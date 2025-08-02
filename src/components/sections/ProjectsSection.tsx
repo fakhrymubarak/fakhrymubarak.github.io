@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { portfolioData } from '@data/portfolio.ts'
 import { ExternalLink, Github, Filter } from 'lucide-react'

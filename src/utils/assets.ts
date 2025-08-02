@@ -20,10 +20,8 @@ export interface ImageOptimizationConfig {
  */
 export const getOptimizedImageUrl = (
   originalUrl: string,
-  config: ImageOptimizationConfig = {}
+  _config: ImageOptimizationConfig = {}
 ): string => {
-  const { width, height, quality = 80, format = 'webp' } = config
-
   // For now, return the original URL
   // In production, you would integrate with an image optimization service
   // like Cloudinary, ImageKit, or Next.js Image Optimization
@@ -102,24 +100,64 @@ export const generatePlaceholder = (width: number, height: number, text?: string
  * Asset registry for managing all project assets
  */
 export const ASSETS = {
-  images: {
-    avatar: '/assets/images/img_avatar.webp',
-    mytelkomsel: '/assets/images/img_mytelkomsel.webp',
-    alkhairaat: '/assets/images/img_alkhairaat.webp',
-    chakra: '/assets/images/img_chakra_loyalty.webp',
-    contact: '/assets/images/img_contact_me.webp',
-  },
-  icons: {
-    mytelkomsel: '/assets/images/ic_mytelkomsel.webp',
-    alkhairaat: '/assets/images/ic_alkhairaat.webp',
-    chakra: '/assets/images/ic_chakra_loyalty.webp',
-    phincon: '/assets/images/ic_phincon.webp',
-    bangkit: '/assets/images/ic_bangkit.webp',
-    crm: '/assets/images/ic_crm.webp',
-    android: '/assets/icons/dark/ic_android_dark.svg',
-    kotlin: '/assets/icons/dark/ic_kotlin_dark.svg',
-    java: '/assets/icons/dark/ic_java_dark.svg',
-    flutter: '/assets/icons/dark/ic_flutter_dark.svg',
+  // Source assets (processed by Vite) - Actual assets in the project
+  source: {
+    images: {
+      avatars: {
+        profile: '/src/assets/images/avatars/img_avatar.webp',
+      },
+      projects: {
+        mytelkomsel: '/src/assets/images/projects/img_mytelkomsel.webp',
+        alkhairaat: '/src/assets/images/projects/img_alkhairaat.webp',
+        chakra: '/src/assets/images/projects/img_chakra_loyalty.webp',
+        hress: '/src/assets/images/projects/img_hress.webp',
+        lifelog: '/src/assets/images/projects/img_lifelog.webp',
+        akuisisi: '/src/assets/images/projects/img_akuisisi_loyalty.webp',
+      },
+      experience: {
+        // Experience-related images if any
+      },
+      backgrounds: {
+        // Background images if any
+      },
+    },
+    icons: {
+      tech: {
+        android: {
+          light: '/src/assets/icons/tech/ic_android_light.svg',
+          dark: '/src/assets/icons/tech/ic_android_dark.svg',
+        },
+        kotlin: {
+          light: '/src/assets/icons/tech/ic_kotlin_light.svg',
+          dark: '/src/assets/icons/tech/ic_kotlin_dark.svg',
+        },
+        java: {
+          light: '/src/assets/icons/tech/ic_java_light.svg',
+          dark: '/src/assets/icons/tech/ic_java_dark.svg',
+        },
+        flutter: {
+          light: '/src/assets/icons/tech/ic_flutter_light.svg',
+          dark: '/src/assets/icons/tech/ic_flutter_dark.svg',
+        },
+      },
+      companies: {
+        mytelkomsel: '/src/assets/icons/companies/ic_mytelkomsel.webp',
+        alkhairaat: '/src/assets/icons/companies/ic_alkhairaat.webp',
+        chakra: '/src/assets/icons/companies/ic_chakra_loyalty.webp',
+        phincon: '/src/assets/icons/companies/ic_phincon.webp',
+        bangkit: '/src/assets/icons/companies/ic_bangkit.webp',
+        crm: '/src/assets/icons/companies/ic_crm.webp',
+        hress: '/src/assets/icons/companies/ic_hress_crm.webp',
+        lifelog: '/src/assets/icons/companies/ic_lifelog.webp',
+        akuisisi: '/src/assets/icons/companies/ic_akuisisi_loyalty.webp',
+      },
+      social: {
+        // Social media icons if any
+      },
+      ui: {
+        // UI icons if any
+      },
+    },
   },
 } as const
 

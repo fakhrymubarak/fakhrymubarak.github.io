@@ -71,9 +71,10 @@ const IntroSection: React.FC = () => {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg shadow-sm"
                   >
-                    <div
-                      className="w-6 h-6 rounded"
-                      style={{ backgroundColor: tech.color }}
+                    <img
+                      src={tech.icon}
+                      alt={`${tech.name} icon`}
+                      className="w-6 h-6 object-contain"
                     />
                     <span className="font-medium text-sm">{tech.name}</span>
                   </motion.div>

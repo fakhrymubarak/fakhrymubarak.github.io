@@ -66,7 +66,7 @@ class PerformanceMonitor {
       try {
         const fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries()
-          entries.forEach((entry) => {
+          entries.forEach((entry: any) => {
             this.metrics.fid = entry.processingStart - entry.startTime
             this.logMetric('FID', this.metrics.fid)
           })
@@ -112,8 +112,8 @@ class PerformanceMonitor {
     console.log(`Performance Metric - ${name}:`, value)
 
     // Send to analytics if available
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'performance_metric', {
+    if (typeof (window as any).gtag !== 'undefined') {
+      (window as any).gtag('event', 'performance_metric', {
         metric_name: name,
         metric_value: value,
       })

@@ -1,0 +1,253 @@
+{
+  "portfolio": {
+    "title": "Fakhry Mubarak - Portfolio",
+    "description": "A modern, responsive portfolio website built with Flutter Web showcasing Fakhry Mubarak's professional experience, projects, and skills as an Android Developer",
+    "liveDemo": "https://fakhrymubarak.github.io/flutter-multiplatform/pages",
+    "sections": {
+      "1_introduction": {
+        "title": "Introduction Section",
+        "data": {
+          "title": ["Hi, I am ", "Fakhry ", "Mubarak"],
+          "subtitle": "Android Developer",
+          "description": "Software engineer with 3 years of experience in mobile app development, including several published Android apps on the Play Store. Actively expanding my expertise in software engineering and driven by a passion for learning and problem-solving.",
+          "imagePath": "assets/images/img_avatar.webp",
+          "techStackSection": {
+            "title": "EXPERIENCE WITH",
+            "highlightStacks": [
+              {
+                "name": "Android",
+                "iconPath": "assets/icons/dark/ic_android_dark.svg"
+              },
+              {
+                "name": "Kotlin",
+                "iconPath": "assets/icons/dark/ic_kotlin_dark.svg"
+              },
+              {
+                "name": "Java",
+                "iconPath": "assets/icons/dark/ic_java_dark.svg"
+              },
+              {
+                "name": "Flutter",
+                "iconPath": "assets/icons/dark/ic_flutter_dark.svg"
+              }
+            ]
+          }
+        }
+      },
+      "2_projects": {
+        "title": "Projects Section",
+        "data": {
+          "title": "PROJECTS",
+          "initialCount": 3,
+          "projects": [
+            {
+              "title": "MyTelkomsel",
+              "timeline": "Jul 2023 — Present",
+              "logo": "assets/images/ic_mytelkomsel.webp",
+              "image": "assets/images/img_mytelkomsel.webp",
+              "desc": "MyTelkomsel is the official self-care mobile application from Telkomsel, Indonesia's largest cellular provider, with over 100 million downloads and approximately 300,000 daily active users. In this project, I was responsible for planning, developing, and delivering multiple key features using Kotlin and Java within a clean architecture that adheres to SOLID principles. I also led and mentored junior developers, ensuring high code quality and team performance across various feature tracks.",
+              "cta": "https://play.google.com/store/apps/details?id=com.telkomsel.telkomselcm",
+              "stacks": [
+                {
+                  "name": "Android",
+                  "iconPath": "assets/icons/light/ic_android_light.svg"
+                },
+                {
+                  "name": "Kotlin",
+                  "iconPath": "assets/icons/light/ic_kotlin_light.svg"
+                },
+                {
+                  "name": "Java",
+                  "iconPath": "assets/icons/light/ic_java_light.svg"
+                }
+              ]
+            },
+            {
+              "title": "Alkhairaat",
+              "timeline": "March 2023 — Jun 2023",
+              "logo": "assets/images/ic_alkhairaat.webp",
+              "image": "assets/images/img_alkhairaat.webp",
+              "desc": "Alkhairaat is a membership application designed for the Alkhairaat Islamic organization in Indonesia. It facilitates registration, member management, and organizational engagement. I developed the mobile app using Flutter with Bloc state management, focusing on clean, scalable, and robust architecture for both Android and iOS platforms. My responsibilities included implementing core features, maintaining performance consistency, and delivering a user-friendly interface tailored to the organization's needs.",
+              "cta": "https://apkpure.com/alkhairaat-app/com.alkhairaat.membership",
+              "stacks": [
+                {
+                  "name": "Android",
+                  "iconPath": "assets/icons/light/ic_android_light.svg"
+                },
+                {
+                  "name": "Flutter",
+                  "iconPath": "assets/icons/light/ic_flutter_light.svg"
+                }
+              ]
+            },
+            {
+              "title": "Chakra App",
+              "timeline": "Jan 2022 — Jun 2023",
+              "logo": "assets/images/ic_chakra_loyalty.webp",
+              "image": "assets/images/img_chakra_loyalty.webp",
+              "desc": "Chakra App is a loyalty membership application developed for Kalbe Nutritionals users. My primary responsibility included migrating the entire codebase from Java to Kotlin (up to 97%) and refactoring the architecture from MVP to MVVM. In addition, I worked on a white-label variant of the app using Flutter, expanding its usability across multiple brand implementations and streamlining future development processes.",
+              "cta": "https://apkpure.com/chakra-rewards/com.kalbe.cakraloyalty",
+              "stacks": [
+                {
+                  "name": "Android",
+                  "iconPath": "assets/icons/light/ic_android_light.svg"
+                },
+                {
+                  "name": "Kotlin",
+                  "iconPath": "assets/icons/light/ic_kotlin_light.svg"
+                }
+              ]
+            },
+            {
+              "title": "Akuisisi Loyalty",
+              "timeline": "Jan 2022 — Jun 2023",
+              "logo": "assets/images/ic_akuisisi_loyalty.webp",
+              "image": "assets/images/img_akuisisi_loyalty.webp",
+              "desc": "Akuisisi Loyalty is an Android application developed by PT Cakra Radha Mustika to support sales team operations in acquiring and tracking loyalty members. Built using Kotlin, I focused on implementing the feature set required for progress tracking, reporting, and member engagement. I also ensured smooth UX flows, robust network operations, and an architecture that could scale with the organization's future loyalty programs.",
+              "cta": "https://play.google.com/store/apps/details?id=com.kalbe.crm.dmqi",
+              "stacks": [
+                {
+                  "name": "Android",
+                  "iconPath": "assets/icons/light/ic_android_light.svg"
+                },
+                {
+                  "name": "Kotlin",
+                  "iconPath": "assets/icons/light/ic_kotlin_light.svg"
+                }
+              ]
+            },
+            {
+              "title": "HRESS CRM",
+              "timeline": "Jan 2022 — Jun 2023",
+              "logo": "assets/images/ic_hress_crm.webp",
+              "image": "assets/images/img_hress.webp",
+              "desc": "HRESS CRM is a digital solution owned by PT Cakra Radha Mustika, aimed at supporting the daily operations of Field Officers through an Android-based mobile application. I contributed to building this solution using Kotlin, ensuring the app remained efficient and aligned with the operational workflow of the field teams. My role also included integrating offline capabilities, syncing with backend systems, and maintaining a clean user experience in varying field conditions.",
+              "cta": "https://play.google.com/store/apps/details?id=com.kalbe.crm.hress",
+              "stacks": [
+                {
+                  "name": "Android",
+                  "iconPath": "assets/icons/light/ic_android_light.svg"
+                },
+                {
+                  "name": "Kotlin",
+                  "iconPath": "assets/icons/light/ic_kotlin_light.svg"
+                }
+              ]
+            },
+            {
+              "title": "Lifelog",
+              "timeline": "Okt 2022 — Sept 2022",
+              "logo": "assets/images/ic_lifelog.webp",
+              "image": "assets/images/img_lifelog.webp",
+              "desc": "Lifelog is a personal journaling and mood tracking Android application, created as my first published app on the Google Play Store. I built the entire app from scratch using Java and Kotlin, applying what I learned as a self-taught developer during my early Android journey. The app allows users to log their daily thoughts, emotions, and mental well-being—helping them reflect and grow over time.",
+              "cta": "https://play.google.com/store/apps/details?id=com.fakhry.lifelog",
+              "stacks": [
+                {
+                  "name": "Android",
+                  "iconPath": "assets/icons/light/ic_android_light.svg"
+                },
+                {
+                  "name": "Kotlin",
+                  "iconPath": "assets/icons/light/ic_kotlin_light.svg"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "3_experience": {
+        "title": "Experience Section",
+        "data": {
+          "title": "EXPERIENCES",
+          "experiences": [
+            {
+              "title": "Android Developer for MyTelkomsel",
+              "companyAndStatus": "PHINCON · Full-time",
+              "logoPath": "assets/images/ic_phincon.webp",
+              "date": "Jul 2023 — Present · 2 yrs",
+              "description": "Milestones:\n- Crafting Android Application with +100M downloads and ~6M daily active users.\n- Moved to Customer Interaction Squad and developed Help Center, Veronika Chat, and InApp Chat features.\n- Assigned to assist Engagement Squad in developing Commerce features.\nPlan, develop, and build features with SOLID principles and clean architecture."
+            },
+            {
+              "title": "Mobile Development Instructor",
+              "companyAndStatus": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka · Part-time",
+              "logoPath": "assets/images/ic_bangkit.webp",
+              "date": "Feb 2024 — Dec 2024 · 11 mos",
+              "description": "Help the Bangkit cohort to understand the Android Development course material through ILT sessions."
+            },
+            {
+              "title": "Software Engineer (Mobile | Kotlin & Flutter)",
+              "companyAndStatus": "PT. Cakra Radha Mustika (Kalbe Group) · Contract",
+              "logoPath": "assets/images/ic_crm.webp",
+              "date": "Jan 2022 — Jun 2023 · 1 yr 6 mos",
+              "description": "- Migrating Chakra android app data source from vendor server to CRM server (~80 API endpoint)\n- Migrating app architecture pattern from MVP to MVVM\n- Migrating source code language from 100% Java to 97% Kotlin\n- Design and Implement repository pattern.\n- Maintaining chakra rewards apps.\n- Creating human resource employee self-service (HRESS) android apps for the HRGA department.\n- Mentoring 2 interns to work on a HRESS android apps\n- Creating White Label Loyalty Apps for Android and iOS platforms using Flutter."
+            }
+          ]
+        }
+      },
+      "4_footer": {
+        "title": "Footer Section",
+        "data": {
+          "socialMediaList": [
+            {
+              "label": "Instagram",
+              "cta": "https://www.instagram.com/fakhrymubarak"
+            },
+            {
+              "label": "LinkedIn",
+              "cta": "http://linkedin.com/in/fakhrymubarak"
+            },
+            {
+              "label": "Github",
+              "cta": "http://github.com/fakhrymubarak"
+            },
+            {
+              "label": "YouTube",
+              "cta": "https://www.youtube.com/@fakhry.mubarakk"
+            }
+          ],
+          "contacts": [
+            {
+              "label": "Download Resume",
+              "cta": "https://drive.google.com/file/d/1p6Z4PxUOCo3ijZ9D5ZAsbQWjRqeIt6CX/view?usp=sharing"
+            },
+            {
+              "label": "Write Email",
+              "cta": "mailto:fakhrymubarak@gmail.com?subject=Work%20Opportunity&body=Hi%20Fakhry,"
+            },
+            {
+              "label": "Contact Me",
+              "cta": "https://api.whatsapp.com/send/?phone=6285155305499&text=Hi%20Fakhry, &type=phone_number&app_absent=0"
+            }
+          ],
+          "imagePath": "assets/images/img_contact_me.webp",
+          "signature": "©Crafted with Flutter in 2025"
+        }
+      }
+    },
+    "metadata": {
+      "version": "1.0.0",
+      "lastUpdated": "2025-01-27",
+      "techStack": {
+        "framework": "Flutter 3.6.0+",
+        "language": "Dart ^3.6.0",
+        "stateManagement": "Provider ^6.1.2",
+        "ui": [
+          "Google Fonts ^6.2.1",
+          "Flutter SVG ^2.0.16",
+          "Material Design"
+        ],
+        "utilities": [
+          "URL Launcher ^6.3.1"
+        ],
+        "development": [
+          "Flutter Lints ^5.0.0"
+        ]
+      },
+      "platforms": [
+        "Web",
+        "Android", 
+        "iOS"
+      ]
+    }
+  }
+} 

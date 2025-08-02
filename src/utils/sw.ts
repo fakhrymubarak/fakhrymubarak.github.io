@@ -26,7 +26,7 @@ export const registerServiceWorker = async () => {
   }
 }
 
-const showUpdateNotification = (registration: ServiceWorkerRegistration) => {
+const showUpdateNotification = (_registration: ServiceWorkerRegistration) => {
   // You can implement a custom update notification here
   console.log('New version available!')
 
@@ -62,10 +62,10 @@ export const requestNotificationPermission = async () => {
 
 // Background sync registration
 export const registerBackgroundSync = async (tag: string) => {
-  if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+  if ('serviceWorker' in navigator && 'sync' in (window.ServiceWorkerRegistration.prototype as any)) {
     try {
       const registration = await navigator.serviceWorker.ready
-      await registration.sync.register(tag)
+      await (registration as any).sync.register(tag)
       console.log('Background sync registered:', tag)
     } catch (error) {
       console.error('Background sync registration failed:', error)

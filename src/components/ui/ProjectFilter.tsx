@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Filter, X } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 import { Project } from '@/types'
 
 interface ProjectFilterProps {
@@ -95,8 +95,8 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
               key={category}
               onClick={() => toggleCategory(category)}
               className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 ${selectedCategories.includes(category)
-                  ? 'bg-primary-coral text-white shadow-lg'
-                  : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 border border-light-muted/20 dark:border-dark-muted/20'
+                ? 'bg-primary-coral text-white shadow-lg'
+                : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 border border-light-muted/20 dark:border-dark-muted/20'
                 }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
