@@ -38,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) =
               alt={`${project.title} logo`}
               className="w-6 h-6 rounded"
             />
-            <h3 className="heading-3">{project.title}</h3>
+            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">{project.title}</h3>
           </div>
           <span className="text-sm text-light-muted dark:text-dark-muted">
             {project.period}

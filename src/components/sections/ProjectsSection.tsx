@@ -74,7 +74,7 @@ const ProjectsSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="heading-2">PROJECTS</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">PROJECTS</h2>
             <p className="body-text max-w-2xl mx-auto">
               Here are some of the projects I've worked on, showcasing my expertise in mobile development and software engineering.
             </p>

@@ -35,7 +35,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 alt={`${project.title} logo`}
                 className="w-8 h-8 rounded"
               />
-              <h2 className="heading-2">{project.title}</h2>
+              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text">{project.title}</h2>
             </div>
             <button
               onClick={onClose}

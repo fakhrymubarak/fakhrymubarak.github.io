@@ -40,7 +40,7 @@ const IntroSection: React.FC = () => {
           >
             {/* Title */}
             <motion.div variants={itemVariants} className="space-y-2">
-              <h1 className="heading-1">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
                 <span className="text-light-text dark:text-dark-text">
                   {introduction.title[0]}
                 </span>

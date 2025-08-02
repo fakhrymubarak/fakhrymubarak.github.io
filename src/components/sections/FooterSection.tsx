@@ -67,7 +67,7 @@ const FooterSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="heading-2">GET IN TOUCH</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">GET IN TOUCH</h2>
             <p className="body-text max-w-2xl mx-auto">
               I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology.
             </p>

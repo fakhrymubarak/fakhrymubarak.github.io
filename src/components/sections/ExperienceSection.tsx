@@ -54,7 +54,7 @@ const ExperienceSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="heading-2">EXPERIENCES</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">EXPERIENCES</h2>
             <p className="body-text max-w-2xl mx-auto">
               My professional journey in mobile development and software engineering.
             </p>
