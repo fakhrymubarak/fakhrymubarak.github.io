@@ -1,4 +1,4 @@
-import { PortfolioData } from '@/types'
+import {PortfolioData} from '@/types'
 
 // Import assets from src/assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp'
@@ -28,7 +28,7 @@ export const portfolioData: PortfolioData = {
   introduction: {
     title: ['Hi, I am', 'Fakhry Mubarak'],
     subtitle: 'Software Engineer specializing in Android Development',
-    description: 'Software engineer with 3 years of experience in mobile app development, including several published Android apps on the Play Store. Actively expanding my expertise in software engineering and driven by a passion for learning and problem-solving.',
+    description: 'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Flutter development, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
     imagePath: avatarImage,
     techStack: [
       {
@@ -143,10 +143,14 @@ export const portfolioData: PortfolioData = {
       logo: phinconLogo,
       type: 'full-time',
       highlights: [
-        'Crafted an Android app with 100 M+ downloads and ~6 M daily active users',
-        'Developed Help Center, Veronika Chat, and InApp Chat features',
-        'Assisted Engagement Squad on Commerce features',
-        'Followed SOLID principles & clean architecture'
+        'Crafting Android Application with +100M downloads and ~6M daily active users.',
+        'Plan, develop, and build features with SOLID principles with a modular clean architecture using MVVM.',
+        'Defined story point estimations in Agile sprint planning and collaborated with Scrum Master, PM, QA and backend teams.',
+        'Conducting code reviews, mentoring juniors, and leading feature development.',
+        'Collaborating with cross-functional teams in Agile environment.',
+        'Proactively initiated improvements in legacy code and resolved technical debt across multiple modules.',
+        'Handle SDK integrations (Firebase SDK, AyoLari SDK, etc.)',
+        'Performed Unit Testing using Junit.',
       ]
     },
     {
@@ -170,10 +174,15 @@ export const portfolioData: PortfolioData = {
       logo: crmLogo,
       type: 'contract',
       highlights: [
-        'Migrated data sources for Chakra app (80 APIs)',
-        'Refactored MVP → MVVM & Java → Kotlin (97%)',
-        'Designed & implemented repository pattern',
-        'Maintained HRESS & loyalty apps; mentored interns'
+        'Migrating Chakra android app data source from vendor server to CRM server (~80 API endpoint)',
+        'Migrating app architecture pattern from MVP to MVVM.',
+        'Migrating source code language from 100% Java to 97% Kotlin.',
+        'Crafting Flutter variant of Chakra Rewards to be Released on Apple App Store',
+        'Delivered full-stack Android features (UI to data layers) for multiple loyalty and HR apps',
+        'Built and maintained robust mobile architectures supporting long-term scalability.',
+        'Integrated REST APIs, sockets, push notifications, and handled multi-threading workflows.',
+        'Developed Chakra Rewards and HRESS app with high uptime and responsive UI.',
+        'Used design patterns (MVVM, Repository, DI) and maintained excellent code hygiene.',
       ]
     }
   ],
@@ -220,7 +229,7 @@ export const portfolioData: PortfolioData = {
         icon: 'message-circle'
       }
     ],
-    signature: '© Crafted with Cursor JS in 2025.',
+    signature: '© Prompted using Cursor in 2025',
     contactImage: footerAvatarImage
   }
 } 
