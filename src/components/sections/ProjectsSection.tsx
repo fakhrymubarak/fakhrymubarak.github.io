@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { portfolioData } from '../../data/portfolio'
+import { portfolioData } from '@data/portfolio.ts'
 import ProjectCard from './project/ProjectCard'
 import ProjectModal from './project/ProjectModal'
 import ProjectFilter from './project/ProjectFilter'
@@ -126,14 +126,14 @@ const ProjectsSection: React.FC = () => {
           </motion.div>
 
           {/* Load More Button */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
             className="text-center"
           >
             <button className="btn-secondary px-8 py-3">
               View All Projects
             </button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
 
