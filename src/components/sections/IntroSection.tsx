@@ -30,13 +30,46 @@ const IntroSection: React.FC = () => {
   return (
     <section id="home" className="section bg-gradient">
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
+        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-15rem)]">
+          {/* Image - Mobile First */}
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-center lg:justify-end order-1 lg:order-2"
+          >
+            <div className="relative">
+              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-br from-primary-coral/20 to-primary-lavender/20 flex items-center justify-center">
+                <img
+                  src={introduction.imagePath}
+                  alt="Fakhry Mubarak"
+                  className="w-72 h-72 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl"
+                />
+              </div>
+              {/* Floating elements */}
+              <motion.div
+                animate={{ y: [-10, 10, -10] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -top-4 -right-4 w-16 h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg"
+              >
+                <span className="text-white font-bold">3+</span>
+              </motion.div>
+              <motion.div
+                animate={{ y: [10, -10, 10] }}
+                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg"
+              >
+                <span className="text-white font-bold text-sm">100M+</span>
+              </motion.div>
+            </div>
+          </motion.div>
+
           {/* Content */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-8"
+            className="space-y-8 order-2 lg:order-1"
           >
             {/* Title */}
             <motion.div variants={itemVariants} className="space-y-2">
@@ -102,39 +135,6 @@ const IntroSection: React.FC = () => {
                 <Download className="w-4 h-4 ml-2" />
               </a>
             </motion.div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-br from-primary-coral/20 to-primary-lavender/20 flex items-center justify-center">
-                <img
-                  src={introduction.imagePath}
-                  alt="Fakhry Mubarak"
-                  className="w-72 h-72 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl"
-                />
-              </div>
-              {/* Floating elements */}
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg"
-              >
-                <span className="text-white font-bold">3+</span>
-              </motion.div>
-              <motion.div
-                animate={{ y: [10, -10, 10] }}
-                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg"
-              >
-                <span className="text-white font-bold text-sm">100M+</span>
-              </motion.div>
-            </div>
           </motion.div>
         </div>
       </div>
