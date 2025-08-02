@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { portfolioData } from '@data/portfolio.ts'
-import { ExternalLink, Github } from 'lucide-react'
+import { ExternalLink, Github, Filter } from 'lucide-react'
+import ProjectFilter from '../ui/ProjectFilter'
 
 const ProjectsSection: React.FC = () => {
   const { projects } = portfolioData
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
+  const [filteredProjects, setFilteredProjects] = useState(projects)
+  const [showFilters, setShowFilters] = useState(false)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -44,14 +47,44 @@ const ProjectsSection: React.FC = () => {
             <p className="body-text max-w-2xl mx-auto">
               Here are some of the projects I've worked on, showcasing my expertise in mobile development and software engineering.
             </p>
+
+            {/* Filter Toggle */}
+            <div className="flex justify-center">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+              >
+                <Filter className="w-4 h-4" />
+                <span>Filter Projects</span>
+              </button>
+            </div>
           </motion.div>
+
+          {/* Filter Component */}
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <ProjectFilter
+                  projects={projects}
+                  onFilterChange={setFilteredProjects}
+                  className="mb-8"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Projects Grid */}
           <motion.div
             variants={itemVariants}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {projects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ scale: 0.9, opacity: 0 }}
