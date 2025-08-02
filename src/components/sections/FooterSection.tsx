@@ -83,7 +83,7 @@ const FooterSection: React.FC = () => {
                 <img
                   src={footer.contactImage}
                   alt="Contact me"
-                  className="w-80 h- lg:w-96 lg:h-96 rounded-2xl object-cover shadow-2xl"
+                  className="w-80 h-100 lg:w-96 lg:h-auto rounded-2xl object-cover shadow-2xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
               </div>
