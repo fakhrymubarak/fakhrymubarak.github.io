@@ -5,7 +5,7 @@ This repository uses GitHub Actions for continuous integration and deployment.
 ## Workflows
 
 ### 1. CI/CD Pipeline (`ci-cd.yml`)
-Main pipeline that runs on push to `main` and `develop` branches, and on pull requests.
+Main pipeline that runs on push to `naster` and `develop` branches, and on pull requests.
 
 **Jobs:**
 - **Lint and Type Check**: ESLint, TypeScript type checking, and Prettier formatting
@@ -18,7 +18,7 @@ Main pipeline that runs on push to `main` and `develop` branches, and on pull re
 Dedicated deployment workflow for GitHub Pages.
 
 **Features:**
-- Runs on push to `main` branch
+- Runs on push to `naster` branch
 - Manual trigger support (`workflow_dispatch`)
 - Proper permissions and concurrency control
 - Environment-specific deployment
@@ -37,7 +37,7 @@ Quality assurance workflow for pull requests.
 1. **Enable GitHub Pages:**
    - Go to Settings > Pages
    - Source: "GitHub Actions"
-   - Branch: `main`
+   - Branch: `naster`
 
 2. **Required Secrets:**
    - `LHCI_GITHUB_APP_TOKEN` (optional): For Lighthouse CI performance reports
@@ -69,7 +69,7 @@ The pipeline includes Lighthouse CI for performance monitoring with these thresh
 ## Deployment
 
 The portfolio is automatically deployed to GitHub Pages when:
-- Code is pushed to the `main` branch
+- Code is pushed to the `naster` branch
 - All CI checks pass successfully
 
 **Deployment URL**: `https://[username].github.io/showcase-v2/`
