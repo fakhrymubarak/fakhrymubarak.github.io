@@ -2,6 +2,7 @@ import { PortfolioData } from '@/types'
 
 // Import assets from src/assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp'
+import footerAvatarImage from '@/assets/images/avatars/img_avatar_footer.webp'
 import mytelkomselImage from '@/assets/images/projects/img_mytelkomsel.webp'
 import alkhairaatImage from '@/assets/images/projects/img_alkhairaat.webp'
 import chakraImage from '@/assets/images/projects/img_chakra_loyalty.webp'
@@ -220,6 +221,6 @@ export const portfolioData: PortfolioData = {
       }
     ],
     signature: '© Crafted with React JS in 2025',
-    contactImage: '' // Removed as we don't have this asset
+    contactImage: footerAvatarImage
   }
 } 
