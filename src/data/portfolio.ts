@@ -220,7 +220,7 @@ export const portfolioData: PortfolioData = {
         icon: 'message-circle'
       }
     ],
-    signature: '© Crafted with React JS in 2025',
+    signature: '© Crafted with Cursor JS in 2025.',
     contactImage: footerAvatarImage
   }
 } 

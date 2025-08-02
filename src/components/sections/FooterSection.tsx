@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { portfolioData } from '../../data/portfolio'
+import { portfolioData } from '@data/portfolio.ts'
 import { Mail, MessageCircle, Download, Instagram, Linkedin, Github, Youtube } from 'lucide-react'
 
 const FooterSection: React.FC = () => {
@@ -145,7 +145,15 @@ const FooterSection: React.FC = () => {
             className="border-t border-light-muted/20 dark:border-dark-muted/20 pt-8 text-center"
           >
             <p className="text-sm text-light-muted dark:text-dark-muted">
-              {footer.signature}
+              {footer.signature} •{' '}
+              <a
+                href="https://fakhrymubarak.github.io/showcase-v1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary-coral transition-colors underline"
+              >
+                See Also The V1
+              </a>
             </p>
           </motion.div>
         </motion.div>
