@@ -49,9 +49,6 @@ const IntroSection: React.FC = () => {
                   {introduction.title[1]}
                 </span>
               </h1>
-              <h2 className="heading-3 text-primary-coral">
-                {introduction.subtitle}
-              </h2>
             </motion.div>
 
             {/* Description */}

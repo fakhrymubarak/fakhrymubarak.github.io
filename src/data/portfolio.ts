@@ -26,7 +26,7 @@ import flutterIcon from '@/assets/icons/tech/ic_flutter_dark.svg'
 export const portfolioData: PortfolioData = {
   introduction: {
     title: ['Hi, I am', 'Fakhry Mubarak'],
-    subtitle: 'Android Developer',
+    subtitle: 'Software Engineer specializing in Android Development',
     description: 'Software engineer with 3 years of experience in mobile app development, including several published Android apps on the Play Store. Actively expanding my expertise in software engineering and driven by a passion for learning and problem-solving.',
     imagePath: avatarImage,
     techStack: [
