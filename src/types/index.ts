@@ -14,6 +14,7 @@ export interface Project {
   link: string
   stacks: string[]
   featured?: boolean
+  hasGithub?: boolean
 }
 
 export interface Experience {

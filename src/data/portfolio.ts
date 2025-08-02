@@ -62,7 +62,8 @@ export const portfolioData: PortfolioData = {
       description: 'MyTelkomsel is the official self-care mobile application from Telkomsel, Indonesia\'s largest cellular provider, with over 100 million downloads and ~300 000 daily active users. I planned, developed, and delivered multiple key features using Kotlin and Java within a clean architecture following SOLID principles. I also led and mentored junior developers, ensuring high code quality and team performance.',
       link: 'https://play.google.com/store/apps/details?id=com.telkomsel.telkomselcm',
       stacks: ['Android', 'Kotlin', 'Java'],
-      featured: true
+      featured: true,
+      hasGithub: false
     },
     {
       id: 'alkhairaat',
@@ -73,7 +74,8 @@ export const portfolioData: PortfolioData = {
       description: 'Alkhairaat is a membership app for the Alkhairaat Islamic organization in Indonesia. Built with Flutter & Bloc, I implemented core features, maintained performance consistency, and delivered a user-friendly interface for both Android and iOS.',
       link: 'https://apkpure.com/alkhairaat-app/com.alkhairaat.membership',
       stacks: ['Android', 'Flutter'],
-      featured: true
+      featured: true,
+      hasGithub: false
     },
     {
       id: 'chakra-app',
@@ -84,7 +86,8 @@ export const portfolioData: PortfolioData = {
       description: 'Chakra App is a loyalty membership application for Kalbe Nutritionals users. I migrated 97% of the codebase from Java to Kotlin, refactored from MVP to MVVM, and built a white-label Flutter variant to streamline multi-brand deployments.',
       link: 'https://apkpure.com/chakra-rewards/com.kalbe.cakraloyalty',
       stacks: ['Android', 'Kotlin'],
-      featured: true
+      featured: true,
+      hasGithub: false
     },
     {
       id: 'hress',
@@ -95,7 +98,8 @@ export const portfolioData: PortfolioData = {
       description: 'HRESS is an HR management system for Kalbe Group. I developed and maintained the mobile application using Kotlin and Java, implementing features for employee management, attendance tracking, and HR processes.',
       link: '#',
       stacks: ['Android', 'Kotlin', 'Java'],
-      featured: false
+      featured: false,
+      hasGithub: false
     },
     {
       id: 'lifelog',
@@ -106,7 +110,8 @@ export const portfolioData: PortfolioData = {
       description: 'LifeLog is a health and wellness tracking application. I contributed to the development of mobile features for health monitoring, activity tracking, and wellness insights.',
       link: '#',
       stacks: ['Android', 'Kotlin'],
-      featured: false
+      featured: false,
+      hasGithub: false
     },
     {
       id: 'akuisisi-loyalty',
@@ -117,7 +122,8 @@ export const portfolioData: PortfolioData = {
       description: 'Akuisisi Loyalty is a customer acquisition and loyalty management system. I developed mobile features for customer onboarding, loyalty programs, and engagement tracking.',
       link: '#',
       stacks: ['Android', 'Kotlin'],
-      featured: false
+      featured: false,
+      hasGithub: false
     }
   ],
   experience: [
