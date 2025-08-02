@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { portfolioData } from '../../data/portfolio'
-import ProjectCard from '../ProjectCard'
-import ProjectModal from '../ProjectModal'
-import ProjectFilter from '../ProjectFilter'
+import ProjectCard from './project/ProjectCard'
+import ProjectModal from './project/ProjectModal'
+import ProjectFilter from './project/ProjectFilter'
 import { Filter } from 'lucide-react'
 
 const ProjectsSection: React.FC = () => {

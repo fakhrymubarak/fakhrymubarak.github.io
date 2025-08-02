@@ -94,6 +94,11 @@ const FooterSection: React.FC = () => {
               {/* Contact Links */}
               <div className="space-y-4">
                 <h3 className="heading-3">Let's Connect</h3>
+                <p className="body-text">
+                  Feel free to reach out if you'd like to discuss potential collaborations,
+                  have questions about my work, or just want to say hello!
+                </p>
+
                 <div className="space-y-3">
                   {footer.contacts.map((contact) => (
                     <a
@@ -131,21 +136,6 @@ const FooterSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Quick Message */}
-              <div className="space-y-4">
-                <h3 className="heading-3">Quick Message</h3>
-                <p className="body-text">
-                  Feel free to reach out if you'd like to discuss potential collaborations,
-                  have questions about my work, or just want to say hello!
-                </p>
-                <a
-                  href="mailto:fakhrymubarak@gmail.com?subject=Hello%20Fakhry&body=Hi%20Fakhry,%0D%0A%0D%0AI%20hope%20this%20message%20finds%20you%20well.%20I%20came%20across%20your%20portfolio%20and%20would%20love%20to%20connect.%0D%0A%0D%0ABest%20regards,"
-                  className="btn-primary inline-flex items-center"
-                >
-                  Send Message
-                  <Mail className="w-4 h-4 ml-2" />
-                </a>
-              </div>
             </motion.div>
           </div>
 
