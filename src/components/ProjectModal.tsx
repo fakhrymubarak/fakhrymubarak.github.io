@@ -70,10 +70,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   View Project
                   <ExternalLink className="w-3 h-3 ml-1" />
                 </a>
-                {project.hasGithub && (
-                  <button className="p-2 bg-light-surface dark:bg-dark-surface rounded border border-light-muted/20 dark:border-dark-muted/20 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors">
+                {project.hasGithub && project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-light-surface dark:bg-dark-surface rounded border border-light-muted/20 dark:border-dark-muted/20 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors"
+                  >
                     <Github className="w-4 h-4" />
-                  </button>
+                  </a>
                 )}
               </div>
             </div>

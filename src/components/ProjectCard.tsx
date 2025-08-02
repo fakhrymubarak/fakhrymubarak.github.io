@@ -73,11 +73,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) =
             View Project
             <ExternalLink className="w-3 h-3 ml-1" />
           </a>
-          {project.hasGithub && (
-            <button className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors">
-              <Github className="w-4 h-4" />
-            </button>
-          )}
+                     {project.hasGithub && project.githubUrl && (
+             <a
+               href={project.githubUrl}
+               target="_blank"
+               rel="noopener noreferrer"
+               className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors"
+               onClick={(e) => e.stopPropagation()}
+             >
+               <Github className="w-4 h-4" />
+             </a>
+           )}
         </div>
       </div>
     </motion.div>

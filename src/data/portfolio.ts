@@ -63,7 +63,8 @@ export const portfolioData: PortfolioData = {
       link: 'https://play.google.com/store/apps/details?id=com.telkomsel.telkomselcm',
       stacks: ['Android', 'Kotlin', 'Java'],
       featured: true,
-      hasGithub: false
+      hasGithub: false,
+      githubUrl: ''
     },
     {
       id: 'alkhairaat',
@@ -75,7 +76,8 @@ export const portfolioData: PortfolioData = {
       link: 'https://apkpure.com/alkhairaat-app/com.alkhairaat.membership',
       stacks: ['Android', 'Flutter'],
       featured: true,
-      hasGithub: false
+      hasGithub: false,
+      githubUrl: ''
     },
     {
       id: 'chakra-app',
@@ -87,7 +89,8 @@ export const portfolioData: PortfolioData = {
       link: 'https://apkpure.com/chakra-rewards/com.kalbe.cakraloyalty',
       stacks: ['Android', 'Kotlin'],
       featured: true,
-      hasGithub: false
+      hasGithub: false,
+      githubUrl: ''
     },
     {
       id: 'hress',
@@ -99,7 +102,8 @@ export const portfolioData: PortfolioData = {
       link: '#',
       stacks: ['Android', 'Kotlin', 'Java'],
       featured: false,
-      hasGithub: false
+      hasGithub: false,
+      githubUrl: ''
     },
     {
       id: 'lifelog',
@@ -107,11 +111,12 @@ export const portfolioData: PortfolioData = {
       period: 'Jan 2022 — Jun 2023',
       logo: crmLogo,
       image: lifelogImage,
-      description: 'LifeLog is a health and wellness tracking application. I contributed to the development of mobile features for health monitoring, activity tracking, and wellness insights.',
-      link: '#',
+      description: 'LifeLog is a not simple notes app to write a daily note and track your daily mood. Built with MVVM architecture, Room database, and Material Design UI. Features include daily note writing, mood tracking, note tagging, date-based search, and favorite notes.',
+      link: 'https://github.com/fakhrymubarak/LifeLog',
       stacks: ['Android', 'Kotlin'],
       featured: false,
-      hasGithub: false
+      hasGithub: true,
+      githubUrl: 'https://github.com/fakhrymubarak/LifeLog'
     },
     {
       id: 'akuisisi-loyalty',
@@ -123,7 +128,8 @@ export const portfolioData: PortfolioData = {
       link: '#',
       stacks: ['Android', 'Kotlin'],
       featured: false,
-      hasGithub: false
+      hasGithub: false,
+      githubUrl: ''
     }
   ],
   experience: [
