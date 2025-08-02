@@ -204,7 +204,7 @@ export const portfolioData: PortfolioData = {
       {
         type: 'resume',
         label: 'Download Resume',
-        url: 'https://drive.google.com/file/d/1p6Z4PxUOCo3ijZ9D5ZAsbQWqRqeIt6CX/view?usp=sharing',
+        url: 'https://drive.google.com/file/d/1p6Z4PxUOCo3ijZ9D5ZAsbQWjRqeIt6CX/view',
         icon: 'download'
       },
       {

@@ -93,9 +93,9 @@ const ExperienceSection: React.FC = () => {
                     <div className="space-y-4">
                       {/* Header */}
                       <div className="space-y-2">
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                           <h3 className="heading-3">{exp.title}</h3>
-                          <span className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(exp.type)}`}>
+                          <span className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(exp.type)} self-start sm:self-auto`}>
                             {exp.type}
                           </span>
                         </div>
