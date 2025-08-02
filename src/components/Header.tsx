@@ -32,19 +32,18 @@ const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md shadow-lg' 
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md shadow-lg'
         : 'bg-transparent'
-    }`}>
-      <div className="container">
-        <div className="flex items-center justify-between h-16">
+      }`}>
+      <div className="container px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 min-w-0">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary-coral rounded-lg flex items-center justify-center">
+          <div className="flex items-center space-x-2 min-w-0 flex-shrink-0">
+            <div className="w-8 h-8 bg-primary-coral rounded-lg flex items-center justify-center flex-shrink-0">
               <span className="text-white font-bold text-sm">F</span>
             </div>
-            <span className="font-display font-semibold text-lg">Fakhry Mubarak</span>
+            <span className="font-display font-semibold text-lg truncate">Fakhry Mubarak</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -61,11 +60,11 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+              className="p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -78,7 +77,7 @@ const Header: React.FC = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+              className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
