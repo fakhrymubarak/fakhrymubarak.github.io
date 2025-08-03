@@ -1,18 +1,18 @@
 // Asset management utilities
 
 export interface AssetConfig {
-  src: string
-  alt: string
-  placeholder?: string
-  sizes?: string
-  loading?: 'lazy' | 'eager'
+  src: string;
+  alt: string;
+  placeholder?: string;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
 }
 
 export interface ImageOptimizationConfig {
-  width?: number
-  height?: number
-  quality?: number
-  format?: 'webp' | 'avif' | 'jpeg' | 'png'
+  width?: number;
+  height?: number;
+  quality?: number;
+  format?: 'webp' | 'avif' | 'jpeg' | 'png';
 }
 
 /**
@@ -25,8 +25,8 @@ export const getOptimizedImageUrl = (
   // For now, return the original URL
   // In production, you would integrate with an image optimization service
   // like Cloudinary, ImageKit, or Next.js Image Optimization
-  return originalUrl
-}
+  return originalUrl;
+};
 
 /**
  * Generate responsive image srcset
@@ -37,53 +37,59 @@ export const getResponsiveSrcSet = (
 ): string => {
   return widths
     .map(width => `${getOptimizedImageUrl(baseUrl, { width })} ${width}w`)
-    .join(', ')
-}
+    .join(', ');
+};
 
 /**
  * Get image dimensions from URL or metadata
  */
-export const getImageDimensions = async (url: string): Promise<{ width: number; height: number } | null> => {
+export const getImageDimensions = async (
+  url: string
+): Promise<{ width: number; height: number } | null> => {
   try {
-    return new Promise((resolve) => {
-      const img = new Image()
+    return new Promise(resolve => {
+      const img = new Image();
       img.onload = () => {
-        resolve({ width: img.naturalWidth, height: img.naturalHeight })
-      }
+        resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      };
       img.onerror = () => {
-        resolve(null)
-      }
-      img.src = url
-    })
+        resolve(null);
+      };
+      img.src = url;
+    });
   } catch (error) {
-    console.warn('Failed to get image dimensions:', error)
-    return null
+    console.warn('Failed to get image dimensions:', error);
+    return null;
   }
-}
+};
 
 /**
  * Preload critical images
  */
 export const preloadImage = (src: string): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => resolve()
-    img.onerror = reject
-    img.src = src
-  })
-}
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = reject;
+    img.src = src;
+  });
+};
 
 /**
  * Preload multiple images
  */
 export const preloadImages = async (srcs: string[]): Promise<void> => {
-  await Promise.allSettled(srcs.map(preloadImage))
-}
+  await Promise.allSettled(srcs.map(preloadImage));
+};
 
 /**
  * Generate placeholder for image
  */
-export const generatePlaceholder = (width: number, height: number, text?: string): string => {
+export const generatePlaceholder = (
+  width: number,
+  height: number,
+  text?: string
+): string => {
   // Generate a simple SVG placeholder
   const svg = `
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
@@ -92,9 +98,9 @@ export const generatePlaceholder = (width: number, height: number, text?: string
         ${text || 'Loading...'}
       </text>
     </svg>
-  `
-  return `data:image/svg+xml;base64,${btoa(svg)}`
-}
+  `;
+  return `data:image/svg+xml;base64,${btoa(svg)}`;
+};
 
 /**
  * Asset registry for managing all project assets
@@ -159,24 +165,24 @@ export const ASSETS = {
       },
     },
   },
-} as const
+} as const;
 
 /**
  * Get asset URL with type safety
  */
 export const getAsset = (path: string): string => {
   // In production, you might want to add CDN prefix or versioning
-  return path
-}
+  return path;
+};
 
 /**
  * Check if asset exists
  */
 export const assetExists = async (url: string): Promise<boolean> => {
   try {
-    const response = await fetch(url, { method: 'HEAD' })
-    return response.ok
+    const response = await fetch(url, { method: 'HEAD' });
+    return response.ok;
   } catch {
-    return false
+    return false;
   }
-} 
+};

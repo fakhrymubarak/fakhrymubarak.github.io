@@ -1,10 +1,18 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { portfolioData } from '@data/portfolio.ts'
-import { Mail, MessageCircle, Download, Instagram, Linkedin, Github, Youtube } from 'lucide-react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
+import {
+  Mail,
+  MessageCircle,
+  Download,
+  Instagram,
+  Linkedin,
+  Github,
+  Youtube,
+} from 'lucide-react';
 
 const FooterSection: React.FC = () => {
-  const { footer } = portfolioData
+  const { footer } = portfolioData;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -14,7 +22,7 @@ const FooterSection: React.FC = () => {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -25,35 +33,35 @@ const FooterSection: React.FC = () => {
         duration: 0.5,
       },
     },
-  }
+  };
 
   const getSocialIcon = (icon: string) => {
     switch (icon) {
       case 'instagram':
-        return <Instagram className="w-5 h-5" />
+        return <Instagram className="w-5 h-5" />;
       case 'linkedin':
-        return <Linkedin className="w-5 h-5" />
+        return <Linkedin className="w-5 h-5" />;
       case 'github':
-        return <Github className="w-5 h-5" />
+        return <Github className="w-5 h-5" />;
       case 'youtube':
-        return <Youtube className="w-5 h-5" />
+        return <Youtube className="w-5 h-5" />;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   const getContactIcon = (icon: string) => {
     switch (icon) {
       case 'mail':
-        return <Mail className="w-5 h-5" />
+        return <Mail className="w-5 h-5" />;
       case 'message-circle':
-        return <MessageCircle className="w-5 h-5" />
+        return <MessageCircle className="w-5 h-5" />;
       case 'download':
-        return <Download className="w-5 h-5" />
+        return <Download className="w-5 h-5" />;
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <section id="contact" className="section">
@@ -67,9 +75,12 @@ const FooterSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">GET IN TOUCH</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+              GET IN TOUCH
+            </h2>
             <p className="body-text max-w-2xl mx-auto">
-              I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology.
+              I'm always open to discussing new opportunities, interesting
+              projects, or just having a chat about technology.
             </p>
           </motion.div>
 
@@ -90,22 +101,30 @@ const FooterSection: React.FC = () => {
             </motion.div>
 
             {/* Contact Content */}
-            <motion.div variants={itemVariants} className="space-y-8 lg:col-span-3">
+            <motion.div
+              variants={itemVariants}
+              className="space-y-8 lg:col-span-3"
+            >
               {/* Contact Links */}
               <div className="space-y-4">
                 <h3 className="heading-3">Let's Connect</h3>
                 <p className="body-text">
-                  Feel free to reach out if you'd like to discuss potential collaborations,
-                  have questions about my work, or just want to say hello!
+                  Feel free to reach out if you'd like to discuss potential
+                  collaborations, have questions about my work, or just want to
+                  say hello!
                 </p>
 
                 <div className="space-y-3">
-                  {footer.contacts.map((contact) => (
+                  {footer.contacts.map(contact => (
                     <a
                       key={contact.type}
                       href={contact.url}
                       target={contact.type === 'email' ? undefined : '_blank'}
-                      rel={contact.type === 'email' ? undefined : 'noopener noreferrer'}
+                      rel={
+                        contact.type === 'email'
+                          ? undefined
+                          : 'noopener noreferrer'
+                      }
                       className="flex items-center space-x-3 p-4 bg-light-surface dark:bg-dark-surface rounded-lg hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors group"
                     >
                       <div className="p-2 bg-primary-coral/10 rounded-lg group-hover:bg-primary-coral/20 transition-colors">
@@ -121,7 +140,7 @@ const FooterSection: React.FC = () => {
               <div className="space-y-4">
                 <h3 className="heading-3">Follow Me</h3>
                 <div className="flex space-x-4">
-                  {footer.socialMedia.map((social) => (
+                  {footer.socialMedia.map(social => (
                     <a
                       key={social.name}
                       href={social.url}
@@ -135,7 +154,6 @@ const FooterSection: React.FC = () => {
                   ))}
                 </div>
               </div>
-
             </motion.div>
           </div>
 
@@ -159,7 +177,7 @@ const FooterSection: React.FC = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default FooterSection 
+export default FooterSection;

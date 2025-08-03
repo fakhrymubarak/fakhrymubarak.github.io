@@ -1,15 +1,19 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { ExternalLink, Github } from 'lucide-react'
-import { Project } from '../../../types'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github } from 'lucide-react';
+import { Project } from '@/types';
 
 interface ProjectCardProps {
-  project: Project
-  index: number
-  onSelect: (projectId: string) => void
+  project: Project;
+  index: number;
+  onSelect: (projectId: string) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  index,
+  onSelect,
+}) => {
   return (
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
@@ -38,20 +42,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) =
               alt={`${project.title} logo`}
               className="w-6 h-6 rounded"
             />
-            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">{project.title}</h3>
+            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
+              {project.title}
+            </h3>
           </div>
           <span className="text-sm text-light-muted dark:text-dark-muted">
             {project.period}
           </span>
         </div>
 
-        <p className="body-text text-sm line-clamp-3">
-          {project.description}
-        </p>
+        <p className="body-text text-sm line-clamp-3">{project.description}</p>
 
         {/* Tech Stacks */}
         <div className="flex flex-wrap gap-2">
-          {project.stacks.map((stack) => (
+          {project.stacks.map(stack => (
             <span
               key={stack}
               className="px-2 py-1 bg-primary-coral/10 text-primary-coral text-xs rounded-full"
@@ -68,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) =
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline text-sm px-4 py-2"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
             View Project
             <ExternalLink className="w-3 h-3 ml-1" />
@@ -79,7 +83,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) =
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <Github className="w-4 h-4" />
             </a>
@@ -87,7 +91,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSelect }) =
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default ProjectCard 
+export default ProjectCard;

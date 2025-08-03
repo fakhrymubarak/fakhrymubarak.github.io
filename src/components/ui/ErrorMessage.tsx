@@ -1,11 +1,11 @@
-import React from 'react'
-import { AlertCircle, XCircle, Info } from 'lucide-react'
+import React from 'react';
+import { AlertCircle, XCircle, Info } from 'lucide-react';
 
 interface ErrorMessageProps {
-  message: string
-  type?: 'error' | 'warning' | 'info'
-  onRetry?: () => void
-  className?: string
+  message: string;
+  type?: 'error' | 'warning' | 'info';
+  onRetry?: () => void;
+  className?: string;
 }
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({
@@ -36,10 +36,10 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
       textColor: 'text-blue-800 dark:text-blue-200',
       iconColor: 'text-blue-500',
     },
-  }
+  };
 
-  const config = typeConfig[type]
-  const Icon = config.icon
+  const config = typeConfig[type];
+  const Icon = config.icon;
 
   return (
     <div
@@ -58,7 +58,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ErrorMessage 
+export default ErrorMessage;

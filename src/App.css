@@ -7,7 +7,10 @@
 
 /* Smooth transitions for theme switching */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* Custom scrollbar */
@@ -30,6 +33,6 @@
 
 /* Focus styles for accessibility */
 *:focus-visible {
-  outline: 2px solid #FF6F61;
+  outline: 2px solid #ff6f61;
   outline-offset: 2px;
-} 
+}

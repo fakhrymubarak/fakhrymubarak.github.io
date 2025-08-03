@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Search, X } from 'lucide-react'
-import { Project } from '@/types'
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, X } from 'lucide-react';
+import { Project } from '@/types';
 
 interface ProjectFilterProps {
-  projects: Project[]
-  onFilterChange: (filteredProjects: Project[]) => void
-  className?: string
+  projects: Project[];
+  onFilterChange: (filteredProjects: Project[]) => void;
+  className?: string;
 }
 
 const ProjectFilter: React.FC<ProjectFilterProps> = ({
@@ -14,49 +14,53 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   onFilterChange,
   className = '',
 }) => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   // Get unique categories from projects
   const categories = useMemo(() => {
-    const allCategories = projects.flatMap(project => project.stacks)
-    return Array.from(new Set(allCategories)).sort()
-  }, [projects])
+    const allCategories = projects.flatMap(project => project.stacks);
+    return Array.from(new Set(allCategories)).sort();
+  }, [projects]);
 
   // Filter projects based on search and categories
   const filteredProjects = useMemo(() => {
     return projects.filter(project => {
-      const matchesSearch = searchTerm === '' ||
+      const matchesSearch =
+        searchTerm === '' ||
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.stacks.some(stack => stack.toLowerCase().includes(searchTerm.toLowerCase()))
+        project.stacks.some(stack =>
+          stack.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
-      const matchesCategories = selectedCategories.length === 0 ||
-        selectedCategories.some(category => project.stacks.includes(category))
+      const matchesCategories =
+        selectedCategories.length === 0 ||
+        selectedCategories.some(category => project.stacks.includes(category));
 
-      return matchesSearch && matchesCategories
-    })
-  }, [projects, searchTerm, selectedCategories])
+      return matchesSearch && matchesCategories;
+    });
+  }, [projects, searchTerm, selectedCategories]);
 
   // Update parent component when filters change
   React.useEffect(() => {
-    onFilterChange(filteredProjects)
-  }, [filteredProjects, onFilterChange])
+    onFilterChange(filteredProjects);
+  }, [filteredProjects, onFilterChange]);
 
   const toggleCategory = (category: string) => {
     setSelectedCategories(prev =>
       prev.includes(category)
         ? prev.filter(c => c !== category)
         : [...prev, category]
-    )
-  }
+    );
+  };
 
   const clearFilters = () => {
-    setSearchTerm('')
-    setSelectedCategories([])
-  }
+    setSearchTerm('');
+    setSelectedCategories([]);
+  };
 
-  const hasActiveFilters = searchTerm !== '' || selectedCategories.length > 0
+  const hasActiveFilters = searchTerm !== '' || selectedCategories.length > 0;
 
   return (
     <div className={`space-y-6 ${className}`}>
@@ -67,7 +71,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
           type="text"
           placeholder="Search projects..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
           className="w-full pl-10 pr-4 py-3 bg-light-surface dark:bg-dark-surface border border-light-muted/20 dark:border-dark-muted/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-coral focus:border-transparent"
         />
       </div>
@@ -90,14 +94,15 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
+          {categories.map(category => (
             <motion.button
               key={category}
               onClick={() => toggleCategory(category)}
-              className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 ${selectedCategories.includes(category)
-                ? 'bg-primary-coral text-white shadow-lg'
-                : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 border border-light-muted/20 dark:border-dark-muted/20'
-                }`}
+              className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                selectedCategories.includes(category)
+                  ? 'bg-primary-coral text-white shadow-lg'
+                  : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 border border-light-muted/20 dark:border-dark-muted/20'
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -118,14 +123,12 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
         >
           Showing {filteredProjects.length} of {projects.length} projects
           {hasActiveFilters && (
-            <span className="ml-2 text-primary-coral">
-              (filtered)
-            </span>
+            <span className="ml-2 text-primary-coral">(filtered)</span>
           )}
         </motion.div>
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default ProjectFilter 
+export default ProjectFilter;

@@ -1,8 +1,8 @@
-import { Routes, Route } from 'react-router-dom'
-import { ThemeProvider } from './contexts/ThemeContext'
-import Layout from './components/Layout'
-import HomePage from './pages/HomePage'
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext.tsx';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import './App.css';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         </Routes>
       </Layout>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App 
+export default App;

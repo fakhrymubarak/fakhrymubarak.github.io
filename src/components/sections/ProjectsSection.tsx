@@ -1,33 +1,46 @@
-import React, { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { portfolioData } from '@data/portfolio.ts'
-import ProjectCard from './project/ProjectCard'
-import ProjectModal from './project/ProjectModal'
-import ProjectFilter from './project/ProjectFilter'
-import { Filter } from 'lucide-react'
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
+import ProjectCard from './project/ProjectCard';
+import ProjectModal from './project/ProjectModal';
+import ProjectFilter from './project/ProjectFilter';
+import { Filter } from 'lucide-react';
 
 const ProjectsSection: React.FC = () => {
-  const { projects } = portfolioData
-  const [selectedProject, setSelectedProject] = useState<string | null>(null)
-  const [activeFilter, setActiveFilter] = useState('all')
-  const [showFilters, setShowFilters] = useState(false)
+  const { projects } = portfolioData;
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [showFilters, setShowFilters] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
+  const MAX_PROJECTS = 6;
 
   // Get unique tech stacks for filtering
   const availableFilters = useMemo(() => {
-    const stacks = projects.flatMap(project => project.stacks)
-    return Array.from(new Set(stacks))
-  }, [projects])
+    const stacks = projects.flatMap(project => project.stacks);
+    return Array.from(new Set(stacks));
+  }, [projects]);
 
   // Filter projects based on active filter
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'all') return projects
-    return projects.filter(project => project.stacks.includes(activeFilter))
-  }, [projects, activeFilter])
+    if (activeFilter === 'all') return projects;
+    return projects.filter(project => project.stacks.includes(activeFilter));
+  }, [projects, activeFilter]);
+
+  // Limit projects to show based on showAllProjects state
+  const displayedProjects = useMemo(() => {
+    return showAllProjects
+      ? filteredProjects
+      : filteredProjects.slice(0, MAX_PROJECTS);
+  }, [filteredProjects, showAllProjects]);
+
+  // Check if there are more projects to show
+  const hasMoreProjects = filteredProjects.length > MAX_PROJECTS;
 
   // Get selected project data
   const selectedProjectData = useMemo(() => {
-    return projects.find(project => project.id === selectedProject) || null
-  }, [projects, selectedProject])
+    return projects.find(project => project.id === selectedProject) || null;
+  }, [projects, selectedProject]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -37,7 +50,7 @@ const ProjectsSection: React.FC = () => {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -48,19 +61,23 @@ const ProjectsSection: React.FC = () => {
         duration: 0.5,
       },
     },
-  }
+  };
 
   const handleProjectSelect = (projectId: string) => {
-    setSelectedProject(projectId)
-  }
+    setSelectedProject(projectId);
+  };
 
   const handleFilterChange = (filter: string) => {
-    setActiveFilter(filter)
-  }
+    setActiveFilter(filter);
+  };
 
   const handleCloseModal = () => {
-    setSelectedProject(null)
-  }
+    setSelectedProject(null);
+  };
+
+  const handleToggleProjects = () => {
+    setShowAllProjects(!showAllProjects);
+  };
 
   return (
     <section id="projects" className="section">
@@ -74,9 +91,12 @@ const ProjectsSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">PROJECTS</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+              PROJECTS
+            </h2>
             <p className="body-text max-w-2xl mx-auto">
-              Here are some of the projects I've worked on, showcasing my expertise in mobile development and software engineering.
+              Here are some of the projects I've worked on, showcasing my
+              expertise in mobile development and software engineering.
             </p>
 
             {/* Filter Toggle */}
@@ -115,7 +135,7 @@ const ProjectsSection: React.FC = () => {
             variants={itemVariants}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {filteredProjects.map((project, index) => (
+            {displayedProjects.map((project, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}
@@ -125,15 +145,23 @@ const ProjectsSection: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Load More Button */}
-          {/* <motion.div
-            variants={itemVariants}
-            className="text-center"
-          >
-            <button className="btn-secondary px-8 py-3">
-              View All Projects
-            </button>
-          </motion.div> */}
+          {/* Toggle Projects Button */}
+          {hasMoreProjects && (
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <button
+                onClick={handleToggleProjects}
+                className="btn-outline px-8 py-3"
+              >
+                {showAllProjects ? 'Show Less' : 'See More'}
+              </button>
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
@@ -147,7 +175,7 @@ const ProjectsSection: React.FC = () => {
         )}
       </AnimatePresence>
     </section>
-  )
-}
+  );
+};
 
-export default ProjectsSection 
+export default ProjectsSection;

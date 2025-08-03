@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import LoadingSpinner from './LoadingSpinner'
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import LoadingSpinner from './LoadingSpinner';
 
 interface LazyImageProps {
-  src: string
-  alt: string
-  className?: string
-  placeholder?: string
-  onLoad?: () => void
-  onError?: () => void
+  src: string;
+  alt: string;
+  className?: string;
+  placeholder?: string;
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
@@ -19,41 +19,41 @@ const LazyImage: React.FC<LazyImageProps> = ({
   onLoad,
   onError,
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [hasError, setHasError] = useState(false)
-  const [isInView, setIsInView] = useState(false)
-  const imgRef = useRef<HTMLImageElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsInView(true)
-          observer.disconnect()
+          setIsInView(true);
+          observer.disconnect();
         }
       },
       {
         threshold: 0.1,
         rootMargin: '50px',
       }
-    )
+    );
 
     if (imgRef.current) {
-      observer.observe(imgRef.current)
+      observer.observe(imgRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const handleLoad = () => {
-    setIsLoaded(true)
-    onLoad?.()
-  }
+    setIsLoaded(true);
+    onLoad?.();
+  };
 
   const handleError = () => {
-    setHasError(true)
-    onError?.()
-  }
+    setHasError(true);
+    onError?.();
+  };
 
   if (hasError) {
     return (
@@ -67,7 +67,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
           <p className="text-xs">Image failed to load</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -98,15 +98,16 @@ const LazyImage: React.FC<LazyImageProps> = ({
         <motion.img
           src={src}
           alt={alt}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+          className={`w-full h-full object-cover transition-opacity duration-300 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           onLoad={handleLoad}
           onError={handleError}
           loading="lazy"
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default LazyImage 
+export default LazyImage;
