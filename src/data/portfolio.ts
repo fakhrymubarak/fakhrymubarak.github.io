@@ -1,5 +1,5 @@
-import { PortfolioData } from '@/types'
-import { calculateDuration } from '@/utils/dateUtils'
+import {PortfolioData} from '@/types'
+import {calculateDuration} from '@/utils/dateUtils'
 
 // Import assets from src/assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp'
@@ -10,6 +10,8 @@ import chakraImage from '@/assets/images/projects/img_chakra_loyalty.webp'
 import hressImage from '@/assets/images/projects/img_hress.webp'
 import lifelogImage from '@/assets/images/projects/img_lifelog.webp'
 import akuisisiImage from '@/assets/images/projects/img_akuisisi_loyalty.webp'
+import shafaWebImage from '@/assets/images/projects/img_shafa_web.webp'
+import showcaseV1Image from '@/assets/images/projects/img_showcase_v1.webp'
 
 // Import company logos
 import mytelkomselLogo from '@/assets/icons/companies/ic_mytelkomsel.webp'
@@ -18,6 +20,11 @@ import chakraLogo from '@/assets/icons/companies/ic_chakra_loyalty.webp'
 import phinconLogo from '@/assets/icons/companies/ic_phincon.webp'
 import bangkitLogo from '@/assets/icons/companies/ic_bangkit.webp'
 import crmLogo from '@/assets/icons/companies/ic_crm.webp'
+import lifelogLogo from '@/assets/icons/companies/ic_lifelog.webp'
+import shafaLogo from '@/assets/icons/companies/ic_shafa_25.webp'
+import akuisisiLogo from '@/assets/icons/companies/ic_akuisisi_loyalty.webp'
+import hressLogo from '@/assets/icons/companies/ic_hress_crm.webp'
+import showcaseV1Logo from '@/assets/icons/companies/ic_showcase_v1.webp'
 
 // Import tech stack icons
 import androidIcon from '@/assets/icons/tech/ic_android_dark.svg'
@@ -72,7 +79,7 @@ export const portfolioData: PortfolioData = {
       id: 'lifelog',
       title: 'LifeLog',
       period: 'Jan 2022 — Present',
-      logo: crmLogo,
+      logo: lifelogLogo,
       image: lifelogImage,
       description: 'LifeLog is a not simple notes app to write a daily note and track your daily mood. Built with MVVM architecture, Room database, and Material Design UI. Features include daily note writing, mood tracking, note tagging, date-based search, and favorite notes.',
       link: 'https://github.com/fakhrymubarak/LifeLog',
@@ -111,28 +118,54 @@ export const portfolioData: PortfolioData = {
       id: 'hress',
       title: 'HRESS',
       period: 'Jan 2022 — Jun 2023',
-      logo: crmLogo,
+      logo: hressLogo,
       image: hressImage,
       description: 'HRESS is an HR management system for Kalbe Group. I developed and maintained the mobile application using Kotlin and Java, implementing features for employee management, attendance tracking, and HR processes.',
-      link: '#',
+      link: 'https://github.com/fakhrymubarak/shafa-25-birthday',
       stacks: ['Android', 'Kotlin', 'Java'],
       featured: false,
-      hasGithub: false,
-      githubUrl: ''
+      hasGithub: true,
+      githubUrl: 'https://github.com/fakhrymubarak/shafa-25-birthday'
     },
     {
       id: 'akuisisi-loyalty',
       title: 'Akuisisi Loyalty',
       period: 'Jan 2022 — Jun 2023',
-      logo: crmLogo,
+      logo: akuisisiLogo,
       image: akuisisiImage,
       description: 'Akuisisi Loyalty is a customer acquisition and loyalty management system. I developed mobile features for customer onboarding, loyalty programs, and engagement tracking.',
-      link: '#',
+      link: 'https://play.google.com/store/apps/details?id=com.kalbe.crm.dmqi',
       stacks: ['Android', 'Kotlin'],
       featured: false,
       hasGithub: false,
       githubUrl: ''
-    }
+    },
+    {
+      id: 'showcase-v1',
+      title: 'V1 of This Site',
+      period: 'Apr 2025',
+      logo: showcaseV1Logo,
+      image: showcaseV1Image,
+      description: 'My V1 portfolio showcase is a Flutter Web chosen after KMP\'s alpha web support proved unreliable, with Flutter delivering stable, seamless cross-platform performance.',
+      link: 'fakhrymubarak.github.io/showcase-v1',
+      stacks: ['Flutter', 'Web'],
+      featured: false,
+      hasGithub: true,
+      githubUrl: 'https://github.com/fakhrymubarak/showcase-v1'
+    },
+    {
+      id: 'shafa-birthday-25th',
+      title: 'Shafa Birthday Web',
+      period: 'Jan 2025',
+      logo: shafaLogo,
+      image: shafaWebImage,
+      description: 'Shafa\'s 25th Birthday Web is a heartfelt Flutter Web app built using Dart with Provider + Firebase with featuring interactive, responsive birthday animations and personalized greetings, crafted with 100% love as a surprise gift.',
+      link: 'https://fakhrymubarak.github.io/shafa-25-birthday/',
+      stacks: ['Flutter', 'Web'],
+      featured: false,
+      hasGithub: true,
+      githubUrl: 'https://github.com/fakhrymubarak/shafa-25-birthday'
+    },
   ],
   companies: [
     {
