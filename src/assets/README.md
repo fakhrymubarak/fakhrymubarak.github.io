@@ -93,7 +93,6 @@ assets-react/
 ```javascript
 // Using Vite's asset handling
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
-import heroImage from '../assets/images/hero/img_fakhry_hello.webp';
 
 // Using public folder (alternative)
 const projectImage = '/assets/images/projects/img_mytelkomsel.webp';
@@ -107,18 +106,6 @@ import { ReactComponent as FlutterIcon } from '../assets/icons/tech/ic_flutter_l
 
 // Or as regular imports
 import androidIcon from '../assets/icons/tech/ic_android_dark.svg';
-```
-
-### **Loading Data**
-```javascript
-// Import JSON data
-import portfolioData from '../assets/data/portfolio_data.json';
-
-// Or fetch dynamically
-const loadPortfolioData = async () => {
-  const response = await fetch('/assets/data/portfolio_data.json');
-  return response.json();
-};
 ```
 
 ## 🎨 Theme Integration
