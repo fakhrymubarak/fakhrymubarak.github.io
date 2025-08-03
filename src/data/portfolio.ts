@@ -1,4 +1,5 @@
-import {PortfolioData} from '@/types'
+import { PortfolioData } from '@/types'
+import { calculateDuration } from '@/utils/dateUtils'
 
 // Import assets from src/assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp'
@@ -139,7 +140,7 @@ export const portfolioData: PortfolioData = {
       title: 'Android Developer for MyTelkomsel',
       company: 'PHINCON',
       period: 'Jul 2023 — Present',
-      duration: '2 yrs',
+      duration: calculateDuration('Jul 2023 — Present'),
       logo: phinconLogo,
       type: 'full-time',
       highlights: [
@@ -158,7 +159,7 @@ export const portfolioData: PortfolioData = {
       title: 'Mobile Development Instructor',
       company: 'Bangkit Academy (Google · Tokopedia · Gojek · Traveloka)',
       period: 'Feb 2024 — Dec 2024',
-      duration: '11 mos',
+      duration: calculateDuration('Feb 2024 — Dec 2024'),
       logo: bangkitLogo,
       type: 'part-time',
       highlights: [
@@ -170,7 +171,7 @@ export const portfolioData: PortfolioData = {
       title: 'Software Engineer (Mobile | Kotlin & Flutter)',
       company: 'PT Cakra Radha Mustika (Kalbe Group)',
       period: 'Jan 2022 — Jun 2023',
-      duration: '1 yr 6 mos',
+      duration: calculateDuration('Jan 2022 — Jun 2023'),
       logo: crmLogo,
       type: 'contract',
       highlights: [
