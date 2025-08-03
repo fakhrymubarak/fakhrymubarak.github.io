@@ -35,6 +35,8 @@ export default [
         ServiceWorkerRegistration: 'readonly',
         Notification: 'readonly',
         performance: 'readonly',
+        PerformanceEntry: 'readonly',
+        Window: 'readonly',
       },
     },
     plugins: {

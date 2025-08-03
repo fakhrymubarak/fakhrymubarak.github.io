@@ -12,6 +12,19 @@ export interface PerformanceObserver {
   disconnect: () => void
 }
 
+interface FirstInputEntry extends PerformanceEntry {
+  processingStart: number
+}
+
+interface LayoutShiftEntry extends PerformanceEntry {
+  hadRecentInput: boolean
+  value: number
+}
+
+interface GtagWindow extends Window {
+  gtag?: (command: string, eventName: string, params: Record<string, unknown>) => void
+}
+
 class PerformanceMonitor {
   private metrics: PerformanceMetrics = {
     fcp: null,
@@ -66,8 +79,9 @@ class PerformanceMonitor {
       try {
         const fidObserver = new PerformanceObserver((list) => {
           const entries = list.getEntries()
-          entries.forEach((entry: any) => {
-            this.metrics.fid = entry.processingStart - entry.startTime
+          entries.forEach((entry) => {
+            const fidEntry = entry as FirstInputEntry
+            this.metrics.fid = fidEntry.processingStart - fidEntry.startTime
             this.logMetric('FID', this.metrics.fid)
           })
         })
@@ -82,9 +96,10 @@ class PerformanceMonitor {
         const clsObserver = new PerformanceObserver((list) => {
           let clsValue = 0
           const entries = list.getEntries()
-          entries.forEach((entry: any) => {
-            if (!entry.hadRecentInput) {
-              clsValue += entry.value
+          entries.forEach((entry) => {
+            const clsEntry = entry as LayoutShiftEntry
+            if (!clsEntry.hadRecentInput) {
+              clsValue += clsEntry.value
             }
           })
           this.metrics.cls = clsValue
@@ -112,8 +127,9 @@ class PerformanceMonitor {
     console.log(`Performance Metric - ${name}:`, value)
 
     // Send to analytics if available
-    if (typeof (window as any).gtag !== 'undefined') {
-      (window as any).gtag('event', 'performance_metric', {
+    const gtagWindow = window as GtagWindow
+    if (typeof gtagWindow.gtag !== 'undefined') {
+      gtagWindow.gtag('event', 'performance_metric', {
         metric_name: name,
         metric_value: value,
       })

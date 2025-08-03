@@ -1,5 +1,17 @@
 // Service Worker registration utility
 
+interface ServiceWorkerRegistrationWithSync extends ServiceWorkerRegistration {
+  sync: {
+    register(tag: string): Promise<void>
+  }
+}
+
+interface ServiceWorkerRegistrationPrototype {
+  sync?: {
+    register(tag: string): Promise<void>
+  }
+}
+
 export const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
@@ -62,10 +74,11 @@ export const requestNotificationPermission = async () => {
 
 // Background sync registration
 export const registerBackgroundSync = async (tag: string) => {
-  if ('serviceWorker' in navigator && 'sync' in (window.ServiceWorkerRegistration.prototype as any)) {
+  const swPrototype = window.ServiceWorkerRegistration.prototype as ServiceWorkerRegistrationPrototype
+  if ('serviceWorker' in navigator && 'sync' in swPrototype) {
     try {
-      const registration = await navigator.serviceWorker.ready
-      await (registration as any).sync.register(tag)
+      const registration = await navigator.serviceWorker.ready as ServiceWorkerRegistrationWithSync
+      await registration.sync.register(tag)
       console.log('Background sync registered:', tag)
     } catch (error) {
       console.error('Background sync registration failed:', error)

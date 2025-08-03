@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { portfolioData } from '@data/portfolio.ts'
 import { ExternalLink, Download } from 'lucide-react'
-import { useTheme } from '@/contexts/ThemeContext'
+import { useTheme } from '@hooks/useTheme.ts'
 
 const IntroSection: React.FC = () => {
   const { introduction } = portfolioData

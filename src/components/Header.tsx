@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useTheme } from '../contexts/ThemeContext'
+import { useTheme } from '../hooks/useTheme'
 import { Moon, Sun, Menu, X } from 'lucide-react'
 import avatarImage from '../assets/images/avatars/img_avatar.webp'
 
