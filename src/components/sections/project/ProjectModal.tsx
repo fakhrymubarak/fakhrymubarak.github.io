@@ -1,15 +1,15 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { X, ExternalLink, Github } from 'lucide-react'
-import { Project } from '../../../types'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { X, ExternalLink, Github } from 'lucide-react';
+import { Project } from '@/types';
 
 interface ProjectModalProps {
-  project: Project | null
-  onClose: () => void
+  project: Project | null;
+  onClose: () => void;
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
-  if (!project) return null
+  if (!project) return null;
 
   return (
     <motion.div
@@ -24,7 +24,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         className="bg-light-surface dark:bg-dark-surface rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         <div className="p-6">
           {/* Header */}
@@ -35,7 +35,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 alt={`${project.title} logo`}
                 className="w-8 h-8 rounded"
               />
-              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text">{project.title}</h2>
+              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text">
+                {project.title}
+              </h2>
             </div>
             <button
               onClick={onClose}
@@ -91,7 +93,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             <div>
               <h3 className="font-semibold mb-2">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
-                {project.stacks.map((stack) => (
+                {project.stacks.map(stack => (
                   <span
                     key={stack}
                     className="px-3 py-1 bg-primary-coral/10 text-primary-coral text-sm rounded-full"
@@ -105,7 +107,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         </div>
       </motion.div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default ProjectModal 
+export default ProjectModal;

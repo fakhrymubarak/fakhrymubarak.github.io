@@ -1,10 +1,10 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface ProjectFilterProps {
-  filters: string[]
-  activeFilter: string
-  onFilterChange: (filter: string) => void
+  filters: string[];
+  activeFilter: string;
+  onFilterChange: (filter: string) => void;
 }
 
 const ProjectFilter: React.FC<ProjectFilterProps> = ({
@@ -28,7 +28,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
       >
         All Projects
       </button>
-      {filters.map((filter) => (
+      {filters.map(filter => (
         <button
           key={filter}
           onClick={() => onFilterChange(filter)}
@@ -42,7 +42,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
         </button>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default ProjectFilter 
+export default ProjectFilter;

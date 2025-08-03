@@ -1,8 +1,8 @@
-import React from 'react'
-import IntroSection from '../components/sections/IntroSection'
-import ProjectsSection from '../components/sections/ProjectsSection'
-import ExperienceSection from '../components/sections/ExperienceSection'
-import FooterSection from '../components/sections/FooterSection'
+import React from 'react';
+import IntroSection from '../components/sections/IntroSection';
+import ProjectsSection from '../components/sections/ProjectsSection';
+import ExperienceSection from '../components/sections/ExperienceSection';
+import FooterSection from '../components/sections/FooterSection';
 
 const HomePage: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
       <ExperienceSection />
       <FooterSection />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage 
+export default HomePage;

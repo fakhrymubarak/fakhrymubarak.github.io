@@ -1,10 +1,10 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { portfolioData } from '@data/portfolio.ts'
-import { Calendar, Clock } from 'lucide-react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
+import { Calendar, Clock } from 'lucide-react';
 
 const ExperienceSection: React.FC = () => {
-  const { companies } = portfolioData
+  const { companies } = portfolioData;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -14,7 +14,7 @@ const ExperienceSection: React.FC = () => {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -25,22 +25,22 @@ const ExperienceSection: React.FC = () => {
         duration: 0.5,
       },
     },
-  }
+  };
 
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'full-time':
-        return 'bg-green-500'
+        return 'bg-green-500';
       case 'part-time':
-        return 'bg-blue-500'
+        return 'bg-blue-500';
       case 'contract':
-        return 'bg-orange-500'
+        return 'bg-orange-500';
       case 'freelance':
-        return 'bg-purple-500'
+        return 'bg-purple-500';
       default:
-        return 'bg-gray-500'
+        return 'bg-gray-500';
     }
-  }
+  };
 
   return (
     <section id="experience" className="section bg-gradient">
@@ -54,9 +54,12 @@ const ExperienceSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">EXPERIENCES</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+              EXPERIENCES
+            </h2>
             <p className="body-text max-w-2xl mx-auto">
-              My professional journey in mobile development and software engineering.
+              My professional journey in mobile development and software
+              engineering.
             </p>
           </motion.div>
 
@@ -74,7 +77,6 @@ const ExperienceSection: React.FC = () => {
                   transition={{ delay: companyIndex * 0.2 }}
                   className="relative"
                 >
-
                   <div className="flex gap-4">
                     {/* Timeline Dot */}
                     <div className="relative">
@@ -85,7 +87,9 @@ const ExperienceSection: React.FC = () => {
                           className="w-8 h-8 rounded"
                         />
                       </div>
-                      <div className={`absolute -top-1 -right-1 w-4 h-4 ${getTypeColor(company.experiences[0].type)} rounded-full`} />
+                      <div
+                        className={`absolute -top-1 -right-1 w-4 h-4 ${getTypeColor(company.experiences[0].type)} rounded-full`}
+                      />
                     </div>
 
                     {/* Content */}
@@ -96,7 +100,9 @@ const ExperienceSection: React.FC = () => {
                           <h4 className="text-lg font-semibold text-primary-coral">
                             {company.name}
                           </h4>
-                          <span className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(company.experiences[0].type)}`}>
+                          <span
+                            className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(company.experiences[0].type)}`}
+                          >
                             {company.experiences[0].type}
                           </span>
                         </div>
@@ -137,17 +143,19 @@ const ExperienceSection: React.FC = () => {
                                 Key Achievements:
                               </h5>
                               <ul className="space-y-1">
-                                {exp.highlights.map((highlight, highlightIndex) => (
-                                  <li
-                                    key={highlightIndex}
-                                    className="flex items-start space-x-2 text-sm"
-                                  >
-                                    <span className="w-1.5 h-1.5 bg-primary-coral rounded-full mt-2 flex-shrink-0" />
-                                    <span className="text-light-muted dark:text-dark-muted">
-                                      {highlight}
-                                    </span>
-                                  </li>
-                                ))}
+                                {exp.highlights.map(
+                                  (highlight, highlightIndex) => (
+                                    <li
+                                      key={highlightIndex}
+                                      className="flex items-start space-x-2 text-sm"
+                                    >
+                                      <span className="w-1.5 h-1.5 bg-primary-coral rounded-full mt-2 flex-shrink-0" />
+                                      <span className="text-light-muted dark:text-dark-muted">
+                                        {highlight}
+                                      </span>
+                                    </li>
+                                  )
+                                )}
                               </ul>
                             </div>
                           </div>
@@ -162,7 +170,7 @@ const ExperienceSection: React.FC = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ExperienceSection 
+export default ExperienceSection;

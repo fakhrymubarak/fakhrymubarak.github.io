@@ -1,12 +1,12 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { portfolioData } from '@data/portfolio.ts'
-import { ExternalLink, Download } from 'lucide-react'
-import { useTheme } from '@hooks/useTheme.ts'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
+import { ExternalLink, Download } from 'lucide-react';
+import { useTheme } from '@hooks/useTheme.ts';
 
 const IntroSection: React.FC = () => {
-  const { introduction } = portfolioData
-  const { theme } = useTheme()
+  const { introduction } = portfolioData;
+  const { theme } = useTheme();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -16,7 +16,7 @@ const IntroSection: React.FC = () => {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -27,7 +27,7 @@ const IntroSection: React.FC = () => {
         duration: 0.5,
       },
     },
-  }
+  };
 
   return (
     <section id="home" className="section bg-gradient">
@@ -54,14 +54,18 @@ const IntroSection: React.FC = () => {
                 transition={{ duration: 3, repeat: Infinity }}
                 className="absolute -top-4 -right-4 min-w-[4rem] h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg px-2"
               >
-                <span className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">+3.5 yrs</span>
+                <span className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">
+                  +3.5 yrs
+                </span>
               </motion.div>
               <motion.div
                 animate={{ y: [10, -10, 10] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                 className="absolute -bottom-4 -left-4 min-w-[3.5rem] h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg px-2"
               >
-                <span className="text-white font-bold text-xs whitespace-nowrap">+8 projects</span>
+                <span className="text-white font-bold text-xs whitespace-nowrap">
+                  +8 projects
+                </span>
               </motion.div>
             </div>
           </motion.div>
@@ -80,9 +84,7 @@ const IntroSection: React.FC = () => {
                   {introduction.title[0]}
                 </span>
                 <br />
-                <span className="text-gradient">
-                  {introduction.title[1]}
-                </span>
+                <span className="text-gradient">{introduction.title[1]}</span>
               </h1>
             </motion.div>
 
@@ -115,20 +117,28 @@ const IntroSection: React.FC = () => {
             </motion.div>
 
             {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap gap-4"
+            >
               <a
                 href="#projects"
                 className="btn-primary px-8 py-3"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
+                onClick={e => {
+                  e.preventDefault();
+                  document
+                    .querySelector('#projects')
+                    ?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
                 View Projects
                 <ExternalLink className="w-4 h-4 ml-2" />
               </a>
               <a
-                href={portfolioData.footer.contacts.find(c => c.type === 'resume')?.url}
+                href={
+                  portfolioData.footer.contacts.find(c => c.type === 'resume')
+                    ?.url
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline px-8 py-3"
@@ -141,7 +151,7 @@ const IntroSection: React.FC = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default IntroSection 
+export default IntroSection;
