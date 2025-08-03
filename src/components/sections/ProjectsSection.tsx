@@ -11,6 +11,9 @@ const ProjectsSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
   const [activeFilter, setActiveFilter] = useState('all')
   const [showFilters, setShowFilters] = useState(false)
+  const [showAllProjects, setShowAllProjects] = useState(false)
+
+  const MAX_PROJECTS = 6
 
   // Get unique tech stacks for filtering
   const availableFilters = useMemo(() => {
@@ -23,6 +26,14 @@ const ProjectsSection: React.FC = () => {
     if (activeFilter === 'all') return projects
     return projects.filter(project => project.stacks.includes(activeFilter))
   }, [projects, activeFilter])
+
+  // Limit projects to show based on showAllProjects state
+  const displayedProjects = useMemo(() => {
+    return showAllProjects ? filteredProjects : filteredProjects.slice(0, MAX_PROJECTS)
+  }, [filteredProjects, showAllProjects])
+
+  // Check if there are more projects to show
+  const hasMoreProjects = filteredProjects.length > MAX_PROJECTS
 
   // Get selected project data
   const selectedProjectData = useMemo(() => {
@@ -60,6 +71,10 @@ const ProjectsSection: React.FC = () => {
 
   const handleCloseModal = () => {
     setSelectedProject(null)
+  }
+
+  const handleToggleProjects = () => {
+    setShowAllProjects(!showAllProjects)
   }
 
   return (
@@ -115,7 +130,7 @@ const ProjectsSection: React.FC = () => {
             variants={itemVariants}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {filteredProjects.map((project, index) => (
+            {displayedProjects.map((project, index) => (
               <ProjectCard
                 key={project.id}
                 project={project}
@@ -125,15 +140,23 @@ const ProjectsSection: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Load More Button */}
-          {/* <motion.div
-            variants={itemVariants}
-            className="text-center"
-          >
-            <button className="btn-secondary px-8 py-3">
-              View All Projects
-            </button>
-          </motion.div> */}
+          {/* Toggle Projects Button */}
+          {hasMoreProjects && (
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <button
+                onClick={handleToggleProjects}
+                className="btn-outline px-8 py-3"
+              >
+                {showAllProjects ? 'Show Less' : 'See More'}
+              </button>
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
