@@ -1,7 +1,7 @@
 import { PortfolioData } from '@/types';
 import { calculateDuration } from '@/utils/dateUtils';
 
-// Import assets from src/assets directory
+// Import assets from the src / assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp';
 import footerAvatarImage from '@/assets/images/avatars/img_avatar_footer.webp';
 import mytelkomselImage from '@/assets/images/projects/img_mytelkomsel.webp';
@@ -41,7 +41,7 @@ export const portfolioData: PortfolioData = {
     title: ['Hi, I am', 'Fakhry Mubarak'],
     subtitle: 'Software Engineer specializing in Android Development',
     description:
-      'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Flutter development, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
+      'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
     imagePath: avatarImage,
     techStack: [
       {
@@ -101,7 +101,7 @@ export const portfolioData: PortfolioData = {
       image: lifelogImage,
       description:
         'LifeLog is a not simple notes app to write a daily note and track your daily mood. Built with MVVM architecture, Room database, and Material Design UI. Features include daily note writing, mood tracking, note tagging, date-based search, and favorite notes.',
-      link: 'https://github.com/fakhrymubarak/LifeLog',
+      link: 'https://play.google.com/store/apps/details?id=com.fakhry.lifelog',
       stacks: ['Android', 'Kotlin'],
       featured: false,
       hasGithub: true,
@@ -146,8 +146,8 @@ export const portfolioData: PortfolioData = {
       link: 'https://github.com/fakhrymubarak/shafa-25-birthday',
       stacks: ['Android', 'Kotlin', 'Java'],
       featured: false,
-      hasGithub: true,
-      githubUrl: 'https://github.com/fakhrymubarak/shafa-25-birthday',
+      hasGithub: false,
+      githubUrl: '',
     },
     {
       id: 'akuisisi-loyalty',
@@ -171,7 +171,7 @@ export const portfolioData: PortfolioData = {
       image: showcaseV1Image,
       description:
         "My V1 portfolio showcase is a Flutter Web chosen after KMP's alpha web support proved unreliable, with Flutter delivering stable, seamless cross-platform performance.",
-      link: 'fakhrymubarak.github.io/showcase-v1',
+      link: 'https://fakhrymubarak.github.io/showcase-v1/',
       stacks: ['Flutter', 'Web'],
       featured: false,
       hasGithub: true,
@@ -298,7 +298,7 @@ export const portfolioData: PortfolioData = {
       {
         type: 'resume',
         label: 'Download Resume',
-        url: 'https://drive.google.com/file/d/1p6Z4PxUOCo3ijZ9D5ZAsbQWjRqeIt6CX/view',
+        url: 'https://drive.google.com/file/d/1LFIuiSSoWhdtBmMSRTr3hnLYXM5MgjkX/view',
         icon: 'download',
       },
       {
