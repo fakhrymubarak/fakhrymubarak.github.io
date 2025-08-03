@@ -21,12 +21,17 @@ export interface Project {
 export interface Experience {
   id: string
   title: string
-  company: string
   period: string
   duration: string
-  logo: string
   highlights: string[]
   type: 'full-time' | 'part-time' | 'contract' | 'freelance'
+}
+
+export interface Company {
+  id: string
+  name: string
+  logo: string
+  experiences: Experience[]
 }
 
 export interface SocialLink {
@@ -60,6 +65,6 @@ export interface Footer {
 export interface PortfolioData {
   introduction: Introduction
   projects: Project[]
-  experience: Experience[]
+  companies: Company[]
   footer: Footer
 } 

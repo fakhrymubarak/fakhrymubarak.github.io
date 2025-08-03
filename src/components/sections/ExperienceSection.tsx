@@ -4,7 +4,7 @@ import { portfolioData } from '@data/portfolio.ts'
 import { Calendar, Clock } from 'lucide-react'
 
 const ExperienceSection: React.FC = () => {
-  const { experience } = portfolioData
+  const { companies } = portfolioData
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -61,85 +61,103 @@ const ExperienceSection: React.FC = () => {
           </motion.div>
 
           {/* Experience Timeline */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            {experience.map((exp, index) => (
-              <motion.div
-                key={exp.id}
-                initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.2 }}
-                className="relative"
-              >
-                {/* Timeline Line */}
-                {index < experience.length - 1 && (
-                  <div className="absolute left-8 top-16 w-0.5 h-16 bg-light-muted/20 dark:bg-dark-muted/20" />
-                )}
+          <motion.div variants={itemVariants} className="relative">
+            {/* Continuous Timeline Line */}
+            <div className="absolute left-8 top-16 bottom-0 w-0.5 bg-light-muted/20 dark:bg-dark-muted/20" />
 
-                <div className="flex gap-6">
-                  {/* Timeline Dot */}
-                  <div className="relative">
-                    <div className="w-16 h-16 bg-light-surface dark:bg-dark-surface rounded-full flex items-center justify-center shadow-lg border-4 border-white dark:border-dark-bg">
-                      <img
-                        src={exp.logo}
-                        alt={`${exp.company} logo`}
-                        className="w-8 h-8 rounded"
-                      />
+            <div className="space-y-12">
+              {companies.map((company, companyIndex) => (
+                <motion.div
+                  key={company.id}
+                  initial={{ x: companyIndex % 2 === 0 ? -50 : 50, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ delay: companyIndex * 0.2 }}
+                  className="relative"
+                >
+
+                  <div className="flex gap-4">
+                    {/* Timeline Dot */}
+                    <div className="relative">
+                      <div className="w-16 h-16 bg-light-surface dark:bg-dark-surface rounded-full flex items-center justify-center shadow-lg border-4 border-white dark:border-dark-bg">
+                        <img
+                          src={company.logo}
+                          alt={`${company.name} logo`}
+                          className="w-8 h-8 rounded"
+                        />
+                      </div>
+                      <div className={`absolute -top-1 -right-1 w-4 h-4 ${getTypeColor(company.experiences[0].type)} rounded-full`} />
                     </div>
-                    <div className={`absolute -top-1 -right-1 w-4 h-4 ${getTypeColor(exp.type)} rounded-full`} />
-                  </div>
 
-                  {/* Content */}
-                  <div className="flex-1 card">
-                    <div className="space-y-4">
-                      {/* Header */}
-                      <div className="space-y-2">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                          <h3 className="heading-3">{exp.title}</h3>
-                          <span className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(exp.type)} self-start sm:self-auto`}>
-                            {exp.type}
+                    {/* Content */}
+                    <div className="flex-1 space-y-6">
+                      {/* Company Header */}
+                      <div className="card">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-lg font-semibold text-primary-coral">
+                            {company.name}
+                          </h4>
+                          <span className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(company.experiences[0].type)}`}>
+                            {company.experiences[0].type}
                           </span>
                         </div>
-                        <h4 className="text-lg font-semibold text-primary-coral">
-                          {exp.company}
-                        </h4>
                       </div>
 
-                      {/* Meta Info */}
-                      <div className="flex flex-wrap gap-4 text-sm text-light-muted dark:text-dark-muted">
-                        <div className="flex items-center space-x-1">
-                          <Calendar className="w-4 h-4" />
-                          <span>{exp.period}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{exp.duration}</span>
-                        </div>
-                      </div>
+                      {/* Experiences for this company */}
+                      {company.experiences.map((exp, expIndex) => (
+                        <motion.div
+                          key={exp.id}
+                          initial={{ y: 20, opacity: 0 }}
+                          whileInView={{ y: 0, opacity: 1 }}
+                          transition={{ delay: expIndex * 0.1 }}
+                          className="card"
+                        >
+                          <div className="space-y-4">
+                            {/* Header */}
+                            <div className="space-y-2">
+                              <div className="space-y-2">
+                                <h3 className="heading-3">{exp.title}</h3>
+                              </div>
+                            </div>
 
-                      {/* Highlights */}
-                      <div className="space-y-2">
-                        <h5 className="font-medium text-light-text dark:text-dark-text">
-                          Key Achievements:
-                        </h5>
-                        <ul className="space-y-1">
-                          {exp.highlights.map((highlight, highlightIndex) => (
-                            <li
-                              key={highlightIndex}
-                              className="flex items-start space-x-2 text-sm"
-                            >
-                              <span className="w-1.5 h-1.5 bg-primary-coral rounded-full mt-2 flex-shrink-0" />
-                              <span className="text-light-muted dark:text-dark-muted">
-                                {highlight}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                            {/* Meta Info */}
+                            <div className="flex flex-wrap gap-4 text-sm text-light-muted dark:text-dark-muted">
+                              <div className="flex items-center space-x-1">
+                                <Calendar className="w-4 h-4" />
+                                <span>{exp.period}</span>
+                              </div>
+                              <div className="flex items-center space-x-1">
+                                <Clock className="w-4 h-4" />
+                                <span>{exp.duration}</span>
+                              </div>
+                            </div>
+
+                            {/* Highlights */}
+                            <div className="space-y-2">
+                              <h5 className="font-medium text-light-text dark:text-dark-text">
+                                Key Achievements:
+                              </h5>
+                              <ul className="space-y-1">
+                                {exp.highlights.map((highlight, highlightIndex) => (
+                                  <li
+                                    key={highlightIndex}
+                                    className="flex items-start space-x-2 text-sm"
+                                  >
+                                    <span className="w-1.5 h-1.5 bg-primary-coral rounded-full mt-2 flex-shrink-0" />
+                                    <span className="text-light-muted dark:text-dark-muted">
+                                      {highlight}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </div>

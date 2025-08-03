@@ -58,15 +58,28 @@ export const portfolioData: PortfolioData = {
     {
       id: 'mytelkomsel',
       title: 'MyTelkomsel',
-      period: 'Jul 2023 — Present',
+      period: 'Jul 2023 — Jun 2025',
       logo: mytelkomselLogo,
       image: mytelkomselImage,
-      description: 'MyTelkomsel is the official self-care mobile application from Telkomsel, Indonesia\'s largest cellular provider, with over 100 million downloads and ~300 000 daily active users. I planned, developed, and delivered multiple key features using Kotlin and Java within a clean architecture following SOLID principles. I also led and mentored junior developers, ensuring high code quality and team performance.',
+      description: 'MyTelkomsel is the official self-care mobile application from Telkomsel, Indonesia\'s largest cellular provider, with over 100M downloads and ~300K daily active users. I planned, developed, and delivered multiple key features using Kotlin and Java within a clean architecture following SOLID principles. I also led and mentored junior developers, ensuring high code quality and team performance.',
       link: 'https://play.google.com/store/apps/details?id=com.telkomsel.telkomselcm',
       stacks: ['Android', 'Kotlin', 'Java'],
       featured: true,
       hasGithub: false,
       githubUrl: ''
+    },
+    {
+      id: 'lifelog',
+      title: 'LifeLog',
+      period: 'Jan 2022 — Present',
+      logo: crmLogo,
+      image: lifelogImage,
+      description: 'LifeLog is a not simple notes app to write a daily note and track your daily mood. Built with MVVM architecture, Room database, and Material Design UI. Features include daily note writing, mood tracking, note tagging, date-based search, and favorite notes.',
+      link: 'https://github.com/fakhrymubarak/LifeLog',
+      stacks: ['Android', 'Kotlin'],
+      featured: false,
+      hasGithub: true,
+      githubUrl: 'https://github.com/fakhrymubarak/LifeLog'
     },
     {
       id: 'alkhairaat',
@@ -108,19 +121,6 @@ export const portfolioData: PortfolioData = {
       githubUrl: ''
     },
     {
-      id: 'lifelog',
-      title: 'LifeLog',
-      period: 'Jan 2022 — Jun 2023',
-      logo: crmLogo,
-      image: lifelogImage,
-      description: 'LifeLog is a not simple notes app to write a daily note and track your daily mood. Built with MVVM architecture, Room database, and Material Design UI. Features include daily note writing, mood tracking, note tagging, date-based search, and favorite notes.',
-      link: 'https://github.com/fakhrymubarak/LifeLog',
-      stacks: ['Android', 'Kotlin'],
-      featured: false,
-      hasGithub: true,
-      githubUrl: 'https://github.com/fakhrymubarak/LifeLog'
-    },
-    {
       id: 'akuisisi-loyalty',
       title: 'Akuisisi Loyalty',
       period: 'Jan 2022 — Jun 2023',
@@ -134,56 +134,82 @@ export const portfolioData: PortfolioData = {
       githubUrl: ''
     }
   ],
-  experience: [
+  companies: [
     {
-      id: 'mytelkomsel-exp',
-      title: 'Android Developer for MyTelkomsel',
-      company: 'PHINCON',
-      period: 'Jul 2023 — Present',
-      duration: calculateDuration('Jul 2023 — Present'),
+      id: 'phincon',
+      name: 'PHINCON',
       logo: phinconLogo,
-      type: 'full-time',
-      highlights: [
-        'Crafting Android Application with +100M downloads and ~6M daily active users.',
-        'Plan, develop, and build features with SOLID principles with a modular clean architecture using MVVM.',
-        'Defined story point estimations in Agile sprint planning and collaborated with Scrum Master, PM, QA and backend teams.',
-        'Conducting code reviews, mentoring juniors, and leading feature development.',
-        'Collaborating with cross-functional teams in Agile environment.',
-        'Proactively initiated improvements in legacy code and resolved technical debt across multiple modules.',
-        'Handle SDK integrations (Firebase SDK, AyoLari SDK, etc.)',
-        'Performed Unit Testing using Junit.',
+      experiences: [
+        {
+          id: 'byu-exp',
+          title: 'Software Engineer - Backend',
+          period: 'Jul 2025 — Present',
+          duration: calculateDuration('Jul 2025 — Present'),
+          type: 'full-time',
+          highlights: [
+            'Maintaining Backend App that using Go Fiber to facilitate API bridging for migrating ByU users.',
+            'Enhancing Software Engineering skills by learning Backend using Go Programming Language.',
+          ]
+        },
+        {
+          id: 'mytelkomsel-exp',
+          title: 'Software Engineer - Android',
+          period: 'Jul 2023 — Jun 2025',
+          duration: calculateDuration('Jul 2023 — Jun 2025'),
+          type: 'full-time',
+          highlights: [
+            'Crafting Android Application with +100M downloads and ~6M daily active users.',
+            'Plan, develop, and build features with SOLID principles with a modular clean architecture using MVVM.',
+            'Defined story point estimations in Agile sprint planning and collaborated with Scrum Master, PM, QA and backend teams.',
+            'Conducting code reviews, mentoring juniors, and leading feature development.',
+            'Collaborating with cross-functional teams in Agile environment.',
+            'Proactively initiated improvements in legacy code and resolved technical debt across multiple modules.',
+            'Handle SDK integrations (Firebase SDK, AyoLari SDK, etc.)',
+            'Performed Unit Testing using Junit.',
+          ]
+        }
       ]
     },
     {
       id: 'bangkit',
-      title: 'Mobile Development Instructor',
-      company: 'Bangkit Academy (Google · Tokopedia · Gojek · Traveloka)',
-      period: 'Feb 2024 — Dec 2024',
-      duration: calculateDuration('Feb 2024 — Dec 2024'),
+      name: 'Bangkit Academy (Google · Tokopedia · Gojek · Traveloka)',
       logo: bangkitLogo,
-      type: 'part-time',
-      highlights: [
-        'Led ILT sessions on Android development for the Bangkit cohort'
+      experiences: [
+        {
+          id: 'bangkit-instructor',
+          title: 'Mobile Development Instructor',
+          period: 'Feb 2024 — Dec 2024',
+          duration: calculateDuration('Feb 2024 — Dec 2024'),
+          type: 'part-time',
+          highlights: [
+            'Led ILT sessions on Android development for the Bangkit cohort'
+          ]
+        }
       ]
     },
     {
       id: 'crm',
-      title: 'Software Engineer (Mobile | Kotlin & Flutter)',
-      company: 'PT Cakra Radha Mustika (Kalbe Group)',
-      period: 'Jan 2022 — Jun 2023',
-      duration: calculateDuration('Jan 2022 — Jun 2023'),
+      name: 'PT Cakra Radha Mustika (Kalbe Group)',
       logo: crmLogo,
-      type: 'contract',
-      highlights: [
-        'Migrating Chakra android app data source from vendor server to CRM server (~80 API endpoint)',
-        'Migrating app architecture pattern from MVP to MVVM.',
-        'Migrating source code language from 100% Java to 97% Kotlin.',
-        'Crafting Flutter variant of Chakra Rewards to be Released on Apple App Store',
-        'Delivered full-stack Android features (UI to data layers) for multiple loyalty and HR apps',
-        'Built and maintained robust mobile architectures supporting long-term scalability.',
-        'Integrated REST APIs, sockets, push notifications, and handled multi-threading workflows.',
-        'Developed Chakra Rewards and HRESS app with high uptime and responsive UI.',
-        'Used design patterns (MVVM, Repository, DI) and maintained excellent code hygiene.',
+      experiences: [
+        {
+          id: 'crm-engineer',
+          title: 'Software Engineer - Mobile Apps (Android & iOS)',
+          period: 'Jan 2022 — Jun 2023',
+          duration: calculateDuration('Jan 2022 — Jun 2023'),
+          type: 'contract',
+          highlights: [
+            'Migrating Chakra android app data source from vendor server to CRM server (~80 API endpoint)',
+            'Migrating app architecture pattern from MVP to MVVM.',
+            'Migrating source code language from 100% Java to 97% Kotlin.',
+            'Crafting Flutter variant of Chakra Rewards to be Released on Apple App Store',
+            'Delivered full-stack Android features (UI to data layers) for multiple loyalty and HR apps',
+            'Built and maintained robust mobile architectures supporting long-term scalability.',
+            'Integrated REST APIs, sockets, push notifications, and handled multi-threading workflows.',
+            'Developed Chakra Rewards and HRESS app with high uptime and responsive UI.',
+            'Used design patterns (MVVM, Repository, DI) and maintained excellent code hygiene.',
+          ]
+        }
       ]
     }
   ],

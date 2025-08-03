@@ -52,14 +52,14 @@ const IntroSection: React.FC = () => {
                 transition={{ duration: 3, repeat: Infinity }}
                 className="absolute -top-4 -right-4 w-16 h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg"
               >
-                <span className="text-white font-bold">3+</span>
+                <span className="text-white font-bold">+3.5 yrs</span>
               </motion.div>
               <motion.div
                 animate={{ y: [10, -10, 10] }}
                 transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                 className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg"
               >
-                <span className="text-white font-bold text-sm">100M+</span>
+                <span className="text-white font-bold text-sm">+8 projects</span>
               </motion.div>
             </div>
           </motion.div>
