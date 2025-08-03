@@ -1,6 +1,9 @@
 export interface TechStack {
   name: string
-  icon: string
+  icon: {
+    light: string
+    dark: string
+  }
   color?: string // Made optional since we're using icons
 }
 

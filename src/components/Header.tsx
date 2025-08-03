@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTheme } from '../contexts/ThemeContext'
 import { Moon, Sun, Menu, X } from 'lucide-react'
 import avatarImage from '../assets/images/avatars/img_avatar.webp'
@@ -6,16 +6,6 @@ import avatarImage from '../assets/images/avatars/img_avatar.webp'
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -33,10 +23,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-      ? 'bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md shadow-lg'
-      : 'bg-transparent'
-      }`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 'bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md shadow-lg'`}>
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 min-w-0">
           {/* Logo */}

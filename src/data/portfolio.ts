@@ -1,5 +1,5 @@
-import {PortfolioData} from '@/types'
-import {calculateDuration} from '@/utils/dateUtils'
+import { PortfolioData } from '@/types'
+import { calculateDuration } from '@/utils/dateUtils'
 
 // Import assets from src/assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp'
@@ -27,10 +27,14 @@ import hressLogo from '@/assets/icons/companies/ic_hress_crm.webp'
 import showcaseV1Logo from '@/assets/icons/companies/ic_showcase_v1.webp'
 
 // Import tech stack icons
-import androidIcon from '@/assets/icons/tech/ic_android_dark.svg'
-import kotlinIcon from '@/assets/icons/tech/ic_kotlin_dark.svg'
-import javaIcon from '@/assets/icons/tech/ic_java_dark.svg'
-import flutterIcon from '@/assets/icons/tech/ic_flutter_dark.svg'
+import androidIconDark from '@/assets/icons/tech/ic_android_dark.svg'
+import androidIconLight from '@/assets/icons/tech/ic_android_light.svg'
+import kotlinIconDark from '@/assets/icons/tech/ic_kotlin_dark.svg'
+import kotlinIconLight from '@/assets/icons/tech/ic_kotlin_light.svg'
+import javaIconDark from '@/assets/icons/tech/ic_java_dark.svg'
+import javaIconLight from '@/assets/icons/tech/ic_java_light.svg'
+import flutterIconDark from '@/assets/icons/tech/ic_flutter_dark.svg'
+import flutterIconLight from '@/assets/icons/tech/ic_flutter_light.svg'
 
 export const portfolioData: PortfolioData = {
   introduction: {
@@ -41,22 +45,34 @@ export const portfolioData: PortfolioData = {
     techStack: [
       {
         name: 'Android',
-        icon: androidIcon,
+        icon: {
+          light: androidIconLight,
+          dark: androidIconDark
+        },
         color: '#3DDC84'
       },
       {
         name: 'Kotlin',
-        icon: kotlinIcon,
+        icon: {
+          light: kotlinIconLight,
+          dark: kotlinIconDark
+        },
         color: '#7F52FF'
       },
       {
         name: 'Java',
-        icon: javaIcon,
+        icon: {
+          light: javaIconLight,
+          dark: javaIconDark
+        },
         color: '#ED8B00'
       },
       {
         name: 'Flutter',
-        icon: flutterIcon,
+        icon: {
+          light: flutterIconLight,
+          dark: flutterIconDark
+        },
         color: '#02569B'
       }
     ]

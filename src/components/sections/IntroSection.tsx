@@ -2,9 +2,11 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { portfolioData } from '@data/portfolio.ts'
 import { ExternalLink, Download } from 'lucide-react'
+import { useTheme } from '@/contexts/ThemeContext'
 
 const IntroSection: React.FC = () => {
   const { introduction } = portfolioData
+  const { theme } = useTheme()
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -102,7 +104,7 @@ const IntroSection: React.FC = () => {
                     className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg shadow-sm"
                   >
                     <img
-                      src={tech.icon}
+                      src={tech.icon[theme]}
                       alt={`${tech.name} icon`}
                       className="w-6 h-6 object-contain"
                     />
