@@ -16,6 +16,9 @@ pids
 #coverage/
 *.lcov
 
+# LighhousCI
+.lighthouseci
+
 # nyc test coverage
 .nyc_output
 
