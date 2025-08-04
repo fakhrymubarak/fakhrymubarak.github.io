@@ -1,16 +1,22 @@
 import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext.tsx';
 import Layout from './components/Layout';
-import HomePage from './pages/HomePage';
+import LoadingSpinner from './components/ui/LoadingSpinner';
 import './App.css';
+
+// Lazy load pages for better performance
+const HomePage = lazy(() => import('./pages/HomePage'));
 
 function App() {
   return (
     <ThemeProvider>
       <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </Suspense>
       </Layout>
     </ThemeProvider>
   );

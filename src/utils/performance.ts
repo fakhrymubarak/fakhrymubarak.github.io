@@ -233,3 +233,146 @@ export const measureAsyncTime = async (
   }
   return end - start;
 };
+
+// Performance optimization utilities
+
+// Type definitions for performance APIs
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+  processingEnd: number;
+}
+
+/**
+ * Preload critical resources for better performance
+ */
+export const preloadCriticalResources = () => {
+  // Preload critical images
+  const criticalImages = [
+    '/avatar.webp', // Main avatar image
+  ];
+
+  criticalImages.forEach(src => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    link.type = 'image/webp';
+    document.head.appendChild(link);
+  });
+
+  // Preload critical fonts
+  const fontLinks = [
+    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+    'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap',
+  ];
+
+  fontLinks.forEach(href => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'style';
+    link.href = href;
+    document.head.appendChild(link);
+  });
+};
+
+/**
+ * Optimize images for better performance
+ */
+export const optimizeImages = () => {
+  // Add loading="lazy" to all images that are not above the fold
+  const images = document.querySelectorAll('img:not([loading])');
+  images.forEach(img => {
+    if (!img.hasAttribute('loading')) {
+      (img as HTMLImageElement).loading = 'lazy';
+    }
+  });
+};
+
+/**
+ * Initialize performance optimizations
+ */
+export const initPerformanceOptimizations = () => {
+  // Only run on client side
+  if (typeof window === 'undefined') return;
+
+  // Preload critical resources
+  preloadCriticalResources();
+
+  // Optimize images
+  optimizeImages();
+
+  // Add intersection observer for better lazy loading
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            imageObserver.unobserve(img);
+          }
+        }
+      });
+    });
+
+    // Observe images with data-src attribute
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+};
+
+/**
+ * Measure and log performance metrics
+ */
+export const measurePerformance = () => {
+  if (typeof window === 'undefined') return;
+
+  // Measure Core Web Vitals
+  if ('PerformanceObserver' in window) {
+    const observer = new PerformanceObserver(list => {
+      for (const entry of list.getEntries()) {
+        if (entry.entryType === 'largest-contentful-paint') {
+          console.log('LCP:', entry.startTime);
+        }
+        if (entry.entryType === 'first-input') {
+          const firstInputEntry = entry as PerformanceEventTiming;
+          console.log(
+            'FID:',
+            firstInputEntry.processingStart - firstInputEntry.startTime
+          );
+        }
+      }
+    });
+
+    observer.observe({
+      entryTypes: ['largest-contentful-paint', 'first-input'],
+    });
+  }
+};
+
+/**
+ * Optimize bundle loading
+ */
+export const optimizeBundleLoading = () => {
+  // Add resource hints for better loading
+  const resourceHints = [
+    { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
+    { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+  ];
+
+  resourceHints.forEach(hint => {
+    if (!document.querySelector(`link[href="${hint.href}"]`)) {
+      const link = document.createElement('link');
+      link.rel = hint.rel;
+      link.href = hint.href;
+      if (hint.rel === 'preconnect') {
+        link.crossOrigin = 'anonymous';
+      }
+      document.head.appendChild(link);
+    }
+  });
+};

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoadingSpinner from './LoadingSpinner';
 
-interface LazyImageProps {
+interface ResponsiveImageProps {
   src: string;
   alt: string;
   className?: string;
@@ -10,9 +10,10 @@ interface LazyImageProps {
   priority?: boolean;
   onLoad?: () => void;
   onError?: () => void;
+  sizes?: string;
 }
 
-const LazyImage: React.FC<LazyImageProps> = ({
+const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   src,
   alt,
   className = '',
@@ -20,6 +21,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
   priority = false,
   onLoad,
   onError,
+  sizes = '100vw',
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -61,6 +63,13 @@ const LazyImage: React.FC<LazyImageProps> = ({
   const handleError = () => {
     setHasError(true);
     onError?.();
+  };
+
+  // Generate responsive srcSet for WebP images
+  const generateSrcSet = (imageSrc: string) => {
+    // For now, we'll use the same image but in a real app you'd have multiple sizes
+    // This is a placeholder for responsive image optimization
+    return `${imageSrc} 1x, ${imageSrc} 2x`;
   };
 
   if (hasError) {
@@ -114,10 +123,12 @@ const LazyImage: React.FC<LazyImageProps> = ({
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           fetchPriority={priority ? 'high' : 'auto'}
+          sizes={sizes}
+          srcSet={generateSrcSet(src)}
         />
       )}
     </div>
   );
 };
 
-export default LazyImage;
+export default ResponsiveImage;
