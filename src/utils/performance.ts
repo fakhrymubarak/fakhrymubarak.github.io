@@ -1,5 +1,7 @@
 // Performance monitoring utilities
 
+/* global setTimeout, process */
+
 export interface PerformanceMetrics {
   fcp: number | null;
   lcp: number | null;
@@ -111,7 +113,7 @@ class PerformanceMonitor {
 
     // Cumulative Layout Shift - only measure for first 5 seconds
     try {
-      let clsStartTime = Date.now();
+      const clsStartTime = Date.now();
       const clsObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         entries.forEach(entry => {
