@@ -1,4 +1,6 @@
-import React from 'react';
+import { useEffect, RefObject } from 'react';
+
+/* global HTMLElement */
 
 // Lightweight animation utilities to reduce Framer Motion usage
 
@@ -27,12 +29,6 @@ export const scaleIn = {
   transform: 'scale(0.9)',
   transition: 'opacity 0.3s ease, transform 0.3s ease',
 };
-
-export const scaleInVisible = {
-  opacity: 1,
-  transform: 'scale(1)',
-};
-
 // CSS animation classes for simple animations
 export const animationClasses = {
   fadeInUp: 'animate-fade-in-up',
@@ -44,11 +40,11 @@ export const animationClasses = {
 
 // Intersection Observer hook for simple animations
 export const useIntersectionAnimation = (
-  elementRef: React.RefObject<HTMLElement>,
+  elementRef: RefObject<HTMLElement>,
   animationClass: string,
   threshold = 0.1
 ) => {
-  React.useEffect(() => {
+  useEffect(() => {
     const element = elementRef.current;
     if (!element) return;
 
@@ -65,4 +61,4 @@ export const useIntersectionAnimation = (
     observer.observe(element);
     return () => observer.disconnect();
   }, [elementRef, animationClass, threshold]);
-}; 
+};
