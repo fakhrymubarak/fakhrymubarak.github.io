@@ -1,4 +1,7 @@
-const CACHE_NAME = 'showcase-v2-cache-v1';
+const CACHE_NAME = 'showcase-v2-cache-v2';
+const STATIC_CACHE = 'showcase-v2-static-v2';
+const DYNAMIC_CACHE = 'showcase-v2-dynamic-v2';
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -9,6 +12,14 @@ const urlsToCache = [
   '/icons/Icon-maskable-192.png',
   '/icons/Icon-maskable-512.png',
 ];
+
+// Cache strategies
+const CACHE_STRATEGIES = {
+  STATIC: 'static',
+  DYNAMIC: 'dynamic',
+  NETWORK_FIRST: 'network-first',
+  CACHE_FIRST: 'cache-first',
+};
 
 // Install event - cache resources
 self.addEventListener('install', (event) => {

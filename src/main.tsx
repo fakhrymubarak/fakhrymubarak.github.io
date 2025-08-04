@@ -4,11 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.tsx';
 import './index.css';
-import { initPerformanceMonitoring } from './utils/performance';
+import {
+  initPerformanceMonitoring,
+  initPerformanceOptimizations,
+} from './utils/performance';
 import { registerServiceWorker } from './utils/sw';
 
 // Initialize performance monitoring
 initPerformanceMonitoring();
+
+// Initialize performance optimizations
+initPerformanceOptimizations();
 
 // Register service worker
 registerServiceWorker();

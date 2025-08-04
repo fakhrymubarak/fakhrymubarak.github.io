@@ -65,4 +65,8 @@ export default {
   },
   plugins: [],
   darkMode: 'class',
+  // Optimize for production
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 } 

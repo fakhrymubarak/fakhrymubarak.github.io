@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Project } from '@/types';
+import ResponsiveImage from '@/components/ui/ResponsiveImage';
 
 interface ProjectCardProps {
   project: Project;
@@ -25,10 +26,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       {/* Project Image */}
       <div className="relative overflow-hidden rounded-lg mb-4">
-        <img
+        <ResponsiveImage
           src={project.image}
           alt={project.title}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
@@ -37,10 +39,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img
+            <ResponsiveImage
               src={project.logo}
               alt={`${project.title} logo`}
               className="w-6 h-6 rounded"
+              sizes="24px"
             />
             <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
               {project.title}

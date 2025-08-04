@@ -32,7 +32,8 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
           animations: ['framer-motion'],
-          icons: ['lucide-react'],
+          icons: ['lucide-react', 'react-icons'],
+          utils: ['axios'],
         },
         chunkFileNames: (chunkInfo) => {
           const facadeModuleId = chunkInfo.facadeModuleId
@@ -43,5 +44,6 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000, // Increase warning limit
+    assetsInlineLimit: 4096, // Inline small assets
   },
 }) 
