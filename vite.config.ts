@@ -23,15 +23,25 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps in production to reduce bundle size
+    minify: 'esbuild',
+    target: 'es2015',
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
           animations: ['framer-motion'],
+          icons: ['lucide-react'],
+        },
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId
+            ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
+            : 'chunk'
+          return `js/${facadeModuleId}-[hash].js`
         },
       },
     },
+    chunkSizeWarningLimit: 1000, // Increase warning limit
   },
 }) 

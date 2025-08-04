@@ -7,6 +7,7 @@ interface LazyImageProps {
   alt: string;
   className?: string;
   placeholder?: string;
+  priority?: boolean;
   onLoad?: () => void;
   onError?: () => void;
 }
@@ -16,15 +17,22 @@ const LazyImage: React.FC<LazyImageProps> = ({
   alt,
   className = '',
   placeholder,
+  priority = false,
   onLoad,
   onError,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(priority);
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // If priority is true, load immediately
+    if (priority) {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -43,7 +51,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [priority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -98,12 +106,11 @@ const LazyImage: React.FC<LazyImageProps> = ({
         <motion.img
           src={src}
           alt={alt}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
           onLoad={handleLoad}
           onError={handleError}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
         />
       )}
     </div>

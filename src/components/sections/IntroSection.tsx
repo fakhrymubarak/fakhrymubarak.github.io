@@ -46,27 +46,21 @@ const IntroSection: React.FC = () => {
                   src={introduction.imagePath}
                   alt="Fakhry Mubarak"
                   className="w-72 h-72 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl"
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </div>
-              {/* Floating elements */}
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 min-w-[4rem] h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg px-2"
-              >
+              {/* Floating elements - using CSS animations instead of Framer Motion */}
+              <div className="absolute -top-4 -right-4 min-w-[4rem] h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg px-2 animate-float">
                 <span className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">
                   +3.5 yrs
                 </span>
-              </motion.div>
-              <motion.div
-                animate={{ y: [10, -10, 10] }}
-                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                className="absolute -bottom-4 -left-4 min-w-[3.5rem] h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg px-2"
-              >
+              </div>
+              <div className="absolute -bottom-4 -left-4 min-w-[3.5rem] h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg px-2 animate-float-reverse">
                 <span className="text-white font-bold text-xs whitespace-nowrap">
                   +8 projects
                 </span>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
 

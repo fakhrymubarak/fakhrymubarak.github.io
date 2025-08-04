@@ -1,9 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'white' | 'gray';
+  color?: 'primary' | 'gray' | 'white';
   className?: string;
 }
 
@@ -20,17 +19,17 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   const colorClasses = {
     primary: 'border-primary-coral',
-    white: 'border-white',
     gray: 'border-gray-400',
+    white: 'border-white',
   };
 
   return (
-    <div className={`flex justify-center items-center ${className}`}>
-      <motion.div
-        className={`${sizeClasses[size]} border-2 border-t-transparent rounded-full ${colorClasses[color]}`}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-      />
+    <div
+      className={`animate-spin rounded-full border-2 border-t-transparent ${sizeClasses[size]} ${colorClasses[color]} ${className}`}
+      role="status"
+      aria-label="Loading"
+    >
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };

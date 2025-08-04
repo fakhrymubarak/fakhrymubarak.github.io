@@ -39,83 +39,98 @@ class PerformanceMonitor {
   };
 
   private observers: PerformanceObserver[] = [];
+  private isInitialized = false;
 
   constructor() {
-    this.initObservers();
-    this.measureTTFB();
+    // Delay initialization to reduce initial load impact
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+        this.initObservers();
+        this.measureTTFB();
+      }, 100);
+    }
   }
 
   private initObservers() {
-    // First Contentful Paint
-    if ('PerformanceObserver' in window) {
-      try {
-        const fcpObserver = new PerformanceObserver(list => {
-          const entries = list.getEntries();
-          const fcpEntry = entries.find(
-            entry => entry.name === 'first-contentful-paint'
-          );
-          if (fcpEntry) {
-            this.metrics.fcp = fcpEntry.startTime;
-            this.logMetric('FCP', fcpEntry.startTime);
+    if (this.isInitialized || !('PerformanceObserver' in window)) return;
+
+    this.isInitialized = true;
+
+    // First Contentful Paint - only measure once
+    try {
+      const fcpObserver = new PerformanceObserver(list => {
+        const entries = list.getEntries();
+        const fcpEntry = entries.find(
+          entry => entry.name === 'first-contentful-paint'
+        );
+        if (fcpEntry) {
+          this.metrics.fcp = fcpEntry.startTime;
+          this.logMetric('FCP', fcpEntry.startTime);
+          fcpObserver.disconnect(); // Stop observing after first measurement
+        }
+      });
+      fcpObserver.observe({ entryTypes: ['paint'] });
+      this.observers.push(fcpObserver);
+    } catch (error) {
+      // Silently fail to avoid console pollution
+    }
+
+    // Largest Contentful Paint - only measure once
+    try {
+      const lcpObserver = new PerformanceObserver(list => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        if (lastEntry) {
+          this.metrics.lcp = lastEntry.startTime;
+          this.logMetric('LCP', lastEntry.startTime);
+          // Don't disconnect LCP observer as it can update
+        }
+      });
+      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+      this.observers.push(lcpObserver);
+    } catch (error) {
+      // Silently fail to avoid console pollution
+    }
+
+    // First Input Delay - only measure once
+    try {
+      const fidObserver = new PerformanceObserver(list => {
+        const entries = list.getEntries();
+        entries.forEach(entry => {
+          const fidEntry = entry as FirstInputEntry;
+          this.metrics.fid = fidEntry.processingStart - fidEntry.startTime;
+          this.logMetric('FID', this.metrics.fid);
+          fidObserver.disconnect(); // Stop observing after first measurement
+        });
+      });
+      fidObserver.observe({ entryTypes: ['first-input'] });
+      this.observers.push(fidObserver);
+    } catch (error) {
+      // Silently fail to avoid console pollution
+    }
+
+    // Cumulative Layout Shift - only measure for first 5 seconds
+    try {
+      let clsStartTime = Date.now();
+      const clsObserver = new PerformanceObserver(list => {
+        const entries = list.getEntries();
+        entries.forEach(entry => {
+          const clsEntry = entry as LayoutShiftEntry;
+          if (!clsEntry.hadRecentInput) {
+            this.metrics.cls = (this.metrics.cls || 0) + clsEntry.value;
+            this.logMetric('CLS', this.metrics.cls);
           }
         });
-        fcpObserver.observe({ entryTypes: ['paint'] });
-        this.observers.push(fcpObserver);
-      } catch (error) {
-        console.warn('FCP observer failed:', error);
-      }
 
-      // Largest Contentful Paint
-      try {
-        const lcpObserver = new PerformanceObserver(list => {
-          const entries = list.getEntries();
-          const lastEntry = entries[entries.length - 1];
-          if (lastEntry) {
-            this.metrics.lcp = lastEntry.startTime;
-            this.logMetric('LCP', lastEntry.startTime);
-          }
-        });
-        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-        this.observers.push(lcpObserver);
-      } catch (error) {
-        console.warn('LCP observer failed:', error);
-      }
-
-      // First Input Delay
-      try {
-        const fidObserver = new PerformanceObserver(list => {
-          const entries = list.getEntries();
-          entries.forEach(entry => {
-            const fidEntry = entry as FirstInputEntry;
-            this.metrics.fid = fidEntry.processingStart - fidEntry.startTime;
-            this.logMetric('FID', this.metrics.fid);
-          });
-        });
-        fidObserver.observe({ entryTypes: ['first-input'] });
-        this.observers.push(fidObserver);
-      } catch (error) {
-        console.warn('FID observer failed:', error);
-      }
-
-      // Cumulative Layout Shift
-      try {
-        const clsObserver = new PerformanceObserver(list => {
-          let clsValue = 0;
-          const entries = list.getEntries();
-          entries.forEach(entry => {
-            const clsEntry = entry as LayoutShiftEntry;
-            if (!clsEntry.hadRecentInput) {
-              clsValue += clsEntry.value;
-            }
-          });
-          this.metrics.cls = clsValue;
-          this.logMetric('CLS', clsValue);
-        });
-        clsObserver.observe({ entryTypes: ['layout-shift'] });
-        this.observers.push(clsObserver);
-      } catch (error) {
-        console.warn('CLS observer failed:', error);
-      }
+        // Stop observing after 5 seconds to reduce overhead
+        if (Date.now() - clsStartTime > 5000) {
+          clsObserver.disconnect();
+        }
+      });
+      clsObserver.observe({ entryTypes: ['layout-shift'] });
+      this.observers.push(clsObserver);
+    } catch (error) {
+      // Silently fail to avoid console pollution
     }
   }
 
@@ -132,7 +147,10 @@ class PerformanceMonitor {
   }
 
   private logMetric(name: string, value: number) {
-    console.log(`Performance Metric - ${name}:`, value);
+    // Only log in development to reduce production overhead
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`Performance Metric - ${name}:`, value);
+    }
 
     // Send to analytics if available
     const gtagWindow = window as GtagWindow;
@@ -195,7 +213,9 @@ export const measureTime = (name: string, fn: () => void) => {
   const start = performance.now();
   fn();
   const end = performance.now();
-  console.log(`${name} took ${end - start}ms`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`${name} took ${end - start}ms`);
+  }
   return end - start;
 };
 
@@ -206,6 +226,8 @@ export const measureAsyncTime = async (
   const start = performance.now();
   await fn();
   const end = performance.now();
-  console.log(`${name} took ${end - start}ms`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`${name} took ${end - start}ms`);
+  }
   return end - start;
 };

@@ -15,14 +15,20 @@ interface ServiceWorkerRegistrationPrototype {
 export const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
+      console.log('Registering Service Worker...');
+      const registration = await navigator.serviceWorker.register('/sw.js', {
+        scope: '/',
+        updateViaCache: 'none'
+      });
       console.log('Service Worker registered successfully:', registration);
 
       // Check for updates
       registration.addEventListener('updatefound', () => {
+        console.log('Service Worker update found');
         const newWorker = registration.installing;
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
+            console.log('Service Worker state changed:', newWorker.state);
             if (
               newWorker.state === 'installed' &&
               navigator.serviceWorker.controller
@@ -34,10 +40,20 @@ export const registerServiceWorker = async () => {
         }
       });
 
+      // Handle controller change
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('Service Worker controller changed');
+      });
+
       return registration;
     } catch (error) {
       console.error('Service Worker registration failed:', error);
+      // Don't throw the error, just log it
+      return null;
     }
+  } else {
+    console.log('Service Worker not supported in this browser');
+    return null;
   }
 };
 
@@ -49,7 +65,7 @@ const showUpdateNotification = (_registration: ServiceWorkerRegistration) => {
   if ('Notification' in window && Notification.permission === 'granted') {
     new Notification('Portfolio Update', {
       body: 'A new version is available. Refresh to update.',
-      icon: '/favicon-32x32.png',
+      icon: '/icons/Icon-192.png',
     });
   }
 };
