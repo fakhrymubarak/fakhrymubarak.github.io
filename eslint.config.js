@@ -58,6 +58,6 @@ export default [
     },
   },
   {
-    ignores: ['dist/**', 'node_modules/**', 'lighthouserc.js'],
+    ignores: ['dist/**', 'node_modules/**', 'lighthouserc.cjs'],
   },
 ]; 
