@@ -132,12 +132,12 @@ Based on Lighthouse CI results, consider these optimizations:
 
 - Check Lighthouse CI results in the workflow logs
 - Monitor bundle size trends
-- Review performance assertions in `lighthouserc.json`
+- Review performance assertions in `lighthouserc.cjs`
 - Consider image optimization and code splitting
 
 ### Lighthouse CI Issues
 
 - Ensure Chrome is available in the CI environment
 - Check that the preview server starts correctly
-- Verify the URL configuration in `lighthouserc.json`
+- Verify the URL configuration in `lighthouserc.cjs`
 - Review performance thresholds if tests are too strict 

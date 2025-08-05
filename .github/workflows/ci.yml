@@ -79,7 +79,7 @@ jobs:
           echo "Largest files:"
           find dist/ -type f -exec du -h {} + | sort -hr | head -10
 
-  # Performance Analysis (only on master branch)
+  # Performance Analysis (only on the main branch)
   performance-check:
     name: Performance Analysis
     runs-on: ubuntu-latest
@@ -110,7 +110,7 @@ jobs:
         
       - name: Run Lighthouse CI
         run: |
-          lhci autorun --config=lighthouserc.json
+          lhci autorun --config=lighthouserc.cjs
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         continue-on-error: true 
