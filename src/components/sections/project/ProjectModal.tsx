@@ -22,15 +22,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   });
 
   useEffect(() => {
-    // Announce modal opening to screen readers
+    // Only manage body scroll and announce when project is actually provided
     if (project) {
+      // Announce modal opening to screen readers
       accessibilityUtils.announce(`Project modal opened: ${project.title}`);
+
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
     }
 
-    // Prevent body scroll when modal is open
-    document.body.style.overflow = 'hidden';
-
     return () => {
+      // Always restore body scroll when component unmounts or project changes
       document.body.style.overflow = 'unset';
     };
   }, [project]);
@@ -49,6 +51,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     trackButtonClick('view_github', `project_${project?.title}`);
   };
 
+  // Early return after all hooks have been called
   if (!project) return null;
 
   return (
