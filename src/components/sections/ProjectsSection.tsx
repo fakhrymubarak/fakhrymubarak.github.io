@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { portfolioData } from '@data/portfolio.ts';
 import ProjectCard from './project/ProjectCard';
 import ProjectModal from './project/ProjectModal';
 import ProjectFilter from './project/ProjectFilter';
 import { Filter } from 'lucide-react';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 const ProjectsSection: React.FC = () => {
   const { projects } = portfolioData;
@@ -12,6 +13,7 @@ const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const { trackButtonClick } = useAnalytics();
 
   const MAX_PROJECTS = 6;
 
@@ -68,14 +70,20 @@ const ProjectsSection: React.FC = () => {
   };
 
   const handleFilterChange = (filter: string) => {
+    trackButtonClick(`filter_${filter}`, 'projects_section');
     setActiveFilter(filter);
   };
 
   const handleCloseModal = () => {
+    trackButtonClick('close_project_modal', 'projects_section');
     setSelectedProject(null);
   };
 
   const handleToggleProjects = () => {
+    trackButtonClick(
+      showAllProjects ? 'show_less_projects' : 'show_more_projects',
+      'projects_section'
+    );
     setShowAllProjects(!showAllProjects);
   };
 
@@ -102,7 +110,10 @@ const ProjectsSection: React.FC = () => {
             {/* Filter Toggle */}
             <div className="flex justify-center">
               <button
-                onClick={() => setShowFilters(!showFilters)}
+                onClick={() => {
+                  trackButtonClick('toggle_filters', 'projects_section');
+                  setShowFilters(!showFilters);
+                }}
                 className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
               >
                 <Filter className="w-4 h-4" />

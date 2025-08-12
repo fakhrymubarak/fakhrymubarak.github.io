@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { portfolioData } from '@data/portfolio.ts';
-import { ExternalLink, Download } from 'lucide-react';
+import { Download, ExternalLink } from 'lucide-react';
 import { useTheme } from '@hooks/useTheme.ts';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 const IntroSection: React.FC = () => {
   const { introduction } = portfolioData;
   const { theme } = useTheme();
+  const { trackButtonClick, trackContactClick } = useAnalytics();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -120,6 +122,7 @@ const IntroSection: React.FC = () => {
                 className="btn-primary px-8 py-3"
                 onClick={e => {
                   e.preventDefault();
+                  trackButtonClick('view_projects', 'intro_section');
                   document
                     .querySelector('#projects')
                     ?.scrollIntoView({ behavior: 'smooth' });
@@ -136,6 +139,7 @@ const IntroSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline px-8 py-3"
+                onClick={() => trackContactClick('resume_download')}
               >
                 Download Resume
                 <Download className="w-4 h-4 ml-2" />

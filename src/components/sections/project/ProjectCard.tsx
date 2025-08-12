@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Project } from '@/types';
 import ResponsiveImage from '@/components/ui/ResponsiveImage';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 interface ProjectCardProps {
   project: Project;
   index: number;
-  onSelect: (projectId: string) => void;
+  onSelect: (id: string) => void;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -15,50 +16,62 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   index,
   onSelect,
 }) => {
+  const { trackProjectView, trackButtonClick } = useAnalytics();
+
+  const handleProjectClick = () => {
+    trackProjectView(project.title);
+    onSelect(project.id);
+  };
+
   return (
     <motion.div
-      initial={{ scale: 0.9, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
       className="card group cursor-pointer"
-      onClick={() => onSelect(project.id)}
+      onClick={handleProjectClick}
     >
       {/* Project Image */}
-      <div className="relative overflow-hidden rounded-lg mb-4">
+      <div className="relative overflow-hidden rounded-t-lg">
         <ResponsiveImage
           src={project.image}
           alt={project.title}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Project Info */}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <ResponsiveImage
+      {/* Project Content */}
+      <div className="p-6 space-y-4">
+        {/* Header */}
+        <div className="flex items-start justify-between">
+          <div className="flex items-center space-x-3">
+            <img
               src={project.logo}
               alt={`${project.title} logo`}
-              className="w-6 h-6 rounded"
-              sizes="24px"
+              className="w-8 h-8 rounded"
             />
-            <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
-              {project.title}
-            </h3>
+            <div>
+              <h3 className="font-semibold text-light-text dark:text-dark-text">
+                {project.title}
+              </h3>
+              <p className="text-sm text-light-muted dark:text-dark-muted">
+                {project.period}
+              </p>
+            </div>
           </div>
-          <span className="text-sm text-light-muted dark:text-dark-muted">
-            {project.period}
-          </span>
         </div>
 
-        <p className="body-text text-sm line-clamp-3">{project.description}</p>
+        {/* Description */}
+        <p className="text-sm text-light-muted dark:text-dark-muted line-clamp-2">
+          {project.description}
+        </p>
 
-        {/* Tech Stacks */}
+        {/* Tech Stack */}
         <div className="flex flex-wrap gap-2">
-          {project.stacks.map(stack => (
+          {project.stacks.slice(0, 3).map(stack => (
             <span
               key={stack}
               className="px-2 py-1 bg-primary-coral/10 text-primary-coral text-xs rounded-full"
@@ -66,32 +79,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               {stack}
             </span>
           ))}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-2">
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline text-sm px-4 py-2"
-            onClick={e => e.stopPropagation()}
-          >
-            View Project
-            <ExternalLink className="w-3 h-3 ml-1" />
-          </a>
-          {project.hasGithub && project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors"
-              onClick={e => e.stopPropagation()}
-            >
-              <Github className="w-4 h-4" />
-            </a>
+          {project.stacks.length > 3 && (
+            <span className="px-2 py-1 bg-light-muted/20 text-light-muted dark:text-dark-muted text-xs rounded-full">
+              +{project.stacks.length - 3}
+            </span>
           )}
         </div>
+
+        {/* Action Button */}
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-outline text-sm px-4 py-2"
+          onClick={e => {
+            e.stopPropagation();
+            trackButtonClick('view_project', `project_${project.title}`);
+          }}
+        >
+          View Project
+          <ExternalLink className="w-3 h-3 ml-1" />
+        </a>
       </div>
     </motion.div>
   );

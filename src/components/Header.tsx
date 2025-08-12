@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { trackButtonClick } = useAnalytics();
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -14,11 +16,12 @@ const Header: React.FC = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = (href: string, navName: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    trackButtonClick(`nav_${navName.toLowerCase()}`, 'header');
     setIsMenuOpen(false);
   };
 
@@ -47,7 +50,7 @@ const Header: React.FC = () => {
             {navItems.map(item => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => scrollToSection(item.href, item.name)}
                 className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium"
               >
                 {item.name}
@@ -59,7 +62,10 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             {/* Theme Toggle */}
             <button
-              onClick={toggleTheme}
+              onClick={() => {
+                trackButtonClick('theme_toggle', 'header');
+                toggleTheme();
+              }}
               className="p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0"
               aria-label="Toggle theme"
             >
@@ -72,7 +78,10 @@ const Header: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => {
+                trackButtonClick('mobile_menu_toggle', 'header');
+                setIsMenuOpen(!isMenuOpen);
+              }}
               className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0"
               aria-label="Toggle menu"
             >
@@ -92,7 +101,7 @@ const Header: React.FC = () => {
               {navItems.map(item => (
                 <button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => scrollToSection(item.href, item.name)}
                   className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2"
                 >
                   {item.name}
