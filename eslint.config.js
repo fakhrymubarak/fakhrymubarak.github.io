@@ -37,6 +37,22 @@ export default [
         performance: 'readonly',
         PerformanceEntry: 'readonly',
         Window: 'readonly',
+        // DOM Types
+        HTMLElement: 'readonly',
+        HTMLDivElement: 'readonly',
+        HTMLButtonElement: 'readonly',
+        HTMLAnchorElement: 'readonly',
+        HTMLInputElement: 'readonly',
+        HTMLSelectElement: 'readonly',
+        HTMLTextAreaElement: 'readonly',
+        Element: 'readonly',
+        Node: 'readonly',
+        Event: 'readonly',
+        KeyboardEvent: 'readonly',
+        MouseEvent: 'readonly',
+        FocusEvent: 'readonly',
+        // React Types
+        React: 'readonly',
       },
     },
     plugins: {

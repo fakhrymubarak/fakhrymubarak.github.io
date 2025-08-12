@@ -1,7 +1,5 @@
 import { useEffect, RefObject } from 'react';
 
-/* global HTMLElement */
-
 // Lightweight animation utilities to reduce Framer Motion usage
 
 export const fadeInUp = {

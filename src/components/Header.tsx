@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
 import { useAnalytics } from '../hooks/useAnalytics';
+import { accessibilityUtils } from '@hooks/useAccessibility.ts';
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -20,14 +21,33 @@ const Header: React.FC = () => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      accessibilityUtils.announce(`Navigated to ${navName} section`);
     }
     trackButtonClick(`nav_${navName.toLowerCase()}`, 'header');
     setIsMenuOpen(false);
   };
 
+  const handleThemeToggle = () => {
+    trackButtonClick('theme_toggle', 'header');
+    accessibilityUtils.announce(
+      `Switched to ${theme === 'light' ? 'dark' : 'light'} mode`
+    );
+    toggleTheme();
+  };
+
+  const handleMenuToggle = () => {
+    trackButtonClick('mobile_menu_toggle', 'header');
+    const newMenuState = !isMenuOpen;
+    setIsMenuOpen(newMenuState);
+    accessibilityUtils.announce(
+      `Mobile menu ${newMenuState ? 'opened' : 'closed'}`
+    );
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 'bg-light-surface/80 dark:bg-dark-surface/80 backdrop-blur-md shadow-lg'`}
+      role="banner"
     >
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 min-w-0">
@@ -46,12 +66,17 @@ const Header: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav
+            className="hidden md:flex items-center space-x-8"
+            role="navigation"
+            aria-label="Main navigation"
+          >
             {navItems.map(item => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href, item.name)}
-                className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium"
+                className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2 py-1"
+                aria-label={`Navigate to ${item.name} section`}
               >
                 {item.name}
               </button>
@@ -62,33 +87,41 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             {/* Theme Toggle */}
             <button
-              onClick={() => {
-                trackButtonClick('theme_toggle', 'header');
-                toggleTheme();
-              }}
-              className="p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0"
-              aria-label="Toggle theme"
+              onClick={handleThemeToggle}
+              className="p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
-                <Moon className="w-5 h-5 text-light-muted dark:text-dark-muted" />
+                <Moon
+                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  aria-hidden="true"
+                />
               ) : (
-                <Sun className="w-5 h-5 text-light-muted dark:text-dark-muted" />
+                <Sun
+                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  aria-hidden="true"
+                />
               )}
             </button>
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => {
-                trackButtonClick('mobile_menu_toggle', 'header');
-                setIsMenuOpen(!isMenuOpen);
-              }}
-              className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0"
-              aria-label="Toggle menu"
+              onClick={handleMenuToggle}
+              className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2"
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMenuOpen ? (
-                <X className="w-5 h-5 text-light-muted dark:text-dark-muted" />
+                <X
+                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  aria-hidden="true"
+                />
               ) : (
-                <Menu className="w-5 h-5 text-light-muted dark:text-dark-muted" />
+                <Menu
+                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  aria-hidden="true"
+                />
               )}
             </button>
           </div>
@@ -96,13 +129,19 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-light-muted/20 dark:border-dark-muted/20">
+          <div
+            id="mobile-menu"
+            className="md:hidden py-4 border-t border-light-muted/20 dark:border-dark-muted/20"
+            role="navigation"
+            aria-label="Mobile navigation"
+          >
             <nav className="flex flex-col space-y-4">
               {navItems.map(item => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href, item.name)}
-                  className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2"
+                  className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2"
+                  aria-label={`Navigate to ${item.name} section`}
                 >
                   {item.name}
                 </button>
