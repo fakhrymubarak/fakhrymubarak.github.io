@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { X, ExternalLink, Github } from 'lucide-react';
-import { Project } from '@/types';
+import {motion} from 'framer-motion';
+import {ExternalLink, Github, X} from 'lucide-react';
+import {Project} from '@/types';
+import {useAnalytics} from '@hooks/useAnalytics.ts';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -9,7 +10,22 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const {trackButtonClick} = useAnalytics();
+
   if (!project) return null;
+
+  const handleClose = () => {
+    trackButtonClick('close_project_modal', 'project_modal');
+    onClose();
+  };
+
+  const handleViewProject = () => {
+    trackButtonClick('view_project_from_modal', `project_${project.title}`);
+  };
+
+  const handleViewGithub = () => {
+    trackButtonClick('view_github', `project_${project.title}`);
+  };
 
   return (
     <motion.div
@@ -40,7 +56,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               </h2>
             </div>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors"
             >
               <X className="w-5 h-5" />
@@ -68,6 +84,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary text-sm px-4 py-2"
+                  onClick={handleViewProject}
                 >
                   View Project
                   <ExternalLink className="w-3 h-3 ml-1" />
@@ -78,6 +95,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 bg-light-surface dark:bg-dark-surface rounded border border-light-muted/20 dark:border-dark-muted/20 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors"
+                    onClick={handleViewGithub}
                   >
                     <Github className="w-4 h-4" />
                   </a>

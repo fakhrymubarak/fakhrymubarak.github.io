@@ -1,18 +1,12 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { portfolioData } from '@data/portfolio.ts';
-import {
-  Mail,
-  MessageCircle,
-  Download,
-  Instagram,
-  Linkedin,
-  Github,
-  Youtube,
-} from 'lucide-react';
+import {motion} from 'framer-motion';
+import {portfolioData} from '@data/portfolio.ts';
+import {Download, Github, Instagram, Linkedin, Mail, MessageCircle, Youtube,} from 'lucide-react';
+import {useAnalytics} from '@hooks/useAnalytics.ts';
 
 const FooterSection: React.FC = () => {
   const { footer } = portfolioData;
+  const {trackContactClick, trackButtonClick} = useAnalytics();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -126,6 +120,7 @@ const FooterSection: React.FC = () => {
                           : 'noopener noreferrer'
                       }
                       className="flex items-center space-x-3 p-4 bg-light-surface dark:bg-dark-surface rounded-lg hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors group"
+                      onClick={() => trackContactClick(contact.type)}
                     >
                       <div className="p-2 bg-primary-coral/10 rounded-lg group-hover:bg-primary-coral/20 transition-colors">
                         {getContactIcon(contact.icon)}
@@ -148,6 +143,7 @@ const FooterSection: React.FC = () => {
                       rel="noopener noreferrer"
                       className="p-3 bg-light-surface dark:bg-dark-surface rounded-lg hover:bg-primary-coral hover:text-white transition-all duration-300 group"
                       aria-label={social.name}
+                      onClick={() => trackButtonClick(`social_${social.name.toLowerCase()}`, 'footer')}
                     >
                       {getSocialIcon(social.icon)}
                     </a>
@@ -169,6 +165,7 @@ const FooterSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary-coral transition-colors underline"
+                onClick={() => trackButtonClick('view_v1_showcase', 'footer')}
               >
                 See Also The V1
               </a>

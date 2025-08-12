@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
 
 interface ProjectFilterProps {
   filters: string[];
@@ -20,8 +20,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
     >
       <button
         onClick={() => onFilterChange('all')}
-        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-          activeFilter === 'all'
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeFilter === 'all'
             ? 'bg-primary-coral text-white'
             : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral'
         }`}
@@ -32,8 +31,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
         <button
           key={filter}
           onClick={() => onFilterChange(filter)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeFilter === filter
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeFilter === filter
               ? 'bg-primary-coral text-white'
               : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral'
           }`}
