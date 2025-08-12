@@ -1,11 +1,11 @@
-import React, {useMemo, useState} from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
-import {portfolioData} from '@data/portfolio.ts';
+import React, { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
 import ProjectCard from './project/ProjectCard';
 import ProjectModal from './project/ProjectModal';
 import ProjectFilter from './project/ProjectFilter';
-import {Filter} from 'lucide-react';
-import {useAnalytics} from '@hooks/useAnalytics.ts';
+import { Filter } from 'lucide-react';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 const ProjectsSection: React.FC = () => {
   const { projects } = portfolioData;
@@ -13,7 +13,7 @@ const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const {trackButtonClick} = useAnalytics();
+  const { trackButtonClick } = useAnalytics();
 
   const MAX_PROJECTS = 6;
 
@@ -80,7 +80,10 @@ const ProjectsSection: React.FC = () => {
   };
 
   const handleToggleProjects = () => {
-    trackButtonClick(showAllProjects ? 'show_less_projects' : 'show_more_projects', 'projects_section');
+    trackButtonClick(
+      showAllProjects ? 'show_less_projects' : 'show_more_projects',
+      'projects_section'
+    );
     setShowAllProjects(!showAllProjects);
   };
 

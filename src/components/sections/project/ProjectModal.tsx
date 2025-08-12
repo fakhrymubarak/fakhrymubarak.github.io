@@ -1,8 +1,8 @@
 import React from 'react';
-import {motion} from 'framer-motion';
-import {ExternalLink, Github, X} from 'lucide-react';
-import {Project} from '@/types';
-import {useAnalytics} from '@hooks/useAnalytics.ts';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, X } from 'lucide-react';
+import { Project } from '@/types';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -10,7 +10,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
-  const {trackButtonClick} = useAnalytics();
+  const { trackButtonClick } = useAnalytics();
 
   if (!project) return null;
 

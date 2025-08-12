@@ -1,9 +1,9 @@
 import React from 'react';
-import {motion} from 'framer-motion';
-import {ExternalLink} from 'lucide-react';
-import {Project} from '@/types';
+import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
+import { Project } from '@/types';
 import ResponsiveImage from '@/components/ui/ResponsiveImage';
-import {useAnalytics} from '@hooks/useAnalytics.ts';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 interface ProjectCardProps {
   project: Project;
@@ -16,7 +16,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   index,
   onSelect,
 }) => {
-  const {trackProjectView, trackButtonClick} = useAnalytics();
+  const { trackProjectView, trackButtonClick } = useAnalytics();
 
   const handleProjectClick = () => {
     trackProjectView(project.title);
@@ -25,9 +25,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <motion.div
-      initial={{opacity: 0, y: 20}}
-      whileInView={{opacity: 1, y: 0}}
-      viewport={{once: true}}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
       className="card group cursor-pointer"
@@ -40,8 +40,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           alt={project.title}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       {/* Project Content */}
@@ -99,7 +98,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           }}
         >
           View Project
-          <ExternalLink className="w-3 h-3 ml-1"/>
+          <ExternalLink className="w-3 h-3 ml-1" />
         </a>
       </div>
     </motion.div>

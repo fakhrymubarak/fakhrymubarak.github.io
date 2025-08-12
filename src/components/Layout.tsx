@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
-import {useAnalytics} from '../hooks/useAnalytics';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const {trackPageView} = useAnalytics();
+  const { trackPageView } = useAnalytics();
 
   useEffect(() => {
     // Track the initial page view

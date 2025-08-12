@@ -1,12 +1,20 @@
 import React from 'react';
-import {motion} from 'framer-motion';
-import {portfolioData} from '@data/portfolio.ts';
-import {Download, Github, Instagram, Linkedin, Mail, MessageCircle, Youtube,} from 'lucide-react';
-import {useAnalytics} from '@hooks/useAnalytics.ts';
+import { motion } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
+import {
+  Download,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Youtube,
+} from 'lucide-react';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 const FooterSection: React.FC = () => {
   const { footer } = portfolioData;
-  const {trackContactClick, trackButtonClick} = useAnalytics();
+  const { trackContactClick, trackButtonClick } = useAnalytics();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -143,7 +151,12 @@ const FooterSection: React.FC = () => {
                       rel="noopener noreferrer"
                       className="p-3 bg-light-surface dark:bg-dark-surface rounded-lg hover:bg-primary-coral hover:text-white transition-all duration-300 group"
                       aria-label={social.name}
-                      onClick={() => trackButtonClick(`social_${social.name.toLowerCase()}`, 'footer')}
+                      onClick={() =>
+                        trackButtonClick(
+                          `social_${social.name.toLowerCase()}`,
+                          'footer'
+                        )
+                      }
                     >
                       {getSocialIcon(social.icon)}
                     </a>

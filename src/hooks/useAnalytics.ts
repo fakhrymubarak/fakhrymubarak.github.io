@@ -3,7 +3,10 @@ import { Analytics, logEvent } from 'firebase/analytics';
 import { analytics } from '../config/firebase';
 
 // Define a proper type for analytics parameters
-type AnalyticsParameters = Record<string, string | number | boolean | null | undefined>;
+type AnalyticsParameters = Record<
+  string,
+  string | number | boolean | null | undefined
+>;
 
 export const useAnalytics = () => {
   const analyticsRef = useRef<Analytics | null>(null);
@@ -25,7 +28,7 @@ export const useAnalytics = () => {
   const trackButtonClick = (buttonName: string, location?: string) => {
     trackEvent('button_click', {
       button_name: buttonName,
-      location: location
+      location: location,
     });
   };
 

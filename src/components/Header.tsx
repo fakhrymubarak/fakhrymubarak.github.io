@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {useTheme} from '../hooks/useTheme';
-import {Menu, Moon, Sun, X} from 'lucide-react';
+import React, { useState } from 'react';
+import { useTheme } from '../hooks/useTheme';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
-import {useAnalytics} from '../hooks/useAnalytics';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {trackButtonClick} = useAnalytics();
+  const { trackButtonClick } = useAnalytics();
 
   const navItems = [
     { name: 'Home', href: '#home' },

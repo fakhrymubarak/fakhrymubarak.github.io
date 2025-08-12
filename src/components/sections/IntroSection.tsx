@@ -1,14 +1,14 @@
 import React from 'react';
-import {motion} from 'framer-motion';
-import {portfolioData} from '@data/portfolio.ts';
-import {Download, ExternalLink} from 'lucide-react';
-import {useTheme} from '@hooks/useTheme.ts';
-import {useAnalytics} from '@hooks/useAnalytics.ts';
+import { motion } from 'framer-motion';
+import { portfolioData } from '@data/portfolio.ts';
+import { Download, ExternalLink } from 'lucide-react';
+import { useTheme } from '@hooks/useTheme.ts';
+import { useAnalytics } from '@hooks/useAnalytics.ts';
 
 const IntroSection: React.FC = () => {
   const { introduction } = portfolioData;
   const { theme } = useTheme();
-  const {trackButtonClick, trackContactClick} = useAnalytics();
+  const { trackButtonClick, trackContactClick } = useAnalytics();
 
   const containerVariants = {
     hidden: { opacity: 0 },
