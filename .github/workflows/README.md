@@ -1,6 +1,6 @@
 # GitHub Actions Workflows
 
-This directory contains the CI/CD workflows for the showcase-v2 project.
+This directory contains the CI/CD workflows for this project.
 
 ## Workflows
 

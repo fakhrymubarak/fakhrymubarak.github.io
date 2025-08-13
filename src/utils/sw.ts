@@ -16,10 +16,15 @@ export const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
       console.log('Registering Service Worker...');
-      const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/',
-        updateViaCache: 'none',
-      });
+      // Use the same base path as Vite config for production
+      const basePath = '/';
+      const registration = await navigator.serviceWorker.register(
+        `${basePath}sw.js`,
+        {
+          scope: basePath,
+          updateViaCache: 'none',
+        }
+      );
       console.log('Service Worker registered successfully:', registration);
 
       // Check for updates
@@ -63,9 +68,10 @@ const showUpdateNotification = (_registration: ServiceWorkerRegistration) => {
 
   // Example: Show a notification to the user
   if ('Notification' in window && Notification.permission === 'granted') {
+    const basePath = '/';
     new Notification('Portfolio Update', {
       body: 'A new version is available. Refresh to update.',
-      icon: '/icons/Icon-192.png',
+      icon: `${basePath}icons/Icon-192.png`,
     });
   }
 };

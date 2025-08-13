@@ -35,6 +35,7 @@ export default [
         ServiceWorkerRegistration: 'readonly',
         Notification: 'readonly',
         performance: 'readonly',
+        Performance: 'readonly',
         PerformanceEntry: 'readonly',
         Window: 'readonly',
         // DOM Types
@@ -53,6 +54,17 @@ export default [
         FocusEvent: 'readonly',
         // React Types
         React: 'readonly',
+        // Jest globals
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        jest: 'readonly',
+        global: 'readonly',
       },
     },
     plugins: {

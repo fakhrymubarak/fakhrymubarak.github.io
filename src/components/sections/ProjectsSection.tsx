@@ -88,7 +88,12 @@ const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="section">
+    <section
+      id="projects"
+      className="section"
+      role="region"
+      aria-label="Projects"
+    >
       <div className="container">
         <motion.div
           variants={containerVariants}

@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { calculateDuration } from './dateUtils';
+import { calculateDuration } from '../dateUtils';
 
 describe('calculateDuration', () => {
   describe('Basic duration calculations', () => {
