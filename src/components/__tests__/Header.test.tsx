@@ -99,7 +99,7 @@ describe('Header Component', () => {
     };
     jest
       .spyOn(document, 'querySelector')
-      .mockReturnValue(mockElement as Element);
+      .mockReturnValue(mockElement as unknown as Element);
 
     render(<Header />);
 
