@@ -8,11 +8,11 @@ on:
     inputs:
       rollback_version:
         description: 'Version to rollback to (e.g., v1.0.0)'
-        required: false
+        required: true
         type: string
       rollback_reason:
         description: 'Reason for rollback'
-        required: false
+        required: true
         type: string
 
 env:
@@ -46,18 +46,6 @@ jobs:
 
     - name: Build application
       run: npm run build
-
-    - name: Run Lighthouse CI
-      run: npx lhci autorun --config=lighthouserc.cjs
-      env:
-        LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-      continue-on-error: true
-
-    - name: Upload Lighthouse results
-      uses: actions/upload-artifact@v4
-      with:
-        name: lighthouse-results
-        path: .lighthouseci/
 
     - name: Create deployment artifact
       uses: actions/upload-artifact@v4
@@ -119,12 +107,10 @@ jobs:
         cname: fakhrymubarak.github.io
 
     - name: Create GitHub Release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: "${{ steps.version.outputs.version }}"
-        release_name: "Release ${{ steps.version.outputs.version }}"
+        name: "Release ${{ steps.version.outputs.version }}"
         body: |
           ## Release v${{ steps.version.outputs.version }}
           
@@ -137,6 +123,7 @@ jobs:
           - Timestamp: ${{ github.event.head_commit.timestamp }}
         draft: false
         prerelease: false
+        generate_release_notes: true
 
   # Manual rollback workflow
   rollback:
@@ -173,17 +160,15 @@ jobs:
         cname: fakhrymubarak.github.io
 
     - name: Create rollback notification
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: "rollback-${{ github.event.inputs.rollback_version }}-${{ github.run_number }}"
-        release_name: "Rollback to v${{ github.event.inputs.rollback_version }}"
+        name: "Rollback to ${{ github.event.inputs.rollback_version }}"
         body: |
-          ## Rollback to v${{ github.event.inputs.rollback_version }}
+          ## Rollback to ${{ github.event.inputs.rollback_version }}
           
           **Rollback Details:**
-          - Rollback Version: v${{ github.event.inputs.rollback_version }}
+          - Rollback Version: ${{ github.event.inputs.rollback_version }}
           - Reason: ${{ github.event.inputs.rollback_reason || 'No reason provided' }}
           - Triggered by: ${{ github.actor }}
           - Timestamp: ${{ github.event.head_commit.timestamp }}
