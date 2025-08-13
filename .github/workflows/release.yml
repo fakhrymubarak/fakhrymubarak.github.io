@@ -127,7 +127,6 @@ jobs:
 
   # Manual rollback workflow
   rollback:
-    needs: deploy
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.rollback_version != ''
 
