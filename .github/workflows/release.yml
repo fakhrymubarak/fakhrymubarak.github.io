@@ -48,8 +48,7 @@ jobs:
       run: npm run build
 
     - name: Run Lighthouse CI
-      run: |
-        lhci autorun --config=lighthouserc.cjs
+      run: npx lhci autorun --config=lighthouserc.cjs
       env:
         LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
       continue-on-error: true
@@ -75,7 +74,7 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -107,8 +106,8 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
-        git push origin "v${{ steps.version.outputs.version }}"
+        git tag -a "${{ steps.version.outputs.version }}" -m "Release ${{ steps.version.outputs.version }}"
+        git push origin "${{ steps.version.outputs.version }}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -124,8 +123,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: "v${{ steps.version.outputs.version }}"
-        release_name: "Release v${{ steps.version.outputs.version }}"
+        tag_name: "${{ steps.version.outputs.version }}"
+        release_name: "Release ${{ steps.version.outputs.version }}"
         body: |
           ## Release v${{ steps.version.outputs.version }}
           
@@ -141,19 +140,13 @@ jobs:
 
   # Manual rollback workflow
   rollback:
+    needs: deploy
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.rollback_version != ''
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
