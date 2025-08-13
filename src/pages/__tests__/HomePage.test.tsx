@@ -1,4 +1,4 @@
-import { render, screen } from '@utils/test-utils';
+import { render, screen } from '../../utils/test-utils';
 import HomePage from '../HomePage';
 
 // Remove local mocks - use global mocks from test-utils instead

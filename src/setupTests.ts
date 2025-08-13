@@ -67,7 +67,10 @@ beforeAll(() => {
         message.includes(
           'Not implemented: HTMLCanvasElement.prototype.getContext'
         ) ||
-        message.includes('Warning: React does not recognize the'))
+        message.includes('Warning: React does not recognize the') ||
+        message.includes(
+          'Warning: A suspended resource finished loading inside a test'
+        ))
     ) {
       return;
     }

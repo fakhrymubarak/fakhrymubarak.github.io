@@ -1,5 +1,5 @@
-import { PortfolioData } from '@/types';
-import { calculateDuration } from '@/utils/dateUtils';
+import { PortfolioData } from '../types';
+import { calculateDuration } from '../utils/dateUtils';
 
 // Import assets from the src / assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp';

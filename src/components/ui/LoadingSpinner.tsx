@@ -28,6 +28,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
       className={`animate-spin rounded-full border-2 border-t-transparent ${sizeClasses[size]} ${colorClasses[color]} ${className}`}
       role="status"
       aria-label="Loading"
+      data-testid="loading-spinner"
     >
       <span className="sr-only">Loading...</span>
     </div>

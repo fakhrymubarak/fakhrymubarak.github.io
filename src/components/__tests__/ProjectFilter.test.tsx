@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@/utils/test-utils';
+import { render, screen, fireEvent } from '../../utils/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import ProjectFilter from '../sections/project/ProjectFilter';
 
@@ -149,7 +149,7 @@ describe('ProjectFilter', () => {
       render(<ProjectFilter {...defaultProps} />);
 
       const buttons = screen.getAllByRole('button');
-      buttons.forEach(button => {
+      buttons.forEach((button: Element) => {
         // Buttons are naturally focusable, so they don't need explicit tabIndex
         expect(button).toBeInTheDocument();
       });
@@ -182,7 +182,7 @@ describe('ProjectFilter', () => {
       render(<ProjectFilter {...defaultProps} />);
 
       const buttons = screen.getAllByRole('button');
-      buttons.forEach(button => {
+      buttons.forEach((button: Element) => {
         expect(button).toHaveClass('transition-colors');
       });
     });

@@ -1,6 +1,10 @@
-import { render, screen, fireEvent } from '@utils/test-utils';
+import {
+  render,
+  screen,
+  fireEvent,
+  mockProject,
+} from '../../../../utils/test-utils';
 import ProjectModal from '../ProjectModal';
-import { mockProject } from '@utils/test-utils';
 
 describe('ProjectModal Component', () => {
   const mockOnClose = jest.fn();

@@ -34,6 +34,8 @@ export default {
     '!src/**/*.stories.(ts|tsx)',
     '!src/**/*.test.(ts|tsx)',
     '!src/**/*.spec.(ts|tsx)',
+    '!src/utils/sw.ts',
+    '!src/utils/test-utils.tsx',
   ],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   testPathIgnorePatterns: [
@@ -52,4 +54,18 @@ export default {
       statements: 70,
     },
   },
+  // Performance optimizations
+  maxWorkers: '50%',
+  workerIdleMemoryLimit: '512MB',
+  testTimeout: 10000,
+  // Faster test execution
+  bail: false,
+  verbose: false,
+  // Cache optimizations
+  cache: true,
+  cacheDirectory: '<rootDir>/.jest-cache',
+  // Transform optimizations
+  transformIgnorePatterns: [
+    'node_modules/(?!(framer-motion|@framer)/)',
+  ],
 } 

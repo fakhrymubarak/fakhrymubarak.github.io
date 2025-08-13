@@ -10,46 +10,20 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    /* Path mapping */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@hooks/*": [
-        "src/hooks/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@data/*": [
-        "src/data/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ]
-    }
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

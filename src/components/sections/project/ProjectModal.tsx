@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, ExternalLink, Github } from 'lucide-react';
-import { Project } from '@/types';
-import { useAnalytics } from '@hooks/useAnalytics.ts';
+import { Project } from '../../../types';
+import { useAnalytics } from '../../../hooks/useAnalytics';
 import {
   useAccessibility,
   accessibilityUtils,
-} from '@hooks/useAccessibility.ts';
+} from '../../../hooks/useAccessibility';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -158,7 +158,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 role="list"
                 aria-label="Technologies used"
               >
-                {project.stacks.map(stack => (
+                {project.stacks.map((stack: string) => (
                   <span
                     key={stack}
                     className="px-3 py-1 bg-primary-coral/10 text-primary-coral text-sm rounded-full"

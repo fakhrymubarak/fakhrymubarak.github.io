@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { portfolioData } from '@data/portfolio.ts';
+import { portfolioData } from '../../data/portfolio';
 import ProjectCard from './project/ProjectCard';
 import ProjectModal from './project/ProjectModal';
 import ProjectFilter from './project/ProjectFilter';
 import { Filter } from 'lucide-react';
-import { useAnalytics } from '@hooks/useAnalytics.ts';
+import { useAnalytics } from '../../hooks/useAnalytics';
 
 const ProjectsSection: React.FC = () => {
   const { projects } = portfolioData;

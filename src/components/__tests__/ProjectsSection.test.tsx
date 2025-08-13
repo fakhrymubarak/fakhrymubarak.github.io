@@ -1,5 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react';
-import { render } from '@/utils/test-utils';
+import { render } from '../../utils/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import ProjectsSection from '../sections/ProjectsSection';
 

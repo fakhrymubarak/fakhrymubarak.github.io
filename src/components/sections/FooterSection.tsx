@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { portfolioData } from '@data/portfolio.ts';
+import { portfolioData } from '../../data/portfolio';
 import {
   Download,
   Github,
@@ -10,7 +10,7 @@ import {
   MessageCircle,
   Youtube,
 } from 'lucide-react';
-import { useAnalytics } from '@hooks/useAnalytics.ts';
+import { useAnalytics } from '../../hooks/useAnalytics';
 
 const FooterSection: React.FC = () => {
   const { footer } = portfolioData;

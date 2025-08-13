@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { portfolioData } from '@data/portfolio.ts';
+import { portfolioData } from '../../data/portfolio';
 import { Calendar, Clock } from 'lucide-react';
 
 const ExperienceSection: React.FC = () => {

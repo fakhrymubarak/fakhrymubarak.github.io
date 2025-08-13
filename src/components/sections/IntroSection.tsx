@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { portfolioData } from '@data/portfolio.ts';
+import { portfolioData } from '../../data/portfolio';
 import { Download, ExternalLink } from 'lucide-react';
-import { useTheme } from '@hooks/useTheme.ts';
-import { useAnalytics } from '@hooks/useAnalytics.ts';
+import { useTheme } from '../../hooks/useTheme';
+import { useAnalytics } from '../../hooks/useAnalytics';
 
 const IntroSection: React.FC = () => {
   const { introduction } = portfolioData;

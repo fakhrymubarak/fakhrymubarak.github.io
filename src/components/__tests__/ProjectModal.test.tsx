@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from '@/utils/test-utils';
+import { render, screen, fireEvent } from '../../utils/test-utils';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import ProjectModal from '../sections/project/ProjectModal';
-import { Project } from '@/types';
+import { Project } from '../../types';
 
 expect.extend(toHaveNoViolations);
 

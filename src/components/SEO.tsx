@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { portfolioData } from '@data/portfolio.ts';
+import { portfolioData } from '../data/portfolio';
 
 interface SEOProps {
   title?: string;
