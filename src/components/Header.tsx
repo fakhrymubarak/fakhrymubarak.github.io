@@ -3,7 +3,7 @@ import { useTheme } from '../hooks/useTheme';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
 import { useAnalytics } from '../hooks/useAnalytics';
-import { accessibilityUtils } from '@hooks/useAccessibility.ts';
+import { accessibilityUtils } from '../hooks/useAccessibility';
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { accessibilityUtils } from '@hooks/useAccessibility.ts';
+import { accessibilityUtils } from '../../hooks/useAccessibility';
 
 const SkipLink: React.FC = () => {
   const handleSkipToMain = () => {

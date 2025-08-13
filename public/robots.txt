@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://fakhrymubarak.github.io/showcase-v2/sitemap.xml
+Sitemap: https://fakhrymubarak.github.io/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { Project } from '@/types';
-import ResponsiveImage from '@/components/ui/ResponsiveImage';
-import { useAnalytics } from '@hooks/useAnalytics.ts';
+import { Project } from '../../../types';
+import ResponsiveImage from '../../ui/ResponsiveImage';
+import { useAnalytics } from '../../../hooks/useAnalytics';
 
 interface ProjectCardProps {
   project: Project;
@@ -71,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2">
-          {project.stacks.slice(0, 3).map(stack => (
+          {project.stacks.slice(0, 3).map((stack: string) => (
             <span
               key={stack}
               className="px-2 py-1 bg-primary-coral/10 text-primary-coral text-xs rounded-full"

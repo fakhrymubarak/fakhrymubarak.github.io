@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { portfolioData } from '@data/portfolio.ts';
+import { portfolioData } from '../data/portfolio';
 
 interface SEOProps {
   title?: string;
@@ -14,7 +14,7 @@ const SEO: React.FC<SEOProps> = ({
   title = 'Fakhry Mubarak - Software Engineer',
   description = 'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
   image = '/avatar.webp',
-  url = 'https://fakhrymubarak.github.io/showcase-v2',
+  url = 'https://fakhrymubarak.github.io/',
   type = 'website',
 }) => {
   const { introduction, projects } = portfolioData;

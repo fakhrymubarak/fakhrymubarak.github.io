@@ -1,7 +1,5 @@
 // Performance monitoring utilities
 
-/* global setTimeout, process */
-
 export interface PerformanceMetrics {
   fcp: number | null;
   lcp: number | null;

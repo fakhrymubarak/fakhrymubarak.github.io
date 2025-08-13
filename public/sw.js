@@ -1,6 +1,6 @@
-const CACHE_NAME = 'showcase-v2-cache-v2';
-const STATIC_CACHE = 'showcase-v2-static-v2';
-const DYNAMIC_CACHE = 'showcase-v2-dynamic-v2';
+const CACHE_NAME = 'fakhrymubarak.github.io-cache-v2';
+const STATIC_CACHE = 'fakhrymubarak.github.io-static-v2';
+const DYNAMIC_CACHE = 'fakhrymubarak.github.io-dynamic-v2';
 
 const urlsToCache = [
   '/',
@@ -122,10 +122,13 @@ self.addEventListener('sync', (event) => {
 
 // Handle push notifications
 self.addEventListener('push', (event) => {
+  // Get the base path from the service worker scope
+  const basePath = self.location.pathname.replace('/sw.js', '');
+
   const options = {
     body: event.data ? event.data.text() : 'New update available!',
-    icon: '/icons/Icon-192.png',
-    badge: '/icons/Icon-192.png',
+    icon: `${basePath}icons/Icon-192.png`,
+    badge: `${basePath}icons/Icon-192.png`,
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
@@ -135,12 +138,12 @@ self.addEventListener('push', (event) => {
       {
         action: 'explore',
         title: 'View',
-        icon: '/icons/Icon-192.png'
+        icon: `${basePath}icons/Icon-192.png`
       },
       {
         action: 'close',
         title: 'Close',
-        icon: '/icons/Icon-192.png'
+        icon: `${basePath}icons/Icon-192.png`
       }
     ]
   };
@@ -156,7 +159,7 @@ self.addEventListener('notificationclick', (event) => {
 
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/')
+      clients.openWindow(self.location.origin + self.location.pathname.replace('/sw.js', ''))
     );
   }
 }); 
