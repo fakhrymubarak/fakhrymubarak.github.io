@@ -42,6 +42,17 @@ export default defineConfig({
             : 'chunk'
           return `js/${facadeModuleId}-[hash].js`
         },
+        // Add version query parameter to force cache busting
+        assetFileNames: (assetInfo) => {
+          // @ts-ignore - name is deprecated but still functional
+          const info = assetInfo.names?.split('.') || []
+          const ext = info[info.length - 1] || 'unknown'
+          // @ts-ignore - name is deprecated but still functional
+          if (/\.(css|js)$/.test(assetInfo.names || '')) {
+            return `assets/[name]-[hash].${ext}`
+          }
+          return `assets/[name]-[hash].[ext]`
+        },
       },
     },
     chunkSizeWarningLimit: 1000, // Increase warning limit

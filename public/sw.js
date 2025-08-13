@@ -58,12 +58,29 @@ self.addEventListener('activate', (event) => {
       caches.keys().then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_NAME) {
+            if (cacheName !== CACHE_NAME && cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
               console.log('Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
         );
+      }),
+      // Clean up old JavaScript files from dynamic cache
+      caches.open(DYNAMIC_CACHE).then((cache) => {
+        return cache.keys().then((requests) => {
+          return Promise.all(
+            requests.map((request) => {
+              // Remove old JS files that might have stale hashes
+              if (request.url.includes('.js') && request.url.includes('index-')) {
+                console.log('Removing old JS file from cache:', request.url);
+                return cache.delete(request);
+              }
+            })
+          );
+        });
+      }).catch(() => {
+        // Dynamic cache might not exist yet, ignore error
+        console.log('Dynamic cache not found, skipping cleanup');
       }),
       // Take control of all clients
       self.clients.claim()
@@ -100,6 +117,13 @@ self.addEventListener('fetch', (event) => {
 
         return fetch(event.request).catch(error => {
           console.warn('Fetch failed for:', event.request.url, error);
+
+          // Handle 404 errors for JavaScript files by redirecting to index.html
+          if (event.request.url.includes('.js') && error.name === 'TypeError') {
+            console.log('JS file not found, redirecting to index.html:', event.request.url);
+            return caches.match('/index.html');
+          }
+
           // Return a fallback response for navigation requests
           if (event.request.destination === 'document') {
             return caches.match('/index.html');

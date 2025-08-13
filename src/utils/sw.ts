@@ -19,7 +19,7 @@ export const registerServiceWorker = async () => {
       // Use the same base path as Vite config for production
       const basePath = '/';
       const registration = await navigator.serviceWorker.register(
-        `${basePath}sw.js`,
+        `${basePath}sw.js?v=${Date.now()}`,
         {
           scope: basePath,
           updateViaCache: 'none',
