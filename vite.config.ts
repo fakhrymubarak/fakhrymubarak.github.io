@@ -45,10 +45,10 @@ export default defineConfig({
         // Add version query parameter to force cache busting
         assetFileNames: (assetInfo) => {
           // @ts-ignore - name is deprecated but still functional
-          const info = assetInfo.names?.split('.') || []
+          const info = assetInfo.name?.split('.') || []
           const ext = info[info.length - 1] || 'unknown'
           // @ts-ignore - name is deprecated but still functional
-          if (/\.(css|js)$/.test(assetInfo.names || '')) {
+          if (/\.(css|js)$/.test(assetInfo.name || '')) {
             return `assets/[name]-[hash].${ext}`
           }
           return `assets/[name]-[hash].[ext]`
