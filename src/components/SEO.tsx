@@ -118,6 +118,9 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="revisit-after" content="7 days" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+      {/* Google Site Verification */}
+      <meta name="google-site-verification" content="Ll7GeQotHHL2Krg6VdT_C0ZgJE3dpWSM3Pwqrvc2CGw" />
+
       {/* Canonical URL */}
       <link rel="canonical" href={url} />
 
