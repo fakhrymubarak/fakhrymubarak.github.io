@@ -41,7 +41,7 @@ export const portfolioData: PortfolioData = {
     title: ['Hi, I am', 'Fakhry Mubarak'],
     subtitle: 'Software Engineer specializing in Android Development',
     description:
-      'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
+      'Android Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
     imagePath: avatarImage,
     techStack: [
       {
