@@ -94,11 +94,18 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
 
+
     - name: Install dependencies
       run: npm ci
 
     - name: Check code formatting
       run: npm run format:check
 
-    - name: Run bundle analysis
+    - name: Build analyze
       run: npm run build:analyze
+
+    - name: Run Lighthouse CI
+      run: npx lhci autorun --config=lighthouserc.cjs
+      env:
+        LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+      continue-on-error: true
