@@ -26,13 +26,13 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
   - [Project Todo](#project-todo)
     - [Phase 1: Project Setup \& Foundation ✅](#phase-1-project-setup--foundation-)
     - [Phase 2: Core Components Development ✅](#phase-2-core-components-development-)
-    - [Phase 3: Page Structure \& Routing 📄](#phase-3-page-structure--routing-)
+    - [Phase 3: Page Structure \& Routing ✅](#phase-3-page-structure--routing-)
     - [Phase 4: Content \& Data Management ✅](#phase-4-content--data-management-)
     - [Phase 5: Interactive Features ✅](#phase-5-interactive-features-)
     - [Phase 6: Performance \& Optimization ✅](#phase-6-performance--optimization-)
     - [Phase 7: SEO \& Accessibility ✅](#phase-7-seo--accessibility-)
     - [Phase 8: Testing \& Quality Assurance ✅](#phase-8-testing--quality-assurance-)
-    - [Phase 9: Deployment \& Monitoring 🚀](#phase-9-deployment--monitoring-)
+    - [Phase 9: Deployment \& Monitoring ✅](#phase-9-deployment--monitoring-)
     - [Phase 10: Enhancement \& Polish ✨](#phase-10-enhancement--polish-)
     - [Phase 11: Documentation \& Maintenance 📚](#phase-11-documentation--maintenance-)
   - [Contributing](#contributing)
@@ -98,7 +98,23 @@ npm install
 yarn install
 # or
 pnpm install
+
+### Environment Variables
+
+This project uses Firebase for analytics. Create a `.env.local` file in the root directory with the following variables:
+
+```bash
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=your_firebase_api_key_here
+VITE_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project_id.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
 ```
+
+**Note:** The `.env.local` file is already configured in your CI/CD pipelines with the actual Firebase credentials.
 
 ### Development
 
@@ -242,12 +258,12 @@ If you encounter 404 errors after deployment:
 - [x] Add performance testing
 - [x] Set up CI/CD pipeline
 
-### Phase 9: Deployment & Monitoring 🚀
-- [ ] Configure deployment to GitHub Pages
-- [ ] Add Google Analytics
-- [ ] Implement error tracking
-- [ ] Set up monitoring and alerts
-- [ ] Create deployment documentation
+### Phase 9: Deployment & Monitoring ✅
+- [x] Configure deployment to GitHub Pages
+- [x] Add Google Analytics
+- [x] Implement error tracking
+- [x] Set up monitoring and alerts
+- [x] Create deployment documentation
 
 ### Phase 10: Enhancement & Polish ✨
 - [ ] Add advanced animations with Framer Motion

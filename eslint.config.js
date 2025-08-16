@@ -38,6 +38,9 @@ export default [
         Performance: 'readonly',
         PerformanceEntry: 'readonly',
         Window: 'readonly',
+        requestIdleCallback: 'readonly',
+        requestAnimationFrame: 'readonly',
+        NodeJS: 'readonly',
         // DOM Types
         HTMLElement: 'readonly',
         HTMLDivElement: 'readonly',

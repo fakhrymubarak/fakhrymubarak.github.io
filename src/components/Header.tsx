@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
@@ -8,7 +8,38 @@ import { accessibilityUtils } from '../hooks/useAccessibility';
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isThemeToggling, setIsThemeToggling] = useState(false);
+  const [animationPhase, setAnimationPhase] = useState<
+    'idle' | 'exiting' | 'transitioning' | 'entering'
+  >('idle');
   const { trackButtonClick } = useAnalytics();
+
+  // Refs to store timeout IDs for cleanup
+  const animationTimeoutsRef = useRef<{
+    exiting?: NodeJS.Timeout;
+    entering?: NodeJS.Timeout;
+  }>({});
+
+  // Clean-up timeouts on unmounting
+  useEffect(() => {
+    const timeouts = animationTimeoutsRef.current;
+    return () => {
+      if (timeouts.exiting) {
+        clearTimeout(timeouts.exiting);
+      }
+      if (timeouts.entering) {
+        clearTimeout(timeouts.entering);
+      }
+    };
+  }, []);
+
+  // Reset animation state if component unmounts during animation
+  useEffect(() => {
+    return () => {
+      setIsThemeToggling(false);
+      setAnimationPhase('idle');
+    };
+  }, []);
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -28,11 +59,35 @@ const Header: React.FC = () => {
   };
 
   const handleThemeToggle = () => {
+    // Prevent multiple rapid clicks
+    if (isThemeToggling) return;
+
+    setIsThemeToggling(true);
+    setAnimationPhase('exiting');
+
+    // Track analytics
     trackButtonClick('theme_toggle', 'header');
-    accessibilityUtils.announce(
-      `Switched to ${theme === 'light' ? 'dark' : 'light'} mode`
-    );
-    toggleTheme();
+
+    // Start the animation sequence
+    animationTimeoutsRef.current.exiting = setTimeout(() => {
+      setAnimationPhase('transitioning');
+
+      // Toggle theme and announce the change
+      toggleTheme();
+
+      // Announce theme change after the actual theme change
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      accessibilityUtils.announce(`Switched to ${newTheme} mode`);
+
+      animationTimeoutsRef.current.entering = setTimeout(() => {
+        setAnimationPhase('entering');
+
+        setTimeout(() => {
+          setAnimationPhase('idle');
+          setIsThemeToggling(false);
+        }, 250); // Entering animation duration (matches CSS)
+      }, 150); // Brief transition phase
+    }, 250); // Exiting animation duration (matches CSS)
   };
 
   const handleMenuToggle = () => {
@@ -42,6 +97,40 @@ const Header: React.FC = () => {
     accessibilityUtils.announce(
       `Mobile menu ${newMenuState ? 'opened' : 'closed'}`
     );
+  };
+
+  // Get the appropriate animation classes based on current state
+  const getIconClasses = (isActive: boolean) => {
+    // Handle reduced motion preference
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (prefersReducedMotion) {
+      return isActive
+        ? 'opacity-100 scale-100 rotate-0'
+        : 'opacity-0 scale-0 rotate-180';
+    }
+
+    if (animationPhase === 'idle') {
+      return isActive
+        ? 'opacity-100 scale-100 rotate-0'
+        : 'opacity-0 scale-0 rotate-180';
+    }
+
+    if (animationPhase === 'exiting') {
+      return isActive ? 'theme-icon-exit' : 'opacity-0 scale-0 rotate-180';
+    }
+
+    if (animationPhase === 'transitioning') {
+      return 'opacity-0 scale-0 rotate-180';
+    }
+
+    if (animationPhase === 'entering') {
+      return isActive ? 'theme-icon-enter' : 'opacity-0 scale-0 rotate-180';
+    }
+
+    return 'opacity-0 scale-0 rotate-180';
   };
 
   return (
@@ -88,20 +177,25 @@ const Header: React.FC = () => {
             {/* Theme Toggle */}
             <button
               onClick={handleThemeToggle}
-              className="p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2"
+              disabled={isThemeToggling}
+              className={`p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 ${
+                isThemeToggling ? 'cursor-not-allowed' : 'hover:scale-105'
+              }`}
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
-              {theme === 'light' ? (
+              <div className="relative w-5 h-5">
+                {/* Moon Icon */}
                 <Moon
-                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  className={`absolute inset-0 w-5 h-5 text-light-muted dark:text-dark-muted transition-all duration-300 ${getIconClasses(theme === 'light')}`}
                   aria-hidden="true"
                 />
-              ) : (
+
+                {/* Sun Icon */}
                 <Sun
-                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  className={`absolute inset-0 w-5 h-5 text-light-muted dark:text-dark-muted transition-all duration-300 ${getIconClasses(theme === 'dark')}`}
                   aria-hidden="true"
                 />
-              )}
+              </div>
             </button>
 
             {/* Mobile Menu Button */}

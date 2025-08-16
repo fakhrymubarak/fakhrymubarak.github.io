@@ -62,6 +62,17 @@ export const registerServiceWorker = async () => {
   }
 };
 
+// Initialize service worker (handles async registration internally)
+export const initServiceWorker = () => {
+  (async () => {
+    try {
+      await registerServiceWorker();
+    } catch (error) {
+      console.error('Failed to register service worker:', error);
+    }
+  })();
+};
+
 const showUpdateNotification = (_registration: ServiceWorkerRegistration) => {
   // You can implement a custom update notification here
   console.log('New version available!');

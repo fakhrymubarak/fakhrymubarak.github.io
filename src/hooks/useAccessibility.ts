@@ -118,24 +118,63 @@ export const useAccessibility = (options: UseAccessibilityOptions = {}) => {
   };
 };
 
-// Utility functions for accessibility
+// Optimized accessibility utilities
 export const accessibilityUtils = {
-  // Announce to screen readers
-  announce: (message: string, priority: 'polite' | 'assertive' = 'polite') => {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', priority);
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'sr-only';
-    announcement.textContent = message;
+  // Use a singleton aria-live region to avoid DOM manipulation
+  _liveRegion: null as HTMLElement | null,
 
-    document.body.appendChild(announcement);
+  _getLiveRegion: () => {
+    if (!accessibilityUtils._liveRegion) {
+      // Check if live region already exists
+      const existingRegion = document.getElementById(
+        'accessibility-live-region'
+      );
+      if (existingRegion) {
+        accessibilityUtils._liveRegion = existingRegion;
+      } else {
+        // Create live region once and reuse it
+        const liveRegion = document.createElement('div');
+        liveRegion.id = 'accessibility-live-region';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.className = 'sr-only';
+        liveRegion.style.position = 'absolute';
+        liveRegion.style.left = '-10000px';
+        liveRegion.style.width = '1px';
+        liveRegion.style.height = '1px';
+        liveRegion.style.overflow = 'hidden';
 
-    // Remove after announcement
-    window.setTimeout(() => {
-      if (document.body.contains(announcement)) {
-        document.body.removeChild(announcement);
+        document.body.appendChild(liveRegion);
+        accessibilityUtils._liveRegion = liveRegion;
       }
-    }, 1000);
+    }
+    return accessibilityUtils._liveRegion;
+  },
+
+  // Optimized announcement that reuses DOM element
+  announce: (message: string, priority: 'polite' | 'assertive' = 'polite') => {
+    const liveRegion = accessibilityUtils._getLiveRegion();
+    if (!liveRegion) return;
+
+    // Update aria-live priority if needed
+    if (liveRegion.getAttribute('aria-live') !== priority) {
+      liveRegion.setAttribute('aria-live', priority);
+    }
+
+    // Clear previous content and set new message
+    liveRegion.textContent = '';
+
+    // Use requestAnimationFrame to ensure DOM update happens in next frame
+    if (typeof window !== 'undefined' && window.requestAnimationFrame) {
+      window.requestAnimationFrame(() => {
+        if (liveRegion) {
+          liveRegion.textContent = message;
+        }
+      });
+    } else {
+      // Fallback for environments without requestAnimationFrame
+      liveRegion.textContent = message;
+    }
   },
 
   // Skip to the main content
