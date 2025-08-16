@@ -8,7 +8,7 @@ import {
   initPerformanceMonitoring,
   initPerformanceOptimizations,
 } from './utils/performance';
-import { registerServiceWorker } from './utils/sw';
+import { initServiceWorker } from './utils/sw';
 import { handle404Error } from './utils/clearCache';
 
 // Initialize performance monitoring
@@ -17,8 +17,8 @@ initPerformanceMonitoring();
 // Initialize performance optimizations
 initPerformanceOptimizations();
 
-// Register service worker
-registerServiceWorker();
+// Initialize service worker
+initServiceWorker();
 
 // Handle 404 errors
 handle404Error();
