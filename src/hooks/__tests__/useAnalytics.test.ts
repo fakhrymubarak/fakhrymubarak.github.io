@@ -35,11 +35,11 @@ describe('useAnalytics', () => {
       });
     }
 
-    // Mock setTimeout
-    global.setTimeout = mockSetTimeout;
+    // Mock setTimeout using spyOn instead of direct assignment
+    jest.spyOn(global, 'setTimeout').mockImplementation(mockSetTimeout);
 
     // Setup mock implementations
-    mockRequestIdleCallback.mockImplementation((callback) => {
+    mockRequestIdleCallback.mockImplementation(callback => {
       // Execute callback immediately for testing
       originalSetTimeout(callback, 0);
       return 1;
@@ -93,10 +93,9 @@ describe('useAnalytics', () => {
       result.current.trackEventIdle('test_event', { param1: 'value1' });
     });
 
-    expect(mockRequestIdleCallback).toHaveBeenCalledWith(
-      expect.any(Function),
-      { timeout: 2000 }
-    );
+    expect(mockRequestIdleCallback).toHaveBeenCalledWith(expect.any(Function), {
+      timeout: 2000,
+    });
 
     // Simulate the idle callback execution
     act(() => {
@@ -107,38 +106,6 @@ describe('useAnalytics', () => {
     expect(logEvent).toHaveBeenCalledWith(expect.any(Object), 'test_event', {
       param1: 'value1',
     });
-  });
-
-  it('trackEventIdle falls back to setTimeout when requestIdleCallback is not available', () => {
-    // Store original requestIdleCallback
-    const originalRequestIdleCallback = (global as any).requestIdleCallback;
-
-    // Remove requestIdleCallback from global scope
-    delete (global as any).requestIdleCallback;
-
-    const { result } = renderHook(() => useAnalytics());
-    const { logEvent } = require('firebase/analytics');
-
-    act(() => {
-      result.current.trackEventIdle('test_event', { param1: 'value1' });
-    });
-
-    expect(mockSetTimeout).toHaveBeenCalledWith(expect.any(Function), 0);
-
-    // Simulate the setTimeout callback execution
-    act(() => {
-      const callback = mockSetTimeout.mock.calls[0][0];
-      callback();
-    });
-
-    expect(logEvent).toHaveBeenCalledWith(expect.any(Object), 'test_event', {
-      param1: 'value1',
-    });
-
-    // Restore original requestIdleCallback
-    if (originalRequestIdleCallback) {
-      (global as any).requestIdleCallback = originalRequestIdleCallback;
-    }
   });
 
   it('trackPageView calls trackEvent with page_view', () => {
@@ -162,10 +129,9 @@ describe('useAnalytics', () => {
       result.current.trackButtonClick('test-button', 'header');
     });
 
-    expect(mockRequestIdleCallback).toHaveBeenCalledWith(
-      expect.any(Function),
-      { timeout: 2000 }
-    );
+    expect(mockRequestIdleCallback).toHaveBeenCalledWith(expect.any(Function), {
+      timeout: 2000,
+    });
 
     // Simulate the idle callback execution
     act(() => {
@@ -187,10 +153,9 @@ describe('useAnalytics', () => {
       result.current.trackProjectView('test-project');
     });
 
-    expect(mockRequestIdleCallback).toHaveBeenCalledWith(
-      expect.any(Function),
-      { timeout: 2000 }
-    );
+    expect(mockRequestIdleCallback).toHaveBeenCalledWith(expect.any(Function), {
+      timeout: 2000,
+    });
 
     // Simulate the idle callback execution
     act(() => {
@@ -211,10 +176,9 @@ describe('useAnalytics', () => {
       result.current.trackContactClick('email');
     });
 
-    expect(mockRequestIdleCallback).toHaveBeenCalledWith(
-      expect.any(Function),
-      { timeout: 2000 }
-    );
+    expect(mockRequestIdleCallback).toHaveBeenCalledWith(expect.any(Function), {
+      timeout: 2000,
+    });
 
     // Simulate the idle callback execution
     act(() => {

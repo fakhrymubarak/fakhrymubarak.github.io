@@ -122,11 +122,13 @@ export const useAccessibility = (options: UseAccessibilityOptions = {}) => {
 export const accessibilityUtils = {
   // Use a singleton aria-live region to avoid DOM manipulation
   _liveRegion: null as HTMLElement | null,
-  
+
   _getLiveRegion: () => {
     if (!accessibilityUtils._liveRegion) {
       // Check if live region already exists
-      let existingRegion = document.getElementById('accessibility-live-region');
+      const existingRegion = document.getElementById(
+        'accessibility-live-region'
+      );
       if (existingRegion) {
         accessibilityUtils._liveRegion = existingRegion;
       } else {
@@ -141,7 +143,7 @@ export const accessibilityUtils = {
         liveRegion.style.width = '1px';
         liveRegion.style.height = '1px';
         liveRegion.style.overflow = 'hidden';
-        
+
         document.body.appendChild(liveRegion);
         accessibilityUtils._liveRegion = liveRegion;
       }
@@ -161,13 +163,18 @@ export const accessibilityUtils = {
 
     // Clear previous content and set new message
     liveRegion.textContent = '';
-    
+
     // Use requestAnimationFrame to ensure DOM update happens in next frame
-    requestAnimationFrame(() => {
-      if (liveRegion) {
-        liveRegion.textContent = message;
-      }
-    });
+    if (typeof window !== 'undefined' && window.requestAnimationFrame) {
+      window.requestAnimationFrame(() => {
+        if (liveRegion) {
+          liveRegion.textContent = message;
+        }
+      });
+    } else {
+      // Fallback for environments without requestAnimationFrame
+      liveRegion.textContent = message;
+    }
   },
 
   // Skip to the main content

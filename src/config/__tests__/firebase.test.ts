@@ -1,3 +1,21 @@
+// Mock the entire firebase module
+jest.mock('../firebase', () => ({
+  analytics: {
+    app: {
+      name: 'test-app',
+      options: {
+        apiKey: 'test-api-key',
+        authDomain: 'test-auth-domain',
+        projectId: 'test-project-id',
+        storageBucket: 'test-storage-bucket',
+        messagingSenderId: 'test-sender-id',
+        appId: 'test-app-id',
+        measurementId: 'test-measurement-id',
+      },
+    },
+  },
+}));
+
 // Mock IndexedDB to prevent Firebase warnings
 const mockIndexedDB = {
   open: jest.fn(() => ({
@@ -22,6 +40,7 @@ Object.defineProperty(window, 'indexedDB', {
   writable: true,
 });
 
+// Now import the mocked module
 import { analytics } from '../firebase';
 
 describe('Firebase Config', () => {

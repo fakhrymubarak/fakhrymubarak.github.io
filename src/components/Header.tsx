@@ -1,28 +1,30 @@
-import React, {useState} from 'react';
-import {useTheme} from '../hooks/useTheme';
-import {Moon, Sun, Menu, X} from 'lucide-react';
+import React, { useState } from 'react';
+import { useTheme } from '../hooks/useTheme';
+import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
-import {useAnalytics} from '../hooks/useAnalytics';
-import {accessibilityUtils} from '../hooks/useAccessibility';
+import { useAnalytics } from '../hooks/useAnalytics';
+import { accessibilityUtils } from '../hooks/useAccessibility';
 
 const Header: React.FC = () => {
-  const {theme, toggleTheme} = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeToggling, setIsThemeToggling] = useState(false);
-  const [animationPhase, setAnimationPhase] = useState<'idle' | 'exiting' | 'transitioning' | 'entering'>('idle');
-  const {trackButtonClick} = useAnalytics();
+  const [animationPhase, setAnimationPhase] = useState<
+    'idle' | 'exiting' | 'transitioning' | 'entering'
+  >('idle');
+  const { trackButtonClick } = useAnalytics();
 
   const navItems = [
-    {name: 'Home', href: '#home'},
-    {name: 'Projects', href: '#projects'},
-    {name: 'Experience', href: '#experience'},
-    {name: 'Contact', href: '#contact'},
+    { name: 'Home', href: '#home' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   const scrollToSection = (href: string, navName: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({behavior: 'smooth'});
+      element.scrollIntoView({ behavior: 'smooth' });
       accessibilityUtils.announce(`Navigated to ${navName} section`);
     }
     trackButtonClick(`nav_${navName.toLowerCase()}`, 'header');
@@ -68,7 +70,9 @@ const Header: React.FC = () => {
   // Get the appropriate animation classes based on current state
   const getIconClasses = (isActive: boolean) => {
     if (animationPhase === 'idle') {
-      return isActive ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-0 rotate-180';
+      return isActive
+        ? 'opacity-100 scale-100 rotate-0'
+        : 'opacity-0 scale-0 rotate-180';
     }
 
     if (animationPhase === 'exiting') {
@@ -131,7 +135,8 @@ const Header: React.FC = () => {
             <button
               onClick={handleThemeToggle}
               disabled={isThemeToggling}
-              className={`p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 ${isThemeToggling ? 'cursor-not-allowed' : 'hover:scale-105'
+              className={`p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 ${
+                isThemeToggling ? 'cursor-not-allowed' : 'hover:scale-105'
               }`}
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >

@@ -140,7 +140,6 @@
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -152,7 +151,6 @@
 }
 
 @keyframes floatReverse {
-
   0%,
   100% {
     transform: translateY(0);
@@ -254,7 +252,6 @@
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
-
   .animate-fade-in-up,
   .animate-fade-in,
   .animate-scale-in,

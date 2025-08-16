@@ -21,13 +21,19 @@ export const useAnalytics = () => {
     }
   };
 
-  const trackEventIdle = (eventName: string, parameters?: AnalyticsParameters) => {
+  const trackEventIdle = (
+    eventName: string,
+    parameters?: AnalyticsParameters
+  ) => {
     if (analyticsRef.current) {
       // Use requestIdleCallback to defer analytics to idle time
       if (typeof requestIdleCallback !== 'undefined') {
-        requestIdleCallback(() => {
-          logEvent(analyticsRef.current!, eventName, parameters);
-        }, { timeout: 2000 });
+        requestIdleCallback(
+          () => {
+            logEvent(analyticsRef.current!, eventName, parameters);
+          },
+          { timeout: 2000 }
+        );
       } else {
         // Fallback for browsers that don't support requestIdleCallback
         setTimeout(() => {

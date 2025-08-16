@@ -11,7 +11,7 @@ Object.defineProperty(window, 'requestAnimationFrame', {
 describe('useAccessibility', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockRequestAnimationFrame.mockImplementation((callback) => {
+    mockRequestAnimationFrame.mockImplementation(callback => {
       // Execute callback immediately for testing
       setTimeout(callback, 0);
       return 1;
@@ -366,7 +366,9 @@ describe('useAccessibility', () => {
 
       accessibilityUtils.announce(message);
 
-      expect(mockRequestAnimationFrame).toHaveBeenCalledWith(expect.any(Function));
+      expect(mockRequestAnimationFrame).toHaveBeenCalledWith(
+        expect.any(Function)
+      );
     });
 
     it('skipToMain function focuses main element', () => {

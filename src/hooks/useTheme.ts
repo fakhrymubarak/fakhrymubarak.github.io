@@ -5,7 +5,7 @@ import type { ThemeContextType } from '../types/theme';
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
