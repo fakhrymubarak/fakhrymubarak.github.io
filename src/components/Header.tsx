@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../assets/images/avatars/img_avatar.webp';
@@ -13,6 +13,33 @@ const Header: React.FC = () => {
     'idle' | 'exiting' | 'transitioning' | 'entering'
   >('idle');
   const { trackButtonClick } = useAnalytics();
+
+  // Refs to store timeout IDs for cleanup
+  const animationTimeoutsRef = useRef<{
+    exiting?: NodeJS.Timeout;
+    entering?: NodeJS.Timeout;
+  }>({});
+
+  // Clean-up timeouts on unmounting
+  useEffect(() => {
+    const timeouts = animationTimeoutsRef.current;
+    return () => {
+      if (timeouts.exiting) {
+        clearTimeout(timeouts.exiting);
+      }
+      if (timeouts.entering) {
+        clearTimeout(timeouts.entering);
+      }
+    };
+  }, []);
+
+  // Reset animation state if component unmounts during animation
+  useEffect(() => {
+    return () => {
+      setIsThemeToggling(false);
+      setAnimationPhase('idle');
+    };
+  }, []);
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -38,24 +65,29 @@ const Header: React.FC = () => {
     setIsThemeToggling(true);
     setAnimationPhase('exiting');
 
-    // Track analytics (now uses requestIdleCallback)
+    // Track analytics
     trackButtonClick('theme_toggle', 'header');
 
-    // Announce theme change (now optimized)
-    accessibilityUtils.announce(
-      `Switched to ${theme === 'light' ? 'dark' : 'light'} mode`
-    );
-
     // Start the animation sequence
-    setTimeout(() => {
+    animationTimeoutsRef.current.exiting = setTimeout(() => {
       setAnimationPhase('transitioning');
+
+      // Toggle theme and announce the change
       toggleTheme();
 
-      setTimeout(() => {
+      // Announce theme change after the actual theme change
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      accessibilityUtils.announce(`Switched to ${newTheme} mode`);
+
+      animationTimeoutsRef.current.entering = setTimeout(() => {
         setAnimationPhase('entering');
-        setIsThemeToggling(false);
-      }, 200); // Entering animation duration
-    }, 200); // Exiting animation duration
+
+        setTimeout(() => {
+          setAnimationPhase('idle');
+          setIsThemeToggling(false);
+        }, 250); // Entering animation duration (matches CSS)
+      }, 150); // Brief transition phase
+    }, 250); // Exiting animation duration (matches CSS)
   };
 
   const handleMenuToggle = () => {
@@ -69,6 +101,17 @@ const Header: React.FC = () => {
 
   // Get the appropriate animation classes based on current state
   const getIconClasses = (isActive: boolean) => {
+    // Handle reduced motion preference
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (prefersReducedMotion) {
+      return isActive
+        ? 'opacity-100 scale-100 rotate-0'
+        : 'opacity-0 scale-0 rotate-180';
+    }
+
     if (animationPhase === 'idle') {
       return isActive
         ? 'opacity-100 scale-100 rotate-0'

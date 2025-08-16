@@ -92,15 +92,15 @@
 
   /* Theme toggle animations */
   .theme-icon-enter {
-    animation: themeIconEnter 0.2s ease-out forwards;
+    animation: themeIconEnter 0.25s ease-out forwards;
   }
 
   .theme-icon-exit {
-    animation: themeIconExit 0.2s ease-in forwards;
+    animation: themeIconExit 0.25s ease-in forwards;
   }
 
   .theme-icon-rotate {
-    animation: themeIconRotate 0.4s ease-in-out;
+    animation: themeIconRotate 0.25s ease-in-out;
   }
 }
 
