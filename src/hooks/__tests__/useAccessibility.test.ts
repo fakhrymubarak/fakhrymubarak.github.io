@@ -1,9 +1,21 @@
 import { renderHook, act } from '@testing-library/react';
 import { useAccessibility, accessibilityUtils } from '../useAccessibility';
 
+// Mock requestAnimationFrame
+const mockRequestAnimationFrame = jest.fn();
+Object.defineProperty(window, 'requestAnimationFrame', {
+  value: mockRequestAnimationFrame,
+  writable: true,
+});
+
 describe('useAccessibility', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockRequestAnimationFrame.mockImplementation((callback) => {
+      // Execute callback immediately for testing
+      setTimeout(callback, 0);
+      return 1;
+    });
   });
 
   describe('hook functionality', () => {
@@ -299,25 +311,62 @@ describe('useAccessibility', () => {
     beforeEach(() => {
       // Mock document.body
       document.body.innerHTML = '';
+      // Reset the singleton live region
+      accessibilityUtils._liveRegion = null;
     });
 
-    it('announce function creates and removes announcement element', () => {
+    it('announce function creates live region on first call', () => {
       const message = 'Test announcement';
 
       accessibilityUtils.announce(message);
 
-      const announcement = document.querySelector('[aria-live="polite"]');
-      expect(announcement).toBeInTheDocument();
-      expect(announcement?.textContent).toBe(message);
+      const liveRegion = document.getElementById('accessibility-live-region');
+      expect(liveRegion).toBeInTheDocument();
+      expect(liveRegion?.getAttribute('aria-live')).toBe('polite');
+      expect(liveRegion?.getAttribute('aria-atomic')).toBe('true');
     });
 
-    it('announce function with assertive priority', () => {
+    it('announce function reuses existing live region', () => {
+      const message1 = 'First announcement';
+      const message2 = 'Second announcement';
+
+      // First call creates the region
+      accessibilityUtils.announce(message1);
+      const liveRegion1 = document.getElementById('accessibility-live-region');
+
+      // Clear the mock calls
+      mockRequestAnimationFrame.mockClear();
+
+      // Second call reuses the same region
+      accessibilityUtils.announce(message2);
+      const liveRegion2 = document.getElementById('accessibility-live-region');
+
+      expect(liveRegion1).toBe(liveRegion2);
+
+      // Wait for requestAnimationFrame to execute
+      act(() => {
+        const callback = mockRequestAnimationFrame.mock.calls[0][0];
+        callback();
+      });
+
+      expect(liveRegion2?.textContent).toBe(message2);
+    });
+
+    it('announce function with assertive priority updates aria-live', () => {
       const message = 'Test announcement';
 
       accessibilityUtils.announce(message, 'assertive');
 
-      const announcement = document.querySelector('[aria-live="assertive"]');
-      expect(announcement).toBeInTheDocument();
+      const liveRegion = document.getElementById('accessibility-live-region');
+      expect(liveRegion?.getAttribute('aria-live')).toBe('assertive');
+    });
+
+    it('announce function uses requestAnimationFrame for DOM updates', () => {
+      const message = 'Test announcement';
+
+      accessibilityUtils.announce(message);
+
+      expect(mockRequestAnimationFrame).toHaveBeenCalledWith(expect.any(Function));
     });
 
     it('skipToMain function focuses main element', () => {

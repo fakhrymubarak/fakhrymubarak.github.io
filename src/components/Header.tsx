@@ -8,6 +8,7 @@ import { accessibilityUtils } from '../hooks/useAccessibility';
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isThemeToggling, setIsThemeToggling] = useState(false);
   const { trackButtonClick } = useAnalytics();
 
   const navItems = [
@@ -28,11 +29,26 @@ const Header: React.FC = () => {
   };
 
   const handleThemeToggle = () => {
+    // Prevent multiple rapid clicks
+    if (isThemeToggling) return;
+    
+    setIsThemeToggling(true);
+    
+    // Track analytics (now uses requestIdleCallback)
     trackButtonClick('theme_toggle', 'header');
+    
+    // Announce theme change (now optimized)
     accessibilityUtils.announce(
       `Switched to ${theme === 'light' ? 'dark' : 'light'} mode`
     );
+    
+    // Toggle theme (now debounced)
     toggleTheme();
+    
+    // Reset toggle state after animation completes
+    setTimeout(() => {
+      setIsThemeToggling(false);
+    }, 300);
   };
 
   const handleMenuToggle = () => {
@@ -88,17 +104,24 @@ const Header: React.FC = () => {
             {/* Theme Toggle */}
             <button
               onClick={handleThemeToggle}
-              className="p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2"
+              disabled={isThemeToggling}
+              className={`p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 ${
+                isThemeToggling ? 'opacity-50 cursor-not-allowed scale-95' : 'hover:scale-105'
+              }`}
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
                 <Moon
-                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  className={`w-5 h-5 text-light-muted dark:text-dark-muted transition-transform duration-200 ${
+                    isThemeToggling ? 'animate-spin' : ''
+                  }`}
                   aria-hidden="true"
                 />
               ) : (
                 <Sun
-                  className="w-5 h-5 text-light-muted dark:text-dark-muted"
+                  className={`w-5 h-5 text-light-muted dark:text-dark-muted transition-transform duration-200 ${
+                    isThemeToggling ? 'animate-spin' : ''
+                  }`}
                   aria-hidden="true"
                 />
               )}

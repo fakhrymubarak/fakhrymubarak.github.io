@@ -76,6 +76,19 @@
   .bg-gradient {
     @apply bg-gradient-to-br from-primary-coral/10 via-primary-lavender/10 to-primary-rose/10;
   }
+
+  /* Screen reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }
 
 /* Custom CSS animations to reduce JavaScript bundle size */

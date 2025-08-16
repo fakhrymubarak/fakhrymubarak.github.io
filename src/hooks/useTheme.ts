@@ -1,11 +1,29 @@
-import { useContext } from 'react';
+import { useContext, useCallback, useRef } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import type { ThemeContextType } from '../types/theme';
 
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
-  return context;
+
+  const debouncedToggleTheme = useCallback(() => {
+    // Clear any existing timeout
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
+    }
+
+    // Debounce the theme toggle by 150ms
+    debounceTimeoutRef.current = setTimeout(() => {
+      context.toggleTheme();
+    }, 150);
+  }, [context]);
+
+  return {
+    ...context,
+    toggleTheme: debouncedToggleTheme,
+  };
 };
