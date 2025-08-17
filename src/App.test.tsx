@@ -4,28 +4,28 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
 // Mock the lazy-loaded components
-jest.mock('./pages/HomePage', () => {
+jest.mock('@presentation/pages/HomePage', () => {
   return function MockHomePage() {
     return <div data-testid="home-page">Home Page</div>;
   };
 });
 
 // Mock the Layout component
-jest.mock('./components/Layout', () => {
+jest.mock('@presentation/components/Layout', () => {
   return function MockLayout({ children }: { children: React.ReactNode }) {
     return <div data-testid="layout">{children}</div>;
   };
 });
 
 // Mock the LoadingSpinner component
-jest.mock('./components/ui/LoadingSpinner', () => {
+jest.mock('@presentation/components/ui/LoadingSpinner', () => {
   return function MockLoadingSpinner() {
     return <div data-testid="loading-spinner">Loading...</div>;
   };
 });
 
 // Mock the ThemeContext and ThemeProvider
-jest.mock('./contexts/ThemeContext', () => ({
+jest.mock('@application/store/ThemeContext', () => ({
   ThemeContext: {
     Provider: ({ children }: { children: React.ReactNode }) => (
       <div data-testid="theme-provider">{children}</div>
@@ -33,7 +33,7 @@ jest.mock('./contexts/ThemeContext', () => ({
   },
 }));
 
-jest.mock('./contexts/ThemeContext.tsx', () => ({
+jest.mock('@application/store/ThemeContext.tsx', () => ({
   ThemeProvider: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="theme-provider">{children}</div>
   ),

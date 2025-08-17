@@ -7,9 +7,9 @@ import './index.css';
 import {
   initPerformanceMonitoring,
   initPerformanceOptimizations,
-} from './utils/performance';
-import { initServiceWorker } from './utils/sw';
-import { handle404Error } from './utils/clearCache';
+} from '@/domain';
+import { initServiceWorker } from './domain/valueObjects/sw';
+import { handle404Error } from './domain/valueObjects/clearCache';
 
 // Initialize performance monitoring
 initPerformanceMonitoring();
