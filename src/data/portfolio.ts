@@ -283,7 +283,7 @@ export const portfolioData: PortfolioData = {
           certificateUrl: 'https://www.dicoding.com/certificates/0LZ03JMENZ65',
           credentialId: '0LZ03JMENZ65',
           issueDate: '2021-11-24',
-          status: 'active',
+          status: 'expired',
           skills: [
             'Android',
             'Kotlin',
@@ -344,7 +344,7 @@ export const portfolioData: PortfolioData = {
       certificates: [
         {
           id: 'dicoding-expert-session-speaker',
-          title: 'Appreciation - Dicoding Expert Session Speaker',
+          title: 'Dicoding Expert Session Speaker',
           description:
             'Recognized as a speaker at Dicoding Expert Session 2025, presenting "From Learner to Leader: Navigating Your Tech Career Path" to ~200 participants from Dicoding Bootcamp Batch 8 and BEKUP Create 2025. Shared insights on tech career mapping, skill development beyond bootcamp, personal branding, and job hunting strategies.',
           certificateUrl:
@@ -363,7 +363,7 @@ export const portfolioData: PortfolioData = {
         },
         {
           id: 'bangkit-contributor-2024-batch1',
-          title: 'Appreciation - Bangkit 2024 Batch 1 Contributor',
+          title: 'Bangkit 2024 Batch 1 Instructor',
           description:
             'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 1, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
           certificateUrl:
@@ -382,12 +382,12 @@ export const portfolioData: PortfolioData = {
         },
         {
           id: 'bangkit-contributor-2024-batch2',
-          title: 'Appreciation - Bangkit 2024 Batch 2 Contributor',
+          title: 'Bangkit 2024 Batch 1 Instructor',
           description:
             'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 2, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
           certificateUrl:
             'https://drive.google.com/file/d/1i5ZEnaFEtRwLx3tI3wGzKpFIckmlDO3T/view?usp=sharing',
-          credentialId: 'BA24/CTRB/XXIV-02/MD24-0267',
+          credentialId: 'BA24/CTRB/XXV-02/MD24-0267',
           issueDate: '2025-02-11',
           status: 'active',
           skills: [

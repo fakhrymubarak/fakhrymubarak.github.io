@@ -44,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* Project Content */}
-      <div className="p-6 space-y-4">
+      <div className="pb-4 ps-0 pe-0 pt-4 space-y-4">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">

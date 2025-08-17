@@ -1,7 +1,53 @@
+// Mock the CertificatesSection component to avoid portfolio data issues
+jest.mock('../../components/sections/CertificatesSection', () => {
+  return function MockCertificatesSection() {
+    return (
+      <div data-testid="certificates-section">Mock Certificates Section</div>
+    );
+  };
+});
+
+// Mock the portfolio data to include certificateCategories
+jest.mock('../../data/portfolio', () => ({
+  portfolioData: {
+    introduction: {
+      title: ['Test', 'Title'],
+      subtitle: 'Test Subtitle',
+      description: 'Test Description',
+      imagePath: 'test-image.jpg',
+      techStack: [],
+    },
+    projects: [],
+    companies: [],
+    certificateCategories: [
+      {
+        type: 'course',
+        certificates: [
+          {
+            id: 'test-certificate',
+            title: 'Test Certificate',
+            description: 'Test Description',
+            certificateUrl: 'https://example.com',
+            credentialId: 'TEST123',
+            issueDate: '2023-01-01',
+            status: 'active',
+            type: 'course',
+            skills: ['Test', 'Skill'],
+          },
+        ],
+      },
+    ],
+    footer: {
+      socialMedia: [],
+      contacts: [],
+      signature: 'Test Signature',
+      contactImage: 'test-image.jpg',
+    },
+  },
+}));
+
 import { render, screen } from '../../utils/test-utils';
 import HomePage from '../HomePage';
-
-// Remove local mocks - use global mocks from test-utils instead
 
 describe('HomePage Component', () => {
   it('renders all main sections', () => {
@@ -9,6 +55,7 @@ describe('HomePage Component', () => {
 
     expect(screen.getByTestId('intro-section')).toBeInTheDocument();
     expect(screen.getByTestId('projects-section')).toBeInTheDocument();
+    expect(screen.getByTestId('certificates-section')).toBeInTheDocument();
     expect(screen.getByTestId('experience-section')).toBeInTheDocument();
     expect(screen.getByTestId('footer-section')).toBeInTheDocument();
   });
@@ -22,7 +69,7 @@ describe('HomePage Component', () => {
 
     // Check for proper section ordering
     const sections = screen.getAllByTestId(/section$/);
-    expect(sections).toHaveLength(4);
+    expect(sections).toHaveLength(5);
   });
 
   it('has proper semantic HTML structure', () => {
@@ -58,10 +105,12 @@ describe('HomePage Component', () => {
 
     expect(screen.getByTestId('intro-section')).toBeInTheDocument();
     expect(screen.getByTestId('projects-section')).toBeInTheDocument();
+    expect(screen.getByTestId('certificates-section')).toBeInTheDocument();
 
     rerender(<HomePage />);
 
     expect(screen.getByTestId('intro-section')).toBeInTheDocument();
     expect(screen.getByTestId('projects-section')).toBeInTheDocument();
+    expect(screen.getByTestId('certificates-section')).toBeInTheDocument();
   });
 });

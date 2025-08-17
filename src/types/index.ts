@@ -76,7 +76,6 @@ export interface Introduction {
   techStack: TechStack[];
 }
 
-
 export interface Footer {
   socialMedia: SocialLink[];
   contacts: ContactLink[];
