@@ -41,7 +41,7 @@ export const portfolioData: PortfolioData = {
     title: ['Hi, I am', 'Fakhry Mubarak'],
     subtitle: 'Software Engineer specializing in Android Development',
     description:
-      'Android Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
+      'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
     imagePath: avatarImage,
     techStack: [
       {
@@ -266,6 +266,137 @@ export const portfolioData: PortfolioData = {
             'Integrated REST APIs, sockets, push notifications, and handled multi-threading workflows.',
             'Developed Chakra Rewards and HRESS app with high uptime and responsive UI.',
             'Used design patterns (MVVM, Repository, DI) and maintained excellent code hygiene.',
+          ],
+        },
+      ],
+    },
+  ],
+  certificateCategories: [
+    {
+      type: 'course',
+      certificates: [
+        {
+          id: 'dicoding-android-expert',
+          title: 'Course: Android Expert',
+          description:
+            'Advanced Android development course covering Clean Architecture, Reactive Programming with RxJava & Coroutines, Dependency Injection (Dagger/Koin), Modularization, CI/CD, Performance optimization, Security, and industry-standard libraries. Completed 90-hour comprehensive program with capstone project submission.',
+          certificateUrl: 'https://www.dicoding.com/certificates/0LZ03JMENZ65',
+          credentialId: '0LZ03JMENZ65',
+          issueDate: '2021-11-24',
+          status: 'active',
+          skills: [
+            'Android',
+            'Kotlin',
+            'Clean Architecture',
+            'RxJava',
+            'Coroutines',
+            'Dagger',
+            'Koin',
+            'Modularization',
+            'CI/CD',
+            'Performance',
+            'Security',
+          ],
+        },
+        {
+          id: 'dicoding-solid-principles',
+          title: 'Course: Solid Principles',
+          description:
+            'Object-Oriented Programming fundamentals course covering OOP pillars (Inheritance, Encapsulation, Abstraction, Polymorphism), object relationships, software design principles, and SOLID principles (Single Responsibility, Open Closed, Liskov Substitution, Interface Segregation, Dependency Inversion). Completed 15-hour program with final exam.',
+          certificateUrl: 'https://www.dicoding.com/certificates/1RXY44NG1PVM',
+          credentialId: '1RXY44NG1PVM',
+          issueDate: '2021-11-24',
+          status: 'active',
+          skills: [
+            'OOP',
+            'SOLID Principles',
+            'Software Design',
+            'Inheritance',
+            'Encapsulation',
+            'Abstraction',
+            'Polymorphism',
+          ],
+        },
+        {
+          id: 'dicoding-flutter-expert',
+          title: 'Course: Flutter Expert',
+          description:
+            'Advanced Flutter development course covering Clean Architecture, TDD, Advanced UI, Modularization, Reactive Programming with BLoC, CI/CD, Performance optimization, Security, and Post-Development practices. Completed 70-hour comprehensive program with final project submission.',
+          certificateUrl: 'https://www.dicoding.com/certificates/72ZDOWVJ9XYW',
+          credentialId: '72ZDOWVJ9XYW',
+          issueDate: '2022-08-30',
+          status: 'active',
+          skills: [
+            'Flutter',
+            'Dart',
+            'Clean Architecture',
+            'TDD',
+            'BLoC',
+            'CI/CD',
+            'Performance',
+            'Security',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'award',
+      certificates: [
+        {
+          id: 'dicoding-expert-session-speaker',
+          title: 'Appreciation - Dicoding Expert Session Speaker',
+          description:
+            'Recognized as a speaker at Dicoding Expert Session 2025, presenting "From Learner to Leader: Navigating Your Tech Career Path" to ~200 participants from Dicoding Bootcamp Batch 8 and BEKUP Create 2025. Shared insights on tech career mapping, skill development beyond bootcamp, personal branding, and job hunting strategies.',
+          certificateUrl:
+            'https://drive.google.com/file/d/14k72at1VwOkw9IQfkNleB6UzeGpuFYL-/view?usp=sharing',
+          credentialId: 'DCD/DES/XXV-08/DCD25-GS13',
+          issueDate: '2025-08-05',
+          status: 'active',
+          skills: [
+            'Public Speaking',
+            'Career Mentoring',
+            'Tech Leadership',
+            'Personal Branding',
+            'Career Development',
+            'Professional Networking',
+          ],
+        },
+        {
+          id: 'bangkit-contributor-2024-batch1',
+          title: 'Appreciation - Bangkit 2024 Batch 1 Contributor',
+          description:
+            'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 1, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
+          certificateUrl:
+            'https://drive.google.com/file/d/19_wojNOQ-XnAj-B-QcAFoYsSYQ3Pi0w1/view?usp=sharing',
+          credentialId: 'BA24/CTRB/XXIV-07/MD24-0267',
+          issueDate: '2024-07-24',
+          status: 'active',
+          skills: [
+            'Mentorship',
+            'Technical Training',
+            'Mobile Development',
+            'Curriculum Development',
+            'Student Guidance',
+            'Educational Leadership',
+          ],
+        },
+        {
+          id: 'bangkit-contributor-2024-batch2',
+          title: 'Appreciation - Bangkit 2024 Batch 2 Contributor',
+          description:
+            'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 2, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
+          certificateUrl:
+            'https://drive.google.com/file/d/1i5ZEnaFEtRwLx3tI3wGzKpFIckmlDO3T/view?usp=sharing',
+          credentialId: 'BA24/CTRB/XXIV-02/MD24-0267',
+          issueDate: '2025-02-11',
+          status: 'active',
+          skills: [
+            'Mentorship',
+            'Technical Training',
+            'Mobile Development',
+            'Curriculum Development',
+            'Student Guidance',
+            'Educational Leadership',
           ],
         },
       ],

@@ -10,11 +10,6 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
   - [Table of Contents](#table-of-contents)
   - [About](#about)
   - [Features](#features)
-  - [Sections](#sections)
-    - [1. Introduction Section](#1-introduction-section)
-    - [2. Projects Section](#2-projects-section)
-    - [3. Experience Section](#3-experience-section)
-    - [4. Footer Section](#4-footer-section)
   - [Tech Stack](#tech-stack)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -23,15 +18,19 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
     - [Build](#build)
     - [Deployment](#deployment)
     - [GitHub Pages Deployment](#github-pages-deployment)
+      - [What Was Fixed](#what-was-fixed)
+      - [Key Changes Made](#key-changes-made)
+      - [Deployment Process](#deployment-process)
+      - [Troubleshooting](#troubleshooting)
   - [Project Todo](#project-todo)
     - [Phase 1: Project Setup \& Foundation ✅](#phase-1-project-setup--foundation-)
     - [Phase 2: Core Components Development ✅](#phase-2-core-components-development-)
-    - [Phase 3: Page Structure \& Routing ✅](#phase-3-page-structure--routing-)
+    - [Phase 3: Page Structure \& Routing 📄](#phase-3-page-structure--routing-)
     - [Phase 4: Content \& Data Management ✅](#phase-4-content--data-management-)
     - [Phase 5: Interactive Features ✅](#phase-5-interactive-features-)
     - [Phase 6: Performance \& Optimization ✅](#phase-6-performance--optimization-)
     - [Phase 7: SEO \& Accessibility ✅](#phase-7-seo--accessibility-)
-    - [Phase 8: Testing \& Quality Assurance ✅](#phase-8-testing--quality-assurance-)
+    - [Phase 8: Testing \& Quality Assurance 🧪](#phase-8-testing--quality-assurance-)
     - [Phase 9: Deployment \& Monitoring ✅](#phase-9-deployment--monitoring-)
     - [Phase 10: Enhancement \& Polish ✨](#phase-10-enhancement--polish-)
     - [Phase 11: Documentation \& Maintenance 📚](#phase-11-documentation--maintenance-)
@@ -268,7 +267,7 @@ If you encounter 404 errors after deployment:
 ### Phase 10: Enhancement & Polish ✨
 - [ ] Add advanced animations with Framer Motion
 - [ ] Implement progressive web app features
-- [ ] Add blog section (optional)
+- [ ] Add articles section (integrate it with my medium sections.)
 - [ ] Create admin panel for content management
 - [ ] Add multi-language support
 - [ ] Implement A/B testing framework

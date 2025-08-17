@@ -37,6 +37,24 @@ export interface Company {
   experiences: Experience[];
 }
 
+type CertType = 'professional' | 'course' | 'academic' | 'award';
+type CertStatus = 'active' | 'expired';
+export interface CertificateCategory {
+  type: CertType;
+  certificates: Certificate[];
+}
+
+export interface Certificate {
+  id: string;
+  title: string;
+  description: string;
+  certificateUrl: string;
+  credentialId: string;
+  issueDate: string;
+  status: CertStatus;
+  skills: string[];
+}
+
 export interface SocialLink {
   name: string;
   url: string;
@@ -58,6 +76,7 @@ export interface Introduction {
   techStack: TechStack[];
 }
 
+
 export interface Footer {
   socialMedia: SocialLink[];
   contacts: ContactLink[];
@@ -69,5 +88,6 @@ export interface PortfolioData {
   introduction: Introduction;
   projects: Project[];
   companies: Company[];
+  certificateCategories: CertificateCategory[];
   footer: Footer;
 }
