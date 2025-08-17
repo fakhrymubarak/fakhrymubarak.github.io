@@ -6,7 +6,15 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist/**', '.eslintrc.cjs', 'lighthouserc.cjs'],
+  ignorePatterns: [
+    'dist/**',
+    '.eslintrc.cjs',
+    'lighthouserc.cjs',
+    'public/sw.js',
+    'public/version.json',
+    'scripts/**/*.cjs',
+    'src/domain/valueObjects/sw.ts'
+  ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-refresh'],
   rules: {

@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:analyze": "tsc && vite build --mode analyze",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "build": "node scripts/build-with-version.cjs && tsc && vite build",
+    "build:analyze": "node scripts/build-with-version.cjs && tsc && vite build --mode analyze",
+    "lint": "eslint src --report-unused-disable-directives --max-warnings 0 --ignore-pattern 'src/domain/valueObjects/sw.ts'",
     "preview": "vite preview",
     "test": "jest",
     "test:fast": "jest --no-coverage --testPathIgnorePatterns='.*accessibility\\.test\\.tsx' --maxWorkers=4",

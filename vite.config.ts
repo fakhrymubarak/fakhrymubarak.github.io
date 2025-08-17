@@ -41,7 +41,7 @@ export default defineConfig({
             : 'chunk'
           return `js/${facadeModuleId}-[hash].js`
         },
-        // Add version query parameter to force cache busting
+        // Enhanced cache busting with version and hash
         assetFileNames: (assetInfo) => {
           // @ts-ignore - name is deprecated but still functional
           const info = assetInfo.name?.split('.') || []
@@ -52,6 +52,8 @@ export default defineConfig({
           }
           return `assets/[name]-[hash].[ext]`
         },
+        // Add version to entry file names for better cache busting
+        entryFileNames: 'js/[name]-[hash].js',
       },
     },
     chunkSizeWarningLimit: 1000, // Increase warning limit

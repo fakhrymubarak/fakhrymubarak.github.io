@@ -9,8 +9,6 @@ import {
   initPerformanceOptimizations,
 } from '@/domain';
 import { initServiceWorker } from './domain/valueObjects/sw';
-import { handle404Error } from './domain/valueObjects/clearCache';
-
 // Initialize performance monitoring
 initPerformanceMonitoring();
 
@@ -19,9 +17,6 @@ initPerformanceOptimizations();
 
 // Initialize service worker
 initServiceWorker();
-
-// Handle 404 errors
-handle404Error();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

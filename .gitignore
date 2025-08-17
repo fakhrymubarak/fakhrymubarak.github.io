@@ -13,9 +13,9 @@ pids
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
-#coverage/
+coverage/
 *.lcov
-.jest-cache
+.jest-cache/
 
 # LighhousCI
 .lighthouseci
@@ -140,6 +140,7 @@ Thumbs.db
 # Logs
 logs
 *.log
+*.log.*
 
 # Temporary folders
 tmp/
@@ -187,10 +188,16 @@ storybook-static
 # .env.test.local
 # .env.production.local
 
-# # PWA files
-# public/sw.js
-# public/workbox-*.js
-# public/worker-*.js
-# public/sw.js.map
-# public/workbox-*.js.map
-# public/worker-*.js.map 
+# PWA files
+public/sw.js
+public/workbox-*.js
+public/worker-*.js
+public/sw.js.map
+public/workbox-*.js.map
+public/worker-*.js.map
+public/version.json
+
+# Build artifacts
+*.tsbuildinfo
+.eslintcache
+.stylelintcache 
