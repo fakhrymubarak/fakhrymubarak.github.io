@@ -1,6 +1,6 @@
 // Service Worker for cache management and automatic updates
 // This is a template - the build script will inject the actual version
-const APP_VERSION = 'release/v1.1.0'; // Will be replaced by a build script
+const APP_VERSION = 'release/v1.1.1'; // Will be replaced by a build script
 const CACHE_NAME = `showcase-${APP_VERSION}-cache`;
 const STATIC_CACHE_NAME = `showcase-${APP_VERSION}-static`;
 
@@ -8,7 +8,7 @@ const STATIC_CACHE_NAME = `showcase-${APP_VERSION}-static`;
 const urlsToCache = ['/', '/index.html', '/manifest.json'];
 
 // Install event - cache static assets
-self.addEventListener('install', (event: any) => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE_NAME).then(cache => {
       return cache.addAll(urlsToCache);
@@ -17,7 +17,7 @@ self.addEventListener('install', (event: any) => {
 });
 
 // Fetch event - serve from cache, fallback to network
-self.addEventListener('fetch', (event: any) => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches
       .match(event.request)
@@ -53,9 +53,9 @@ self.addEventListener('fetch', (event: any) => {
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event: any) => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames: string[]) => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map(cacheName => {
           // Delete old caches that don't match current version
@@ -70,9 +70,9 @@ self.addEventListener('activate', (event: any) => {
 });
 
 // Listen for messages from the main thread
-self.addEventListener('message', (event: any) => {
+self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
-    (self as any).skipWaiting();
+    self.skipWaiting();
   }
 });
 
