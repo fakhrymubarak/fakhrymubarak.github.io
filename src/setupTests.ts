@@ -44,6 +44,12 @@ Object.defineProperty(window, 'matchMedia', {
 // Mock scrollIntoView
 Element.prototype.scrollIntoView = jest.fn();
 
+// Mock window.scrollTo for Framer Motion
+Object.defineProperty(window, 'scrollTo', {
+  writable: true,
+  value: jest.fn(),
+});
+
 // Mock getComputedStyle
 Object.defineProperty(window, 'getComputedStyle', {
   value: () => ({
@@ -67,6 +73,7 @@ beforeAll(() => {
         message.includes(
           'Not implemented: HTMLCanvasElement.prototype.getContext'
         ) ||
+        message.includes('Not implemented: window.scrollTo') ||
         message.includes('Warning: React does not recognize the') ||
         message.includes(
           'Warning: A suspended resource finished loading inside a test'

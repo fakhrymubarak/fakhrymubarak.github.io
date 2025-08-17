@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import { ThemeProvider } from './contexts/ThemeContext.tsx';
-import Layout from './components/Layout';
-import LoadingSpinner from './components/ui/LoadingSpinner';
+import { ThemeProvider } from './application/store/ThemeContext.tsx';
+import Layout from './presentation/components/Layout';
+import LoadingSpinner from './presentation/components/ui/LoadingSpinner';
 import './App.css';
 
 // Lazy load pages for better performance
-const HomePage = lazy(() => import('./pages/HomePage'));
+const HomePage = lazy(() => import('./presentation/pages/HomePage'));
 
 function App() {
   return (

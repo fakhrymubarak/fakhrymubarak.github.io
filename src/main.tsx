@@ -7,21 +7,20 @@ import './index.css';
 import {
   initPerformanceMonitoring,
   initPerformanceOptimizations,
-} from './utils/performance';
-import { initServiceWorker } from './utils/sw';
-import { handle404Error } from './utils/clearCache';
-
+} from '@/domain';
+import { initServiceWorker } from './domain/valueObjects/sw';
 // Initialize performance monitoring
 initPerformanceMonitoring();
 
 // Initialize performance optimizations
 initPerformanceOptimizations();
 
-// Initialize service worker
-initServiceWorker();
-
-// Handle 404 errors
-handle404Error();
+// Initialize service worker after the page is interactive to avoid impacting LCP
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => initServiceWorker());
+} else {
+  setTimeout(() => initServiceWorker(), 1500);
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

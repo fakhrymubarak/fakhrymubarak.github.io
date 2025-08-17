@@ -1,20 +1,24 @@
 import { defineConfig } from 'vite'
+import compression from 'vite-plugin-compression'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    compression({ algorithm: 'brotliCompress', ext: '.br', deleteOriginFile: false }),
+    compression({ algorithm: 'gzip', ext: '.gz', deleteOriginFile: false }),
+  ],
   base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-      '@styles': path.resolve(__dirname, './src/styles'),
-      '@data': path.resolve(__dirname, './src/data'),
+      '@presentation': path.resolve(__dirname, './src/presentation'),
+      '@application': path.resolve(__dirname, './src/application'),
+      '@domain': path.resolve(__dirname, './src/domain'),
+      '@infrastructure': path.resolve(__dirname, './src/infrastructure'),
+      '@shared': path.resolve(__dirname, './src/shared'),
       '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
@@ -26,14 +30,18 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false, // Disable sourcemaps in production to reduce bundle size
     minify: 'esbuild',
-    target: 'es2015',
+    target: 'es2020',
+    esbuild: {
+      drop: ['console', 'debugger'],
+      legalComments: 'none',
+    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
           animations: ['framer-motion'],
-          icons: ['lucide-react', 'react-icons'],
+          icons: ['lucide-react'],
           utils: ['axios'],
         },
         chunkFileNames: (chunkInfo) => {
@@ -42,7 +50,7 @@ export default defineConfig({
             : 'chunk'
           return `js/${facadeModuleId}-[hash].js`
         },
-        // Add version query parameter to force cache busting
+        // Enhanced cache busting with version and hash
         assetFileNames: (assetInfo) => {
           // @ts-ignore - name is deprecated but still functional
           const info = assetInfo.name?.split('.') || []
@@ -53,6 +61,8 @@ export default defineConfig({
           }
           return `assets/[name]-[hash].[ext]`
         },
+        // Add version to entry file names for better cache busting
+        entryFileNames: 'js/[name]-[hash].js',
       },
     },
     chunkSizeWarningLimit: 1000, // Increase warning limit
