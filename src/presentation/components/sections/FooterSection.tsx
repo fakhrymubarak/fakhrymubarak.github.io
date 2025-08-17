@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { portfolioData } from '@/domain';
 import {
   Download,
   Github,
@@ -10,10 +9,10 @@ import {
   MessageCircle,
   Youtube,
 } from 'lucide-react';
-import { useAnalytics } from '@/presentation';
+import { useFooter, useAnalytics } from '@/presentation';
 
 const FooterSection: React.FC = () => {
-  const { footer } = portfolioData;
+  const { footer } = useFooter();
   const { trackContactClick, trackButtonClick } = useAnalytics();
 
   const containerVariants = {
@@ -66,7 +65,11 @@ const FooterSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="section pb-0">
+    <section
+      id="contact"
+      className="section pb-0"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '800px' }}
+    >
       <div className="container">
         <motion.div
           variants={containerVariants}
@@ -77,8 +80,8 @@ const FooterSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
-              GET IN TOUCH
+            <h2 className="heading-2 text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+              Get in Touch
             </h2>
             <p className="body-text max-w-2xl mx-auto">
               I'm always open to discussing new opportunities, interesting
@@ -97,6 +100,10 @@ const FooterSection: React.FC = () => {
                   src={footer.contactImage}
                   alt="Contact me"
                   className="w-80 h-100 lg:w-96 lg:h-auto rounded-2xl object-cover shadow-2xl"
+                  loading="lazy"
+                  decoding="async"
+                  width={384}
+                  height={480}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
               </div>

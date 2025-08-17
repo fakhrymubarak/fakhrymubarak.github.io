@@ -11,10 +11,10 @@ import {
 } from 'lucide-react';
 import { useAnalytics } from '@/presentation';
 import { useAccessibility, accessibilityUtils } from '@/presentation';
-import type { Certificate } from '@/domain';
+import type { UICertificate } from '@presentation/models';
 
 interface CertificateModalProps {
-  certificate: (Certificate & { categoryType: string }) | null;
+  certificate: (UICertificate & { categoryType: string }) | null;
   onClose: () => void;
 }
 
@@ -57,19 +57,6 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
         return <Star className="w-5 h-5" />;
       default:
         return <Award className="w-5 h-5" />;
-    }
-  };
-
-  const getCategoryLabel = (type: string) => {
-    switch (type) {
-      case 'award':
-        return 'Award';
-      case 'course':
-        return 'Course';
-      case 'professional':
-        return 'Professional';
-      default:
-        return 'Certificate';
     }
   };
 
@@ -138,8 +125,11 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
           {/* Certificate Details */}
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold mb-2">Description</h3>
-              <p id="certificate-modal-description" className="body-text">
+              <h3 className="text-lg font-semibold mb-2">Description</h3>
+              <p
+                id="certificate-modal-description"
+                className="text-sm text-light-muted dark:text-dark-muted"
+              >
                 {certificate.description}
               </p>
             </div>
@@ -149,10 +139,10 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
               <div className="flex items-center space-x-3">
                 <Calendar className="w-4 h-4 text-light-muted dark:text-dark-muted" />
                 <div>
-                  <p className="text-sm text-light-muted dark:text-dark-muted">
+                  <p className="font-medium text-light-text dark:text-dark-text">
                     Issue Date
                   </p>
-                  <p className="font-medium text-light-text dark:text-dark-text">
+                  <p className="text-sm text-light-muted dark:text-dark-muted">
                     {certificate.issueDate}
                   </p>
                 </div>
@@ -160,10 +150,10 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
               <div className="flex items-center space-x-3">
                 <Hash className="w-4 h-4 text-light-muted dark:text-dark-muted" />
                 <div>
-                  <p className="text-sm text-light-muted dark:text-dark-muted">
+                  <p className="font-medium text-light-text dark:text-dark-text text">
                     Credential ID
                   </p>
-                  <p className="font-medium text-light-text dark:text-dark-text font-mono text-sm">
+                  <p className="text-sm text-light-muted dark:text-dark-muted font-mono">
                     {certificate.credentialId}
                   </p>
                 </div>
@@ -204,23 +194,18 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-light-muted dark:text-dark-muted">
-                {getCategoryLabel(certificate.categoryType)}
-              </span>
-              <div className="flex space-x-2">
-                <a
-                  href={certificate.certificateUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-sm px-4 py-2"
-                  onClick={handleViewCertificate}
-                  aria-label={`View ${certificate.title} certificate`}
-                >
-                  View Certificate
-                  <ExternalLink className="w-3 h-3 ml-1" aria-hidden="true" />
-                </a>
-              </div>
+            <div className="flex justify-end">
+              <a
+                href={certificate.certificateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-sm px-4 py-2"
+                onClick={handleViewCertificate}
+                aria-label={`View ${certificate.title} certificate`}
+              >
+                View Certificate
+                <ExternalLink className="w-3 h-3 ml-1" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>

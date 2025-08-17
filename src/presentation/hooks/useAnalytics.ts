@@ -1,12 +1,23 @@
 import { useEffect, useRef } from 'react';
 import { Analytics, logEvent } from 'firebase/analytics';
-import { analytics } from '@/infrastructure/adapters/firebase';
+
+// Conditionally import Firebase adapter to avoid import.meta issues in tests
+let analytics: Analytics | null = null;
+if (process.env.NODE_ENV !== 'test') {
+  import('@/infrastructure/adapters/firebase').then(
+    ({ analytics: firebaseAnalytics }) => {
+      analytics = firebaseAnalytics;
+    }
+  );
+} else {
+  // Provide a mock analytics object for tests
+  analytics = {
+    app: { name: 'test-app' },
+  } as Analytics;
+}
 
 // Define a proper type for analytics parameters
-type AnalyticsParameters = Record<
-  string,
-  string | number | boolean | null | undefined
->;
+type AnalyticsParameters = Record<string, string | number | boolean>;
 
 export const useAnalytics = () => {
   const analyticsRef = useRef<Analytics | null>(null);
@@ -51,7 +62,7 @@ export const useAnalytics = () => {
     // Use idle callback for button clicks to avoid blocking theme toggle
     trackEventIdle('button_click', {
       button_name: buttonName,
-      location: location,
+      location: location ?? 'unknown',
     });
   };
 

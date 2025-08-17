@@ -273,8 +273,90 @@ export const portfolioData: PortfolioData = {
   ],
   certificateCategories: [
     {
+      type: 'award',
+      certificates: [
+        {
+          id: 'dicoding-expert-session-speaker',
+          title: 'Dicoding Expert Session Speaker',
+          description:
+            'Recognized as a speaker at Dicoding Expert Session 2025, presenting "From Learner to Leader: Navigating Your Tech Career Path" to ~200 participants from Dicoding Bootcamp Batch 8 and BEKUP Create 2025. Shared insights on tech career mapping, skill development beyond bootcamp, personal branding, and job hunting strategies.',
+          certificateUrl:
+            'https://drive.google.com/file/d/14k72at1VwOkw9IQfkNleB6UzeGpuFYL-/view?usp=sharing',
+          credentialId: 'DCD/DES/XXV-08/DCD25-GS13',
+          issueDate: '2025-08-05',
+          status: 'active',
+          skills: [
+            'Public Speaking',
+            'Career Mentoring',
+            'Tech Leadership',
+            'Personal Branding',
+            'Career Development',
+            'Professional Networking',
+          ],
+        },
+        {
+          id: 'bangkit-contributor-2024-batch2',
+          title: 'Bangkit 2024 Batch 2 Instructor',
+          description:
+            'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 2, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
+          certificateUrl:
+            'https://drive.google.com/file/d/1i5ZEnaFEtRwLx3tI3wGzKpFIckmlDO3T/view?usp=sharing',
+          credentialId: 'BA24/CTRB/XXV-02/MD24-0267',
+          issueDate: '2025-02-11',
+          status: 'active',
+          skills: [
+            'Mentorship',
+            'Technical Training',
+            'Mobile Development',
+            'Curriculum Development',
+            'Student Guidance',
+            'Educational Leadership',
+          ],
+        },
+        {
+          id: 'bangkit-contributor-2024-batch1',
+          title: 'Bangkit 2024 Batch 1 Instructor',
+          description:
+            'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 1, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
+          certificateUrl:
+            'https://drive.google.com/file/d/19_wojNOQ-XnAj-B-QcAFoYsSYQ3Pi0w1/view?usp=sharing',
+          credentialId: 'BA24/CTRB/XXIV-07/MD24-0267',
+          issueDate: '2024-07-24',
+          status: 'active',
+          skills: [
+            'Mentorship',
+            'Technical Training',
+            'Mobile Development',
+            'Curriculum Development',
+            'Student Guidance',
+            'Educational Leadership',
+          ],
+        },
+      ],
+    },
+    {
       type: 'course',
       certificates: [
+        {
+          id: 'dicoding-flutter-expert',
+          title: 'Course: Flutter Expert',
+          description:
+            'Advanced Flutter development course covering Clean Architecture, TDD, Advanced UI, Modularization, Reactive Programming with BLoC, CI/CD, Performance optimization, Security, and Post-Development practices. Completed 70-hour comprehensive program with final project submission.',
+          certificateUrl: 'https://www.dicoding.com/certificates/72ZDOWVJ9XYW',
+          credentialId: '72ZDOWVJ9XYW',
+          issueDate: '2022-08-30',
+          status: 'active',
+          skills: [
+            'Flutter',
+            'Dart',
+            'Clean Architecture',
+            'TDD',
+            'BLoC',
+            'CI/CD',
+            'Performance',
+            'Security',
+          ],
+        },
         {
           id: 'dicoding-android-expert',
           title: 'Course: Android Expert',
@@ -315,88 +397,6 @@ export const portfolioData: PortfolioData = {
             'Encapsulation',
             'Abstraction',
             'Polymorphism',
-          ],
-        },
-        {
-          id: 'dicoding-flutter-expert',
-          title: 'Course: Flutter Expert',
-          description:
-            'Advanced Flutter development course covering Clean Architecture, TDD, Advanced UI, Modularization, Reactive Programming with BLoC, CI/CD, Performance optimization, Security, and Post-Development practices. Completed 70-hour comprehensive program with final project submission.',
-          certificateUrl: 'https://www.dicoding.com/certificates/72ZDOWVJ9XYW',
-          credentialId: '72ZDOWVJ9XYW',
-          issueDate: '2022-08-30',
-          status: 'active',
-          skills: [
-            'Flutter',
-            'Dart',
-            'Clean Architecture',
-            'TDD',
-            'BLoC',
-            'CI/CD',
-            'Performance',
-            'Security',
-          ],
-        },
-      ],
-    },
-    {
-      type: 'award',
-      certificates: [
-        {
-          id: 'dicoding-expert-session-speaker',
-          title: 'Dicoding Expert Session Speaker',
-          description:
-            'Recognized as a speaker at Dicoding Expert Session 2025, presenting "From Learner to Leader: Navigating Your Tech Career Path" to ~200 participants from Dicoding Bootcamp Batch 8 and BEKUP Create 2025. Shared insights on tech career mapping, skill development beyond bootcamp, personal branding, and job hunting strategies.',
-          certificateUrl:
-            'https://drive.google.com/file/d/14k72at1VwOkw9IQfkNleB6UzeGpuFYL-/view?usp=sharing',
-          credentialId: 'DCD/DES/XXV-08/DCD25-GS13',
-          issueDate: '2025-08-05',
-          status: 'active',
-          skills: [
-            'Public Speaking',
-            'Career Mentoring',
-            'Tech Leadership',
-            'Personal Branding',
-            'Career Development',
-            'Professional Networking',
-          ],
-        },
-        {
-          id: 'bangkit-contributor-2024-batch1',
-          title: 'Bangkit 2024 Batch 1 Instructor',
-          description:
-            'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 1, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
-          certificateUrl:
-            'https://drive.google.com/file/d/19_wojNOQ-XnAj-B-QcAFoYsSYQ3Pi0w1/view?usp=sharing',
-          credentialId: 'BA24/CTRB/XXIV-07/MD24-0267',
-          issueDate: '2024-07-24',
-          status: 'active',
-          skills: [
-            'Mentorship',
-            'Technical Training',
-            'Mobile Development',
-            'Curriculum Development',
-            'Student Guidance',
-            'Educational Leadership',
-          ],
-        },
-        {
-          id: 'bangkit-contributor-2024-batch2',
-          title: 'Bangkit 2024 Batch 2 Instructor',
-          description:
-            'Awarded for outstanding dedication and commitment as a Contributor at Bangkit 2024 Batch 2, sharing expertise and skills with students. Bangkit is designed to prepare students with in-demand skills and tech certifications, offering 3 interdisciplinary learning paths - machine learning, mobile development, and cloud computing. Led by Google, GoTo, Tokopedia, and Traveloka, supported by the Ministry of Education, Culture, Research, and Technology of Indonesia.',
-          certificateUrl:
-            'https://drive.google.com/file/d/1i5ZEnaFEtRwLx3tI3wGzKpFIckmlDO3T/view?usp=sharing',
-          credentialId: 'BA24/CTRB/XXV-02/MD24-0267',
-          issueDate: '2025-02-11',
-          status: 'active',
-          skills: [
-            'Mentorship',
-            'Technical Training',
-            'Mobile Development',
-            'Curriculum Development',
-            'Student Guidance',
-            'Educational Leadership',
           ],
         },
       ],

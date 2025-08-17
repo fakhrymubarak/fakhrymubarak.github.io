@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, ExternalLink, Github } from 'lucide-react';
-import { Project } from '@/domain';
+import type { UIProject } from '@presentation/models';
 import { useAnalytics } from '@/presentation';
 import { useAccessibility, accessibilityUtils } from '@/presentation';
 
 interface ProjectModalProps {
-  project: Project | null;
+  project: UIProject | null;
   onClose: () => void;
 }
 
@@ -82,6 +82,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 src={project.logo}
                 alt={`${project.title} logo`}
                 className="w-8 h-8 rounded"
+                loading="lazy"
+                decoding="async"
+                width={32}
+                height={32}
               />
               <h2
                 id="project-modal-title"
@@ -105,6 +109,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               src={project.image}
               alt={`Screenshot of ${project.title} application`}
               className="w-full h-64 object-cover rounded-lg"
+              loading="lazy"
+              decoding="async"
+              width={1024}
+              height={512}
             />
           </div>
 
@@ -142,14 +150,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-2">Description</h3>
-              <p id="project-modal-description" className="body-text">
+              <h3 className="text-lg font-semibold mb-2">Description</h3>
+              <p
+                id="project-modal-description"
+                className="text-sm text-light-muted dark:text-dark-muted"
+              >
                 {project.description}
               </p>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-2">Tech Stack</h3>
+              <h3 className="text-lg font-semibold mb-2">Tech Stack</h3>
               <div
                 className="flex flex-wrap gap-2"
                 role="list"

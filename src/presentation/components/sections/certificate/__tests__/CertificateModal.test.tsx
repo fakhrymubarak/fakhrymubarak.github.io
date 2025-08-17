@@ -109,41 +109,6 @@ describe('CertificateModal', () => {
     });
   });
 
-  describe('Category Display', () => {
-    it('displays course label for course type', () => {
-      render(
-        <CertificateModal
-          certificate={{ ...mockCertificate, categoryType: 'course' }}
-          onClose={mockOnClose}
-        />
-      );
-
-      expect(screen.getByText('Course')).toBeInTheDocument();
-    });
-
-    it('displays award label for award type', () => {
-      render(
-        <CertificateModal
-          certificate={{ ...mockCertificate, categoryType: 'award' }}
-          onClose={mockOnClose}
-        />
-      );
-
-      expect(screen.getByText('Award')).toBeInTheDocument();
-    });
-
-    it('displays professional label for professional type', () => {
-      render(
-        <CertificateModal
-          certificate={{ ...mockCertificate, categoryType: 'professional' }}
-          onClose={mockOnClose}
-        />
-      );
-
-      expect(screen.getByText('Professional')).toBeInTheDocument();
-    });
-  });
-
   describe('Status Display', () => {
     it('shows active status correctly', () => {
       render(

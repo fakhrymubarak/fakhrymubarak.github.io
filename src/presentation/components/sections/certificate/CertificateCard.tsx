@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Award, BookOpen, Star } from 'lucide-react';
 import { useAnalytics } from '@/presentation';
-import type { Certificate } from '@/domain';
+import type { UICertificate } from '@presentation/models';
 
 interface CertificateCardProps {
-  certificate: Certificate & { categoryType: string };
+  certificate: UICertificate & { categoryType: string };
   index: number;
   onSelect: (id: string) => void;
 }

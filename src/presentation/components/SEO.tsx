@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { portfolioData } from '@/domain';
+import { useIntro } from '@/presentation';
 
 interface SEOProps {
   title?: string;
@@ -17,163 +17,70 @@ const SEO: React.FC<SEOProps> = ({
   url = 'https://fakhrymubarak.github.io/',
   type = 'website',
 }) => {
-  const { introduction, projects } = portfolioData;
+  const { introduction } = useIntro();
 
-  // Structured Data for Person
-  const personStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Fakhry Mubarak',
-    jobTitle: 'Software Engineer - Mobile Apps',
-    description: introduction.description,
-    url: url,
-    image: image,
-    sameAs: [
-      'https://github.com/fakhrymubarak',
-      'https://linkedin.com/in/fakhrymubarak',
-      'https://instagram.com/fakhrymubarak',
-    ],
-    knowsAbout: introduction.techStack.map(tech => tech.name),
-    worksFor: {
-      '@type': 'Organization',
-      name: 'PT Phincon',
-    },
-    alumniOf: [
-      {
-        '@type': 'Organization',
-        name: 'PT Cakra Radha Mustika',
-      },
-      {
-        '@type': 'Organization',
-        name: 'Universitas Islam Negeri Sunan Kalijaga Yogyakarta',
-      },
-    ],
-  };
-
-  // Structured Data for Portfolio
-  const portfolioStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: title,
-    description: description,
-    author: {
-      '@type': 'Person',
-      name: 'Fakhry Mubarak',
-    },
-    creator: {
-      '@type': 'Person',
-      name: 'Fakhry Mubarak',
-    },
-    dateCreated: '2024',
-    dateModified: new Date().toISOString().split('T')[0],
-    url: url,
-    image: image,
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: projects.map((project, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'SoftwareApplication',
-          name: project.title,
-          description: project.description,
-          url: project.link,
-          applicationCategory: 'MobileApplication',
-          operatingSystem: 'Android',
-          author: {
-            '@type': 'Person',
-            name: 'Fakhry Mubarak',
-          },
-        },
-      })),
-    },
-  };
-
-  // Structured Data for Organization
-  const organizationStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Fakhry Mubarak Portfolio',
-    url: url,
-    logo: image,
-    founder: {
-      '@type': 'Person',
-      name: 'Fakhry Mubarak',
-    },
-    description: description,
-  };
+  const seoTitle =
+    title || `${introduction.title.join(' ')} - ${introduction.subtitle}`;
+  const seoDescription = description || introduction.description;
 
   return (
     <Helmet>
+      {/* Preload hero (LCP) image at runtime to help LCP */}
+      <link rel="preload" as="image" href={introduction.imagePath} />
       {/* Basic Meta Tags */}
-      <title>{title}</title>
-      <meta name="description" content={description} />
+      <title>{seoTitle}</title>
+      <meta name="description" content={seoDescription} />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta charSet="utf-8" />
+
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={url} />
+      <meta property="og:title" content={seoTitle} />
+      <meta property="og:description" content={seoDescription} />
+      <meta property="og:image" content={image} />
+      <meta property="og:site_name" content="Fakhry Mubarak Portfolio" />
+
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={url} />
+      <meta property="twitter:title" content={seoTitle} />
+      <meta property="twitter:description" content={seoDescription} />
+      <meta property="twitter:image" content={image} />
+
+      {/* Additional Meta Tags */}
+      <meta name="author" content="Fakhry Mubarak" />
       <meta
         name="keywords"
-        content="Android Developer, Kotlin, Java, Flutter, Mobile Development, Portfolio, React, TypeScript"
+        content="Software Engineer, Android Developer, Flutter Developer, Mobile Development, Kotlin, Java, React, TypeScript"
       />
-      <meta name="author" content="Fakhry Mubarak" />
       <meta name="robots" content="index, follow" />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      {/* Google Site Verification */}
-      <meta
-        name="google-site-verification"
-        content="Ll7GeQotHHL2Krg6VdT_C0ZgJE3dpWSM3Pwqrvc2CGw"
+      {/* Favicon */}
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
       />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
+      <link rel="manifest" href="/site.webmanifest" />
 
       {/* Canonical URL */}
       <link rel="canonical" href={url} />
-
-      {/* Open Graph Meta Tags */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
-      <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta
-        property="og:image:alt"
-        content="Fakhry Mubarak - Software Engineer"
-      />
-      <meta property="og:site_name" content="Fakhry Mubarak Portfolio" />
-      <meta property="og:locale" content="en_US" />
-
-      {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-      <meta
-        name="twitter:image:alt"
-        content="Fakhry Mubarak - Software Engineer"
-      />
-      <meta name="twitter:creator" content="@fakhrymubarak" />
-      <meta name="twitter:site" content="@fakhrymubarak" />
-
-      {/* Additional Meta Tags */}
-      <meta name="theme-color" content="#000000" />
-      <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent"
-      />
-      <meta name="apple-mobile-web-app-title" content="Fakhry Mubarak" />
-
-      {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(personStructuredData)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(portfolioStructuredData)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(organizationStructuredData)}
-      </script>
 
       {/* Preconnect to external domains */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -185,11 +92,36 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="preconnect" href="https://www.google-analytics.com" />
       <link rel="preconnect" href="https://www.googletagmanager.com" />
 
-      {/* DNS Prefetch */}
-      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-      <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Fakhry Mubarak',
+          jobTitle: 'Software Engineer',
+          description: seoDescription,
+          url: url,
+          image: image,
+          sameAs: [
+            'https://linkedin.com/in/fakhrymubarak',
+            'https://github.com/fakhrymubarak',
+            'https://www.instagram.com/fakhrymubarak',
+            'https://www.youtube.com/@fakhry.mubarakk',
+          ],
+          knowsAbout: [
+            'Android Development',
+            'Flutter Development',
+            'Mobile Development',
+            'Kotlin',
+            'Java',
+            'Software Engineering',
+          ],
+          worksFor: {
+            '@type': 'Organization',
+            name: 'PT Phincon',
+          },
+        })}
+      </script>
     </Helmet>
   );
 };

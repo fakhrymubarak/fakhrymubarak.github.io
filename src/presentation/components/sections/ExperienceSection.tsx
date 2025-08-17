@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { portfolioData } from '@/domain';
+import { useExperience } from '@/presentation';
 import { Calendar, Clock } from 'lucide-react';
 
 const ExperienceSection: React.FC = () => {
-  const { companies } = portfolioData;
+  const { companies } = useExperience();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,7 +43,11 @@ const ExperienceSection: React.FC = () => {
   };
 
   return (
-    <section id="experience" className="section bg-gradient">
+    <section
+      id="experience"
+      className="section bg-gradient"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1000px' }}
+    >
       <div className="container">
         <motion.div
           variants={containerVariants}
@@ -54,8 +58,8 @@ const ExperienceSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
-              EXPERIENCES
+            <h2 className="heading-2 text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+              Experiences
             </h2>
             <p className="body-text max-w-2xl mx-auto">
               My professional journey in mobile development and software

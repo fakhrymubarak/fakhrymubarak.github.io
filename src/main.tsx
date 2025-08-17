@@ -15,8 +15,12 @@ initPerformanceMonitoring();
 // Initialize performance optimizations
 initPerformanceOptimizations();
 
-// Initialize service worker
-initServiceWorker();
+// Initialize service worker after the page is interactive to avoid impacting LCP
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => initServiceWorker());
+} else {
+  setTimeout(() => initServiceWorker(), 1500);
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -68,6 +68,7 @@
     "ts-jest": "^29.4.0",
     "typescript": "^5.2.2",
     "vite": "^7.0.6",
-    "vite-bundle-analyzer": "^0.7.0"
+    "vite-bundle-analyzer": "^0.7.0",
+    "vite-plugin-compression": "^0.5.1"
   }
 }

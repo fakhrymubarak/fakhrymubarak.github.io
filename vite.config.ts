@@ -1,10 +1,15 @@
 import { defineConfig } from 'vite'
+import compression from 'vite-plugin-compression'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    compression({ algorithm: 'brotliCompress', ext: '.br', deleteOriginFile: false }),
+    compression({ algorithm: 'gzip', ext: '.gz', deleteOriginFile: false }),
+  ],
   base: '/',
   resolve: {
     alias: {
@@ -25,14 +30,18 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false, // Disable sourcemaps in production to reduce bundle size
     minify: 'esbuild',
-    target: 'es2015',
+    target: 'es2020',
+    esbuild: {
+      drop: ['console', 'debugger'],
+      legalComments: 'none',
+    },
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
           animations: ['framer-motion'],
-          icons: ['lucide-react', 'react-icons'],
+          icons: ['lucide-react'],
           utils: ['axios'],
         },
         chunkFileNames: (chunkInfo) => {

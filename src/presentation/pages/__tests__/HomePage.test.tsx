@@ -7,6 +7,20 @@ jest.mock('../../components/sections/CertificatesSection', () => {
   };
 });
 
+// Mock ProjectsSection and other sections to ensure presence despite React.lazy
+jest.mock('../../components/sections/ProjectsSection', () => ({
+  __esModule: true,
+  default: () => <div data-testid="projects-section">Projects Section</div>,
+}));
+jest.mock('../../components/sections/ExperienceSection', () => ({
+  __esModule: true,
+  default: () => <div data-testid="experience-section">Experience Section</div>,
+}));
+jest.mock('../../components/sections/FooterSection', () => ({
+  __esModule: true,
+  default: () => <div data-testid="footer-section">Footer Section</div>,
+}));
+
 // Mock the portfolio data to include certificateCategories
 jest.mock('@domain/services/portfolio', () => ({
   portfolioData: {
@@ -50,11 +64,11 @@ import { render, screen } from '../../../shared/test-utils/test-utils';
 import HomePage from '../HomePage';
 
 describe('HomePage Component', () => {
-  it('renders all main sections', () => {
+  it('renders all main sections', async () => {
     render(<HomePage />);
 
     expect(screen.getByTestId('intro-section')).toBeInTheDocument();
-    expect(screen.getByTestId('projects-section')).toBeInTheDocument();
+    expect(await screen.findByTestId('projects-section')).toBeInTheDocument();
     expect(screen.getByTestId('certificates-section')).toBeInTheDocument();
     expect(screen.getByTestId('experience-section')).toBeInTheDocument();
     expect(screen.getByTestId('footer-section')).toBeInTheDocument();

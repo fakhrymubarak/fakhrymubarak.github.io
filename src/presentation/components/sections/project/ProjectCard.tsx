@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { Project } from '@/domain';
+import type { UIProject } from '@presentation/models';
 import ResponsiveImage from '../../ui/ResponsiveImage';
 import { useAnalytics } from '@/presentation';
 
 interface ProjectCardProps {
-  project: Project;
+  project: UIProject;
   index: number;
   onSelect: (id: string) => void;
 }
@@ -52,6 +52,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               src={project.logo}
               alt={`${project.title} logo`}
               className="w-8 h-8 rounded"
+              loading="lazy"
+              decoding="async"
+              width={32}
+              height={32}
             />
             <div>
               <h3 className="font-semibold text-light-text dark:text-dark-text">

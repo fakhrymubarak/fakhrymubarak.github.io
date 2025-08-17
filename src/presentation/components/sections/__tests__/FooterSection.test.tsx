@@ -76,7 +76,7 @@ describe('FooterSection', () => {
   it('renders the footer section', () => {
     render(<FooterSection />);
 
-    expect(screen.getByText('GET IN TOUCH')).toBeInTheDocument();
+    expect(screen.getByText('Get in Touch')).toBeInTheDocument();
   });
 
   it('renders the profile image', () => {

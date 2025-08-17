@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import SEO from '../components/SEO';
 import SkipLink from '../components/ui/SkipLink';
 import IntroSection from '../components/sections/IntroSection';
-import ProjectsSection from '../components/sections/ProjectsSection';
-import CertificatesSection from '../components/sections/CertificatesSection';
-import ExperienceSection from '../components/sections/ExperienceSection';
-import FooterSection from '../components/sections/FooterSection';
+const ProjectsSection = lazy(
+  () => import('../components/sections/ProjectsSection')
+);
+const CertificatesSection = lazy(
+  () => import('../components/sections/CertificatesSection')
+);
+const ExperienceSection = lazy(
+  () => import('../components/sections/ExperienceSection')
+);
+const FooterSection = lazy(
+  () => import('../components/sections/FooterSection')
+);
 
 const HomePage: React.FC = () => {
   return (
@@ -14,10 +22,18 @@ const HomePage: React.FC = () => {
       <SkipLink />
       <main id="main-content" className="pt-16" tabIndex={-1}>
         <IntroSection />
-        <ProjectsSection />
-        <ExperienceSection />
-        <CertificatesSection />
-        <FooterSection />
+        <Suspense fallback={null}>
+          <ProjectsSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <ExperienceSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <CertificatesSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <FooterSection />
+        </Suspense>
       </main>
     </>
   );

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import LoadingSpinner from './LoadingSpinner';
 
 interface ResponsiveImageProps {
@@ -90,34 +89,26 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   return (
     <div className={`relative overflow-hidden ${className}`} ref={imgRef}>
       {/* Placeholder */}
-      <AnimatePresence>
-        {!isLoaded && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800"
-          >
-            {placeholder ? (
-              <img
-                src={placeholder}
-                alt=""
-                className="w-full h-full object-cover opacity-50"
-              />
-            ) : (
-              <LoadingSpinner size="md" color="gray" />
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 transition-opacity duration-300 opacity-100">
+          {placeholder ? (
+            <img
+              src={placeholder}
+              alt=""
+              className="w-full h-full object-cover opacity-50"
+            />
+          ) : (
+            <LoadingSpinner size="md" color="gray" />
+          )}
+        </div>
+      )}
 
       {/* Main Image */}
       {isInView && (
-        <motion.img
+        <img
           src={src}
           alt={alt}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={handleLoad}
           onError={handleError}
           loading={priority ? 'eager' : 'lazy'}

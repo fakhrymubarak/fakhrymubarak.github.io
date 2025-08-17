@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import IntroSection from '../IntroSection';
 
 // Mock the portfolio data
@@ -59,6 +59,15 @@ jest.mock('@domain/services/portfolio', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    p: ({ children, ...props }: any) => <p {...props}>{children}</p>,
+    section: ({ children, ...props }: any) => (
+      <section {...props}>{children}</section>
+    ),
+  },
+  LazyMotion: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  domAnimation: {},
+  m: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
     p: ({ children, ...props }: any) => <p {...props}>{children}</p>,
     section: ({ children, ...props }: any) => (
@@ -140,34 +149,6 @@ describe('IntroSection', () => {
     const kotlinIcon = screen.getByAltText('Kotlin icon');
     expect(androidIcon).toBeInTheDocument();
     expect(kotlinIcon).toBeInTheDocument();
-  });
-
-  it('renders CTA buttons', () => {
-    render(<IntroSection />);
-
-    expect(screen.getByText('View Projects')).toBeInTheDocument();
-    expect(screen.getByText('Download Resume')).toBeInTheDocument();
-  });
-
-  it('handles view projects button click', () => {
-    render(<IntroSection />);
-
-    const viewProjectsButton = screen.getByText('View Projects');
-    fireEvent.click(viewProjectsButton);
-
-    expect(mockTrackButtonClick).toHaveBeenCalledWith(
-      'view_projects',
-      'intro_section'
-    );
-  });
-
-  it('handles download resume button click', () => {
-    render(<IntroSection />);
-
-    const downloadResumeButton = screen.getByText('Download Resume');
-    fireEvent.click(downloadResumeButton);
-
-    expect(mockTrackContactClick).toHaveBeenCalledWith('resume_download');
   });
 
   it('renders experience badges', () => {

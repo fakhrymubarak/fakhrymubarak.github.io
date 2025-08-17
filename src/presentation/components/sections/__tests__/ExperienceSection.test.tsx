@@ -74,7 +74,7 @@ describe('ExperienceSection', () => {
   it('renders the experience section', () => {
     render(<ExperienceSection />);
 
-    expect(screen.getByText('EXPERIENCES')).toBeInTheDocument();
+    expect(screen.getByText('Experiences')).toBeInTheDocument();
   });
 
   it('renders all company information', () => {

@@ -51,6 +51,156 @@ jest.mock('*.jpg', () => 'mocked-jpg-image');
 jest.mock('*.jpeg', () => 'mocked-jpeg-image');
 jest.mock('*.svg', () => 'mocked-svg-image');
 
+// Mock Firebase adapter
+jest.mock('@/infrastructure/adapters/firebase', () => ({
+  analytics: {
+    logEvent: jest.fn(),
+  },
+}));
+
+// Mock the portfolio data service
+jest.mock('@domain/services/portfolio', () => ({
+  portfolioData: {
+    introduction: {
+      title: ['Hi, I am', 'Fakhry Mubarak'],
+      subtitle: 'Software Engineer specializing in Android Development',
+      description: 'Test description',
+      imagePath: 'mocked-avatar-image',
+      techStack: [
+        {
+          name: 'Android',
+          icon: {
+            light: 'mocked-android-light-icon',
+            dark: 'mocked-android-dark-icon',
+          },
+          color: '#3DDC84',
+        },
+      ],
+    },
+    projects: [
+      {
+        id: 'react-project',
+        title: 'React Project',
+        description: 'A React project',
+        image: 'mocked-image',
+        logo: 'mocked-logo',
+        link: 'https://example.com',
+        stacks: ['React', 'TypeScript', 'Tailwind CSS'],
+        featured: true,
+        hasGithub: true,
+        githubUrl: 'https://github.com/example/react-project',
+        period: '2023 - 2024',
+      },
+      {
+        id: 'vue-project',
+        title: 'Vue Project',
+        description: 'A Vue project',
+        image: 'mocked-image',
+        logo: 'mocked-logo',
+        link: 'https://example.com',
+        stacks: ['Vue.js', 'JavaScript', 'Vite'],
+        featured: false,
+        hasGithub: true,
+        githubUrl: 'https://github.com/example/vue-project',
+        period: '2023 - 2024',
+      },
+      {
+        id: 'angular-project',
+        title: 'Angular Project',
+        description: 'An Angular project',
+        image: 'mocked-image',
+        logo: 'mocked-logo',
+        link: 'https://example.com',
+        stacks: ['Angular', 'TypeScript', 'Jest'],
+        featured: false,
+        hasGithub: false,
+        githubUrl: '',
+        period: '2023 - 2024',
+      },
+    ],
+    companies: [
+      {
+        id: 'company-1',
+        name: 'Test Company',
+        logo: 'mocked-logo',
+        experiences: [
+          {
+            id: 'exp-1',
+            title: 'Software Engineer',
+            type: 'full-time',
+            period: '2023 - 2024',
+            duration: '1 year',
+            highlights: ['Test highlight 1', 'Test highlight 2'],
+          },
+        ],
+      },
+    ],
+    certificateCategories: [
+      {
+        type: 'professional',
+        certificates: [
+          {
+            id: 'cert-1',
+            title: 'Test Certificate',
+            description: 'A test certificate',
+            issueDate: '2023',
+            credentialId: 'CERT-001',
+            status: 'active',
+            skills: ['React', 'TypeScript'],
+            certificateUrl: 'https://example.com/cert',
+          },
+        ],
+      },
+    ],
+    footer: {
+      contacts: [
+        {
+          type: 'email',
+          label: 'Email',
+          url: 'mailto:test@example.com',
+          icon: 'mail',
+        },
+        {
+          type: 'resume',
+          label: 'Download Resume',
+          url: 'https://example.com/resume',
+          icon: 'download',
+        },
+        {
+          type: 'whatsapp',
+          label: 'WhatsApp',
+          url: 'https://whatsapp.com/test',
+          icon: 'message-circle',
+        },
+      ],
+      socialMedia: [
+        {
+          name: 'GitHub',
+          url: 'https://github.com/test',
+          icon: 'github',
+        },
+        {
+          name: 'Instagram',
+          url: 'https://instagram.com/test',
+          icon: 'instagram',
+        },
+        {
+          name: 'LinkedIn',
+          url: 'https://linkedin.com/test',
+          icon: 'linkedin',
+        },
+        {
+          name: 'YouTube',
+          url: 'https://youtube.com/test',
+          icon: 'youtube',
+        },
+      ],
+      contactImage: 'mocked-footer-avatar-image',
+      signature: 'Test signature',
+    },
+  },
+}));
+
 // Mock all icon imports
 jest.mock(
   '@/assets/icons/companies/ic_akuisisi_loyalty.webp',
@@ -134,6 +284,7 @@ jest.mock('*.scss', () => ({}));
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
+  // Basic motion elements
   motion: {
     div: ({ children, ...props }: React.ComponentProps<'div'>) => (
       <div {...props}>{children}</div>
@@ -143,6 +294,26 @@ jest.mock('framer-motion', () => ({
     ),
     span: ({ children, ...props }: React.ComponentProps<'span'>) => (
       <span {...props}>{children}</span>
+    ),
+    p: ({ children, ...props }: React.ComponentProps<'p'>) => (
+      <p {...props}>{children}</p>
+    ),
+    section: ({ children, ...props }: React.ComponentProps<'section'>) => (
+      <section {...props}>{children}</section>
+    ),
+  },
+  // LazyMotion and m (alias for motion) used in code
+  LazyMotion: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  domAnimation: {},
+  m: {
+    div: ({ children, ...props }: React.ComponentProps<'div'>) => (
+      <div {...props}>{children}</div>
+    ),
+    p: ({ children, ...props }: React.ComponentProps<'p'>) => (
+      <p {...props}>{children}</p>
+    ),
+    section: ({ children, ...props }: React.ComponentProps<'section'>) => (
+      <section {...props}>{children}</section>
     ),
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => (
@@ -196,76 +367,6 @@ jest.mock('@presentation/hooks/useAccessibility', () => ({
   })),
   accessibilityUtils: {
     announce: jest.fn(),
-  },
-}));
-
-// Mock the portfolio data
-jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
-    introduction: {
-      title: ['Hi, I am', 'Fakhry Mubarak'],
-      subtitle: 'Software Engineer specializing in Android Development',
-      description: 'Test description',
-      imagePath: 'mocked-avatar-image',
-      techStack: [
-        {
-          name: 'Android',
-          icon: {
-            light: 'mocked-android-light-icon',
-            dark: 'mocked-android-dark-icon',
-          },
-          color: '#3DDC84',
-        },
-      ],
-    },
-    projects: [
-      {
-        id: 'react-project',
-        title: 'React Project',
-        description: 'A React project',
-        image: 'mocked-image',
-        logo: 'mocked-logo',
-        link: 'https://example.com',
-        stacks: ['React', 'TypeScript', 'Tailwind CSS'],
-        featured: true,
-        hasGithub: true,
-        githubUrl: 'https://github.com/example/react-project',
-        period: '2023 - 2024',
-      },
-      {
-        id: 'vue-project',
-        title: 'Vue Project',
-        description: 'A Vue project',
-        image: 'mocked-image',
-        logo: 'mocked-logo',
-        link: 'https://example.com',
-        stacks: ['Vue.js', 'JavaScript', 'Vite'],
-        featured: false,
-        hasGithub: true,
-        githubUrl: 'https://github.com/example/vue-project',
-        period: '2023 - 2024',
-      },
-      {
-        id: 'angular-project',
-        title: 'Angular Project',
-        description: 'An Angular project',
-        image: 'mocked-image',
-        logo: 'mocked-logo',
-        link: 'https://example.com',
-        stacks: ['Angular', 'TypeScript', 'Jest'],
-        featured: false,
-        hasGithub: false,
-        githubUrl: '',
-        period: '2023 - 2024',
-      },
-    ],
-    companies: [],
-    footer: {
-      contacts: [],
-      socialMedia: [],
-      contactImage: 'mocked-footer-avatar-image',
-      signature: 'Test signature',
-    },
   },
 }));
 
