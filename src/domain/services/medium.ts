@@ -8,7 +8,11 @@ export class MediumService {
   private static lastFetch: number = 0;
   private static readonly CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
-  static async fetchArticles(username: string): Promise<MediumData> {
+  static async fetchArticles(
+    username: string,
+    options: { retry?: number } = {}
+  ): Promise<MediumData> {
+    const { retry = 0 } = options;
     const now = Date.now();
 
     // Return cached data if still fresh
@@ -69,6 +73,11 @@ export class MediumService {
       return mediumData;
     } catch (error) {
       console.error('Error fetching Medium articles:', error);
+
+      if (retry < 1) {
+        console.warn('Retrying Medium fetch…');
+        return this.fetchArticles(username, { retry: retry + 1 });
+      }
 
       // Return fallback data with sample articles if no cache
       if (!this.cache) {

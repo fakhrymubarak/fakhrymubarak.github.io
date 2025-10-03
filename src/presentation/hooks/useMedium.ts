@@ -26,7 +26,6 @@ export const useMedium = (
   handleCloseModal: () => void;
   handleToggleArticles: () => void;
   handleToggleFilters: () => void;
-  refreshArticles: () => Promise<void>;
 } => {
   const [state, setState] = useState<MediumState>({
     articles: [],
@@ -73,10 +72,10 @@ export const useMedium = (
       }
     };
 
-    fetchArticles();
+    fetchArticles().then();
   }, [username]);
 
-  // Filter articles based on active filter
+  // Filter articles based on an active filter
   const filteredArticles = useMemo(() => {
     if (state.activeFilter === 'all') return state.articles;
     return state.articles.filter(article =>
@@ -120,33 +119,6 @@ export const useMedium = (
     setState(prev => ({ ...prev, showFilters: !prev.showFilters }));
   };
 
-  const refreshArticles = async () => {
-    try {
-      MediumService.clearCache();
-      const mediumData = await MediumService.fetchArticles(username);
-
-      const availableFilters = Array.from(
-        new Set(mediumData.articles.flatMap(article => article.tags))
-      );
-
-      setState(prev => ({
-        ...prev,
-        articles: mediumData.articles,
-        availableFilters,
-        loading: false,
-        error: null,
-      }));
-    } catch (error) {
-      console.error('❌ Error refreshing Medium articles:', error);
-      setState(prev => ({
-        ...prev,
-        loading: false,
-        error:
-          error instanceof Error ? error.message : 'Failed to refresh articles',
-      }));
-    }
-  };
-
   return {
     ...state,
     filteredArticles,
@@ -157,6 +129,5 @@ export const useMedium = (
     handleCloseModal,
     handleToggleArticles,
     handleToggleFilters,
-    refreshArticles,
   };
 };

@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
-import { ExternalLink, Filter, RefreshCw } from 'lucide-react';
+import { ExternalLink, Filter } from 'lucide-react';
 import MediumCard from './medium/MediumCard';
 import { useAnalytics, useMedium } from '@/presentation';
 
@@ -19,7 +19,6 @@ const MediumSection: React.FC = () => {
     handleFilterChange,
     handleToggleArticles,
     handleToggleFilters,
-    refreshArticles,
   } = useMedium();
 
   const { trackButtonClick } = useAnalytics();
@@ -48,8 +47,8 @@ const MediumSection: React.FC = () => {
   if (loading) {
     return (
       <section id="articles" className="section bg-gradient">
-        <div className="container">
-          <div className="flex items-center justify-center py-20">
+        <div className="container min-h-screen flex items-center justify-center">
+          <div className="py-20">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-light-primary dark:border-dark-primary"></div>
           </div>
         </div>
@@ -60,14 +59,11 @@ const MediumSection: React.FC = () => {
   if (error) {
     return (
       <section id="articles" className="section bg-gradient">
-        <div className="container">
+        <div className="container min-h-screen flex items-center justify-center">
           <div className="text-center py-20">
             <p className="text-light-muted dark:text-dark-muted mb-4">
               Unable to load articles at the moment.
             </p>
-            <button onClick={refreshArticles} className="btn-primary">
-              Try Again
-            </button>
           </div>
         </div>
       </section>
@@ -80,7 +76,11 @@ const MediumSection: React.FC = () => {
       className="section bg-gradient"
       role="region"
       aria-label="Articles"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '1000px' }}
+      style={{
+        contentVisibility: 'auto',
+        containIntrinsicSize: '1000px',
+        minHeight: '100vh',
+      }}
     >
       <div className="container">
         <LazyMotion features={domAnimation}>
@@ -112,17 +112,6 @@ const MediumSection: React.FC = () => {
                 >
                   <Filter className="w-4 h-4" />
                   <span>Filter Articles</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    trackButtonClick('refresh_articles', 'medium_section');
-                    refreshArticles();
-                  }}
-                  className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                  <span>Refresh</span>
                 </button>
 
                 <a
