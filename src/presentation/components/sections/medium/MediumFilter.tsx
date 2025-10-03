@@ -28,6 +28,7 @@ const MediumFilter: React.FC<MediumFilterProps> = ({
         </h3>
         <button
           onClick={() => onFilterChange('all')}
+          aria-label="Reset filters"
           className="text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text transition-colors"
         >
           <X className="w-5 h-5" />

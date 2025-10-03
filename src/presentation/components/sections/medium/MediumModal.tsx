@@ -24,6 +24,7 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        data-testid="medium-modal-overlay"
         onClick={onClose}
       >
         <motion.div
@@ -41,6 +42,7 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
             </h2>
             <button
               onClick={onClose}
+              aria-label="Close modal"
               className="text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text transition-colors"
             >
               <X className="w-6 h-6" />

@@ -46,10 +46,18 @@ const MediumSection: React.FC = () => {
 
   if (loading) {
     return (
-      <section id="articles" className="section bg-gradient">
+      <section
+        id="articles"
+        className="section bg-gradient"
+        role="region"
+        aria-label="Articles"
+      >
         <div className="container min-h-screen flex items-center justify-center">
           <div className="py-20">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-light-primary dark:border-dark-primary"></div>
+            <div
+              data-testid="medium-loading-spinner"
+              className="animate-spin rounded-full h-8 w-8 border-b-2 border-light-primary dark:border-dark-primary"
+            ></div>
           </div>
         </div>
       </section>
@@ -58,7 +66,12 @@ const MediumSection: React.FC = () => {
 
   if (error) {
     return (
-      <section id="articles" className="section bg-gradient">
+      <section
+        id="articles"
+        className="section bg-gradient"
+        role="region"
+        aria-label="Articles"
+      >
         <div className="container min-h-screen flex items-center justify-center">
           <div className="text-center py-20">
             <p className="text-light-muted dark:text-dark-muted mb-4">
