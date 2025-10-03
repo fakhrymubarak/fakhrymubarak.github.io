@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
 
+npm run test
 npm run type-check
 npm run audit --audit-level=moderate

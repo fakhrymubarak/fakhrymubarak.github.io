@@ -109,8 +109,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               src={project.image}
               alt={`Screenshot of ${project.title} application`}
               className="w-full h-64 object-cover rounded-lg"
-              loading="lazy"
-              decoding="async"
+              loading="eager"
               width={1024}
               height={512}
             />

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import ProjectCard from './project/ProjectCard';
 const ProjectModal = lazy(() => import('./project/ProjectModal'));
@@ -7,6 +7,11 @@ import { Filter } from 'lucide-react';
 import { useProjects, useAnalytics } from '@/presentation';
 
 const ProjectsSection: React.FC = () => {
+  useEffect(() => {
+    // Preload modal chunk so the first open doesn't flash the fallback
+    void import('./project/ProjectModal');
+  }, []);
+
   const {
     displayedProjects,
     selectedProject,
@@ -145,10 +150,11 @@ const ProjectsSection: React.FC = () => {
       </div>
 
       {/* Project Modal */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {selectedProject && (
-          <Suspense fallback={<div />}>
+          <Suspense fallback={null}>
             <ProjectModal
+              key={selectedProject.id}
               project={selectedProject}
               onClose={handleCloseModal}
             />
