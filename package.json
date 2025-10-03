@@ -27,7 +27,7 @@
     "deploy": "bash deploy.sh"
   },
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.12.2",
     "firebase": "^12.1.0",
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.294.0",
@@ -68,7 +68,7 @@
     "tailwindcss": "^3.3.5",
     "ts-jest": "^29.4.0",
     "typescript": "^5.2.2",
-    "vite": "^7.0.6",
+    "vite": "^7.1.9",
     "vite-bundle-analyzer": "^0.7.0",
     "vite-plugin-compression": "^0.5.1"
   }

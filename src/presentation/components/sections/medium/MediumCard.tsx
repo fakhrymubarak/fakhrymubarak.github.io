@@ -36,13 +36,13 @@ const MediumCard: React.FC<MediumCardProps> = ({ article, index }) => {
 
       <div className="p-6 flex flex-col gap-4">
         <div className="space-y-2">
-            <h3 className="font-semibold text-light-text dark:text-dark-text group-hover:text-light-primary dark:group-hover:text-dark-primary transition-colors line-clamp-2">
-              {article.title}
-            </h3>
-            <p className="text-sm text-light-muted dark:text-dark-muted line-clamp-3">
-              {article.description || 'Summary unavailable'}
-            </p>
-          </div>
+          <h3 className="font-semibold text-light-text dark:text-dark-text group-hover:text-light-primary dark:group-hover:text-dark-primary transition-colors line-clamp-2">
+            {article.title}
+          </h3>
+          <p className="text-sm text-light-muted dark:text-dark-muted line-clamp-3">
+            {article.description || 'Summary unavailable'}
+          </p>
+        </div>
 
         <div className="flex items-center justify-between text-sm text-light-muted dark:text-dark-muted">
           <div className="flex items-center space-x-4">

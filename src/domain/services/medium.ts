@@ -3,6 +3,19 @@ import { MediumArticle, MediumData } from '../models';
 // CORS proxy for client-side requests
 const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 
+interface MediumFeedItem {
+  title: string;
+  link: string;
+  pubDate: string;
+  contentSnippet: string;
+  content: string;
+  categories: string[];
+  guid: string;
+}
+
+type DomParserSupported = 'text/html' | 'text/xml';
+type DomParserConstructor = new () => globalThis.DOMParser;
+
 export class MediumService {
   private static cache: MediumData | null = null;
   private static lastFetch: number = 0;
@@ -128,10 +141,9 @@ export class MediumService {
 
     const decoded = this.decodeHtmlEntities(source);
 
-    if (typeof DOMParser !== 'undefined') {
-      try {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(decoded, 'text/html');
+    try {
+      const doc = this.createDomDocument(decoded, 'text/html');
+      if (doc) {
         doc
           .querySelectorAll('script, style, iframe, noscript, svg')
           .forEach(node => node.remove());
@@ -149,9 +161,9 @@ export class MediumService {
         if (normalized) {
           return normalized;
         }
-      } catch (error) {
-        console.error('Error extracting plain text from HTML:', error);
       }
+    } catch (error) {
+      console.error('Error extracting plain text from HTML:', error);
     }
 
     const stripped = decoded
@@ -193,12 +205,12 @@ export class MediumService {
     const decodedHtml = this.decodeHtmlEntities(html);
 
     try {
-      if (typeof DOMParser !== 'undefined') {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(decodedHtml, 'text/html');
-
+      const doc = this.createDomDocument(decodedHtml, 'text/html');
+      if (doc) {
         const contentNodes = Array.from(
-          doc.body.querySelectorAll('p, ul, ol, h2, h3, h4, blockquote, pre')
+          doc.body?.querySelectorAll(
+            'p, ul, ol, h2, h3, h4, blockquote, pre'
+          ) ?? []
         );
 
         const snippetParts: string[] = [];
@@ -223,7 +235,7 @@ export class MediumService {
           return charCount >= maxLength ? `${snippet}...` : snippet;
         }
 
-        const fallbackText = doc.body.textContent || '';
+        const fallbackText = doc.body?.textContent || '';
         return this.createSummary(fallbackText, Math.floor(maxLength / 5));
       }
     } catch (error) {
@@ -239,7 +251,10 @@ export class MediumService {
       return '';
     }
 
-    if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.document !== 'undefined'
+    ) {
       const textarea = window.document.createElement('textarea');
       textarea.innerHTML = value;
       return textarea.value;
@@ -263,32 +278,38 @@ export class MediumService {
     return value.replace(/\s+/g, ' ').trim();
   }
 
-  private static parseRSSFeed(xmlText: string): { items: any[] } {
+  private static parseRSSFeed(xmlText: string): { items: MediumFeedItem[] } {
     try {
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+      const xmlDoc = this.createDomDocument(xmlText, 'text/xml');
+      if (!xmlDoc) {
+        console.warn('DOMParser unavailable when parsing Medium RSS feed.');
+        return { items: [] };
+      }
 
       const items = Array.from(xmlDoc.querySelectorAll('item')).map(item => {
-        const title = item.querySelector('title')?.textContent || '';
-        const link = item.querySelector('link')?.textContent || '';
-        const pubDate = item.querySelector('pubDate')?.textContent || '';
+        const title = item.querySelector('title')?.textContent?.trim() ?? '';
+        const link = item.querySelector('link')?.textContent?.trim() ?? '';
+        const pubDate =
+          item.querySelector('pubDate')?.textContent?.trim() ?? '';
         const description =
-          item.querySelector('description')?.textContent || '';
+          item.querySelector('description')?.textContent?.trim() ?? '';
 
         let content = '';
-        const contentNode =
-          item.getElementsByTagName('content:encoded')[0] ||
+        const encoded =
+          item.getElementsByTagName('content:encoded')[0] ??
           item.getElementsByTagNameNS(
             'http://purl.org/rss/1.0/modules/content/',
             'encoded'
           )[0];
-        if (contentNode && contentNode.textContent) {
-          content = contentNode.textContent;
+        if (encoded?.textContent) {
+          content = encoded.textContent;
         }
 
         const categories = Array.from(item.querySelectorAll('category')).map(
-          cat => cat.textContent || ''
+          category => category.textContent?.trim() ?? ''
         );
+
+        const guid = item.querySelector('guid')?.textContent?.trim() ?? link;
 
         return {
           title,
@@ -297,8 +318,8 @@ export class MediumService {
           contentSnippet: description,
           content,
           categories,
-          guid: link,
-        };
+          guid,
+        } satisfies MediumFeedItem;
       });
 
       return { items };
@@ -308,7 +329,7 @@ export class MediumService {
     }
   }
 
-  private static extractImageUrl(item: any): string | undefined {
+  private static extractImageUrl(item: MediumFeedItem): string | undefined {
     // Try to extract image from content if available
     if (item.content) {
       const imgMatch = item.content.match(/<img[^>]+src="([^"]+)"/);
@@ -324,5 +345,27 @@ export class MediumService {
       }
     }
     return undefined;
+  }
+
+  private static createDomDocument(
+    value: string,
+    type: DomParserSupported
+  ): globalThis.Document | null {
+    const ParserCtor: DomParserConstructor | undefined =
+      (typeof window !== 'undefined' && window.DOMParser) ||
+      (typeof globalThis.DOMParser !== 'undefined'
+        ? (globalThis.DOMParser as DomParserConstructor)
+        : undefined);
+
+    if (!ParserCtor) {
+      return null;
+    }
+
+    try {
+      return new ParserCtor().parseFromString(value, type);
+    } catch (error) {
+      console.error('Failed to parse DOM content:', error);
+      return null;
+    }
   }
 }
