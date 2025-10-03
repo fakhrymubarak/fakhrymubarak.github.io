@@ -17,6 +17,7 @@ export * from './hooks/useCertificates';
 export * from './hooks/useExperience';
 export * from './hooks/useIntro';
 export * from './hooks/useFooter';
+export * from './hooks/useMedium';
 
 // Models
 export * from './models';

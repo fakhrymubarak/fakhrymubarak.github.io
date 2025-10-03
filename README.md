@@ -11,6 +11,7 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
   - [About](#about)
   - [Features](#features)
   - [Tech Stack](#tech-stack)
+  - [Medium Integration Flow](#medium-integration-flow)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
@@ -74,6 +75,25 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
 * **Build Tools:** Vite
 * **Linting:** ESLint + Prettier
 * **Deployment:** GitHub Pages / Netlify / Vercel
+
+---
+
+## Medium Integration Flow
+
+```mermaid
+flowchart TD
+    A[Medium RSS Feed] --> B[CORS Proxy api.allorigins.win]
+    B --> C[MediumService.fetchArticles]
+    C --> D[parseRSSFeed + cache]
+    D --> E[useMedium hook]
+    E --> F[MediumSection component]
+    F --> G[MediumCard grid]
+    F --> H[MediumModal]
+    G --> I[Portfolio UI]
+    H --> I
+```
+
+> The portfolio fetches Medium articles from the browser, but Medium's RSS feed does not include CORS headers allowing direct cross-origin access. The proxy adds permissive headers so `fetch` succeeds while still serving the original feed content.
 
 ---
 
