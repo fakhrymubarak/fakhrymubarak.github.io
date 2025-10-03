@@ -17,13 +17,10 @@ describe('MediumFilter', () => {
       screen.getByRole('button', { name: /all articles/i })
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /react/i })).toHaveClass(
-      'bg-light-primary'
+      'bg-primary-coral'
     );
 
     fireEvent.click(screen.getByRole('button', { name: /testing/i }));
     expect(onFilterChange).toHaveBeenCalledWith('testing');
-
-    fireEvent.click(screen.getByLabelText(/reset filters/i));
-    expect(onFilterChange).toHaveBeenCalledWith('all');
   });
 });

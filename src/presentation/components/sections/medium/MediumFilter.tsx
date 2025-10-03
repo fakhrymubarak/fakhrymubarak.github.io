@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
 
 interface MediumFilterProps {
   filters: string[];
@@ -15,40 +14,39 @@ const MediumFilter: React.FC<MediumFilterProps> = ({
 }) => {
   const allFilters = ['all', ...filters];
 
+  const baseClasses =
+    'px-4 py-2 rounded-full text-sm font-medium transition-colors shadow-sm';
+  const activeClasses = 'bg-primary-coral text-white';
+  const inactiveClasses =
+    'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral';
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: -10 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      className="bg-light-surface dark:bg-dark-surface rounded-xl border border-light-muted/20 dark:border-dark-muted/20 p-6"
+      exit={{ opacity: 0, y: 20 }}
+      className="space-y-4"
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="text-center">
         <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
           Filter Articles
         </h3>
-        <button
-          onClick={() => onFilterChange('all')}
-          aria-label="Reset filters"
-          className="text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text transition-colors"
-        >
-          <X className="w-5 h-5" />
-        </button>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        {allFilters.map(filter => (
-          <button
-            key={filter}
-            onClick={() => onFilterChange(filter)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              activeFilter === filter
-                ? 'bg-light-primary dark:bg-dark-primary text-white'
-                : 'bg-light-muted/20 dark:bg-dark-muted/20 text-light-text dark:text-dark-text hover:bg-light-muted/30 dark:hover:bg-dark-muted/30'
-            }`}
-          >
-            {filter === 'all' ? 'All Articles' : filter}
-          </button>
-        ))}
+      <div className="flex flex-wrap justify-center gap-3">
+        {allFilters.map(filter => {
+          const isActive = activeFilter === filter;
+
+          return (
+            <button
+              key={filter}
+              onClick={() => onFilterChange(filter)}
+              className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+            >
+              {filter === 'all' ? 'All Articles' : filter}
+            </button>
+          );
+        })}
       </div>
     </motion.div>
   );
