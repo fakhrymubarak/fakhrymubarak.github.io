@@ -63,6 +63,46 @@ jest.mock('@domain/services/portfolio', () => ({
 import { render, screen } from '../../../shared/test-utils/test-utils';
 import HomePage from '../HomePage';
 
+const mockRssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Mock Feed</title>
+    <item>
+      <title>Test Article</title>
+      <link>https://example.com/article</link>
+      <guid>article-1</guid>
+      <pubDate>Wed, 01 Jan 2024 00:00:00 GMT</pubDate>
+      <description><![CDATA[<p>Summary content</p>]]></description>
+      <content:encoded><![CDATA[<p>Full content</p>]]></content:encoded>
+      <category>testing</category>
+    </item>
+  </channel>
+</rss>`;
+
+const originalFetch = global.fetch;
+
+beforeEach(() => {
+  (global as unknown as { fetch: jest.Mock }).fetch = jest
+    .fn()
+    .mockResolvedValue({
+      ok: true,
+      status: 200,
+      text: async () => mockRssFeed,
+    });
+});
+
+afterEach(() => {
+  (global.fetch as jest.Mock).mockReset();
+});
+
+afterAll(() => {
+  if (originalFetch) {
+    global.fetch = originalFetch;
+  } else {
+    delete (global as any).fetch;
+  }
+});
+
 describe('HomePage Component', () => {
   it('renders all main sections', async () => {
     render(<HomePage />);

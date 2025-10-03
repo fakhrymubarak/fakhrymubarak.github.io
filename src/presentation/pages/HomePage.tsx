@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import SEO from '../components/SEO';
 import SkipLink from '../components/ui/SkipLink';
 import IntroSection from '../components/sections/IntroSection';
+
 const ProjectsSection = lazy(
   () => import('../components/sections/ProjectsSection')
 );
@@ -10,6 +11,9 @@ const CertificatesSection = lazy(
 );
 const ExperienceSection = lazy(
   () => import('../components/sections/ExperienceSection')
+);
+const MediumSection = lazy(
+  () => import('../components/sections/MediumSection')
 );
 const FooterSection = lazy(
   () => import('../components/sections/FooterSection')
@@ -30,6 +34,9 @@ const HomePage: React.FC = () => {
         </Suspense>
         <Suspense fallback={null}>
           <CertificatesSection />
+        </Suspense>
+        <Suspense fallback={null}>
+          <MediumSection />
         </Suspense>
         <Suspense fallback={null}>
           <FooterSection />

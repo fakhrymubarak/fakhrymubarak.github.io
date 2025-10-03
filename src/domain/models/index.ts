@@ -83,10 +83,31 @@ export interface Footer {
   contactImage: string;
 }
 
+export interface MediumArticle {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  publishedDate: string;
+  readTime: string;
+  tags: string[];
+  featured?: boolean;
+  imageUrl?: string;
+  contentSnippet?: string;
+}
+
+export interface MediumData {
+  articles: MediumArticle[];
+  profileUrl: string;
+  totalArticles: number;
+  lastUpdated: string;
+}
+
 export interface PortfolioData {
   introduction: Introduction;
   projects: Project[];
   companies: Company[];
   certificateCategories: CertificateCategory[];
   footer: Footer;
+  medium?: MediumData;
 }
