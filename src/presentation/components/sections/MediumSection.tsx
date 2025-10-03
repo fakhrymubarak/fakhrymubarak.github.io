@@ -5,12 +5,10 @@ import MediumCard from './medium/MediumCard';
 import { useAnalytics, useMedium } from '@/presentation';
 
 const MediumFilter = lazy(() => import('./medium/MediumFilter'));
-const MediumModal = lazy(() => import('./medium/MediumModal'));
 
 const MediumSection: React.FC = () => {
   const {
     displayedArticles,
-    selectedArticle,
     activeFilter,
     showFilters,
     showAllArticles,
@@ -19,7 +17,6 @@ const MediumSection: React.FC = () => {
     loading,
     error,
     handleFilterChange,
-    handleCloseModal,
     handleToggleArticles,
     handleToggleFilters,
     refreshArticles,
@@ -50,7 +47,7 @@ const MediumSection: React.FC = () => {
 
   if (loading) {
     return (
-      <section id="articles" className="section">
+      <section id="articles" className="section bg-gradient">
         <div className="container">
           <div className="flex items-center justify-center py-20">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-light-primary dark:border-dark-primary"></div>
@@ -62,7 +59,7 @@ const MediumSection: React.FC = () => {
 
   if (error) {
     return (
-      <section id="articles" className="section">
+      <section id="articles" className="section bg-gradient">
         <div className="container">
           <div className="text-center py-20">
             <p className="text-light-muted dark:text-dark-muted mb-4">
@@ -80,7 +77,7 @@ const MediumSection: React.FC = () => {
   return (
     <section
       id="articles"
-      className="section"
+      className="section bg-gradient"
       role="region"
       aria-label="Articles"
       style={{ contentVisibility: 'auto', containIntrinsicSize: '1000px' }}
@@ -192,14 +189,6 @@ const MediumSection: React.FC = () => {
         </LazyMotion>
       </div>
 
-      {/* Article Modal */}
-      <AnimatePresence>
-        {selectedArticle && (
-          <Suspense fallback={<div />}>
-            <MediumModal article={selectedArticle} onClose={handleCloseModal} />
-          </Suspense>
-        )}
-      </AnimatePresence>
     </section>
   );
 };
