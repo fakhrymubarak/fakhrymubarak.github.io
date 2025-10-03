@@ -122,6 +122,7 @@ const MediumSection: React.FC = () => {
                     handleToggleFilters();
                   }}
                   className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+                  aria-expanded={showFilters}
                 >
                   <Filter className="w-4 h-4" />
                   <span>Filter Articles</span>
