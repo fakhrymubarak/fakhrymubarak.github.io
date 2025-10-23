@@ -3,8 +3,18 @@
 const fs = require('fs');
 const path = require('path');
 
-// Get a version from the environment variable only
-const APP_VERSION = process.env.VITE_APP_VERSION || 'v2.0.0';
+// Resolve a unique app version for every build unless explicitly provided
+const packageJsonPath = path.join(__dirname, '../package.json');
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const baseVersion = packageJson.version || '0.0.0';
+const fallbackBuildId =
+  process.env.BUILD_ID ||
+  process.env.GITHUB_SHA ||
+  process.env.VERCEL_GIT_COMMIT_SHA ||
+  process.env.NETLIFY_BUILD_ID ||
+  new Date().toISOString().replace(/[:.]/g, '-');
+const APP_VERSION =
+  process.env.VITE_APP_VERSION || `${baseVersion}-${fallbackBuildId}`;
 
 console.log(`Building with version: ${APP_VERSION}`);
 

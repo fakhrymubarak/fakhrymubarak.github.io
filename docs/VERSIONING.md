@@ -13,7 +13,7 @@ The build process automatically injects the version into the service worker, ens
 
 **Environment Variable**: `VITE_APP_VERSION` or `APP_VERSION`
 
-If no environment variable is set, it defaults to `v2.0.0`.
+If no environment variable is set, the build now combines the `package.json` version with a build identifier (`BUILD_ID`, `GITHUB_SHA`, `VERCEL_GIT_COMMIT_SHA`, `NETLIFY_BUILD_ID`, or an ISO timestamp). Example fallback: `2.0.0-2025-02-11T13-02-45-123Z`.
 
 ## 🔧 Usage Examples
 
