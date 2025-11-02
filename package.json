@@ -73,5 +73,8 @@
     "vite": "^7.1.9",
     "vite-bundle-analyzer": "^0.7.0",
     "vite-plugin-compression": "^0.5.1"
+  },
+  "overrides": {
+    "tmp": "0.2.5"
   }
 }

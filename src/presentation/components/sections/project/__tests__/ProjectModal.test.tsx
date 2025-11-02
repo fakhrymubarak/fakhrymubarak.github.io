@@ -96,7 +96,11 @@ describe('ProjectModal Component', () => {
   });
 
   it('calls onClose when close button is clicked', () => {
+    jest.useFakeTimers();
     render(<ProjectModal project={mockProject} onClose={mockOnClose} />);
+
+    // Advance past the 300ms protection period
+    jest.advanceTimersByTime(300);
 
     const closeButton = screen.getByRole('button', {
       name: /close project modal/i,
@@ -104,15 +108,21 @@ describe('ProjectModal Component', () => {
     fireEvent.click(closeButton);
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
+    jest.useRealTimers();
   });
 
   it('calls onClose when backdrop is clicked', () => {
+    jest.useFakeTimers();
     render(<ProjectModal project={mockProject} onClose={mockOnClose} />);
+
+    // Advance past the 300ms protection period
+    jest.advanceTimersByTime(300);
 
     const backdrop = screen.getByRole('dialog');
     fireEvent.click(backdrop);
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
+    jest.useRealTimers();
   });
 
   it('does not call onClose when modal content is clicked', () => {
@@ -175,7 +185,11 @@ describe('ProjectModal Component', () => {
   });
 
   it('handles keyboard events properly', () => {
+    jest.useFakeTimers();
     render(<ProjectModal project={mockProject} onClose={mockOnClose} />);
+
+    // Advance past the 300ms protection period
+    jest.advanceTimersByTime(300);
 
     const modalContent = screen.getByRole('document');
     // The useAccessibility hook handles the Escape key and calls onClose
@@ -183,6 +197,7 @@ describe('ProjectModal Component', () => {
 
     // The onClose should be called through the useAccessibility hook
     expect(mockOnClose).toHaveBeenCalledTimes(1);
+    jest.useRealTimers();
   });
 
   it('renders tech stack with proper ARIA attributes', () => {

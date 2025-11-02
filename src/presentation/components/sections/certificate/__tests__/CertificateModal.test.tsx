@@ -135,9 +135,13 @@ describe('CertificateModal', () => {
 
   describe('Modal Interaction', () => {
     it('calls onClose when close button is clicked', () => {
+      jest.useFakeTimers();
       render(
         <CertificateModal certificate={mockCertificate} onClose={mockOnClose} />
       );
+
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
 
       const closeButton = screen.getByRole('button', {
         name: /close certificate modal/i,
@@ -145,17 +149,23 @@ describe('CertificateModal', () => {
       fireEvent.click(closeButton);
 
       expect(mockOnClose).toHaveBeenCalled();
+      jest.useRealTimers();
     });
 
     it('calls onClose when backdrop is clicked', () => {
+      jest.useFakeTimers();
       render(
         <CertificateModal certificate={mockCertificate} onClose={mockOnClose} />
       );
+
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
 
       const backdrop = screen.getByRole('dialog');
       fireEvent.click(backdrop);
 
       expect(mockOnClose).toHaveBeenCalled();
+      jest.useRealTimers();
     });
 
     it('does not call onClose when modal content is clicked', () => {

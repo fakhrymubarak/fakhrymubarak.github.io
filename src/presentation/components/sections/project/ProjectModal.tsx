@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { X, ExternalLink, Github } from 'lucide-react';
 import type { UIProject } from '@presentation/models';
@@ -17,6 +17,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     trapFocus: true,
     autoFocus: true,
   });
+  const isOpeningRef = useRef(true);
 
   useEffect(() => {
     // Only manage body scroll and announce when project is actually provided
@@ -26,6 +27,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
+
+      // Prevent backdrop clicks for a brief moment after opening
+      isOpeningRef.current = true;
+      const timer = setTimeout(() => {
+        isOpeningRef.current = false;
+      }, 300);
+
+      return () => {
+        clearTimeout(timer);
+        // Always restore body scroll when component unmounts or project changes
+        document.body.style.overflow = 'unset';
+      };
     }
 
     return () => {
@@ -35,6 +48,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   }, [project]);
 
   const handleClose = () => {
+    if (isOpeningRef.current) return;
     trackButtonClick('close_project_modal', 'project_modal');
     accessibilityUtils.announce('Project modal closed');
     onClose();

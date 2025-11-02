@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import CertificateCard from './certificate/CertificateCard';
 const CertificateModal = lazy(() => import('./certificate/CertificateModal'));
@@ -7,6 +7,11 @@ import { Filter } from 'lucide-react';
 import { useCertificates, useAnalytics } from '@/presentation';
 
 const CertificatesSection: React.FC = () => {
+  useEffect(() => {
+    // Preload modal chunk so the first open doesn't flash the fallback
+    void import('./certificate/CertificateModal');
+  }, []);
+
   const {
     displayedCertificates,
     selectedCertificate,
@@ -159,13 +164,16 @@ const CertificatesSection: React.FC = () => {
       </div>
 
       {/* Certificate Modal */}
-      <AnimatePresence>
-        <Suspense fallback={null}>
-          <CertificateModal
-            certificate={selectedCertificate}
-            onClose={handleCloseModal}
-          />
-        </Suspense>
+      <AnimatePresence mode="wait">
+        {selectedCertificate && (
+          <Suspense fallback={null}>
+            <CertificateModal
+              key={selectedCertificate.id}
+              certificate={selectedCertificate}
+              onClose={handleCloseModal}
+            />
+          </Suspense>
+        )}
       </AnimatePresence>
     </section>
   );

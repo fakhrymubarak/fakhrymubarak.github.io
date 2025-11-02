@@ -17,7 +17,8 @@ const CertificateCard: React.FC<CertificateCardProps> = ({
 }) => {
   const { trackButtonClick } = useAnalytics();
 
-  const handleCertificateClick = () => {
+  const handleCertificateClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     trackButtonClick('certificate_view', `certificate_${certificate.title}`);
     onSelect(certificate.id);
   };

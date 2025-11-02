@@ -149,8 +149,12 @@ describe('ProjectModal', () => {
 
   describe('User Interactions', () => {
     it('calls onClose when close button is clicked', () => {
+      jest.useFakeTimers();
       const onClose = jest.fn();
       render(<ProjectModal project={mockProject} onClose={onClose} />);
+
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
 
       const closeButton = screen.getByRole('button', {
         name: /close project modal/i,
@@ -158,16 +162,22 @@ describe('ProjectModal', () => {
       fireEvent.click(closeButton);
 
       expect(onClose).toHaveBeenCalledTimes(1);
+      jest.useRealTimers();
     });
 
     it('calls onClose when clicking outside the modal', () => {
+      jest.useFakeTimers();
       const onClose = jest.fn();
       render(<ProjectModal project={mockProject} onClose={onClose} />);
+
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
 
       const backdrop = screen.getByRole('dialog');
       fireEvent.click(backdrop);
 
       expect(onClose).toHaveBeenCalledTimes(1);
+      jest.useRealTimers();
     });
 
     it('does not call onClose when clicking inside the modal content', () => {
@@ -267,11 +277,15 @@ describe('ProjectModal', () => {
     });
 
     it('announces modal closing to screen readers', () => {
+      jest.useFakeTimers();
       const { accessibilityUtils } = jest.requireMock(
         '@presentation/hooks/useAccessibility'
       );
       const onClose = jest.fn();
       render(<ProjectModal project={mockProject} onClose={onClose} />);
+
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
 
       const closeButton = screen.getByRole('button', {
         name: /close project modal/i,
@@ -281,6 +295,7 @@ describe('ProjectModal', () => {
       expect(accessibilityUtils.announce).toHaveBeenCalledWith(
         'Project modal closed'
       );
+      jest.useRealTimers();
     });
   });
 

@@ -44,26 +44,6 @@ const MediumSection: React.FC = () => {
     },
   };
 
-  if (loading) {
-    return (
-      <section
-        id="articles"
-        className="section bg-gradient"
-        role="region"
-        aria-label="Articles"
-      >
-        <div className="container min-h-screen flex items-center justify-center">
-          <div className="py-20">
-            <div
-              data-testid="medium-loading-spinner"
-              className="animate-spin rounded-full h-8 w-8 border-b-2 border-light-primary dark:border-dark-primary"
-            ></div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   if (error) {
     return (
       <section
@@ -86,7 +66,7 @@ const MediumSection: React.FC = () => {
   return (
     <section
       id="articles"
-      className="section bg-gradient"
+      className="section bg-gradient relative"
       role="region"
       aria-label="Articles"
       style={{
@@ -95,6 +75,21 @@ const MediumSection: React.FC = () => {
         minHeight: '100vh',
       }}
     >
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <div
+            role="status"
+            aria-live="polite"
+            className="flex flex-col items-center gap-3"
+          >
+            <div
+              data-testid="medium-loading-spinner"
+              className="animate-spin rounded-full h-10 w-10 border-b-2 border-light-primary dark:border-dark-primary"
+            ></div>
+            <span className="sr-only">Loading Medium articles</span>
+          </div>
+        </div>
+      )}
       <div className="container">
         <LazyMotion features={domAnimation}>
           <m.div
@@ -115,34 +110,36 @@ const MediumSection: React.FC = () => {
               </p>
 
               {/* Controls */}
-              <div className="flex justify-center items-center space-x-4">
-                <button
-                  onClick={() => {
-                    trackButtonClick('toggle_filters', 'medium_section');
-                    handleToggleFilters();
-                  }}
-                  className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
-                  aria-expanded={showFilters}
-                >
-                  <Filter className="w-4 h-4" />
-                  <span>Filter Articles</span>
-                </button>
+              {!loading && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => {
+                      trackButtonClick('toggle_filters', 'medium_section');
+                      handleToggleFilters();
+                    }}
+                    className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+                    aria-expanded={showFilters}
+                  >
+                    <Filter className="w-4 h-4" />
+                    <span>Filter Articles</span>
+                  </button>
 
-                <a
-                  href="https://medium.com/@fakhrymubarak"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline gap-2 px-5 py-2.5 rounded-lg"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>View All on Medium</span>
-                </a>
-              </div>
+                  <a
+                    href="https://medium.com/@fakhrymubarak"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline gap-2 px-5 py-2.5 rounded-lg"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>View All on Medium</span>
+                  </a>
+                </div>
+              )}
             </m.div>
 
             {/* Filter Component */}
             <AnimatePresence>
-              {showFilters && (
+              {showFilters && !loading && (
                 <m.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -172,7 +169,7 @@ const MediumSection: React.FC = () => {
             </m.div>
 
             {/* Toggle Articles Button */}
-            {hasMoreArticles && (
+            {hasMoreArticles && !loading && (
               <m.div
                 variants={itemVariants}
                 initial="hidden"

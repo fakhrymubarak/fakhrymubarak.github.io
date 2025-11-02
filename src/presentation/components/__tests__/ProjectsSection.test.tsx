@@ -207,6 +207,7 @@ describe('ProjectsSection', () => {
     });
 
     it('closes modal when close button is clicked', () => {
+      jest.useFakeTimers();
       render(<ProjectsSection />);
 
       // Open modal by clicking the first project card
@@ -217,6 +218,9 @@ describe('ProjectsSection', () => {
 
       // Verify modal is open
       expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
 
       // Close modal
       const closeButton = screen.getByRole('button', {
@@ -226,9 +230,11 @@ describe('ProjectsSection', () => {
 
       // Verify modal is closed
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      jest.useRealTimers();
     });
 
     it('closes modal when clicking outside the modal', () => {
+      jest.useFakeTimers();
       render(<ProjectsSection />);
 
       // Open modal by clicking the first project card
@@ -240,12 +246,16 @@ describe('ProjectsSection', () => {
       // Verify modal is open
       expect(screen.getByRole('dialog')).toBeInTheDocument();
 
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
+
       // Click outside modal
       const backdrop = screen.getByRole('dialog');
       fireEvent.click(backdrop);
 
       // Verify modal is closed
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      jest.useRealTimers();
     });
 
     it('shows correct project information in modal', () => {
@@ -293,6 +303,7 @@ describe('ProjectsSection', () => {
     });
 
     it('restores body scroll when modal is closed', () => {
+      jest.useFakeTimers();
       render(<ProjectsSection />);
 
       // Open modal by clicking the first project card
@@ -303,6 +314,9 @@ describe('ProjectsSection', () => {
 
       expect(document.body.style.overflow).toBe('hidden');
 
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
+
       // Close modal
       const closeButton = screen.getByRole('button', {
         name: /close project modal/i,
@@ -310,6 +324,7 @@ describe('ProjectsSection', () => {
       fireEvent.click(closeButton);
 
       expect(document.body.style.overflow).toBe('unset');
+      jest.useRealTimers();
     });
   });
 
@@ -384,6 +399,7 @@ describe('ProjectsSection', () => {
     });
 
     it('maintains filter state when modal is opened and closed', () => {
+      jest.useFakeTimers();
       render(<ProjectsSection />);
 
       // First click the "Filter Projects" button to show filters
@@ -404,6 +420,9 @@ describe('ProjectsSection', () => {
         .closest('.card');
       fireEvent.click(firstProjectCard!);
 
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
+
       const closeButton = screen.getByRole('button', {
         name: /close project modal/i,
       });
@@ -414,6 +433,7 @@ describe('ProjectsSection', () => {
       expect(screen.getByText('React Project')).toBeInTheDocument();
       expect(screen.getByText('Angular Project')).toBeInTheDocument();
       expect(screen.queryByText('Vue Project')).not.toBeInTheDocument();
+      jest.useRealTimers();
     });
 
     it('handles multiple rapid filter changes', () => {

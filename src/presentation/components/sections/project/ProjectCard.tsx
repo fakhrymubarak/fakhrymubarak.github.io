@@ -18,7 +18,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const { trackProjectView, trackButtonClick } = useAnalytics();
 
-  const handleProjectClick = () => {
+  const handleProjectClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     trackProjectView(project.title);
     onSelect(project.id);
   };
