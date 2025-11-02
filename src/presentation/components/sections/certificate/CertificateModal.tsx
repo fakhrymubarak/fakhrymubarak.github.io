@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   X,
@@ -28,6 +28,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
     trapFocus: true,
     autoFocus: true,
   });
+  const isOpeningRef = useRef(true);
 
   useEffect(() => {
     // Only manage body scroll and announce when certificate is actually provided
@@ -39,6 +40,18 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
 
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
+
+      // Prevent backdrop clicks for a brief moment after opening
+      isOpeningRef.current = true;
+      const timer = setTimeout(() => {
+        isOpeningRef.current = false;
+      }, 300);
+
+      return () => {
+        clearTimeout(timer);
+        // Always restore body scroll when component unmounts or certificate changes
+        document.body.style.overflow = 'unset';
+      };
     }
 
     return () => {
@@ -61,6 +74,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
   };
 
   const handleClose = () => {
+    if (isOpeningRef.current) return;
     trackButtonClick('close_certificate_modal', 'certificate_modal');
     accessibilityUtils.announce('Certificate modal closed');
     onClose();

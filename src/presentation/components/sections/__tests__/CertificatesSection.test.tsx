@@ -209,6 +209,7 @@ describe('CertificatesSection', () => {
     });
 
     it('closes modal when close button is clicked', async () => {
+      jest.useFakeTimers();
       render(<CertificatesSection />);
 
       // Open modal
@@ -223,6 +224,9 @@ describe('CertificatesSection', () => {
         expect(screen.getByText(/description/i)).toBeInTheDocument();
       });
 
+      // Advance past the 300ms protection period
+      jest.advanceTimersByTime(300);
+
       // Close modal
       const closeButton = screen.getByRole('button', {
         name: /close certificate modal/i,
@@ -232,6 +236,8 @@ describe('CertificatesSection', () => {
       await waitFor(() => {
         expect(screen.queryByText(/description/i)).not.toBeInTheDocument();
       });
+
+      jest.useRealTimers();
     });
   });
 
