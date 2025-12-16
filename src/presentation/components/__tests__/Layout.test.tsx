@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Layout from '../Layout';
 
 // Mock the Header component
@@ -16,8 +17,11 @@ jest.mock('../../hooks/useAnalytics', () => ({
 }));
 
 describe('Layout', () => {
+  const renderWithRouter = (ui: React.ReactNode, initialEntries = ['/']) =>
+    render(<MemoryRouter initialEntries={initialEntries}>{ui}</MemoryRouter>);
+
   it('renders header and main content', () => {
-    render(
+    renderWithRouter(
       <Layout>
         <div data-testid="child-content">Child Content</div>
       </Layout>
@@ -28,7 +32,7 @@ describe('Layout', () => {
   });
 
   it('renders children in main element', () => {
-    render(
+    renderWithRouter(
       <Layout>
         <div data-testid="test-child">Test Child</div>
       </Layout>
@@ -40,7 +44,7 @@ describe('Layout', () => {
   });
 
   it('has proper app container structure', () => {
-    render(
+    renderWithRouter(
       <Layout>
         <div>Content</div>
       </Layout>
@@ -51,7 +55,7 @@ describe('Layout', () => {
   });
 
   it('renders multiple children correctly', () => {
-    render(
+    renderWithRouter(
       <Layout>
         <div data-testid="child-1">Child 1</div>
         <div data-testid="child-2">Child 2</div>

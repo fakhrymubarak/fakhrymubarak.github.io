@@ -46,41 +46,24 @@
 }
 
 /* Legal pages (privacy/terms) shared styles */
-:root {
-  --legal-heading: #111;
-  --legal-text: #222;
-  --legal-muted: #444;
+:root,
+:root.dark {
+  --legal-heading: #0f172a;
+  --legal-text: #1f2937;
+  --legal-muted: #4b5563;
   --legal-surface: #ffffff;
   --legal-link: #0ea5e9;
 }
 
-:root.dark {
-  --legal-heading: #f8fafc;
-  --legal-text: #e5e7eb;
-  --legal-muted: #cbd5e1;
-  --legal-surface: #0b1220;
-  --legal-link: #7dd3fc;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --legal-heading: #f8fafc;
-    --legal-text: #e5e7eb;
-    --legal-muted: #cbd5e1;
-    --legal-surface: #0b1220;
-    --legal-link: #7dd3fc;
-  }
-}
-
 .pomo-legal {
-  width: min(80%, 1000px);
-  margin: 5rem auto 2rem;
-  padding: 1.25rem;
+  width: min(90%, 1100px);
+  margin: 3rem auto 2rem;
+  padding: 1.5rem;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--legal-text);
   background: var(--legal-surface);
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .pomo-legal h1 {
@@ -114,4 +97,5 @@
 
 .pomo-legal a {
   color: var(--legal-link);
+  text-decoration: underline;
 }
