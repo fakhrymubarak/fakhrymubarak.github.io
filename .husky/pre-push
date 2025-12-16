@@ -1,6 +1,27 @@
 #!/bin/sh
-set -e
+. "$(dirname -- "$0")/_/husky.sh"
 
-npm run test
-npm run type-check
-npm run audit --audit-level=moderate
+# Allow skipping for emergencies
+if [ -n "$SKIP_CI_HOOKS" ]; then
+  echo "SKIP_CI_HOOKS is set; skipping pre-push checks."
+  exit 0
+fi
+
+set -euo pipefail
+
+run_step() {
+  printf "\n▶ %s\n" "$1"
+  eval "$1"
+}
+
+echo "Running pre-push checks (mirroring CI)..."
+
+run_step "npm run lint"
+run_step "npm run type-check"
+run_step "npm run format:check"
+run_step "npm run test:coverage"
+run_step "npm run test:accessibility"
+run_step "npm run test:performance"
+run_step "npm run build:analyze"
+run_step "npm audit --audit-level=moderate"
+run_step "npx audit-ci --moderate"
