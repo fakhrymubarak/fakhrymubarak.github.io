@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/build-with-version.cjs && tsc && vite build",
+    "postbuild": "node scripts/spa-fallbacks.cjs",
     "build:analyze": "node scripts/build-with-version.cjs && tsc && vite build --mode analyze",
     "lint": "eslint src --report-unused-disable-directives --max-warnings 0 --ignore-pattern 'src/domain/valueObjects/sw.ts'",
     "preview": "vite preview",
@@ -24,7 +25,7 @@
     "audit": "npm audit",
     "audit:fix": "npm audit fix",
     "lighthouse": "lhci autorun",
-    "deploy": "bash deploy.sh",
+    "deploy": "gh-pages -d dist -b gh-pages",
     "prepare": "husky install"
   },
   "dependencies": {
