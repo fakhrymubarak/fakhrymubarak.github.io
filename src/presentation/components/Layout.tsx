@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import { useAnalytics } from '@/presentation';
 
@@ -8,16 +9,19 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { trackPageView } = useAnalytics();
+  const location = useLocation();
+  const hideChrome = location.pathname.startsWith('/pomodojo');
 
   useEffect(() => {
-    // Track the initial page view
-    trackPageView(window.location.pathname);
-  }, [trackPageView]);
+    trackPageView(location.pathname);
+  }, [trackPageView, location.pathname]);
 
   return (
     <div className="app">
-      <Header />
-      <main>{children}</main>
+      {!hideChrome && <Header />}
+      <main className={hideChrome ? 'app-main app-main--bare' : 'app-main'}>
+        {children}
+      </main>
     </div>
   );
 };

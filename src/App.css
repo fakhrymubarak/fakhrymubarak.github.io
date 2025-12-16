@@ -5,6 +5,14 @@
   flex-direction: column;
 }
 
+.app-main {
+  flex: 1;
+}
+
+.app-main--bare {
+  padding-top: 0;
+}
+
 /* Smooth transitions for theme switching */
 * {
   transition:
@@ -42,12 +50,16 @@
   --legal-heading: #111;
   --legal-text: #222;
   --legal-muted: #444;
+  --legal-surface: #ffffff;
+  --legal-link: #0ea5e9;
 }
 
 :root.dark {
   --legal-heading: #f8fafc;
   --legal-text: #e5e7eb;
   --legal-muted: #cbd5e1;
+  --legal-surface: #0b1220;
+  --legal-link: #7dd3fc;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,6 +67,8 @@
     --legal-heading: #f8fafc;
     --legal-text: #e5e7eb;
     --legal-muted: #cbd5e1;
+    --legal-surface: #0b1220;
+    --legal-link: #7dd3fc;
   }
 }
 
@@ -64,6 +78,9 @@
   padding: 1.25rem;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--legal-text);
+  background: var(--legal-surface);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
 }
 
 .pomo-legal h1 {
@@ -93,4 +110,8 @@
 
 .pomo-legal li {
   margin-bottom: 0.5rem;
+}
+
+.pomo-legal a {
+  color: var(--legal-link);
 }

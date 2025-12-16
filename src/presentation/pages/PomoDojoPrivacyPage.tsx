@@ -1,20 +1,7 @@
 import React from 'react';
 import SEO from '../components/SEO';
 
-const htmlContent = `<style>
-  :root { --legal-heading: #111; --legal-text: #222; --legal-muted: #444; }
-  :root.dark { --legal-heading: #f8fafc; --legal-text: #e5e7eb; --legal-muted: #cbd5e1; }
-  @media (prefers-color-scheme: dark) {
-    :root { --legal-heading: #f8fafc; --legal-text: #e5e7eb; --legal-muted: #cbd5e1; }
-  }
-  .pomo-legal { width: min(80%, 1000px); margin: 5rem auto 2rem; padding: 1.25rem; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: var(--legal-text); }
-  .pomo-legal h1 { font-size: 2rem; margin: 0 0 1rem; line-height: 1.3; color: var(--legal-heading); }
-  .pomo-legal strong { display: block; margin: 1.5rem 0 0.75rem; font-size: 1.1rem; color: var(--legal-heading); }
-  .pomo-legal p, .pomo-legal ul, .pomo-legal li { color: var(--legal-text); line-height: 1.6; }
-  .pomo-legal ul { margin: 0.5rem 0 1rem 1.5rem; }
-  .pomo-legal li { margin-bottom: 0.5rem; }
-</style>
-<div class="pomo-legal">
+const htmlContent = `<div class="pomo-legal">
 <h1>PomoDojo - Pomodoro Timer Privacy Policy</h1>
 <strong>Privacy Policy</strong>
 <p>This privacy policy is applicable to the PomoDojo - Pomodoro Timer app (hereinafter referred to
