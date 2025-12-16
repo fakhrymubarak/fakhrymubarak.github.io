@@ -7,6 +7,12 @@ import './App.css';
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./presentation/pages/HomePage'));
+const PrivacyPomodojoPage = lazy(
+  () => import('@presentation/pages/PomoDojoPrivacyPage')
+);
+const PomoDojoTermsOfUsePage = lazy(
+  () => import('@presentation/pages/PomoDojoTermsOfUsePage')
+);
 
 function App() {
   return (
@@ -15,6 +21,11 @@ function App() {
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/pomodojo/privacy" element={<PrivacyPomodojoPage />} />
+            <Route
+              path="/pomodojo/terms"
+              element={<PomoDojoTermsOfUsePage />}
+            />
           </Routes>
         </Suspense>
       </Layout>
