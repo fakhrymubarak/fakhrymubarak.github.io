@@ -5,6 +5,7 @@ This project uses a dynamic versioning system that automatically updates the ser
 ## 🚀 How It Works
 
 The build process automatically injects the version into the service worker, ensuring that:
+
 - Each deployment gets a unique cache name
 - Old caches are automatically cleaned up
 - Users get the latest version without manual intervention
@@ -25,15 +26,13 @@ export VITE_APP_VERSION="v2.1.0"
 npm run build
 ```
 
-
-
 ### 2. GitHub Actions Integration
 
 ```yaml
 - name: Build with version
   run: npm run build
   env:
-    VITE_APP_VERSION: ${{ github.ref_name }}  # Use branch/tag name
+    VITE_APP_VERSION: ${{ github.ref_name }} # Use branch/tag name
 ```
 
 ### 3. Git Tags
@@ -50,6 +49,7 @@ npm run build
 ## 🔄 Auto-Update Behavior
 
 The service worker is configured to:
+
 - ✅ **Automatically update** when a new version is detected
 - ✅ **No user notification** - updates happen seamlessly
 - ✅ **Clean up old caches** automatically
@@ -63,6 +63,7 @@ The build process creates:
 2. **`public/version.json`** - Version information for reference
 
 Example `version.json`:
+
 ```json
 {
   "version": "v2.1.0",
@@ -74,6 +75,7 @@ Example `version.json`:
 ## 🛠️ Build Script
 
 The version injection is handled by `scripts/build-with-version.cjs` which:
+
 - Reads version from environment variables
 - Injects version into service worker template
 - Creates version.json for reference
@@ -82,11 +84,13 @@ The version injection is handled by `scripts/build-with-version.cjs` which:
 ## 🚀 Deployment
 
 ### Local Development
+
 ```bash
 npm run build
 ```
 
 ### Production Pipeline
+
 ```bash
 # Set your version
 export VITE_APP_VERSION="v2.1.0"
@@ -94,6 +98,7 @@ npm run build
 ```
 
 ### GitHub Actions
+
 ```yaml
 - name: Build
   run: npm run build
@@ -106,6 +111,7 @@ npm run build
 ## 🔍 Verification
 
 After building, check:
+
 1. `public/sw.js` - Should contain your version
 2. `public/version.json` - Should show build info
 3. Browser DevTools → Application → Service Workers - Should show new version

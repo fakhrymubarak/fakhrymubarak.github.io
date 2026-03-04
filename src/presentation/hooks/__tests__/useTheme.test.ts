@@ -67,32 +67,7 @@ describe('useTheme', () => {
     expect(typeof result.current.toggleTheme).toBe('function');
   });
 
-  it('debounces theme toggle calls', () => {
-    // Mock the useContext to return the mock context
-    jest.spyOn(React, 'useContext').mockReturnValue(mockThemeContext);
-
-    const { result } = renderHook(() => useTheme());
-
-    // Call toggleTheme multiple times rapidly
-    act(() => {
-      result.current.toggleTheme();
-      result.current.toggleTheme();
-      result.current.toggleTheme();
-    });
-
-    // The original toggleTheme should not be called immediately
-    expect(mockThemeContext.toggleTheme).not.toHaveBeenCalled();
-
-    // Fast-forward time to trigger the debounced call
-    act(() => {
-      jest.advanceTimersByTime(150);
-    });
-
-    // The original toggleTheme should be called only once
-    expect(mockThemeContext.toggleTheme).toHaveBeenCalledTimes(1);
-  });
-
-  it('cancels previous debounced calls when new calls are made', () => {
+  it('executes theme toggle calls immediately', () => {
     // Mock the useContext to return the mock context
     jest.spyOn(React, 'useContext').mockReturnValue(mockThemeContext);
 
@@ -103,22 +78,23 @@ describe('useTheme', () => {
       result.current.toggleTheme();
     });
 
-    // Wait a bit but not enough to trigger the call
-    act(() => {
-      jest.advanceTimersByTime(100);
-    });
+    // The original toggleTheme should be called immediately
+    expect(mockThemeContext.toggleTheme).toHaveBeenCalledTimes(1);
+  });
 
-    // Call toggleTheme again (should cancel the previous call)
+  it('executes multiple theme toggle calls sequentially', () => {
+    // Mock the useContext to return the mock context
+    jest.spyOn(React, 'useContext').mockReturnValue(mockThemeContext);
+
+    const { result } = renderHook(() => useTheme());
+
+    // Call toggleTheme
     act(() => {
+      result.current.toggleTheme();
       result.current.toggleTheme();
     });
 
-    // Wait for the debounce delay
-    act(() => {
-      jest.advanceTimersByTime(150);
-    });
-
-    // Should only be called once (the second call)
-    expect(mockThemeContext.toggleTheme).toHaveBeenCalledTimes(1);
+    // Should be called twice
+    expect(mockThemeContext.toggleTheme).toHaveBeenCalledTimes(2);
   });
 });

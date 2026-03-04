@@ -11,21 +11,22 @@ export default {
     '^@domain/(.*)$': '<rootDir>/src/domain/$1',
     '^@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
-    '^@/infrastructure/adapters/firebase$': '<rootDir>/__mocks__/firebaseMock.js',
+    '^@/infrastructure/adapters/firebase$':
+      '<rootDir>/__mocks__/firebaseMock.js',
 
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
   },
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', {
-      useESM: true,
-    }],
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        useESM: true,
+      },
+    ],
   },
-  testMatch: [
-    '**/__tests__/**/*.(ts|tsx)',
-    '**/?(*.)+(spec|test).(ts|tsx)'
-  ],
+  testMatch: ['**/__tests__/**/*.(ts|tsx)', '**/?(*.)+(spec|test).(ts|tsx)'],
   collectCoverageFrom: [
     'src/**/*.(ts|tsx)',
     '!src/**/*.d.ts',
@@ -66,9 +67,7 @@ export default {
   cache: true,
   cacheDirectory: '<rootDir>/.jest-cache',
   // Transform optimizations
-  transformIgnorePatterns: [
-    'node_modules/(?!(framer-motion|@framer)/)',
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(framer-motion|@framer)/)'],
   // Handle import.meta in test environment
   globals: {
     'import.meta': {
@@ -83,4 +82,4 @@ export default {
       },
     },
   },
-} 
+};

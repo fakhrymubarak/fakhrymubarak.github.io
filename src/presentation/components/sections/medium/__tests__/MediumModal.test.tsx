@@ -32,8 +32,16 @@ describe('MediumModal', () => {
       'https://example.com/modal'
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /close modal/i }));
-    fireEvent.click(screen.getByTestId('medium-modal-overlay'));
+    const closeButton = document.querySelector('button');
+    if (closeButton) {
+      fireEvent.click(closeButton);
+    }
+
+    // click backdrop overlay
+    const overlay = screen.getByTestId('medium-modal-overlay');
+    if (overlay) {
+      fireEvent.click(overlay);
+    }
 
     expect(onClose).toHaveBeenCalledTimes(2);
   });

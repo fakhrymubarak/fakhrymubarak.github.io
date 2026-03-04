@@ -5,6 +5,7 @@ This document explains how to use the new release pipeline and rollback function
 ## Overview
 
 The project now uses a two-workflow approach:
+
 1. **CI Pipeline** (`ci.yml`) - Runs tests and quality checks on all branches
 2. **Release Pipeline** (`release.yml`) - Handles deployments and rollbacks
 
@@ -20,6 +21,7 @@ git push origin release/v1.0.0
 ```
 
 The release pipeline will automatically:
+
 - Run all tests and quality checks
 - Build the application
 - Create a Git tag (e.g., `v1.0.0`)
@@ -31,6 +33,7 @@ The release pipeline will automatically:
 Release branches must follow the pattern: `release/vX.Y.Z`
 
 Examples:
+
 - `release/v1.0.0`
 - `release/v1.2.3`
 - `release/v2.0.0-beta.1`
@@ -41,7 +44,7 @@ Examples:
 2. **Security Check**: Runs security audits and dependency checks
 3. **Quality Check**: Runs linting, formatting, and bundle analysis
 4. **Build Phase**: Builds the application and runs Lighthouse CI
-5. **Deploy Phase**: 
+5. **Deploy Phase**:
    - Extracts version from branch name
    - Creates Git tag
    - Deploys to GitHub Pages
@@ -71,6 +74,7 @@ If issues are discovered after deployment, you can rollback to a previous versio
 ### Rollback Release Format
 
 Rollback releases are marked as pre-releases and follow this naming:
+
 - Tag: `rollback-v1.0.0-123` (where 123 is the workflow run number)
 - Release name: `Rollback to v1.0.0`
 
@@ -79,12 +83,12 @@ Rollback releases are marked as pre-releases and follow this naming:
 | Feature  | CI Pipeline  | Release Pipeline      |
 | -------- | ------------ | --------------------- |
 | Triggers | All branches | Release branches only |
-| Tests    | ✅            | ✅                     |
-| Security | ✅            | ✅                     |
-| Quality  | ✅            | ✅                     |
-| Build    | ❌            | ✅                     |
-| Deploy   | ❌            | ✅                     |
-| Rollback | ❌            | ✅                     |
+| Tests    | ✅           | ✅                    |
+| Security | ✅           | ✅                    |
+| Quality  | ✅           | ✅                    |
+| Build    | ❌           | ✅                    |
+| Deploy   | ❌           | ✅                    |
+| Rollback | ❌           | ✅                    |
 
 ## Best Practices
 
@@ -129,6 +133,7 @@ Rollback releases are marked as pre-releases and follow this naming:
 ### Getting Help
 
 If you encounter issues:
+
 1. Check the Actions tab for detailed logs
 2. Review the workflow files in `.github/workflows/`
 3. Contact the development team

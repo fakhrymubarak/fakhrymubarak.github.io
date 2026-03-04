@@ -15,7 +15,9 @@ const targets = [
 ];
 
 if (!fs.existsSync(indexPath)) {
-  console.error('Cannot create SPA fallbacks: dist/index.html is missing. Build first.');
+  console.error(
+    'Cannot create SPA fallbacks: dist/index.html is missing. Build first.'
+  );
   process.exit(1);
 }
 

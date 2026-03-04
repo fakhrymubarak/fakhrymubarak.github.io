@@ -13,7 +13,7 @@ module.exports = {
     'public/sw.js',
     'public/version.json',
     'scripts/**/*.cjs',
-    'src/domain/valueObjects/sw.ts'
+    'src/domain/valueObjects/sw.ts',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-refresh'],
@@ -27,4 +27,4 @@ module.exports = {
     'prefer-const': 'error',
     'no-var': 'error',
   },
-} 
+};

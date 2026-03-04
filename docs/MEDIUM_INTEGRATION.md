@@ -183,7 +183,7 @@ Update the username in `useMedium.ts`:
 ```typescript
 export const useMedium = (username: string = 'fakhrymubarak') => {
   // ...
-}
+};
 ```
 
 ### Modify Cache Duration

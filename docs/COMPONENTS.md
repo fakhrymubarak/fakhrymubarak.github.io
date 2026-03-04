@@ -30,6 +30,7 @@ import { Button } from '@/components/ui/Button'
 ```
 
 **Props:**
+
 - `variant`: 'primary' | 'secondary' | 'outline'
 - `size`: 'sm' | 'md' | 'lg'
 - `disabled`: boolean
@@ -51,6 +52,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner'
 ```
 
 **Props:**
+
 - `size`: 'sm' | 'md' | 'lg'
 - `color`: 'primary' | 'white' | 'gray'
 - `className`: string
@@ -63,20 +65,21 @@ Error, warning, and info message display component.
 import ErrorMessage from '@/components/ui/ErrorMessage'
 
 // Error message
-<ErrorMessage 
-  message="Failed to load projects" 
-  type="error" 
-  onRetry={handleRetry} 
+<ErrorMessage
+  message="Failed to load projects"
+  type="error"
+  onRetry={handleRetry}
 />
 
 // Info message
-<ErrorMessage 
-  message="Loading projects..." 
-  type="info" 
+<ErrorMessage
+  message="Loading projects..."
+  type="info"
 />
 ```
 
 **Props:**
+
 - `message`: string
 - `type`: 'error' | 'warning' | 'info'
 - `onRetry`: function (optional)
@@ -89,11 +92,11 @@ import ErrorMessage from '@/components/ui/ErrorMessage'
 Main layout wrapper that includes header and footer.
 
 ```tsx
-import Layout from '@/components/Layout'
+import Layout from '@/components/Layout';
 
 <Layout>
   <YourPageContent />
-</Layout>
+</Layout>;
 ```
 
 ### Header Component
@@ -101,6 +104,7 @@ import Layout from '@/components/Layout'
 Navigation header with theme toggle and mobile menu.
 
 **Features:**
+
 - Responsive navigation
 - Dark/light theme toggle
 - Mobile hamburger menu
@@ -117,6 +121,7 @@ Simple footer with copyright information.
 Hero section with personal introduction and tech stack.
 
 **Features:**
+
 - Animated title with gradient text
 - Tech stack badges
 - Call-to-action buttons
@@ -127,6 +132,7 @@ Hero section with personal introduction and tech stack.
 Portfolio projects showcase with interactive cards.
 
 **Features:**
+
 - Project cards with images
 - Tech stack tags
 - External links
@@ -137,6 +143,7 @@ Portfolio projects showcase with interactive cards.
 Professional experience timeline.
 
 **Features:**
+
 - Timeline layout
 - Company logos
 - Employment type indicators
@@ -147,6 +154,7 @@ Professional experience timeline.
 Contact information and social media links.
 
 **Features:**
+
 - Contact methods (email, WhatsApp, resume)
 - Social media links
 - Contact image
@@ -157,8 +165,8 @@ Contact information and social media links.
 ### Creating a New Section
 
 ```tsx
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const NewSection: React.FC = () => {
   return (
@@ -175,46 +183,42 @@ const NewSection: React.FC = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default NewSection
+export default NewSection;
 ```
 
 ### Using Theme Context
 
 ```tsx
-import { useTheme } from '@/contexts/ThemeContext'
+import { useTheme } from '@/contexts/ThemeContext';
 
 const MyComponent: React.FC = () => {
-  const { theme, toggleTheme } = useTheme()
-  
-  return (
-    <button onClick={toggleTheme}>
-      Current theme: {theme}
-    </button>
-  )
-}
+  const { theme, toggleTheme } = useTheme();
+
+  return <button onClick={toggleTheme}>Current theme: {theme}</button>;
+};
 ```
 
 ### Adding Animations
 
 ```tsx
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 
 const AnimatedComponent: React.FC = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  }
+      transition: { staggerChildren: 0.1 },
+    },
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
-  }
+    visible: { y: 0, opacity: 1 },
+  };
 
   return (
     <motion.div
@@ -223,12 +227,10 @@ const AnimatedComponent: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <motion.div variants={itemVariants}>
-        Content
-      </motion.div>
+      <motion.div variants={itemVariants}>Content</motion.div>
     </motion.div>
-  )
-}
+  );
+};
 ```
 
 ## Styling Guidelines
@@ -294,4 +296,4 @@ The project uses Tailwind CSS with custom utility classes:
 5. **Performance:**
    - Use React.memo for expensive components
    - Implement lazy loading where appropriate
-   - Optimize images and assets 
+   - Optimize images and assets

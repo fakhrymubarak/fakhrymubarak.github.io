@@ -42,11 +42,11 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
 
 ## About
 
-* **Title:** Fakhry Mubarak – Showcase Site
-* **Description:** A modern, responsive portfolio website built with React JS showcasing Fakhry Mubarak's professional experience, projects, and skills as an Mobile Apps Developer.
-* **Version:** 2.0.0
-* **Last Updated:** 2025-09-27
-* **Live Demo:** [Portfolio Website](https://fakhrymubarak.github.io)
+- **Title:** Fakhry Mubarak – Showcase Site
+- **Description:** A modern, responsive portfolio website built with React JS showcasing Fakhry Mubarak's professional experience, projects, and skills as an Mobile Apps Developer.
+- **Version:** 2.0.0
+- **Last Updated:** 2025-09-27
+- **Live Demo:** [Portfolio Website](https://fakhrymubarak.github.io)
 
 ---
 
@@ -64,17 +64,17 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
 
 ## Tech Stack
 
-* **Framework:** React JS 18+
-* **Language:** TypeScript
-* **Routing:** React Router v6
-* **State Management:** React Context API / Zustand
-* **Styling:** Tailwind CSS / Styled-Components
-* **Animation:** Framer Motion
-* **Icons:** React Icons / Lucide React
-* **Testing:** Jest + React Testing Library
-* **Build Tools:** Vite
-* **Linting:** ESLint + Prettier
-* **Deployment:** GitHub Pages / Netlify / Vercel
+- **Framework:** React JS 18+
+- **Language:** TypeScript
+- **Routing:** React Router v6
+- **State Management:** React Context API / Zustand
+- **Styling:** Tailwind CSS / Styled-Components
+- **Animation:** Framer Motion
+- **Icons:** React Icons / Lucide React
+- **Testing:** Jest + React Testing Library
+- **Build Tools:** Vite
+- **Linting:** ESLint + Prettier
+- **Deployment:** GitHub Pages / Netlify / Vercel
 
 ---
 
@@ -101,12 +101,12 @@ flowchart TD
 
 ### Prerequisites
 
-* Node.js (v18 or above)
-* npm or Yarn or pnpm
+- Node.js (v18 or above)
+- npm or Yarn or pnpm
 
 ### Installation
 
-```bash
+````bash
 # Clone the repository
 git clone https://github.com/fakhrymubarak/fakhrymubarak.github.io.git
 cd fakhrymubarak.github.io
@@ -131,7 +131,7 @@ VITE_FIREBASE_STORAGE_BUCKET=your_project_id.firebasestorage.app
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
-```
+````
 
 **Note:** The `.env.local` file is already configured in your CI/CD pipelines with the actual Firebase credentials.
 
@@ -176,7 +176,7 @@ This project is configured for GitHub Pages deployment with the correct base pat
 
 #### What Was Fixed
 
-1. **Base Path Configuration**: Added `base: `/` to `vite.config.ts` for production builds
+1. **Base Path Configuration**: Added `base: `/`to`vite.config.ts` for production builds
 2. **Service Worker Paths**: Updated service worker registration to use the correct base path
 3. **Asset Paths**: All static assets (icons, manifest, etc.) now use the correct base path
 4. **HTML Paths**: Updated all hardcoded paths in `index.html` and `manifest.json`
@@ -210,6 +210,7 @@ If you encounter 404 errors after deployment:
 ## Project Todo
 
 ### Phase 1: Project Setup & Foundation ✅
+
 - [x] Initialize React project with Vite
 - [x] Set up TypeScript configuration
 - [x] Configure ESLint and Prettier
@@ -218,6 +219,7 @@ If you encounter 404 errors after deployment:
 - [x] Install essential dependencies (React Router, Tailwind CSS, etc.)
 
 ### Phase 2: Core Components Development ✅
+
 - [x] Create reusable UI components
   - [x] Button component with variants
   - [x] Card component for projects
@@ -229,6 +231,7 @@ If you encounter 404 errors after deployment:
 - [x] Create component library documentation
 
 ### Phase 3: Page Structure & Routing 📄
+
 - [x] Set up React Router configuration
 - [x] Create main page layouts
   - [x] Home/Introduction page
@@ -239,6 +242,7 @@ If you encounter 404 errors after deployment:
 - [x] Add page transitions and animations
 
 ### Phase 4: Content & Data Management ✅
+
 - [x] Create data structure for projects
 - [x] Create data structure for experience
 - [x] Implement content management system
@@ -246,6 +250,7 @@ If you encounter 404 errors after deployment:
 - [x] Set up asset management (icons, images, etc.)
 
 ### Phase 5: Interactive Features ✅
+
 - [x] Implement dark/light theme toggle
 - [x] Add smooth scrolling navigation
 - [x] Create project filtering system
@@ -254,6 +259,7 @@ If you encounter 404 errors after deployment:
 - [x] Create download resume functionality
 
 ### Phase 6: Performance & Optimization ✅
+
 - [x] Implement code splitting and lazy loading
 - [x] Optimize images and assets
 - [x] Add service worker for offline support
@@ -262,6 +268,7 @@ If you encounter 404 errors after deployment:
 - [x] Add performance monitoring
 
 ### Phase 7: SEO & Accessibility ✅
+
 - [x] Add meta tags and Open Graph data
 - [x] Implement structured data (JSON-LD)
 - [x] Ensure WCAG compliance
@@ -270,6 +277,7 @@ If you encounter 404 errors after deployment:
 - [x] Add sitemap and robots.txt
 
 ### Phase 8: Testing & Quality Assurance 🧪
+
 - [x] Write unit tests for components
 - [x] Write integration tests for pages
 - [x] Add end-to-end testing
@@ -278,6 +286,7 @@ If you encounter 404 errors after deployment:
 - [x] Set up CI/CD pipeline
 
 ### Phase 9: Deployment & Monitoring ✅
+
 - [x] Configure deployment to GitHub Pages
 - [x] Add Google Analytics
 - [x] Implement error tracking
@@ -285,6 +294,7 @@ If you encounter 404 errors after deployment:
 - [x] Create deployment documentation
 
 ### Phase 10: Enhancement & Polish ✨
+
 - [ ] Add advanced animations with Framer Motion
 - [ ] Implement progressive web app features
 - [ ] Add articles section (integrate it with my medium sections.)
@@ -293,6 +303,7 @@ If you encounter 404 errors after deployment:
 - [ ] Implement A/B testing framework
 
 ### Phase 11: Documentation & Maintenance 📚
+
 - [ ] Complete README documentation
 - [ ] Create component documentation
 - [ ] Add contribution guidelines

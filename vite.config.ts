@@ -1,13 +1,17 @@
-import { defineConfig } from 'vite'
-import compression from 'vite-plugin-compression'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import compression from 'vite-plugin-compression';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    compression({ algorithm: 'brotliCompress', ext: '.br', deleteOriginFile: false }),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      deleteOriginFile: false,
+    }),
     compression({ algorithm: 'gzip', ext: '.gz', deleteOriginFile: false }),
   ],
   base: '/',
@@ -44,22 +48,26 @@ export default defineConfig({
           icons: ['lucide-react'],
           utils: ['axios'],
         },
-        chunkFileNames: (chunkInfo) => {
+        chunkFileNames: chunkInfo => {
           const facadeModuleId = chunkInfo.facadeModuleId
-            ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.tsx', '').replace('.ts', '')
-            : 'chunk'
-          return `js/${facadeModuleId}-[hash].js`
+            ? chunkInfo.facadeModuleId
+                .split('/')
+                .pop()
+                ?.replace('.tsx', '')
+                .replace('.ts', '')
+            : 'chunk';
+          return `js/${facadeModuleId}-[hash].js`;
         },
         // Enhanced cache busting with version and hash
-        assetFileNames: (assetInfo) => {
+        assetFileNames: assetInfo => {
           // @ts-ignore - name is deprecated but still functional
-          const info = assetInfo.name?.split('.') || []
-          const ext = info[info.length - 1] || 'unknown'
+          const info = assetInfo.name?.split('.') || [];
+          const ext = info[info.length - 1] || 'unknown';
           // @ts-ignore - name is deprecated but still functional
           if (/\.(css|js)$/.test(assetInfo.name || '')) {
-            return `assets/[name]-[hash].${ext}`
+            return `assets/[name]-[hash].${ext}`;
           }
-          return `assets/[name]-[hash].[ext]`
+          return `assets/[name]-[hash].[ext]`;
         },
         // Add version to entry file names for better cache busting
         entryFileNames: 'js/[name]-[hash].js',
@@ -68,4 +76,4 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000, // Increase warning limit
     assetsInlineLimit: 4096, // Inline small assets
   },
-}) 
+});

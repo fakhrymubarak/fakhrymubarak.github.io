@@ -89,7 +89,10 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-var-requires': 'off', // Allow require in test files
       'prefer-const': 'error',
@@ -158,4 +161,4 @@ export default [
   {
     ignores: ['dist/**', 'node_modules/**', 'lighthouserc.cjs', 'coverage/**'],
   },
-]; 
+];
