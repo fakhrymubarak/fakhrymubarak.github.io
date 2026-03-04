@@ -250,6 +250,26 @@ export const portfolioData: PortfolioData = {
   ],
   companies: [
     {
+      id: 'transjakarta',
+      name: 'PT Transportasi Jakarta (Transjakarta)',
+      logo: transjakartaLogo,
+      experiences: [
+        {
+          id: 'tj-engineer',
+          title: 'Senior Software Engineer',
+          period: 'Feb 2026 — Present',
+          duration: calculateDuration('Feb 2026 — Present'),
+          type: 'full-time',
+          highlights: [
+            'Developing features for the On-Board Unit (OBU) Android application deployed on Transjakarta buses.',
+            'Implementing real-time GPS tracking via MQTT for live bus monitoring.',
+            'Creating automated voice announcement systems based on geolocation stop proximity.',
+            'Integrating with LED destination signs across the bus fleet.',
+          ],
+        },
+      ],
+    },
+    {
       id: 'phincon',
       name: 'PHINCON',
       logo: phinconLogo,
@@ -257,8 +277,8 @@ export const portfolioData: PortfolioData = {
         {
           id: 'byu-exp',
           title: 'Software Engineer - Backend',
-          period: 'Jul 2025 — Present',
-          duration: calculateDuration('Jul 2025 — Present'),
+          period: 'Jul 2025 — Jan 2026',
+          duration: calculateDuration('Jul 2025 — Jan 2026'),
           type: 'full-time',
           highlights: [
             'Maintaining Backend App that using Go Fiber to facilitate API bridging for migrating ByU users.',
