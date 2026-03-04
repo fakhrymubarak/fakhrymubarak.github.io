@@ -4,6 +4,8 @@ import { calculateDuration } from '../valueObjects/dateUtils';
 // Import assets from the src / assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp';
 import footerAvatarImage from '@/assets/images/avatars/img_avatar_footer.webp';
+import transjakartaImage from '@/assets/images/projects/img_transjakarta_obu.webp';
+import byuImage from '@/assets/images/projects/img_byu_landing_page.webp';
 import mytelkomselImage from '@/assets/images/projects/img_mytelkomsel.webp';
 import alkhairaatImage from '@/assets/images/projects/img_alkhairaat.webp';
 import chakraImage from '@/assets/images/projects/img_chakra_loyalty.webp';
@@ -14,6 +16,8 @@ import shafaWebImage from '@/assets/images/projects/img_shafa_web.webp';
 import showcaseV1Image from '@/assets/images/projects/img_showcase_v1.webp';
 
 // Import company logos
+import transjakartaLogo from '@/assets/icons/companies/ic_transjakarta.webp';
+import byuLogo from '@/assets/icons/companies/ic_byu.webp';
 import mytelkomselLogo from '@/assets/icons/companies/ic_mytelkomsel.webp';
 import alkhairaatLogo from '@/assets/icons/companies/ic_alkhairaat.webp';
 import chakraLogo from '@/assets/icons/companies/ic_chakra_loyalty.webp';
@@ -41,9 +45,10 @@ export const portfolioData: PortfolioData = {
     title: ['Hi, I am', 'Fakhry Mubarak'],
     subtitle: 'Software Engineer specializing in Android Development',
     description:
-      'Mobile Apps focused Software Engineer specializing in app development with over 4 years professional experience building scalable softwares. ' +
-      'Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. ' +
-      'Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. ' +
+      'Software Engineer with over 4 years of professional experience building scalable softwares. ' +
+      'Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. ' +
+      'Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. ' +
+      'Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. ' +
       'Chasing impact, craftsmanship, and growth. Open for any challenges and opportunities.',
     imagePath: avatarImage,
     techStack: [
@@ -82,6 +87,34 @@ export const portfolioData: PortfolioData = {
     ],
   },
   projects: [
+    {
+      id: 'transjakarta-obu',
+      title: 'OBU - On-Board Unit Transjakarta',
+      period: 'Feb 2026 — Present',
+      logo: transjakartaLogo,
+      image: transjakartaImage,
+      description:
+        'The On-Board Unit (OBU) is an Android application deployed on Transjakarta buses. I developed features including real-time GPS tracking via MQTT to display live bus locations on the Transjakarta App and Google Maps, automated voice announcements triggered by stopping proximity to inform passengers of current and upcoming stops, and integration with the LED units to display the route on the front, back and inside of the bus.',
+      link: '',
+      stacks: ['Android', 'Kotlin'],
+      featured: true,
+      hasGithub: false,
+      githubUrl: '',
+    },
+    {
+      id: 'byu-bridging',
+      title: 'Byu Bridging',
+      period: 'Jul 2025 — Jan 2026',
+      logo: byuLogo,
+      image: byuImage,
+      description:
+        'ByU Bridging is a middleware service built with Go Fiber to facilitate API bridging for migrating millions of ByU users. I developed and maintained the application, ensuring seamless data flow between systems during the migration process. I also provided critical on-call support during post-release phases, diagnosing and resolving production incidents to maintain system uptime during user migrations.',
+      link: 'https://byu.id',
+      stacks: ['Go', 'Fiber', 'Redis', 'Docker', 'Kubernetes'],
+      featured: true,
+      hasGithub: false,
+      githubUrl: '',
+    },
     {
       id: 'mytelkomsel',
       title: 'MyTelkomsel',
