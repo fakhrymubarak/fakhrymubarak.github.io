@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import {
-  X,
-  ExternalLink,
   Award,
   BookOpen,
-  Star,
   Calendar,
+  ExternalLink,
   Hash,
+  Star,
+  X,
 } from 'lucide-react';
 import { useAnalytics } from '@/presentation';
-import { useAccessibility, accessibilityUtils } from '@/presentation';
 import type { UICertificate } from '@presentation/models';
 
 interface CertificateModalProps {
@@ -23,25 +23,12 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
   onClose,
 }) => {
   const { trackButtonClick } = useAnalytics();
-  const { containerRef, handleKeyDown } = useAccessibility({
-    onEscape: onClose,
-    trapFocus: true,
-    autoFocus: true,
-  });
   const isOpeningRef = useRef(true);
 
   useEffect(() => {
-    // Only manage body scroll and announce when certificate is actually provided
     if (certificate) {
-      // Announce modal opening to screen readers
-      accessibilityUtils.announce(
-        `Certificate modal opened: ${certificate.title}`
-      );
-
-      // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
 
-      // Prevent backdrop clicks for a brief moment after opening
       isOpeningRef.current = true;
       const timer = setTimeout(() => {
         isOpeningRef.current = false;
@@ -49,13 +36,11 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
 
       return () => {
         clearTimeout(timer);
-        // Always restore body scroll when component unmounts or certificate changes
         document.body.style.overflow = 'unset';
       };
     }
 
     return () => {
-      // Always restore body scroll when component unmounts or certificate changes
       document.body.style.overflow = 'unset';
     };
   }, [certificate]);
@@ -76,7 +61,6 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
   const handleClose = () => {
     if (isOpeningRef.current) return;
     trackButtonClick('close_certificate_modal', 'certificate_modal');
-    accessibilityUtils.announce('Certificate modal closed');
     onClose();
   };
 
@@ -87,31 +71,22 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
     );
   };
 
-  // Early return after all hooks have been called
   if (!certificate) return null;
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
       onClick={handleClose}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="certificate-modal-title"
-      aria-describedby="certificate-modal-description"
     >
       <motion.div
-        ref={containerRef}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         className="bg-light-surface dark:bg-dark-surface rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
-        role="document"
-        onKeyDown={handleKeyDown}
-        tabIndex={-1}
       >
         <div className="p-6">
           {/* Header */}
@@ -120,17 +95,13 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
               <div className="p-2 rounded-lg bg-primary-coral/10">
                 {getCategoryIcon(certificate.categoryType)}
               </div>
-              <h2
-                id="certificate-modal-title"
-                className="text-2xl font-bold text-light-text dark:text-dark-text"
-              >
+              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text">
                 {certificate.title}
               </h2>
             </div>
             <button
               onClick={handleClose}
               className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded"
-              aria-label="Close certificate modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -140,10 +111,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="space-y-4">
             <div>
               <h3 className="text-lg font-semibold mb-2">Description</h3>
-              <p
-                id="certificate-modal-description"
-                className="text-sm text-light-muted dark:text-dark-muted"
-              >
+              <p className="text-sm text-light-muted dark:text-dark-muted">
                 {certificate.description}
               </p>
             </div>
@@ -215,16 +183,16 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
                 rel="noopener noreferrer"
                 className="btn-primary text-sm px-4 py-2"
                 onClick={handleViewCertificate}
-                aria-label={`View ${certificate.title} certificate`}
               >
                 View Certificate
-                <ExternalLink className="w-3 h-3 ml-1" aria-hidden="true" />
+                <ExternalLink className="w-3 h-3 ml-1" />
               </a>
             </div>
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 };
 

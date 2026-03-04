@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Calendar, Clock, ExternalLink, X } from 'lucide-react';
 import type { MediumArticle } from '@domain/models';
@@ -17,7 +18,7 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
     });
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
@@ -42,7 +43,6 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
             </h2>
             <button
               onClick={onClose}
-              aria-label="Close modal"
               className="text-light-muted dark:text-dark-muted hover:text-light-text dark:hover:text-dark-text transition-colors"
             >
               <X className="w-6 h-6" />
@@ -123,7 +123,8 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

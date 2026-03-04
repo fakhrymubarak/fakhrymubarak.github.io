@@ -1,17 +1,13 @@
-import React, { Suspense, lazy, useEffect } from 'react';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import React, { lazy, Suspense } from 'react';
+import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import ProjectCard from './project/ProjectCard';
-const ProjectModal = lazy(() => import('./project/ProjectModal'));
-const ProjectFilter = lazy(() => import('./project/ProjectFilter'));
+import ProjectModal from './project/ProjectModal';
 import { Filter } from 'lucide-react';
-import { useProjects, useAnalytics } from '@/presentation';
+import { useAnalytics, useProjects } from '@/presentation';
+
+const ProjectFilter = lazy(() => import('./project/ProjectFilter'));
 
 const ProjectsSection: React.FC = () => {
-  useEffect(() => {
-    // Preload modal chunk so the first open doesn't flash the fallback
-    void import('./project/ProjectModal');
-  }, []);
-
   const {
     displayedProjects,
     selectedProject,
@@ -152,13 +148,11 @@ const ProjectsSection: React.FC = () => {
       {/* Project Modal */}
       <AnimatePresence mode="wait">
         {selectedProject && (
-          <Suspense fallback={null}>
-            <ProjectModal
-              key={selectedProject.id}
-              project={selectedProject}
-              onClose={handleCloseModal}
-            />
-          </Suspense>
+          <ProjectModal
+            key={selectedProject.id}
+            project={selectedProject}
+            onClose={handleCloseModal}
+          />
         )}
       </AnimatePresence>
     </section>
