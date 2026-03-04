@@ -39,6 +39,10 @@ import javaIconDark from '@/assets/icons/tech/ic_java_dark.svg';
 import javaIconLight from '@/assets/icons/tech/ic_java_light.svg';
 import flutterIconDark from '@/assets/icons/tech/ic_flutter_dark.svg';
 import flutterIconLight from '@/assets/icons/tech/ic_flutter_light.svg';
+import goIconDark from '@/assets/icons/tech/ic_go_dark.svg';
+import goIconLight from '@/assets/icons/tech/ic_go_light.svg';
+import reactIconDark from '@/assets/icons/tech/ic_react_dark.svg';
+import reactIconLight from '@/assets/icons/tech/ic_react_light.svg';
 
 export const portfolioData: PortfolioData = {
   introduction: {
@@ -83,6 +87,22 @@ export const portfolioData: PortfolioData = {
           dark: flutterIconDark,
         },
         color: '#02569B',
+      },
+      {
+        name: 'Go',
+        icon: {
+          light: goIconLight,
+          dark: goIconDark,
+        },
+        color: '#00ADD8',
+      },
+      {
+        name: 'React',
+        icon: {
+          light: reactIconLight,
+          dark: reactIconDark,
+        },
+        color: '#61DAFB',
       },
     ],
   },
