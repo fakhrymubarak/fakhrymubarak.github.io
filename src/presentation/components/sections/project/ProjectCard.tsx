@@ -92,19 +92,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Action Button */}
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-outline text-sm px-4 py-2"
-          onClick={e => {
-            e.stopPropagation();
-            trackButtonClick('view_project', `project_${project.title}`);
-          }}
-        >
-          View Project
-          <ExternalLink className="w-3 h-3 ml-1" />
-        </a>
+        {project.link !== '' && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-outline text-sm px-4 py-2"
+            onClick={e => {
+              e.stopPropagation();
+              trackButtonClick('view_project', `project_${project.title}`);
+            }}
+          >
+            View Project
+            <ExternalLink className="w-3 h-3 ml-1" />
+          </a>
+        )}
       </div>
     </motion.div>
   );

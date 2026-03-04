@@ -136,17 +136,19 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 {project.period}
               </span>
               <div className="flex space-x-2">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-sm px-4 py-2"
-                  onClick={handleViewProject}
-                  aria-label={`View ${project.title} project`}
-                >
-                  View Project
-                  <ExternalLink className="w-3 h-3 ml-1" aria-hidden="true" />
-                </a>
+                {project.link !== '' && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-sm px-4 py-2"
+                    onClick={handleViewProject}
+                    aria-label={`View ${project.title} project`}
+                  >
+                    View Project
+                    <ExternalLink className="w-3 h-3 ml-1" aria-hidden="true" />
+                  </a>
+                )}
                 {project.hasGithub && project.githubUrl && (
                   <a
                     href={project.githubUrl}
