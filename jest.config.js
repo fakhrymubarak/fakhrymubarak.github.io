@@ -79,6 +79,7 @@ export default {
         VITE_FIREBASE_MESSAGING_SENDER_ID: 'test-sender-id',
         VITE_FIREBASE_APP_ID: 'test-app-id',
         VITE_FIREBASE_MEASUREMENT_ID: 'test-measurement-id',
+        VITE_SITE_URL: 'https://fakhrymubarak.my.id',
       },
     },
   },

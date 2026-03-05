@@ -10,11 +10,13 @@ interface SEOProps {
   type?: string;
 }
 
+const SITE_URL = import.meta.env.VITE_SITE_URL || '';
+
 const SEO: React.FC<SEOProps> = ({
   title = 'Fakhry Mubarak - Software Engineer',
-  description = 'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
-  image = '/avatar.webp',
-  url = 'https://fakhrymubarak.github.io/',
+  description = 'Software Engineer with over 4 years of professional experience building scalable softwares. Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. Chasing impact, craftsmanship, and growth. Open for any challenges and opportunities.',
+  image = `${SITE_URL}/avatar.webp`,
+  url = `${SITE_URL}/`,
   type = 'website',
 }) => {
   const { introduction } = useIntro();
@@ -42,11 +44,11 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:site_name" content="Fakhry Mubarak Portfolio" />
 
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
-      <meta property="twitter:title" content={seoTitle} />
-      <meta property="twitter:description" content={seoDescription} />
-      <meta property="twitter:image" content={image} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={url} />
+      <meta name="twitter:title" content={seoTitle} />
+      <meta name="twitter:description" content={seoDescription} />
+      <meta name="twitter:image" content={image} />
 
       {/* Additional Meta Tags */}
       <meta name="author" content="Fakhry Mubarak" />
@@ -98,7 +100,7 @@ const SEO: React.FC<SEOProps> = ({
           '@context': 'https://schema.org',
           '@type': 'Person',
           name: 'Fakhry Mubarak',
-          jobTitle: 'Software Engineer',
+          jobTitle: 'Senior Software Engineer',
           description: seoDescription,
           url: url,
           image: image,
@@ -118,7 +120,7 @@ const SEO: React.FC<SEOProps> = ({
           ],
           worksFor: {
             '@type': 'Organization',
-            name: 'PT Phincon',
+            name: 'Transjakarta',
           },
         })}
       </script>
