@@ -9,7 +9,7 @@ import {
   MessageCircle,
   Youtube,
 } from 'lucide-react';
-import { useFooter, useAnalytics } from '@/presentation';
+import { useAnalytics, useFooter } from '@/presentation';
 
 const FooterSection: React.FC = () => {
   const { footer } = useFooter();
@@ -179,16 +179,7 @@ const FooterSection: React.FC = () => {
             className="border-t border-light-muted/20 dark:border-dark-muted/20 pt-8 pb-8 text-center"
           >
             <p className="text-sm text-light-muted dark:text-dark-muted">
-              {footer.signature} •{' '}
-              <a
-                href="https://fakhrymubarak.github.io/showcase-v1/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary-coral transition-colors underline"
-                onClick={() => trackButtonClick('view_v1_showcase', 'footer')}
-              >
-                See Also The V1
-              </a>
+              {footer.signature} - {new Date().getFullYear()}
             </p>
           </motion.div>
         </motion.div>

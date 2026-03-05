@@ -521,7 +521,7 @@ export const portfolioData: PortfolioData = {
         icon: 'message-circle',
       },
     ],
-    signature: '© Prompted using Cursor in 2025',
+    signature: '© Crafted by Fakhry Mubarak in 2025',
     contactImage: footerAvatarImage,
   },
 };
