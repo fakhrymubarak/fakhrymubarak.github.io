@@ -99,7 +99,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: fakhrymubarak.github.io
+          cname: ${{ vars.CUSTOM_DOMAIN || 'fakhrymubarak.github.io' }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -151,7 +151,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: fakhrymubarak.github.io
+          cname: ${{ vars.CUSTOM_DOMAIN || 'fakhrymubarak.github.io' }}
 
       - name: Create rollback notification
         uses: softprops/action-gh-release@v1
