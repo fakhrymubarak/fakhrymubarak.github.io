@@ -74,6 +74,7 @@ describe('useAnalytics', () => {
 
   it('trackEvent calls logEvent with correct parameters', () => {
     const { result } = renderHook(() => useAnalytics());
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { logEvent } = require('firebase/analytics');
 
     act(() => {
@@ -87,6 +88,7 @@ describe('useAnalytics', () => {
 
   it('trackEventIdle uses requestIdleCallback when available', () => {
     const { result } = renderHook(() => useAnalytics());
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { logEvent } = require('firebase/analytics');
 
     act(() => {
@@ -110,6 +112,7 @@ describe('useAnalytics', () => {
 
   it('trackPageView calls trackEvent with page_view', () => {
     const { result } = renderHook(() => useAnalytics());
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { logEvent } = require('firebase/analytics');
 
     act(() => {
@@ -123,6 +126,7 @@ describe('useAnalytics', () => {
 
   it('trackButtonClick uses trackEventIdle for performance', () => {
     const { result } = renderHook(() => useAnalytics());
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { logEvent } = require('firebase/analytics');
 
     act(() => {
@@ -147,6 +151,7 @@ describe('useAnalytics', () => {
 
   it('trackProjectView uses trackEventIdle for performance', () => {
     const { result } = renderHook(() => useAnalytics());
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { logEvent } = require('firebase/analytics');
 
     act(() => {
@@ -170,6 +175,7 @@ describe('useAnalytics', () => {
 
   it('trackContactClick uses trackEventIdle for performance', () => {
     const { result } = renderHook(() => useAnalytics());
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { logEvent } = require('firebase/analytics');
 
     act(() => {

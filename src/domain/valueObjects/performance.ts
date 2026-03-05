@@ -71,7 +71,7 @@ class PerformanceMonitor {
       });
       fcpObserver.observe({ entryTypes: ['paint'] });
       this.observers.push(fcpObserver);
-    } catch (error) {
+    } catch {
       // Silently fail to avoid console pollution
     }
 
@@ -88,7 +88,7 @@ class PerformanceMonitor {
       });
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
       this.observers.push(lcpObserver);
-    } catch (error) {
+    } catch {
       // Silently fail to avoid console pollution
     }
 
@@ -105,7 +105,7 @@ class PerformanceMonitor {
       });
       fidObserver.observe({ entryTypes: ['first-input'] });
       this.observers.push(fidObserver);
-    } catch (error) {
+    } catch {
       // Silently fail to avoid console pollution
     }
 
@@ -129,7 +129,7 @@ class PerformanceMonitor {
       });
       clsObserver.observe({ entryTypes: ['layout-shift'] });
       this.observers.push(clsObserver);
-    } catch (error) {
+    } catch {
       // Silently fail to avoid console pollution
     }
   }

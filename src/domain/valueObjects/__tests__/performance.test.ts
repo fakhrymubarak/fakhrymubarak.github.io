@@ -113,6 +113,7 @@ describe('Performance utilities', () => {
     it('returns null when monitor is not initialized', () => {
       // Reset the module to clear the singleton
       jest.resetModules();
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { getPerformanceMonitor: getMonitor } = require('../performance');
 
       const monitor = getMonitor();
