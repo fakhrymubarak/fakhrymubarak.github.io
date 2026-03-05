@@ -83,6 +83,13 @@ jest.mock('@presentation/hooks/useTheme', () => ({
   }),
 }));
 
+// Mock useProjects hook
+jest.mock('@presentation/hooks/useProjects', () => ({
+  useProjects: () => ({
+    projects: new Array(8).fill({}),
+  }),
+}));
+
 // Mock useAnalytics hook
 const mockTrackButtonClick = jest.fn();
 const mockTrackContactClick = jest.fn();
@@ -152,9 +159,11 @@ describe('IntroSection', () => {
   });
 
   it('renders experience badges', () => {
+    jest.useFakeTimers().setSystemTime(new Date('2025-07-01'));
     render(<IntroSection />);
 
     expect(screen.getByText('+3.5 yrs')).toBeInTheDocument();
     expect(screen.getByText('+8 projects')).toBeInTheDocument();
+    jest.useRealTimers();
   });
 });

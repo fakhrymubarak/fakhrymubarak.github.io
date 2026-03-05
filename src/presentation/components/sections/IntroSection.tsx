@@ -1,10 +1,19 @@
 import React from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useIntro, useTheme } from '@/presentation';
+import { useIntro, useTheme, useProjects } from '@/presentation';
 
 const IntroSection: React.FC = () => {
   const { introduction } = useIntro();
   const { theme } = useTheme();
+  const { projects } = useProjects();
+
+  // Calculate experience from Jan 2022 in 0.5 increments
+  const startDate = new Date(2022, 0, 1); // Jan 1, 2022
+  const currentDate = new Date();
+  const diffInMonths =
+    (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
+    (currentDate.getMonth() - startDate.getMonth());
+  const yearsOfExperience = Math.floor(diffInMonths / 6) * 0.5;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -56,12 +65,12 @@ const IntroSection: React.FC = () => {
                 {/* Floating elements - using CSS animations instead of Framer Motion */}
                 <div className="absolute -top-4 -right-4 min-w-[4rem] h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg px-2 animate-float">
                   <span className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">
-                    +3.5 yrs
+                    +{yearsOfExperience} yrs
                   </span>
                 </div>
                 <div className="absolute -bottom-4 -left-4 min-w-[3.5rem] h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg px-2 animate-float-reverse">
                   <span className="text-white font-bold text-xs whitespace-nowrap">
-                    +8 projects
+                    +{projects.length} projects
                   </span>
                 </div>
               </div>
