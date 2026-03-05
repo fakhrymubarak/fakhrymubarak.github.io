@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useIntro } from '@/presentation';
+import { SITE_URL } from '@/shared/env';
 
 interface SEOProps {
   title?: string;
@@ -9,8 +10,6 @@ interface SEOProps {
   url?: string;
   type?: string;
 }
-
-const SITE_URL = import.meta.env.VITE_SITE_URL || '';
 
 const SEO: React.FC<SEOProps> = ({
   title = 'Fakhry Mubarak - Software Engineer',

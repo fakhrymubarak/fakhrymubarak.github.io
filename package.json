@@ -76,7 +76,6 @@
     "vite-plugin-compression": "^0.5.1"
   },
   "overrides": {
-    "tmp": "0.2.5",
-    "minimatch": "^9.0.7"
+    "tmp": "0.2.5"
   }
 }

@@ -3,6 +3,9 @@ export default {
   testEnvironment: 'jsdom',
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: {
+    '^@/infrastructure/adapters/firebase$': '<rootDir>/__mocks__/firebaseMock.js',
+    '^@shared/env$': '<rootDir>/__mocks__/envMock.js',
+    '^@/shared/env$': '<rootDir>/__mocks__/envMock.js',
     '^@assets/(.*)$': '<rootDir>/__mocks__/fileMock.js',
     '^@/assets/(.*)$': '<rootDir>/__mocks__/fileMock.js',
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -11,8 +14,6 @@ export default {
     '^@domain/(.*)$': '<rootDir>/src/domain/$1',
     '^@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
-    '^@/infrastructure/adapters/firebase$':
-      '<rootDir>/__mocks__/firebaseMock.js',
 
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
