@@ -3,7 +3,8 @@ export default {
   testEnvironment: 'jsdom',
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleNameMapper: {
-    '^@/infrastructure/adapters/firebase$': '<rootDir>/__mocks__/firebaseMock.js',
+    '^@/infrastructure/adapters/firebase$':
+      '<rootDir>/__mocks__/firebaseMock.js',
     '^@shared/env$': '<rootDir>/__mocks__/envMock.js',
     '^@/shared/env$': '<rootDir>/__mocks__/envMock.js',
     '^@assets/(.*)$': '<rootDir>/__mocks__/fileMock.js',

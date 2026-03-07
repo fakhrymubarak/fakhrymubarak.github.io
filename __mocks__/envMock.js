@@ -1,3 +1,3 @@
 module.exports = {
-  SITE_URL: 'https://fakhrymubarak.my.id'
+  SITE_URL: 'https://fakhrymubarak.my.id',
 };
