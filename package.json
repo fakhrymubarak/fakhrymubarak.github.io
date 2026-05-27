@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/update-sitemap-date.cjs",
     "build": "node scripts/build-with-version.cjs && tsc && vite build",
     "postbuild": "node scripts/spa-fallbacks.cjs",
     "build:analyze": "node scripts/build-with-version.cjs && tsc && vite build --mode analyze",
@@ -29,7 +30,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "axios": "^1.12.2",
+    "axios": "^1.16.0",
     "firebase": "^12.1.0",
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.294.0",
@@ -71,11 +72,11 @@
     "tailwindcss": "^3.3.5",
     "ts-jest": "^29.4.0",
     "typescript": "^5.2.2",
-    "vite": "^7.1.9",
+    "vite": "^7.3.2",
     "vite-bundle-analyzer": "^0.7.0",
     "vite-plugin-compression": "^0.5.1"
   },
   "overrides": {
-    "tmp": "0.2.5"
+    "tmp": ">=0.2.6"
   }
 }

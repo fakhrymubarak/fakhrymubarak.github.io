@@ -53,7 +53,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="author" content="Fakhry Mubarak" />
       <meta
         name="keywords"
-        content="Software Engineer, Android Developer, Flutter Developer, Mobile Development, Kotlin, Java, React, TypeScript"
+        content="Fakhry Mubarak, Software Engineer, Android Developer, Flutter Developer, Mobile Development, Kotlin, Java, React, TypeScript, KMM, Go"
       />
       <meta name="robots" content="index, follow" />
       <meta name="language" content="English" />
