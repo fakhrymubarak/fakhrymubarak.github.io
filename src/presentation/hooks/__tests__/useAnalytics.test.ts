@@ -32,6 +32,7 @@ describe('useAnalytics', () => {
       Object.defineProperty(global, 'requestIdleCallback', {
         value: mockRequestIdleCallback,
         writable: true,
+        configurable: true,
       });
     }
 
