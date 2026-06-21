@@ -2,12 +2,12 @@ name: Release Pipeline
 
 on:
   push:
-    branches:
-      - 'release/**'
+    tags:
+      - 'v*'
   workflow_dispatch:
     inputs:
       rollback_version:
-        description: 'Version to rollback to (e.g., v1.0.0)'
+        description: 'Release tag to roll back to (e.g., v1.0.0)'
         required: true
         type: string
       rollback_reason:
@@ -24,11 +24,11 @@ env:
   VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
   VITE_FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
   VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
-  VITE_APP_VERSION: ${{ github.ref_name }}
+  VITE_APP_VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.rollback_version || github.ref_name }}
   VITE_SITE_URL: ${{ vars.SITE_URL || 'https://fakhrymubarak.my.id' }}
 
 jobs:
-  # Build and deploy for release branches
+  # Build and deploy for release tags
   build:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -78,22 +78,11 @@ jobs:
           name: build-artifact
           path: dist
 
-      - name: Extract version from branch name
+      - name: Resolve release tag
         id: version
         run: |
-          BRANCH_NAME="${{ github.ref_name }}"
-          VERSION=$(echo $BRANCH_NAME | sed 's/release\///')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Deploying version: $VERSION"
-
-      - name: Create release tag
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git tag -a "${{ steps.version.outputs.version }}" -m "Release ${{ steps.version.outputs.version }}"
-          git push origin "${{ steps.version.outputs.version }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "tag=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          echo "Deploying release tag: ${{ github.ref_name }}"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -105,18 +94,18 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: '${{ steps.version.outputs.version }}'
-          name: 'Release ${{ steps.version.outputs.version }}'
+          tag_name: '${{ steps.version.outputs.tag }}'
+          name: 'Release ${{ steps.version.outputs.tag }}'
           body: |
-            ## Release v${{ steps.version.outputs.version }}
+            ## Release ${{ steps.version.outputs.tag }}
 
-            This release was automatically deployed from branch `${{ github.ref_name }}`.
+            This release was automatically deployed from tag `${{ github.ref_name }}`.
 
             **Deployment Details:**
-            - Branch: ${{ github.ref_name }}
+            - Tag: ${{ github.ref_name }}
             - Commit: ${{ github.sha }}
             - Triggered by: ${{ github.actor }}
-            - Timestamp: ${{ github.event.head_commit.timestamp }}
+            - Workflow Run: #${{ github.run_number }}
           draft: false
           prerelease: false
           generate_release_notes: true
@@ -125,6 +114,10 @@ jobs:
   rollback:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.rollback_version != ''
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -142,7 +135,7 @@ jobs:
       - name: Checkout specific version
         run: |
           git fetch --tags
-          git checkout "v${{ github.event.inputs.rollback_version }}"
+          git checkout "${{ github.event.inputs.rollback_version }}"
 
       - name: Build application
         run: npm run build
@@ -166,7 +159,6 @@ jobs:
             - Rollback Version: ${{ github.event.inputs.rollback_version }}
             - Reason: ${{ github.event.inputs.rollback_reason || 'No reason provided' }}
             - Triggered by: ${{ github.actor }}
-            - Timestamp: ${{ github.event.head_commit.timestamp }}
             - Workflow Run: #${{ github.run_number }}
 
             This is a rollback deployment to address issues with the current release.
@@ -175,6 +167,6 @@ jobs:
 
       - name: Notify rollback completion
         run: |
-          echo "Rollback to v${{ github.event.inputs.rollback_version }} completed successfully"
+          echo "Rollback to ${{ github.event.inputs.rollback_version }} completed successfully"
           echo "Reason: ${{ github.event.inputs.rollback_reason || 'No reason provided' }}"
           echo "Triggered by: ${{ github.actor }}"
