@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(**)"
+    ],
+    "deny": []
+  },
+  "approvalMode": "unrestricted",
+  "autoAcceptWebSearch": true,
+  "sandbox": {
+    "mode": "disabled",
+    "networkAccess": "user_config_with_defaults"
+  }
+}
