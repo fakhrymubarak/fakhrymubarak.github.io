@@ -42,9 +42,7 @@ jest.mock('@application/store/ThemeContext.tsx', () => ({
 describe('App', () => {
   const renderApp = () => {
     return render(
-      <BrowserRouter
-        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-      >
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     );

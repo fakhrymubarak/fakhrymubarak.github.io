@@ -1,0 +1,14 @@
+{
+  // Fail the build on production advisories at moderate severity or above.
+  "moderate": true,
+  "skip-dev": true,
+  "allowlist": [
+    // GHSA-qwww-vcr4-c8h2 — React Router RSC-mode CSRF bypass.
+    // Not exploitable here: this is a client-side SPA using BrowserRouter with
+    // declarative Routes/useLocation; React Server Components mode is not used.
+    // No react-router version currently clears both this and the moderate
+    // open-redirect advisories (fixed only in >=7.18.0); a fix is expected in
+    // react-router 8.3.0. Re-audit and remove when 8.3.0+ is adopted.
+    "GHSA-qwww-vcr4-c8h2"
+  ]
+}

@@ -74,10 +74,10 @@ jobs:
         run: npm ci
 
       - name: Run security audit
-        run: npm audit --omit=dev --audit-level=moderate
+        run: node scripts/audit-prod.cjs
 
       - name: Run dependency check
-        run: npx audit-ci --moderate --skip-dev
+        run: npx audit-ci --config ./audit-ci.jsonc
 
   quality:
     runs-on: ubuntu-latest

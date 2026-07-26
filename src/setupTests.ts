@@ -1,5 +1,14 @@
+import { TextEncoder, TextDecoder } from 'util';
 import '@testing-library/jest-dom';
 import { toHaveNoViolations } from 'jest-axe';
+
+// react-router v7 references TextEncoder/TextDecoder at import time, which jsdom
+// does not provide. Polyfill from Node before any router import runs (setup
+// files complete before test modules are loaded). Object.assign avoids the
+// Node-vs-DOM TextDecoder type mismatch under strict TypeScript.
+if (typeof global.TextEncoder === 'undefined') {
+  Object.assign(global, { TextEncoder, TextDecoder });
+}
 
 // Extend Jest matchers for jest-axe
 expect.extend(toHaveNoViolations);
