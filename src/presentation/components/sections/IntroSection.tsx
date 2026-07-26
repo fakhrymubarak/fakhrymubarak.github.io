@@ -15,13 +15,13 @@ const IntroSection: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 24, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
@@ -32,96 +32,98 @@ const IntroSection: React.FC = () => {
   };
 
   return (
-    <section id="home" className="section bg-gradient">
+    <section id="home" className="section">
       <div className="container">
         <LazyMotion features={domAnimation}>
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-15rem)]">
-            {/* Image - Mobile First */}
+          <m.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="bento-grid"
+          >
+            {/* ── Headline tile: the editorial anchor ── */}
             <m.div
               variants={itemVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex justify-center lg:justify-end order-1 lg:order-2"
+              className="bento-tile-feature bento-span-4 flex flex-col justify-center min-h-[18rem] md:min-h-[24rem]"
             >
-              <div className="relative">
-                <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-br from-primary-coral/20 to-primary-lavender/20 flex items-center justify-center">
-                  <img
-                    src={introduction.imagePath}
-                    alt="Fakhry Mubarak"
-                    className="w-72 h-72 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl"
-                    loading="eager"
-                    fetchPriority="high"
-                    width={320}
-                    height={320}
-                    decoding="async"
-                    sizes="(min-width: 1024px) 20rem, 18rem"
-                  />
-                </div>
-                {/* Floating elements - using CSS animations instead of Framer Motion */}
-                <div className="absolute -top-4 -right-4 min-w-[4rem] h-16 bg-primary-coral rounded-full flex items-center justify-center shadow-lg px-2 animate-float">
-                  <span className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">
-                    +{yearsOfExperience} yrs
-                  </span>
-                </div>
-                <div className="absolute -bottom-4 -left-4 min-w-[3.5rem] h-12 bg-primary-lavender rounded-full flex items-center justify-center shadow-lg px-2 animate-float-reverse">
-                  <span className="text-white font-bold text-xs whitespace-nowrap">
-                    +{projects.length} projects
-                  </span>
-                </div>
+              <p className="eyebrow mb-4">{introduction.title[0]}</p>
+              <h1 className="display-xl text-light-text dark:text-dark-text">
+                {introduction.title[1]}
+              </h1>
+              <p className="body-text mt-6 max-w-xl">
+                {introduction.description}
+              </p>
+            </m.div>
+
+            {/* ── Portrait tile ── */}
+            <m.div
+              variants={itemVariants}
+              className="bento-tile bento-span-2 flex items-center justify-center p-0 min-h-[18rem] md:min-h-[24rem]"
+            >
+              <img
+                src={introduction.imagePath}
+                alt="Fakhry Mubarak"
+                className="w-full h-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+                width={320}
+                height={320}
+                decoding="async"
+                sizes="(min-width: 1024px) 20rem, 18rem"
+              />
+            </m.div>
+
+            {/* ── Stat: years of experience ── */}
+            <m.div
+              variants={itemVariants}
+              className="bento-tile bento-span-2 flex flex-col justify-between min-h-[9rem]"
+            >
+              <p className="eyebrow">Experience</p>
+              <p className="display-lg text-primary-coral leading-none">
+                +{yearsOfExperience} yrs
+              </p>
+            </m.div>
+
+            {/* ── Stat: projects shipped ── */}
+            <m.div
+              variants={itemVariants}
+              className="bento-tile bento-span-2 flex flex-col justify-between min-h-[9rem]"
+            >
+              <p className="eyebrow">Shipped</p>
+              <p className="display-lg text-primary-lavender leading-none">
+                +{projects.length} projects
+              </p>
+            </m.div>
+
+            {/* ── Tech stack tile ── */}
+            <m.div
+              variants={itemVariants}
+              className="bento-tile bento-span-2 flex flex-col min-h-[9rem]"
+            >
+              <h3 className="eyebrow mb-4">Tech Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {introduction.techStack.map(tech => (
+                  <div
+                    key={tech.name}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-full
+                      bg-black/[0.04] dark:bg-white/[0.06]
+                      border border-black/[0.05] dark:border-white/[0.07]"
+                  >
+                    <img
+                      src={tech.icon[theme]}
+                      alt={`${tech.name} icon`}
+                      className="w-4 h-4 object-contain"
+                      loading="lazy"
+                      decoding="async"
+                      width={16}
+                      height={16}
+                    />
+                    <span className="font-medium text-xs">{tech.name}</span>
+                  </div>
+                ))}
               </div>
             </m.div>
-
-            {/* Content */}
-            <m.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="space-y-8 order-2 lg:order-1"
-            >
-              {/* Title */}
-              <m.div variants={itemVariants} className="space-y-2">
-                <h1 className="heading-1 text-4xl md:text-5xl lg:text-6xl font-bold">
-                  <span className="text-light-text dark:text-dark-text">
-                    {introduction.title[0]}
-                  </span>
-                  <br />
-                  <span className="text-gradient">{introduction.title[1]}</span>
-                </h1>
-              </m.div>
-
-              {/* Description */}
-              <m.p variants={itemVariants} className="body-text max-w-2xl">
-                {introduction.description}
-              </m.p>
-
-              {/* Tech Stack */}
-              <m.div variants={itemVariants} className="space-y-4">
-                <h3 className="heading-3">Tech Stack</h3>
-                <div className="flex flex-wrap gap-4">
-                  {introduction.techStack.map((tech, index) => (
-                    <m.div
-                      key={tech.name}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg shadow-sm"
-                    >
-                      <img
-                        src={tech.icon[theme]}
-                        alt={`${tech.name} icon`}
-                        className="w-6 h-6 object-contain"
-                        loading="lazy"
-                        decoding="async"
-                        width={24}
-                        height={24}
-                      />
-                      <span className="font-medium text-sm">{tech.name}</span>
-                    </m.div>
-                  ))}
-                </div>
-              </m.div>
-            </m.div>
-          </div>
+          </m.div>
         </LazyMotion>
       </div>
     </section>

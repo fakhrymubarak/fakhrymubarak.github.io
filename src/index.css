@@ -51,6 +51,80 @@
     @apply bg-light-surface dark:bg-dark-surface rounded-lg shadow-lg p-6;
   }
 
+  /* ---------- Bento editorial system ---------- */
+
+  /* Bento grid: 6-col fluid canvas, asymmetric spans set per-tile */
+  .bento-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 md:gap-5;
+  }
+
+  /* Base tile — the atom of the whole layout.
+     Declared after .card so a `card bento-tile` combo resolves to bento styling
+     (tests query `.card` as a stable hook; bento supplies the visuals). */
+  .bento-tile {
+    @apply relative overflow-hidden rounded-bento p-6 md:p-7
+      bg-light-surface dark:bg-dark-surface
+      border border-black/[0.06] dark:border-white/[0.08]
+      shadow-none
+      transition-all duration-300;
+  }
+
+  .bento-tile-interactive {
+    @apply bento-tile hover:-translate-y-1
+      hover:border-primary-coral/40 dark:hover:border-primary-coral/40
+      hover:shadow-xl hover:shadow-primary-coral/[0.07];
+  }
+
+  /* Feature tile — the one loud tile per section */
+  .bento-tile-feature {
+    @apply bento-tile rounded-bento-lg
+      bg-gradient-to-br from-primary-coral/[0.09] via-transparent to-primary-lavender/[0.09];
+  }
+
+  /* Column spans (lg = 6-col canvas) */
+  .bento-span-2 {
+    @apply lg:col-span-2;
+  }
+
+  .bento-span-3 {
+    @apply sm:col-span-2 lg:col-span-3;
+  }
+
+  .bento-span-4 {
+    @apply sm:col-span-2 lg:col-span-4;
+  }
+
+  .bento-span-6 {
+    @apply sm:col-span-2 lg:col-span-6;
+  }
+
+  /* Editorial typography */
+  .display-xl {
+    @apply font-display font-bold text-display-xl;
+  }
+
+  .display-lg {
+    @apply font-display font-bold text-display-lg;
+  }
+
+  .display-md {
+    @apply font-display font-semibold text-display-md;
+  }
+
+  .eyebrow {
+    @apply text-eyebrow uppercase text-primary-coral font-semibold;
+  }
+
+  /* Section header: left-aligned editorial, replaces centered stack */
+  .section-header {
+    @apply max-w-2xl space-y-3 mb-10 md:mb-12;
+  }
+
+  /* Hairline rule used to separate editorial blocks */
+  .rule {
+    @apply border-t border-black/[0.08] dark:border-white/[0.10];
+  }
+
   .heading-1 {
     @apply text-4xl md:text-6xl font-display font-bold;
   }

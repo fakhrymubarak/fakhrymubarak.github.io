@@ -64,23 +64,24 @@ const ProjectsSection: React.FC = () => {
             className="space-y-12"
           >
             {/* Section Header */}
-            <m.div variants={itemVariants} className="text-center space-y-4">
-              <h2 className="heading-2 text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+            <m.div variants={itemVariants} className="section-header">
+              <p className="eyebrow">Selected work</p>
+              <h2 className="display-md text-light-text dark:text-dark-text">
                 Projects
               </h2>
-              <p className="body-text max-w-2xl mx-auto">
+              <p className="body-text">
                 Here are some of the projects I've worked on, showcasing my
                 expertise in mobile development and software engineering.
               </p>
 
               {/* Filter Toggle */}
-              <div className="flex justify-center">
+              <div className="flex pt-2">
                 <button
                   onClick={() => {
                     trackButtonClick('toggle_filters', 'projects_section');
                     handleToggleFilters();
                   }}
-                  className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-full bg-light-surface dark:bg-dark-surface border border-black/[0.06] dark:border-white/[0.08] hover:border-primary-coral/40 transition-colors"
                 >
                   <Filter className="w-4 h-4" />
                   <span>Filter Projects</span>
@@ -109,18 +110,19 @@ const ProjectsSection: React.FC = () => {
               )}
             </AnimatePresence>
 
-            {/* Projects Grid */}
-            <m.div
-              variants={itemVariants}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+            {/* Projects Grid — bento: first tile spans wide, rest form the rhythm */}
+            <m.div variants={itemVariants} className="bento-grid">
               {displayedProjects.map((project, index) => (
-                <ProjectCard
+                <div
                   key={project.id}
-                  project={project}
-                  index={index}
-                  onSelect={handleProjectSelect}
-                />
+                  className={index === 0 ? 'bento-span-4' : 'bento-span-2'}
+                >
+                  <ProjectCard
+                    project={project}
+                    index={index}
+                    onSelect={handleProjectSelect}
+                  />
+                </div>
               ))}
             </m.div>
 
@@ -131,11 +133,11 @@ const ProjectsSection: React.FC = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="text-center"
+                className="flex"
               >
                 <button
                   onClick={handleToggleProjects}
-                  className="btn-outline px-8 py-3"
+                  className="btn-outline px-8 py-3 rounded-full"
                 >
                   {showAllProjects ? 'Show Less' : 'See More'}
                 </button>

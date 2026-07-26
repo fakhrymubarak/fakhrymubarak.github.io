@@ -56,7 +56,7 @@ const CertificateCard: React.FC<CertificateCardProps> = ({
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
-      className="card group cursor-pointer h-full"
+      className="card bento-tile-interactive group cursor-pointer h-full"
       onClick={handleCertificateClick}
     >
       {/* Certificate Content */}
