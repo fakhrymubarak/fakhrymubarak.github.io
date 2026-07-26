@@ -34,6 +34,29 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Poppins', 'system-ui', 'sans-serif'],
       },
+      fontSize: {
+        // Editorial display scale — fluid, clamps between mobile and desktop
+        'display-xl': [
+          'clamp(2.75rem, 8vw, 6rem)',
+          { lineHeight: '0.95', letterSpacing: '-0.03em' },
+        ],
+        'display-lg': [
+          'clamp(2.25rem, 5.5vw, 4rem)',
+          { lineHeight: '1.0', letterSpacing: '-0.025em' },
+        ],
+        'display-md': [
+          'clamp(1.75rem, 3.5vw, 2.75rem)',
+          { lineHeight: '1.1', letterSpacing: '-0.02em' },
+        ],
+        eyebrow: [
+          '0.75rem',
+          { lineHeight: '1', letterSpacing: '0.14em', fontWeight: '600' },
+        ],
+      },
+      borderRadius: {
+        bento: '1.25rem',
+        'bento-lg': '1.75rem',
+      },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',

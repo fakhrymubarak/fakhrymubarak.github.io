@@ -31,11 +31,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5 }}
-      className="card group cursor-pointer"
+      className="card bento-tile-interactive group cursor-pointer h-full flex flex-col p-0"
       onClick={handleProjectClick}
     >
       {/* Project Image */}
-      <div className="relative overflow-hidden rounded-t-lg">
+      <div className="relative overflow-hidden">
         <ResponsiveImage
           src={project.image}
           alt={project.title}
@@ -45,7 +45,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* Project Content */}
-      <div className="pt-4 space-y-4">
+      <div className="p-6 space-y-4 flex-1 flex flex-col">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
@@ -97,7 +97,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline text-sm px-4 py-2"
+            className="btn-outline text-sm px-4 py-2 rounded-full mt-auto self-start"
             onClick={e => {
               e.stopPropagation();
               trackButtonClick('view_project', `project_${project.title}`);
