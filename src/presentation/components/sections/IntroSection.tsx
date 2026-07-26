@@ -58,7 +58,7 @@ const IntroSection: React.FC = () => {
             {/* ── Portrait tile ── */}
             <m.div
               variants={itemVariants}
-              className="bento-tile bento-span-2 flex items-center justify-center p-0 min-h-[18rem] md:min-h-[24rem]"
+              className="bento-tile bento-span-2 sm:col-span-2 flex items-center justify-center p-0 min-h-[18rem] md:min-h-[24rem]"
             >
               <img
                 src={introduction.imagePath}
@@ -98,7 +98,7 @@ const IntroSection: React.FC = () => {
             {/* ── Tech stack tile ── */}
             <m.div
               variants={itemVariants}
-              className="bento-tile bento-span-2 flex flex-col min-h-[9rem]"
+              className="bento-tile bento-span-2 sm:col-span-2 flex flex-col min-h-[9rem]"
             >
               <h3 className="eyebrow mb-4">Tech Stack</h3>
               <div className="flex flex-wrap gap-2">
