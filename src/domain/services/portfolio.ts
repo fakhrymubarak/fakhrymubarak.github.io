@@ -1,5 +1,8 @@
 import { PortfolioData } from '@/domain';
-import { calculateDuration } from '../valueObjects/dateUtils';
+import {
+  calculateDuration,
+  getYearsOfExperience,
+} from '../valueObjects/dateUtils';
 
 // Import assets from the src / assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp';
@@ -49,7 +52,7 @@ export const portfolioData: PortfolioData = {
     title: ['Hi, I am', 'Fakhry Mubarak'],
     subtitle: 'Software Engineer specializing in Android Development',
     description:
-      'Software Engineer with over 4 years of professional experience building scalable softwares. ' +
+      `Software Engineer with over ${getYearsOfExperience()} years of professional experience building scalable softwares. ` +
       'Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. ' +
       'Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. ' +
       'Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. ' +
@@ -351,6 +354,25 @@ export const portfolioData: PortfolioData = {
     {
       type: 'award',
       certificates: [
+        {
+          id: 'tempa-instructor-2026',
+          title: 'Tempa led by Dicoding Instructor',
+          description:
+            "Awarded for outstanding dedication and commitment as an Instructor at Tempa led by Dicoding, sharing insights and expertise with program participants. Tempa is Dicoding's intensive bootcamp that strengthens fundamental tech skills for Indonesian university students across three learning paths - Artificial Intelligence, Web Development, and Mobile Development - through 900+ hours of expert-led sessions, code reviews, and capstone projects. Through the collective effort of all contributors, the program achieved a 92% graduation rate.",
+          certificateUrl:
+            'https://drive.google.com/file/d/1D7ccnZBw1xfMwnf4ROZc3u0uz24jGGKD/view?usp=drive_link',
+          credentialId: 'Tempa26/LS/XXVI-7/TP26-MD017',
+          issueDate: '2026-07-17',
+          status: 'active',
+          skills: [
+            'Mentorship',
+            'Technical Training',
+            'Mobile Development',
+            'Flutter',
+            'Student Guidance',
+            'Educational Leadership',
+          ],
+        },
         {
           id: 'dicoding-expert-session-speaker',
           title: 'Dicoding Expert Session Speaker',

@@ -1,19 +1,14 @@
 import React from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useIntro, useTheme, useProjects } from '@/presentation';
+import { getYearsOfExperience } from '@/domain';
 
 const IntroSection: React.FC = () => {
   const { introduction } = useIntro();
   const { theme } = useTheme();
   const { projects } = useProjects();
 
-  // Calculate experience from Jan 2022 in 0.5 increments
-  const startDate = new Date(2022, 0, 1); // Jan 1, 2022
-  const currentDate = new Date();
-  const diffInMonths =
-    (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
-    (currentDate.getMonth() - startDate.getMonth());
-  const yearsOfExperience = Math.floor(diffInMonths / 6) * 0.5;
+  const yearsOfExperience = getYearsOfExperience();
 
   const containerVariants = {
     hidden: { opacity: 0 },

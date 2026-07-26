@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useIntro } from '@/presentation';
+import { getYearsOfExperience } from '@/domain';
 import { SITE_URL } from '@/shared/env';
 
 interface SEOProps {
@@ -13,7 +14,7 @@ interface SEOProps {
 
 const SEO: React.FC<SEOProps> = ({
   title = 'Fakhry Mubarak - Software Engineer',
-  description = 'Software Engineer with over 4 years of professional experience building scalable softwares. Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. Chasing impact, craftsmanship, and growth. Open for any challenges and opportunities.',
+  description = `Software Engineer with over ${getYearsOfExperience()} years of professional experience building scalable softwares. Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. Chasing impact, craftsmanship, and growth. Open for any challenges and opportunities.`,
   image = `${SITE_URL}/avatar.webp`,
   url = `${SITE_URL}/`,
   type = 'website',

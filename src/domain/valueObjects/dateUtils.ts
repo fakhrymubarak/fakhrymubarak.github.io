@@ -55,6 +55,19 @@ export function calculateDuration(period: string): string {
 }
 
 /**
+ * Calculate years of professional experience from Jan 2022, in 0.5-year increments.
+ * @returns Years of experience (e.g., 4.5)
+ */
+export function getYearsOfExperience(): number {
+  const startDate = new Date(2022, 0, 1); // Jan 1, 2022
+  const currentDate = new Date();
+  const diffInMonths =
+    (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
+    (currentDate.getMonth() - startDate.getMonth());
+  return Math.floor(diffInMonths / 6) * 0.5;
+}
+
+/**
  * Parse date string in format "MMM YYYY" (e.g., "Jul 2023", "Jan 2022")
  * @param dateStr - Date string to parse
  * @returns Date object or null if invalid
