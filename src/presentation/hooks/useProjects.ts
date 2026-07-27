@@ -3,7 +3,7 @@ import { portfolioData } from '@domain/services/portfolio';
 import { mapPortfolioData } from '@presentation/utils/dataMapper';
 import type { UIProjectState } from '@presentation/models';
 
-const MAX_PROJECTS = 6;
+const MAX_PROJECTS = 5;
 
 export const useProjects = (): UIProjectState & {
   handleProjectSelect: (projectId: string) => void;
