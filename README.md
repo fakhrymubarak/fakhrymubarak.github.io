@@ -82,18 +82,19 @@ A modern, responsive portfolio website built with **React JS** showcasing Fakhry
 
 ```mermaid
 flowchart TD
-    A[Medium RSS Feed] --> B[CORS Proxy api.allorigins.win]
-    B --> C[MediumService.fetchArticles]
-    C --> D[parseRSSFeed + cache]
-    D --> E[useMedium hook]
-    E --> F[MediumSection component]
-    F --> G[MediumCard grid]
-    F --> H[MediumModal]
-    G --> I[Portfolio UI]
-    H --> I
+    A[Medium RSS Feed] --> B[Go medium-api on VPS]
+    B --> C[Caddy HTTPS medium-api.fakhrymubarak.my.id]
+    C --> D[MediumService.fetchArticles]
+    D --> E[30-min client cache]
+    E --> F[useMedium hook]
+    F --> G[MediumSection component]
+    G --> H[MediumCard grid]
+    G --> I[MediumModal]
+    H --> J[Portfolio UI]
+    I --> J
 ```
 
-> The portfolio fetches Medium articles from the browser, but Medium's RSS feed does not include CORS headers allowing direct cross-origin access. The proxy adds permissive headers so `fetch` succeeds while still serving the original feed content.
+> The portfolio calls `GET /api/medium` on the Go service. RSS parsing and transforms happen server-side; the browser only consumes JSON over HTTPS.
 
 ---
 

@@ -26,6 +26,7 @@ env:
   VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
   VITE_APP_VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.rollback_version || github.ref_name }}
   VITE_SITE_URL: ${{ vars.SITE_URL || 'https://fakhrymubarak.my.id' }}
+  VITE_MEDIUM_API_URL: ${{ vars.MEDIUM_API_URL || 'https://medium-api.fakhrymubarak.my.id' }}
 
 jobs:
   # Build and deploy for release tags

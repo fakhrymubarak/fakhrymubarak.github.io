@@ -1,31 +1,36 @@
 import { MediumService } from '../medium';
+import type { MediumData } from '../../models';
 
 describe('MediumService', () => {
-  const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Mock Feed</title>
-    <item>
-      <title>First Article</title>
-      <link>https://example.com/first</link>
-      <guid>guid-1</guid>
-      <pubDate>Wed, 01 Jan 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>First summary<img src="https://example.com/img.jpg" alt="Example" /></p>]]></description>
-      <content:encoded><![CDATA[<p>First content paragraph.</p><p>More words here.</p><img src="https://example.com/img.jpg" alt="Cover" />]]></content:encoded>
-      <category>react</category>
-      <category>testing</category>
-    </item>
-    <item>
-      <title>Second Article</title>
-      <link>https://example.com/second</link>
-      <guid>guid-2</guid>
-      <pubDate>Thu, 02 Jan 2024 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>Second summary</p>]]></description>
-      <content:encoded><![CDATA[<p>Second content paragraph with more than enough words to calculate read time easily.</p>]]></content:encoded>
-      <category>react</category>
-    </item>
-  </channel>
-</rss>`;
+  const mediumData: MediumData = {
+    articles: [
+      {
+        id: 'guid-1',
+        title: 'First Article',
+        description: 'First summary',
+        url: 'https://example.com/first',
+        publishedDate: 'Wed, 01 Jan 2024 00:00:00 GMT',
+        readTime: '1 min read',
+        tags: ['react', 'testing'],
+        featured: true,
+        imageUrl: 'https://example.com/img.jpg',
+        contentSnippet: '<p>First content paragraph.</p>',
+      },
+      {
+        id: 'guid-2',
+        title: 'Second Article',
+        description: 'Second summary',
+        url: 'https://example.com/second',
+        publishedDate: 'Thu, 02 Jan 2024 00:00:00 GMT',
+        readTime: '1 min read',
+        tags: ['react'],
+        featured: true,
+      },
+    ],
+    profileUrl: 'https://medium.com/@tester',
+    totalArticles: 2,
+    lastUpdated: '2024-01-01T00:00:00.000Z',
+  };
 
   const originalFetch = global.fetch;
   const mockFetch = jest.fn();
@@ -36,7 +41,7 @@ describe('MediumService', () => {
     mockFetch.mockResolvedValue({
       ok: true,
       status: 200,
-      text: async () => rssFeed,
+      json: async () => mediumData,
     });
     (global as unknown as { fetch: typeof fetch }).fetch =
       mockFetch as unknown as typeof fetch;
@@ -56,12 +61,12 @@ describe('MediumService', () => {
     }
   });
 
-  it('fetches, parses, and caches Medium articles', async () => {
+  it('fetches MediumData from the API and caches it', async () => {
     const data = await MediumService.fetchArticles('tester');
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringContaining('https://api.allorigins.win/raw?url=')
+      expect.stringMatching(/\/api\/medium$/)
     );
     expect(data.articles).toHaveLength(2);
 
@@ -86,7 +91,7 @@ describe('MediumService', () => {
       .mockResolvedValueOnce({
         ok: true,
         status: 200,
-        text: async () => rssFeed,
+        json: async () => mediumData,
       } as any);
 
     const data = await MediumService.fetchArticles('tester');

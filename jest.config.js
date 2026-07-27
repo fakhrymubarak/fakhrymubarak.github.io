@@ -82,6 +82,7 @@ export default {
         VITE_FIREBASE_APP_ID: 'test-app-id',
         VITE_FIREBASE_MEASUREMENT_ID: 'test-measurement-id',
         VITE_SITE_URL: 'https://fakhrymubarak.my.id',
+        VITE_MEDIUM_API_URL: 'https://medium-api.fakhrymubarak.my.id',
       },
     },
   },

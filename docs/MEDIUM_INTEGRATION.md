@@ -4,14 +4,16 @@ This document explains the automated Medium integration implemented in the portf
 
 ## Overview
 
-The Medium integration automatically fetches articles from your Medium RSS feed and displays them in a dedicated section
-on your portfolio. This eliminates the need to manually update article data.
+The Medium integration fetches pre-transformed article JSON from a small Go service
+(`https://medium-api.fakhrymubarak.my.id`) and displays them in a dedicated section on your
+portfolio. The Go service pulls Medium's RSS server-side, caches it, and exposes a stable
+JSON API so the browser never talks to Medium or a CORS proxy.
 
 ## Features
 
-- **Automatic RSS Feed Fetching**: Fetches articles from `https://medium.com/feed/@fakhrymubarak`
-- **Caching**: 30-minute cache to prevent excessive API calls
-- **Error Handling**: Graceful fallbacks if RSS feed is unavailable
+- **Go backend API**: `GET /api/medium` returns `MediumData` JSON
+- **Caching**: 30-minute client cache (server also refreshes every 30 minutes)
+- **Error Handling**: Graceful fallbacks if the API is unavailable
 - **Filtering**: Filter articles by tags/categories
 - **Modal View**: Detailed article view with content preview
 - **Responsive Design**: Mobile-friendly layout
@@ -22,7 +24,7 @@ on your portfolio. This eliminates the need to manually update article data.
 ### Data Flow
 
 ```
-Medium RSS Feed → MediumService → useMedium Hook → MediumSection Component
+Medium RSS → Go medium-api (cache) → MediumService → useMedium → MediumSection
 ```
 
 ### Components Structure
@@ -31,7 +33,7 @@ Medium RSS Feed → MediumService → useMedium Hook → MediumSection Component
 src/
 ├── domain/
 │   ├── models/index.ts          # MediumArticle, MediumData interfaces
-│   └── services/medium.ts       # RSS feed fetching service
+│   └── services/medium.ts       # Fetches JSON from medium-api
 ├── presentation/
 │   ├── hooks/useMedium.ts       # State management hook
 │   └── components/sections/
@@ -44,21 +46,21 @@ src/
 
 ## Implementation Details
 
-### 1. RSS Feed Integration
+### 1. API Integration
 
-The `MediumService` class handles RSS feed fetching:
+The `MediumService` class fetches from the Go backend:
 
 ```typescript
-// Fetches articles from Medium RSS feed
 const mediumData = await MediumService.fetchArticles('fakhrymubarak');
+// → GET ${VITE_MEDIUM_API_URL}/api/medium
 ```
 
 **Features:**
 
-- CORS proxy support for client-side requests
-- 30-minute caching to reduce API calls
-- Error handling with fallback data
-- Automatic image extraction from articles
+- Configurable via `VITE_MEDIUM_API_URL` (default `https://medium-api.fakhrymubarak.my.id`)
+- 30-minute client-side caching
+- Error handling with fallback sample article
+- Server owns RSS parsing, summaries, images, and snippets
 
 ### 2. Data Models
 
@@ -96,12 +98,10 @@ The `useMedium` hook provides:
 
 ## Configuration
 
-### RSS Feed URL
+### API URL
 
-The integration uses your Medium RSS feed:
-
-```
-https://medium.com/feed/@fakhrymubarak
+```bash
+VITE_MEDIUM_API_URL=https://medium-api.fakhrymubarak.my.id
 ```
 
 ### Caching
@@ -110,14 +110,6 @@ Articles are cached for 30 minutes to improve performance:
 
 ```typescript
 private static readonly CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
-```
-
-### CORS Proxy
-
-Uses `api.allorigins.win` to bypass CORS restrictions:
-
-```typescript
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 ```
 
 ## Usage
