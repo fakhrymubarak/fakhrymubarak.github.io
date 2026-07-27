@@ -12,7 +12,7 @@ JSON API so the browser never talks to Medium or a CORS proxy.
 ## Features
 
 - **Go backend API**: `GET /api/medium` returns `MediumData` JSON
-- **Caching**: 30-minute client cache (server also refreshes every 30 minutes)
+- **Caching**: 30-minute client cache (server refreshes on boot + daily at 03:00 Asia/Jakarta)
 - **Error Handling**: Graceful fallbacks if the API is unavailable
 - **Filtering**: Filter articles by tags/categories
 - **Modal View**: Detailed article view with content preview
@@ -51,7 +51,7 @@ src/
 The `MediumService` class fetches from the Go backend:
 
 ```typescript
-const mediumData = await MediumService.fetchArticles('fakhrymubarak');
+const mediumData = await MediumService.fetchArticles();
 // → GET ${VITE_MEDIUM_API_URL}/api/medium
 ```
 

@@ -40,11 +40,11 @@ describe('useMedium', () => {
   });
 
   it('loads Medium articles and exposes derived state', async () => {
-    const { result } = renderHook(() => useMedium('tester'));
+    const { result } = renderHook(() => useMedium());
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
-    expect(mockFetchArticles).toHaveBeenCalledWith('tester');
+    expect(mockFetchArticles).toHaveBeenCalled();
     expect(result.current.articles).toHaveLength(7);
     expect(result.current.availableFilters).toEqual([
       'react',
@@ -56,7 +56,7 @@ describe('useMedium', () => {
   });
 
   it('handles filter and selection interactions', async () => {
-    const { result } = renderHook(() => useMedium('tester'));
+    const { result } = renderHook(() => useMedium());
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
@@ -97,7 +97,7 @@ describe('useMedium', () => {
   it('sets error state when fetching fails', async () => {
     mockFetchArticles.mockRejectedValueOnce(new Error('network error'));
 
-    const { result } = renderHook(() => useMedium('tester'));
+    const { result } = renderHook(() => useMedium());
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 

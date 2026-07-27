@@ -62,7 +62,7 @@ describe('MediumService', () => {
   });
 
   it('fetches MediumData from the API and caches it', async () => {
-    const data = await MediumService.fetchArticles('tester');
+    const data = await MediumService.fetchArticles();
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockFetch).toHaveBeenCalledWith(
@@ -80,7 +80,7 @@ describe('MediumService', () => {
     );
 
     mockFetch.mockClear();
-    const cached = await MediumService.fetchArticles('tester');
+    const cached = await MediumService.fetchArticles();
     expect(mockFetch).not.toHaveBeenCalled();
     expect(cached).toBe(data);
   });
@@ -94,7 +94,7 @@ describe('MediumService', () => {
         json: async () => mediumData,
       } as any);
 
-    const data = await MediumService.fetchArticles('tester');
+    const data = await MediumService.fetchArticles();
 
     expect(mockFetch).toHaveBeenCalledTimes(2);
     expect(data.articles).toHaveLength(2);
@@ -103,7 +103,7 @@ describe('MediumService', () => {
   it('returns fallback data when fetch fails and cache is empty', async () => {
     mockFetch.mockRejectedValue(new Error('unavailable'));
 
-    const data = await MediumService.fetchArticles('tester');
+    const data = await MediumService.fetchArticles();
 
     expect(data.articles).toHaveLength(1);
     expect(data.articles[0].id).toBe('sample-1');

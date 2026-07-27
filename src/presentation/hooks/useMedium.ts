@@ -18,9 +18,7 @@ interface MediumState {
 
 const MAX_ARTICLES = 6;
 
-export const useMedium = (
-  username: string = 'fakhrymubarak'
-): MediumState & {
+export const useMedium = (): MediumState & {
   handleArticleSelect: (articleId: string) => void;
   handleFilterChange: (filter: string) => void;
   handleCloseModal: () => void;
@@ -41,14 +39,14 @@ export const useMedium = (
     error: null,
   });
 
-  // Fetch articles on mount
+  // Fetch articles from Go medium-api on mount
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         setState(prev => ({ ...prev, loading: true, error: null }));
-        console.log('🔄 Fetching Medium articles for:', username);
+        console.log('🔄 Fetching Medium articles from Go API');
 
-        const mediumData = await MediumService.fetchArticles(username);
+        const mediumData = await MediumService.fetchArticles();
         console.log('✅ Medium articles fetched:', mediumData.articles.length);
 
         const availableFilters = Array.from(
@@ -73,7 +71,7 @@ export const useMedium = (
     };
 
     fetchArticles().then();
-  }, [username]);
+  }, []);
 
   // Filter articles based on an active filter
   const filteredArticles = useMemo(() => {
