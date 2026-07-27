@@ -16,7 +16,7 @@ interface MediumState {
   error: string | null;
 }
 
-const MAX_ARTICLES = 6;
+const MAX_ARTICLES = 5;
 
 export const useMedium = (): MediumState & {
   handleArticleSelect: (articleId: string) => void;

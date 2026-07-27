@@ -69,11 +69,7 @@ const MediumSection: React.FC = () => {
       className="section bg-gradient relative"
       role="region"
       aria-label="Articles"
-      style={{
-        contentVisibility: 'auto',
-        containIntrinsicSize: '1000px',
-        minHeight: '100vh',
-      }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1000px' }}
     >
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
@@ -100,24 +96,25 @@ const MediumSection: React.FC = () => {
             className="space-y-12"
           >
             {/* Section Header */}
-            <m.div variants={itemVariants} className="text-center space-y-4">
-              <h2 className="heading-2 text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
+            <m.div variants={itemVariants} className="section-header">
+              <p className="eyebrow">Writing</p>
+              <h2 className="display-md text-light-text dark:text-dark-text">
                 Articles
               </h2>
-              <p className="body-text max-w-2xl mx-auto">
+              <p className="body-text">
                 My latest thoughts and insights on software development, mobile
                 engineering, and technology trends.
               </p>
 
               {/* Controls */}
               {!loading && (
-                <div className="flex justify-center items-center space-x-4">
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   <button
                     onClick={() => {
                       trackButtonClick('toggle_filters', 'medium_section');
                       handleToggleFilters();
                     }}
-                    className="flex items-center space-x-2 px-4 py-2 bg-light-surface dark:bg-dark-surface rounded-lg border border-light-muted/20 dark:border-dark-muted/20 hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors"
+                    className="flex items-center space-x-2 px-4 py-2 rounded-full bg-light-surface dark:bg-dark-surface border border-black/[0.06] dark:border-white/[0.08] hover:border-primary-coral/40 transition-colors"
                     aria-expanded={showFilters}
                   >
                     <Filter className="w-4 h-4" />
@@ -128,7 +125,7 @@ const MediumSection: React.FC = () => {
                     href="https://medium.com/@fakhrymubarak"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-outline gap-2 px-5 py-2.5 rounded-lg"
+                    className="btn-outline gap-2 px-4 py-2 rounded-full"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>View All on Medium</span>
@@ -158,13 +155,15 @@ const MediumSection: React.FC = () => {
               )}
             </AnimatePresence>
 
-            {/* Articles Grid */}
-            <m.div
-              variants={itemVariants}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+            {/* Articles Grid — bento: first tile spans wide, rest form the rhythm */}
+            <m.div variants={itemVariants} className="bento-grid">
               {displayedArticles.map((article, index) => (
-                <MediumCard key={article.id} article={article} index={index} />
+                <div
+                  key={article.id}
+                  className={index === 0 ? 'bento-span-4' : 'bento-span-2'}
+                >
+                  <MediumCard article={article} index={index} />
+                </div>
               ))}
             </m.div>
 
@@ -175,11 +174,11 @@ const MediumSection: React.FC = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="text-center"
+                className="flex"
               >
                 <button
                   onClick={handleToggleArticles}
-                  className="btn-outline px-8 py-3"
+                  className="btn-outline px-8 py-3 rounded-full"
                 >
                   {showAllArticles ? 'Show Less' : 'See More Articles'}
                 </button>

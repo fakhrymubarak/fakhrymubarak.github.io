@@ -20,40 +20,43 @@ const MediumCard: React.FC<MediumCardProps> = ({ article, index }) => {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-light-surface dark:bg-dark-surface rounded-xl border border-light-muted/20 dark:border-dark-muted/20 hover:border-light-primary/30 dark:hover:border-dark-primary/30 transition-all duration-300 overflow-hidden flex flex-col"
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ y: -5 }}
+      className="card bento-tile-interactive group h-full flex flex-col p-0"
     >
       {article.imageUrl && (
-        <div className="aspect-video overflow-hidden">
+        <div className="relative overflow-hidden">
           <img
             src={article.imageUrl}
             alt={article.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       )}
 
-      <div className="p-6 flex flex-col gap-4">
+      <div className="p-6 space-y-4 flex-1 flex flex-col">
         <div className="space-y-2">
-          <h3 className="font-semibold text-light-text dark:text-dark-text group-hover:text-light-primary dark:group-hover:text-dark-primary transition-colors line-clamp-2">
+          <h3 className="font-semibold text-light-text dark:text-dark-text line-clamp-2">
             {article.title}
           </h3>
-          <p className="text-sm text-light-muted dark:text-dark-muted line-clamp-3">
+          <p className="text-sm text-light-muted dark:text-dark-muted line-clamp-2">
             {article.description || 'Summary unavailable'}
           </p>
         </div>
 
-        <div className="flex items-center justify-between text-sm text-light-muted dark:text-dark-muted">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <Calendar className="w-4 h-4" />
-              <span>{formatDate(article.publishedDate)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Clock className="w-4 h-4" />
-              <span>{article.readTime}</span>
-            </div>
+        <div className="flex items-center space-x-4 text-sm text-light-muted dark:text-dark-muted">
+          <div className="flex items-center space-x-1">
+            <Calendar className="w-4 h-4" />
+            <span>{formatDate(article.publishedDate)}</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <Clock className="w-4 h-4" />
+            <span>{article.readTime}</span>
           </div>
         </div>
 
@@ -75,17 +78,15 @@ const MediumCard: React.FC<MediumCardProps> = ({ article, index }) => {
           </div>
         )}
 
-        <div className="flex justify-end">
-          <a
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline text-sm px-4 py-2"
-          >
-            View on Medium
-            <ExternalLink className="w-3 h-3 ml-1" />
-          </a>
-        </div>
+        <a
+          href={article.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-outline text-sm px-4 py-2 rounded-full mt-auto self-start"
+        >
+          View on Medium
+          <ExternalLink className="w-3 h-3 ml-1" />
+        </a>
       </div>
     </motion.article>
   );

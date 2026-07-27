@@ -52,7 +52,7 @@ describe('useMedium', () => {
       'javascript',
     ]);
     expect(result.current.hasMoreArticles).toBe(true);
-    expect(result.current.displayedArticles).toHaveLength(6);
+    expect(result.current.displayedArticles).toHaveLength(5);
   });
 
   it('handles filter and selection interactions', async () => {
