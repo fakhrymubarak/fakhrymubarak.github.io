@@ -89,31 +89,9 @@ const FooterSection: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-5 gap-12 items-center">
-            {/* Contact Image */}
-            <motion.div
-              variants={itemVariants}
-              className="flex justify-center lg:justify-center lg:col-span-2"
-            >
-              <div className="relative">
-                <img
-                  src={footer.contactImage}
-                  alt="Contact me"
-                  className="w-80 h-100 lg:w-96 lg:h-auto rounded-2xl object-cover shadow-2xl"
-                  loading="lazy"
-                  decoding="async"
-                  width={384}
-                  height={480}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
-              </div>
-            </motion.div>
-
+          <div className="max-w-2xl mx-auto">
             {/* Contact Content */}
-            <motion.div
-              variants={itemVariants}
-              className="space-y-8 lg:col-span-3"
-            >
+            <motion.div variants={itemVariants} className="space-y-8">
               {/* Contact Links */}
               <div className="space-y-4">
                 <h3 className="heading-3">Let's Connect</h3>

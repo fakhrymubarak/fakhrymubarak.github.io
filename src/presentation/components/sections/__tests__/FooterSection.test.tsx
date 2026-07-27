@@ -40,23 +40,9 @@ jest.mock('@domain/services/portfolio', () => ({
         },
       ],
       signature: '© 2024 Fakhry Mubarak. All rights reserved.',
-      contactImage: 'test-image.webp',
     },
   },
 }));
-
-// Mock the ResponsiveImage component
-jest.mock('../../ui/ResponsiveImage', () => {
-  return function MockResponsiveImage({
-    src,
-    alt,
-  }: {
-    src: string;
-    alt: string;
-  }) {
-    return <img src={src} alt={alt} data-testid="responsive-image" />;
-  };
-});
 
 // Mock the useAnalytics hook
 const mockTrackContactClick = jest.fn();
@@ -77,12 +63,6 @@ describe('FooterSection', () => {
     render(<FooterSection />);
 
     expect(screen.getByText('Get in Touch')).toBeInTheDocument();
-  });
-
-  it('renders the profile image', () => {
-    render(<FooterSection />);
-
-    expect(screen.getByAltText('Contact me')).toBeInTheDocument();
   });
 
   it('renders social media links', () => {
