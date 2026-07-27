@@ -1,6 +1,6 @@
 // Service Worker for cache management and automatic updates
 // This is a template - the build script will inject the actual version
-const APP_VERSION = '2.0.0-2026-07-27T01-33-50-799Z'; // Will be replaced by a build script
+const APP_VERSION = '2.0.0-2026-07-27T02-31-41-427Z'; // Will be replaced by a build script
 const CACHE_NAME = `showcase-${APP_VERSION}-cache`;
 const STATIC_CACHE_NAME = `showcase-${APP_VERSION}-static`;
 
