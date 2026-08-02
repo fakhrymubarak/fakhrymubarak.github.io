@@ -101,7 +101,7 @@ const ExperienceSection: React.FC = () => {
                         initial={{ y: 20, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="card space-y-6"
+                        className="card bento-tile space-y-6"
                       >
                         {/* Company Header */}
                         <div className="flex items-center justify-between">
