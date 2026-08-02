@@ -200,4 +200,7 @@ public/version.json
 # Build artifacts
 *.tsbuildinfo
 .eslintcache
-.stylelintcache 
+.stylelintcache
+
+# Rust AI Token Killer
+.rtk
