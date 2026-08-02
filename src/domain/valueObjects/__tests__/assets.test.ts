@@ -294,25 +294,11 @@ describe('Asset utilities', () => {
       expect(ASSETS.source.images.projects).toHaveProperty('akuisisi');
     });
 
-    it('has tech icons', () => {
-      expect(ASSETS.source.icons.tech).toHaveProperty('android');
-      expect(ASSETS.source.icons.tech).toHaveProperty('kotlin');
-      expect(ASSETS.source.icons.tech).toHaveProperty('java');
-      expect(ASSETS.source.icons.tech).toHaveProperty('flutter');
-    });
-
     it('has company icons', () => {
       expect(ASSETS.source.icons.companies).toHaveProperty('mytelkomsel');
       expect(ASSETS.source.icons.companies).toHaveProperty('alkhairaat');
       expect(ASSETS.source.icons.companies).toHaveProperty('phincon');
       expect(ASSETS.source.icons.companies).toHaveProperty('bangkit');
-    });
-
-    it('tech icons have light and dark variants', () => {
-      expect(ASSETS.source.icons.tech.android).toHaveProperty('light');
-      expect(ASSETS.source.icons.tech.android).toHaveProperty('dark');
-      expect(ASSETS.source.icons.tech.kotlin).toHaveProperty('light');
-      expect(ASSETS.source.icons.tech.kotlin).toHaveProperty('dark');
     });
   });
 });

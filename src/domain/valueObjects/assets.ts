@@ -128,24 +128,6 @@ export const ASSETS = {
       },
     },
     icons: {
-      tech: {
-        android: {
-          light: '/src/assets/icons/tech/ic_android_light.svg',
-          dark: '/src/assets/icons/tech/ic_android_dark.svg',
-        },
-        kotlin: {
-          light: '/src/assets/icons/tech/ic_kotlin_light.svg',
-          dark: '/src/assets/icons/tech/ic_kotlin_dark.svg',
-        },
-        java: {
-          light: '/src/assets/icons/tech/ic_java_light.svg',
-          dark: '/src/assets/icons/tech/ic_java_dark.svg',
-        },
-        flutter: {
-          light: '/src/assets/icons/tech/ic_flutter_light.svg',
-          dark: '/src/assets/icons/tech/ic_flutter_dark.svg',
-        },
-      },
       companies: {
         mytelkomsel: '/src/assets/icons/companies/ic_mytelkomsel.webp',
         alkhairaat: '/src/assets/icons/companies/ic_alkhairaat.webp',
