@@ -1,6 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import IntroSection from '../IntroSection';
 import { AllTheProviders } from '@/shared/test-utils/test-providers';
+import {
+  SiAndroid as mockSiAndroid,
+  SiKotlin as mockSiKotlin,
+  SiFlutter as mockSiFlutter,
+} from 'react-icons/si';
+import { DiJava as mockDiJava } from 'react-icons/di';
 
 // Mock the portfolio data
 jest.mock('@domain/services/portfolio', () => ({
@@ -14,34 +20,22 @@ jest.mock('@domain/services/portfolio', () => ({
       techStack: [
         {
           name: 'Android',
-          icon: {
-            light: 'android-light.svg',
-            dark: 'android-dark.svg',
-          },
+          icon: mockSiAndroid,
           color: '#3DDC84',
         },
         {
           name: 'Kotlin',
-          icon: {
-            light: 'kotlin-light.svg',
-            dark: 'kotlin-dark.svg',
-          },
+          icon: mockSiKotlin,
           color: '#7F52FF',
         },
         {
           name: 'Java',
-          icon: {
-            light: 'java-light.svg',
-            dark: 'java-dark.svg',
-          },
+          icon: mockDiJava,
           color: '#ED8B00',
         },
         {
           name: 'Flutter',
-          icon: {
-            light: 'flutter-light.svg',
-            dark: 'flutter-dark.svg',
-          },
+          icon: mockSiFlutter,
           color: '#02569B',
         },
       ],
@@ -75,13 +69,6 @@ jest.mock('framer-motion', () => ({
       <section {...props}>{children}</section>
     ),
   },
-}));
-
-// Mock useTheme hook
-jest.mock('@presentation/hooks/useTheme', () => ({
-  useTheme: () => ({
-    theme: 'light',
-  }),
 }));
 
 // Mock useProjects hook
@@ -173,8 +160,8 @@ describe('IntroSection', () => {
       </AllTheProviders>
     );
 
-    const androidIcon = screen.getByAltText('Android icon');
-    const kotlinIcon = screen.getByAltText('Kotlin icon');
+    const androidIcon = screen.getByRole('img', { name: 'Android icon' });
+    const kotlinIcon = screen.getByRole('img', { name: 'Kotlin icon' });
     expect(androidIcon).toBeInTheDocument();
     expect(kotlinIcon).toBeInTheDocument();
   });

@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { AllTheProviders } from './test-providers';
+import { SiAndroid as mockSiAndroid } from 'react-icons/si';
 
 // Mock all-image imports
 jest.mock(
@@ -69,10 +70,7 @@ jest.mock('@domain/services/portfolio', () => ({
       techStack: [
         {
           name: 'Android',
-          icon: {
-            light: 'mocked-android-light-icon',
-            dark: 'mocked-android-dark-icon',
-          },
+          icon: mockSiAndroid,
           color: '#3DDC84',
         },
       ],
@@ -242,40 +240,6 @@ jest.mock(
 jest.mock(
   '@/assets/icons/companies/ic_showcase_v1.webp',
   () => 'mocked-ic-showcase-v1'
-);
-
-// Mock tech icons
-jest.mock(
-  '@/assets/icons/tech/ic_android_dark.svg',
-  () => 'mocked-android-dark-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_android_light.svg',
-  () => 'mocked-android-light-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_flutter_dark.svg',
-  () => 'mocked-flutter-dark-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_flutter_light.svg',
-  () => 'mocked-flutter-light-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_java_dark.svg',
-  () => 'mocked-java-dark-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_java_light.svg',
-  () => 'mocked-java-light-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_kotlin_dark.svg',
-  () => 'mocked-kotlin-dark-icon'
-);
-jest.mock(
-  '@/assets/icons/tech/ic_kotlin_light.svg',
-  () => 'mocked-kotlin-light-icon'
 );
 
 // Mock CSS modules
