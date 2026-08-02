@@ -103,7 +103,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
             <button
               onClick={handleClose}
-              className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded"
+              className="p-2 text-light-muted dark:text-dark-muted hover:text-primary-coral transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded"
             >
               <X className="w-5 h-5" />
             </button>

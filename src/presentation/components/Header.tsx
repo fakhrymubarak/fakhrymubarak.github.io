@@ -173,7 +173,7 @@ const Header: React.FC = () => {
               <button
                 key={item.key}
                 onClick={() => scrollToSection(item.href, item.key, item.name)}
-                className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2 py-1"
+                className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded px-2 py-1"
                 aria-label={t.a11y.navigateTo(item.name)}
               >
                 {item.name}
@@ -187,7 +187,7 @@ const Header: React.FC = () => {
             <button
               data-testid="language-toggle"
               onClick={handleLanguageToggle}
-              className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 hover:scale-105"
+              className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 hover:scale-105"
               aria-label={t.a11y.switchToLanguage}
             >
               <span aria-hidden="true" className="text-base leading-none">
@@ -202,7 +202,7 @@ const Header: React.FC = () => {
             <button
               onClick={handleThemeToggle}
               disabled={isThemeToggling}
-              className={`p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 ${
+              className={`p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 ${
                 isThemeToggling ? 'cursor-not-allowed' : 'hover:scale-105'
               }`}
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -225,7 +225,7 @@ const Header: React.FC = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={handleMenuToggle}
-              className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2"
+              className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2"
               aria-label={t.a11y.toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -260,7 +260,7 @@ const Header: React.FC = () => {
                   onClick={() =>
                     scrollToSection(item.href, item.key, item.name)
                   }
-                  className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2"
+                  className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded px-2"
                   aria-label={t.a11y.navigateTo(item.name)}
                 >
                   {item.name}
