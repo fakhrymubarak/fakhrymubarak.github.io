@@ -174,7 +174,7 @@ const Header: React.FC = () => {
                 key={item.key}
                 onClick={() => scrollToSection(item.href, item.key, item.name)}
                 className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2 py-1"
-                aria-label={`Navigate to ${item.name} section`}
+                aria-label={t.a11y.navigateTo(item.name)}
               >
                 {item.name}
               </button>
@@ -226,7 +226,7 @@ const Header: React.FC = () => {
             <button
               onClick={handleMenuToggle}
               className="md:hidden p-1.5 sm:p-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2"
-              aria-label="Toggle mobile menu"
+              aria-label={t.a11y.toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
             >
@@ -261,7 +261,7 @@ const Header: React.FC = () => {
                     scrollToSection(item.href, item.key, item.name)
                   }
                   className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2"
-                  aria-label={`Navigate to ${item.name} section`}
+                  aria-label={t.a11y.navigateTo(item.name)}
                 >
                   {item.name}
                 </button>
