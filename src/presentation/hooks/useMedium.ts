@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MediumService } from '@domain/services/medium';
 import type { MediumArticle } from '@domain/models';
+import { useLanguage } from './useLanguage';
 
 interface MediumState {
   articles: MediumArticle[];
@@ -25,6 +26,7 @@ export const useMedium = (): MediumState & {
   handleToggleArticles: () => void;
   handleToggleFilters: () => void;
 } => {
+  const { language } = useLanguage();
   const [state, setState] = useState<MediumState>({
     articles: [],
     selectedArticle: null,
@@ -39,14 +41,15 @@ export const useMedium = (): MediumState & {
     error: null,
   });
 
-  // Fetch articles from Go medium-api on mount
+  // Fetch articles from Go medium-api on mount, and again if the user
+  // switches language.
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         setState(prev => ({ ...prev, loading: true, error: null }));
         console.log('🔄 Fetching Medium articles from Go API');
 
-        const mediumData = await MediumService.fetchArticles();
+        const mediumData = await MediumService.fetchArticles({ language });
         console.log('✅ Medium articles fetched:', mediumData.articles.length);
 
         const availableFilters = Array.from(
@@ -71,7 +74,7 @@ export const useMedium = (): MediumState & {
     };
 
     fetchArticles().then();
-  }, []);
+  }, [language]);
 
   // Filter articles based on an active filter
   const filteredArticles = useMemo(() => {

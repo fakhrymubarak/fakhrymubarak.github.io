@@ -62,11 +62,12 @@ describe('MediumService', () => {
   });
 
   it('fetches MediumData from the API and caches it', async () => {
-    const data = await MediumService.fetchArticles();
+    const data = await MediumService.fetchArticles({ language: 'en' });
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringMatching(/\/api\/medium$/)
+      expect.stringMatching(/\/api\/medium$/),
+      { headers: { 'X-Lang': 'en' } }
     );
     expect(data.articles).toHaveLength(2);
 
@@ -80,9 +81,38 @@ describe('MediumService', () => {
     );
 
     mockFetch.mockClear();
-    const cached = await MediumService.fetchArticles();
+    const cached = await MediumService.fetchArticles({ language: 'en' });
     expect(mockFetch).not.toHaveBeenCalled();
     expect(cached).toBe(data);
+  });
+
+  it('caches English and Indonesian articles separately', async () => {
+    const idData: MediumData = {
+      ...mediumData,
+      articles: [{ ...mediumData.articles[0], title: 'Artikel Pertama' }],
+    };
+    mockFetch.mockImplementation(
+      async (_url: string, init?: { headers?: Record<string, string> }) => ({
+        ok: true,
+        status: 200,
+        json: async () =>
+          init?.headers?.['X-Lang'] === 'id' ? idData : mediumData,
+      })
+    );
+
+    const en = await MediumService.fetchArticles({ language: 'en' });
+    const id = await MediumService.fetchArticles({ language: 'id' });
+
+    expect(mockFetch).toHaveBeenCalledTimes(2);
+    expect(en.articles[0].title).toBe('First Article');
+    expect(id.articles[0].title).toBe('Artikel Pertama');
+
+    mockFetch.mockClear();
+    const cachedEn = await MediumService.fetchArticles({ language: 'en' });
+    const cachedId = await MediumService.fetchArticles({ language: 'id' });
+    expect(mockFetch).not.toHaveBeenCalled();
+    expect(cachedEn).toBe(en);
+    expect(cachedId).toBe(id);
   });
 
   it('retries once before returning cache data on error', async () => {

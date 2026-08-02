@@ -1,6 +1,14 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
+import React from 'react';
 import { useMedium } from '../useMedium';
+import { useLanguage } from '../useLanguage';
 import { MediumService } from '@domain/services/medium';
+import { LanguageProvider } from '@application/store/LanguageContext.tsx';
+
+const wrapperFor =
+  (lang: 'id' | 'en') =>
+  ({ children }: { children: React.ReactNode }) =>
+    React.createElement(LanguageProvider, { initialLanguage: lang }, children);
 
 describe('useMedium', () => {
   const mockFetchArticles = jest.spyOn(MediumService, 'fetchArticles');
@@ -40,11 +48,15 @@ describe('useMedium', () => {
   });
 
   it('loads Medium articles and exposes derived state', async () => {
-    const { result } = renderHook(() => useMedium());
+    const { result } = renderHook(() => useMedium(), {
+      wrapper: wrapperFor('en'),
+    });
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
-    expect(mockFetchArticles).toHaveBeenCalled();
+    expect(mockFetchArticles).toHaveBeenCalledWith(
+      expect.objectContaining({ language: 'en' })
+    );
     expect(result.current.articles).toHaveLength(7);
     expect(result.current.availableFilters).toEqual([
       'react',
@@ -56,7 +68,9 @@ describe('useMedium', () => {
   });
 
   it('handles filter and selection interactions', async () => {
-    const { result } = renderHook(() => useMedium());
+    const { result } = renderHook(() => useMedium(), {
+      wrapper: wrapperFor('en'),
+    });
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
@@ -97,11 +111,37 @@ describe('useMedium', () => {
   it('sets error state when fetching fails', async () => {
     mockFetchArticles.mockRejectedValueOnce(new Error('network error'));
 
-    const { result } = renderHook(() => useMedium());
+    const { result } = renderHook(() => useMedium(), {
+      wrapper: wrapperFor('en'),
+    });
 
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     expect(result.current.error).toBe('network error');
     expect(result.current.articles).toHaveLength(0);
+  });
+
+  it('refetches in the new language when the user switches language', async () => {
+    const { result } = renderHook(
+      () => ({ medium: useMedium(), lang: useLanguage() }),
+      { wrapper: wrapperFor('en') }
+    );
+
+    await waitFor(() => expect(result.current.medium.loading).toBe(false));
+    expect(mockFetchArticles).toHaveBeenCalledWith(
+      expect.objectContaining({ language: 'en' })
+    );
+
+    mockFetchArticles.mockClear();
+
+    act(() => {
+      result.current.lang.setLanguage('id');
+    });
+
+    await waitFor(() =>
+      expect(mockFetchArticles).toHaveBeenCalledWith(
+        expect.objectContaining({ language: 'id' })
+      )
+    );
   });
 });

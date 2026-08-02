@@ -1,40 +1,54 @@
 import { MediumData } from '../models';
+import type { Locale } from '@domain/models/i18n.ts';
 import { MEDIUM_API_URL } from '@shared/env';
 
 /** Default article source: Go medium-api (not Medium RSS / CORS proxy). */
 const DEFAULT_PROFILE_USERNAME = 'fakhrymubarak';
 
 export class MediumService {
-  private static cache: MediumData | null = null;
-  private static lastFetch: number = 0;
+  private static cache: Partial<Record<Locale, MediumData>> = {};
+  private static lastFetch: Partial<Record<Locale, number>> = {};
   /** Client cache; server refreshes once daily at 03:00 Asia/Jakarta. */
   private static readonly CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
   /**
-   * Fetches articles from the Go medium-api backend.
+   * Fetches articles from the Go medium-api backend, in the given language
+   * (sent as the `X-Lang` header; the API defaults to English otherwise).
    * Username is only used for the offline fallback profile URL.
    */
   static async fetchArticles(
-    options: { retry?: number; fallbackUsername?: string } = {}
+    options: {
+      language?: Locale;
+      retry?: number;
+      fallbackUsername?: string;
+    } = {}
   ): Promise<MediumData> {
-    const { retry = 0, fallbackUsername = DEFAULT_PROFILE_USERNAME } = options;
+    const {
+      language = 'en',
+      retry = 0,
+      fallbackUsername = DEFAULT_PROFILE_USERNAME,
+    } = options;
     const now = Date.now();
 
-    if (this.cache && now - this.lastFetch < this.CACHE_DURATION) {
-      return this.cache;
+    const cached = this.cache[language];
+    const cachedAt = this.lastFetch[language] ?? 0;
+    if (cached && now - cachedAt < this.CACHE_DURATION) {
+      return cached;
     }
 
     try {
       const apiBase = MEDIUM_API_URL.replace(/\/$/, '');
-      const response = await fetch(`${apiBase}/api/medium`);
+      const response = await fetch(`${apiBase}/api/medium`, {
+        headers: { 'X-Lang': language },
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const mediumData = (await response.json()) as MediumData;
 
-      this.cache = mediumData;
-      this.lastFetch = now;
+      this.cache[language] = mediumData;
+      this.lastFetch[language] = now;
 
       return mediumData;
     } catch (error) {
@@ -42,10 +56,15 @@ export class MediumService {
 
       if (retry < 1) {
         console.warn('Retrying Medium API fetch…');
-        return this.fetchArticles({ retry: retry + 1, fallbackUsername });
+        return this.fetchArticles({
+          language,
+          retry: retry + 1,
+          fallbackUsername,
+        });
       }
 
-      if (!this.cache) {
+      const staleCache = this.cache[language];
+      if (!staleCache) {
         return {
           articles: [
             {
@@ -69,12 +88,12 @@ export class MediumService {
         };
       }
 
-      return this.cache;
+      return staleCache;
     }
   }
 
   static clearCache(): void {
-    this.cache = null;
-    this.lastFetch = 0;
+    this.cache = {};
+    this.lastFetch = {};
   }
 }
