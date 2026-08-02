@@ -10,7 +10,7 @@ import {
   Star,
   X,
 } from 'lucide-react';
-import { useAnalytics } from '@/presentation';
+import { useAnalytics, useLockBodyScroll } from '@/presentation';
 import type { UICertificate } from '@presentation/models';
 
 interface CertificateModalProps {
@@ -25,10 +25,10 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
   const { trackButtonClick } = useAnalytics();
   const isOpeningRef = useRef(true);
 
+  useLockBodyScroll(!!certificate);
+
   useEffect(() => {
     if (certificate) {
-      document.body.style.overflow = 'hidden';
-
       isOpeningRef.current = true;
       const timer = setTimeout(() => {
         isOpeningRef.current = false;
@@ -36,13 +36,10 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
 
       return () => {
         clearTimeout(timer);
-        document.body.style.overflow = 'unset';
       };
     }
 
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    return undefined;
   }, [certificate]);
 
   const getCategoryIcon = (type: string) => {

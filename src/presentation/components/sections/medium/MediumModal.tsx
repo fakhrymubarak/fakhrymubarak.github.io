@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Calendar, Clock, ExternalLink, X } from 'lucide-react';
 import type { MediumArticle } from '@domain/models';
+import { useLockBodyScroll } from '@/presentation';
 
 interface MediumModalProps {
   article: MediumArticle;
@@ -10,6 +11,8 @@ interface MediumModalProps {
 }
 
 const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
+  useLockBodyScroll(true);
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',

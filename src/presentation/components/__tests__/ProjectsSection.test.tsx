@@ -13,6 +13,9 @@ describe('ProjectsSection', () => {
     Object.defineProperty(document.body, 'style', {
       value: {
         overflow: '',
+        position: '',
+        top: '',
+        width: '',
       },
       writable: true,
     });
@@ -20,6 +23,9 @@ describe('ProjectsSection', () => {
 
   afterEach(() => {
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
   });
 
   describe('Rendering', () => {
@@ -297,7 +303,7 @@ describe('ProjectsSection', () => {
         .closest('.card');
       fireEvent.click(firstProjectCard!);
 
-      expect(document.body.style.overflow).toBe('hidden');
+      expect(document.body.style.position).toBe('fixed');
     });
 
     it('restores body scroll when modal is closed', () => {
@@ -310,7 +316,7 @@ describe('ProjectsSection', () => {
         .closest('.card');
       fireEvent.click(firstProjectCard!);
 
-      expect(document.body.style.overflow).toBe('hidden');
+      expect(document.body.style.position).toBe('fixed');
 
       // Advance past the 300ms protection period
       jest.advanceTimersByTime(300);
@@ -321,7 +327,7 @@ describe('ProjectsSection', () => {
         fireEvent.click(closeButton);
       }
 
-      expect(document.body.style.overflow).toBe('unset');
+      expect(document.body.style.position).toBe('');
       jest.useRealTimers();
     });
   });

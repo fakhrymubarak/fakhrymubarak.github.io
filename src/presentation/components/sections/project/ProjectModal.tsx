@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, X } from 'lucide-react';
 import type { UIProject } from '@presentation/models';
-import { useAnalytics } from '@/presentation';
+import { useAnalytics, useLockBodyScroll } from '@/presentation';
 
 interface ProjectModalProps {
   project: UIProject | null;
@@ -14,10 +14,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const { trackButtonClick } = useAnalytics();
   const isOpeningRef = useRef(true);
 
+  useLockBodyScroll(!!project);
+
   useEffect(() => {
     if (project) {
-      document.body.style.overflow = 'hidden';
-
       isOpeningRef.current = true;
       const timer = setTimeout(() => {
         isOpeningRef.current = false;
@@ -25,13 +25,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
       return () => {
         clearTimeout(timer);
-        document.body.style.overflow = 'unset';
       };
     }
 
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    return undefined;
   }, [project]);
 
   const handleClose = () => {
