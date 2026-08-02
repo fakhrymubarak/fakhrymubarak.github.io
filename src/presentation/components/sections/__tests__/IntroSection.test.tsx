@@ -2,59 +2,62 @@ import { render, screen } from '@testing-library/react';
 import IntroSection from '../IntroSection';
 
 // Mock the portfolio data
-jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
-    introduction: {
-      title: ['Hi, I am', 'Fakhry Mubarak'],
-      subtitle: 'Software Engineer specializing in Android Development',
-      description:
-        'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
-      imagePath: 'test-avatar.webp',
-      techStack: [
-        {
-          name: 'Android',
-          icon: {
-            light: 'android-light.svg',
-            dark: 'android-dark.svg',
+jest.mock('@domain/services/portfolio', () => {
+  const {
+    SiAndroid: mockSiAndroid,
+    SiKotlin: mockSiKotlin,
+    SiFlutter: mockSiFlutter,
+  } = (() => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('react-icons/si');
+  })();
+  const { DiJava: mockDiJava } = (() => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('react-icons/di');
+  })();
+
+  return {
+    portfolioData: {
+      introduction: {
+        title: ['Hi, I am', 'Fakhry Mubarak'],
+        subtitle: 'Software Engineer specializing in Android Development',
+        description:
+          'Mobile Apps focused Software Engineer specializing in app development with over 3.5 years professional experience building scalable softwares. Currently building softwares at PT Phincon. Passionate about clean architecture, SOLID principles, and continuous learning. Experienced in both native Android and Multiplatform Development using Flutter, with strong mentoring and leadership abilities. Open for any challenges and opportunities.',
+        imagePath: 'test-avatar.webp',
+        techStack: [
+          {
+            name: 'Android',
+            icon: mockSiAndroid,
+            color: '#3DDC84',
           },
-          color: '#3DDC84',
-        },
-        {
-          name: 'Kotlin',
-          icon: {
-            light: 'kotlin-light.svg',
-            dark: 'kotlin-dark.svg',
+          {
+            name: 'Kotlin',
+            icon: mockSiKotlin,
+            color: '#7F52FF',
           },
-          color: '#7F52FF',
-        },
-        {
-          name: 'Java',
-          icon: {
-            light: 'java-light.svg',
-            dark: 'java-dark.svg',
+          {
+            name: 'Java',
+            icon: mockDiJava,
+            color: '#ED8B00',
           },
-          color: '#ED8B00',
-        },
-        {
-          name: 'Flutter',
-          icon: {
-            light: 'flutter-light.svg',
-            dark: 'flutter-dark.svg',
+          {
+            name: 'Flutter',
+            icon: mockSiFlutter,
+            color: '#02569B',
           },
-          color: '#02569B',
-        },
-      ],
+        ],
+      },
+      footer: {
+        contacts: [
+          {
+            type: 'resume',
+            url: '/resume.pdf',
+          },
+        ],
+      },
     },
-    footer: {
-      contacts: [
-        {
-          type: 'resume',
-          url: '/resume.pdf',
-        },
-      ],
-    },
-  },
-}));
+  };
+});
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
@@ -74,13 +77,6 @@ jest.mock('framer-motion', () => ({
       <section {...props}>{children}</section>
     ),
   },
-}));
-
-// Mock useTheme hook
-jest.mock('@presentation/hooks/useTheme', () => ({
-  useTheme: () => ({
-    theme: 'light',
-  }),
 }));
 
 // Mock useProjects hook
@@ -152,8 +148,8 @@ describe('IntroSection', () => {
   it('renders tech stack icons', () => {
     render(<IntroSection />);
 
-    const androidIcon = screen.getByAltText('Android icon');
-    const kotlinIcon = screen.getByAltText('Kotlin icon');
+    const androidIcon = screen.getByRole('img', { name: 'Android icon' });
+    const kotlinIcon = screen.getByRole('img', { name: 'Kotlin icon' });
     expect(androidIcon).toBeInTheDocument();
     expect(kotlinIcon).toBeInTheDocument();
   });
