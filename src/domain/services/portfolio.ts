@@ -34,18 +34,8 @@ import hressLogo from '@/assets/icons/companies/ic_hress_crm.webp';
 import showcaseV1Logo from '@/assets/icons/companies/ic_showcase_v1.webp';
 
 // Import tech stack icons
-import androidIconDark from '@/assets/icons/tech/ic_android_dark.svg';
-import androidIconLight from '@/assets/icons/tech/ic_android_light.svg';
-import kotlinIconDark from '@/assets/icons/tech/ic_kotlin_dark.svg';
-import kotlinIconLight from '@/assets/icons/tech/ic_kotlin_light.svg';
-import javaIconDark from '@/assets/icons/tech/ic_java_dark.svg';
-import javaIconLight from '@/assets/icons/tech/ic_java_light.svg';
-import flutterIconDark from '@/assets/icons/tech/ic_flutter_dark.svg';
-import flutterIconLight from '@/assets/icons/tech/ic_flutter_light.svg';
-import goIconDark from '@/assets/icons/tech/ic_go_dark.svg';
-import goIconLight from '@/assets/icons/tech/ic_go_light.svg';
-import reactIconDark from '@/assets/icons/tech/ic_react_dark.svg';
-import reactIconLight from '@/assets/icons/tech/ic_react_light.svg';
+import { SiAndroid, SiKotlin, SiFlutter, SiGo, SiReact } from 'react-icons/si';
+import { DiJava } from 'react-icons/di';
 
 export const portfolioData: PortfolioData = {
   introduction: {
@@ -61,50 +51,32 @@ export const portfolioData: PortfolioData = {
     techStack: [
       {
         name: 'Android',
-        icon: {
-          light: androidIconLight,
-          dark: androidIconDark,
-        },
+        icon: SiAndroid,
         color: '#3DDC84',
       },
       {
         name: 'Kotlin',
-        icon: {
-          light: kotlinIconLight,
-          dark: kotlinIconDark,
-        },
+        icon: SiKotlin,
         color: '#7F52FF',
       },
       {
         name: 'Java',
-        icon: {
-          light: javaIconLight,
-          dark: javaIconDark,
-        },
+        icon: DiJava,
         color: '#ED8B00',
       },
       {
         name: 'Flutter',
-        icon: {
-          light: flutterIconLight,
-          dark: flutterIconDark,
-        },
+        icon: SiFlutter,
         color: '#02569B',
       },
       {
         name: 'Go',
-        icon: {
-          light: goIconLight,
-          dark: goIconDark,
-        },
+        icon: SiGo,
         color: '#00ADD8',
       },
       {
         name: 'React',
-        icon: {
-          light: reactIconLight,
-          dark: reactIconDark,
-        },
+        icon: SiReact,
         color: '#61DAFB',
       },
     ],
