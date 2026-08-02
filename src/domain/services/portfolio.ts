@@ -71,6 +71,11 @@ const techStack = [
     icon: SiReact,
     color: '#61DAFB',
   },
+  {
+    name: 'React Native',
+    icon: SiReact,
+    color: '#61DAFB',
+  },
 ];
 
 // Structural project metadata (no translatable text except via content maps).
