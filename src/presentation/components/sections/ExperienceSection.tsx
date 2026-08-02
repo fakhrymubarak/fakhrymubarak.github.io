@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useExperience } from '@/presentation';
+import { useExperience, useTranslations } from '@/presentation';
 import { Calendar, Clock } from 'lucide-react';
 
 const ExperienceSection: React.FC = () => {
   const { companies } = useExperience();
+  const t = useTranslations();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -58,14 +59,11 @@ const ExperienceSection: React.FC = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="section-header">
-            <p className="eyebrow">Career</p>
+            <p className="eyebrow">{t.experience.eyebrow}</p>
             <h2 className="display-md text-light-text dark:text-dark-text">
-              Experiences
+              {t.experience.heading}
             </h2>
-            <p className="body-text">
-              My professional journey in mobile development and software
-              engineering.
-            </p>
+            <p className="body-text">{t.experience.body}</p>
           </motion.div>
 
           {/* Experience Timeline */}
@@ -108,7 +106,7 @@ const ExperienceSection: React.FC = () => {
                           <span
                             className={`px-2 py-1 text-xs text-white rounded-full ${getTypeColor(company.experiences[0].type)}`}
                           >
-                            {company.experiences[0].type}
+                            {t.experience.types[company.experiences[0].type]}
                           </span>
                         </div>
                       </div>
@@ -145,7 +143,7 @@ const ExperienceSection: React.FC = () => {
                             {/* Highlights */}
                             <div className="space-y-2">
                               <h5 className="font-medium text-light-text dark:text-dark-text">
-                                Key Achievements:
+                                {t.experience.keyAchievements}
                               </h5>
                               <ul className="space-y-1">
                                 {exp.highlights.map(

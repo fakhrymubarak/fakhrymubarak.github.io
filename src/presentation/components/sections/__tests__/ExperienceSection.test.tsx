@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import ExperienceSection from '../ExperienceSection';
+import { AllTheProviders } from '@/shared/test-utils/test-providers';
 
 // Mock the portfolio data
 jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     companies: [
       {
         id: 'phincon',
@@ -54,7 +55,7 @@ jest.mock('@domain/services/portfolio', () => ({
         ],
       },
     ],
-  },
+  }),
 }));
 
 // Mock the ResponsiveImage component
@@ -70,15 +71,22 @@ jest.mock('../../ui/ResponsiveImage', () => {
   };
 });
 
+const renderSection = () =>
+  render(
+    <AllTheProviders>
+      <ExperienceSection />
+    </AllTheProviders>
+  );
+
 describe('ExperienceSection', () => {
   it('renders the experience section', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     expect(screen.getByText('Experiences')).toBeInTheDocument();
   });
 
   it('renders all company information', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     expect(screen.getByText('PHINCON')).toBeInTheDocument();
     expect(
@@ -87,7 +95,7 @@ describe('ExperienceSection', () => {
   });
 
   it('renders company positions', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     expect(screen.getByText('Software Engineer - Backend')).toBeInTheDocument();
     expect(screen.getByText('Software Engineer - Android')).toBeInTheDocument();
@@ -97,7 +105,7 @@ describe('ExperienceSection', () => {
   });
 
   it('renders employment periods', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     expect(screen.getByText('Jul 2025 — Present')).toBeInTheDocument();
     expect(screen.getByText('Jul 2023 — Jun 2025')).toBeInTheDocument();
@@ -105,7 +113,7 @@ describe('ExperienceSection', () => {
   });
 
   it('renders job descriptions', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     expect(screen.getByText(/Maintaining Backend App/)).toBeInTheDocument();
     expect(
@@ -117,27 +125,27 @@ describe('ExperienceSection', () => {
   });
 
   it('renders company logos', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     const images = screen.getAllByAltText(/logo$/);
     expect(images.length).toBeGreaterThan(0);
   });
 
   it('has proper section structure', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
   });
 
   it('renders experience items', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     const experienceItems = screen.getAllByText(/Software Engineer/);
     expect(experienceItems.length).toBeGreaterThan(0);
   });
 
   it('renders key achievements sections', () => {
-    render(<ExperienceSection />);
+    renderSection();
 
     const achievementsSections = screen.getAllByText('Key Achievements:');
     expect(achievementsSections.length).toBeGreaterThan(0);

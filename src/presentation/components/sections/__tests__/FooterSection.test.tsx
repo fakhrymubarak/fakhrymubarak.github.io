@@ -1,9 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import FooterSection from '../FooterSection';
+import { AllTheProviders } from '@/shared/test-utils/test-providers';
 
 // Mock the portfolio data
 jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     footer: {
       socialMedia: [
         {
@@ -41,7 +42,7 @@ jest.mock('@domain/services/portfolio', () => ({
       ],
       signature: '© 2024 Fakhry Mubarak. All rights reserved.',
     },
-  },
+  }),
 }));
 
 // Mock the useAnalytics hook
@@ -54,19 +55,26 @@ jest.mock('../../../hooks/useAnalytics', () => ({
   }),
 }));
 
+const renderSection = () =>
+  render(
+    <AllTheProviders>
+      <FooterSection />
+    </AllTheProviders>
+  );
+
 describe('FooterSection', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders the footer section', () => {
-    render(<FooterSection />);
+    renderSection();
 
     expect(screen.getByText('Get in Touch')).toBeInTheDocument();
   });
 
   it('renders social media links', () => {
-    render(<FooterSection />);
+    renderSection();
 
     expect(screen.getByLabelText('Instagram')).toBeInTheDocument();
     expect(screen.getByLabelText('LinkedIn')).toBeInTheDocument();
@@ -75,7 +83,7 @@ describe('FooterSection', () => {
   });
 
   it('renders contact links', () => {
-    render(<FooterSection />);
+    renderSection();
 
     expect(screen.getByText('Download Resume')).toBeInTheDocument();
     expect(screen.getByText('Write Email')).toBeInTheDocument();
@@ -83,7 +91,7 @@ describe('FooterSection', () => {
   });
 
   it('renders contact links with correct URLs', () => {
-    render(<FooterSection />);
+    renderSection();
 
     const resumeLink = screen.getByRole('link', { name: /download resume/i });
     const emailLink = screen.getByRole('link', { name: /write email/i });
@@ -95,13 +103,13 @@ describe('FooterSection', () => {
   });
 
   it('renders copyright text', () => {
-    render(<FooterSection />);
+    renderSection();
 
     expect(screen.getByText(/© 2024 Fakhry Mubarak/)).toBeInTheDocument();
   });
 
   it('tracks contact clicks', () => {
-    render(<FooterSection />);
+    renderSection();
 
     const emailLink = screen.getByRole('link', { name: /write email/i });
     fireEvent.click(emailLink);
@@ -110,7 +118,7 @@ describe('FooterSection', () => {
   });
 
   it('tracks social media clicks', () => {
-    render(<FooterSection />);
+    renderSection();
 
     const githubLink = screen.getByLabelText('GitHub');
     fireEvent.click(githubLink);
@@ -122,7 +130,7 @@ describe('FooterSection', () => {
   });
 
   it('has proper accessibility attributes', () => {
-    render(<FooterSection />);
+    renderSection();
 
     const links = screen.getAllByRole('link');
     links.forEach(link => {
@@ -133,14 +141,14 @@ describe('FooterSection', () => {
   });
 
   it('renders with proper heading structure', () => {
-    render(<FooterSection />);
+    renderSection();
 
     const headings = screen.getAllByRole('heading');
     expect(headings.length).toBeGreaterThan(0);
   });
 
   it('renders social links with icons', () => {
-    render(<FooterSection />);
+    renderSection();
 
     const socialLinks = screen.getAllByRole('link');
     expect(socialLinks.length).toBeGreaterThan(0);
