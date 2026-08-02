@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Award, BookOpen, Star } from 'lucide-react';
-import { useAnalytics } from '@/presentation';
+import { useAnalytics, useTranslations } from '@/presentation';
 import type { UICertificate } from '@presentation/models';
 
 interface CertificateCardProps {
@@ -16,6 +16,7 @@ const CertificateCard: React.FC<CertificateCardProps> = ({
   onSelect,
 }) => {
   const { trackButtonClick } = useAnalytics();
+  const t = useTranslations();
 
   const handleCertificateClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -111,7 +112,9 @@ const CertificateCard: React.FC<CertificateCardProps> = ({
                 : 'bg-red-500/10 text-red-600 dark:text-red-400'
             }`}
           >
-            {certificate.status === 'active' ? 'Active' : 'Expired'}
+            {certificate.status === 'active'
+              ? t.certificates.active
+              : t.certificates.expired}
           </span>
 
           {/* Action Button */}
@@ -128,7 +131,7 @@ const CertificateCard: React.FC<CertificateCardProps> = ({
               );
             }}
           >
-            View Certificate
+            {t.certificates.viewCertificate}
             <ExternalLink className="w-3 h-3 ml-1" />
           </a>
         </div>

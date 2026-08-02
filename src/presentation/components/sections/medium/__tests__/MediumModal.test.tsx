@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import MediumModal from '../MediumModal';
+import { render } from '../../../../../shared/test-utils/test-utils';
 
 const article = {
   id: 'modal-1',

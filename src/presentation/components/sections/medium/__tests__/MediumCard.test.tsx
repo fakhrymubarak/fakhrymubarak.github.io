@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import MediumCard from '../MediumCard';
+import { render } from '../../../../../shared/test-utils/test-utils';
 
 const baseArticle = {
   id: 'article-1',

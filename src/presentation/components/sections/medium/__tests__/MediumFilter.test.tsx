@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import MediumFilter from '../MediumFilter';
+import { render } from '../../../../../shared/test-utils/test-utils';
 
 describe('MediumFilter', () => {
   it('renders filters and handles filter change', () => {

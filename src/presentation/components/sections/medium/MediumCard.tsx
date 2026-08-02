@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ExternalLink } from 'lucide-react';
 import type { MediumArticle } from '@domain/models';
+import { useLanguage, useTranslations } from '@/presentation';
 
 interface MediumCardProps {
   article: MediumArticle;
@@ -9,12 +10,18 @@ interface MediumCardProps {
 }
 
 const MediumCard: React.FC<MediumCardProps> = ({ article, index }) => {
+  const t = useTranslations();
+  const { language } = useLanguage();
+
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+    return new Date(dateString).toLocaleDateString(
+      language === 'id' ? 'id-ID' : 'en-US',
+      {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }
+    );
   };
 
   return (
@@ -45,7 +52,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ article, index }) => {
             {article.title}
           </h3>
           <p className="text-sm text-light-muted dark:text-dark-muted line-clamp-2">
-            {article.description || 'Summary unavailable'}
+            {article.description || t.articles.summaryUnavailable}
           </p>
         </div>
 
@@ -84,7 +91,7 @@ const MediumCard: React.FC<MediumCardProps> = ({ article, index }) => {
           rel="noopener noreferrer"
           className="btn-outline text-sm px-4 py-2 rounded-full mt-auto self-start"
         >
-          View on Medium
+          {t.articles.viewOnMedium}
           <ExternalLink className="w-3 h-3 ml-1" />
         </a>
       </div>

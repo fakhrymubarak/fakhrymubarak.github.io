@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslations } from '@/presentation';
 
 interface ProjectFilterProps {
   filters: string[];
@@ -12,6 +13,8 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   activeFilter,
   onFilterChange,
 }) => {
+  const t = useTranslations();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,7 +29,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
             : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral'
         }`}
       >
-        All Projects
+        {t.projects.all}
       </button>
       {filters.map(filter => (
         <button

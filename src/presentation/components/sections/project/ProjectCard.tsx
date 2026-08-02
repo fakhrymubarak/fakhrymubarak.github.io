@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import type { UIProject } from '@presentation/models';
 import ResponsiveImage from '../../ui/ResponsiveImage';
-import { useAnalytics } from '@/presentation';
+import { useAnalytics, useTranslations } from '@/presentation';
 
 interface ProjectCardProps {
   project: UIProject;
@@ -17,6 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   onSelect,
 }) => {
   const { trackProjectView, trackButtonClick } = useAnalytics();
+  const t = useTranslations();
 
   const handleProjectClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -103,7 +104,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               trackButtonClick('view_project', `project_${project.title}`);
             }}
           >
-            View Project
+            {t.projects.viewProject}
             <ExternalLink className="w-3 h-3 ml-1" />
           </a>
         )}

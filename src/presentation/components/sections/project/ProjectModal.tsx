@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, X } from 'lucide-react';
 import type { UIProject } from '@presentation/models';
-import { useAnalytics } from '@/presentation';
+import { useAnalytics, useTranslations } from '@/presentation';
 
 interface ProjectModalProps {
   project: UIProject | null;
@@ -12,6 +12,7 @@ interface ProjectModalProps {
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const { trackButtonClick } = useAnalytics();
+  const t = useTranslations();
   const isOpeningRef = useRef(true);
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     className="btn-primary text-sm px-4 py-2"
                     onClick={handleViewProject}
                   >
-                    View Project
+                    {t.projects.viewProject}
                     <ExternalLink className="w-3 h-3 ml-1" />
                   </a>
                 )}
@@ -136,14 +137,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-2">Description</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {t.projects.modalDescription}
+              </h3>
               <p className="text-sm text-light-muted dark:text-dark-muted">
                 {project.description}
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-2">Tech Stack</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {t.projects.modalTechStack}
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {project.stacks.map((stack: string) => (
                   <span

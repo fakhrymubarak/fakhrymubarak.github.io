@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Calendar, Clock, ExternalLink, X } from 'lucide-react';
 import type { MediumArticle } from '@domain/models';
+import { useLanguage, useTranslations } from '@/presentation';
 
 interface MediumModalProps {
   article: MediumArticle;
@@ -10,12 +11,18 @@ interface MediumModalProps {
 }
 
 const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
+  const t = useTranslations();
+  const { language } = useLanguage();
+
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return new Date(dateString).toLocaleDateString(
+      language === 'id' ? 'id-ID' : 'en-US',
+      {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }
+    );
   };
 
   return createPortal(
@@ -91,7 +98,7 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
             {/* Description */}
             <div className="prose prose-lg max-w-none">
               <p className="text-light-text dark:text-dark-text leading-relaxed">
-                {article.description || 'Summary unavailable'}
+                {article.description || t.articles.summaryUnavailable}
               </p>
             </div>
 
@@ -109,7 +116,7 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
           {/* Footer */}
           <div className="flex items-center justify-between p-6 border-t border-light-muted/20 dark:border-dark-muted/20">
             <div className="text-sm text-light-muted dark:text-dark-muted">
-              Read the full article on Medium
+              {t.articles.readFullArticle}
             </div>
             <a
               href={article.url}
@@ -117,7 +124,7 @@ const MediumModal: React.FC<MediumModalProps> = ({ article, onClose }) => {
               rel="noopener noreferrer"
               className="flex items-center space-x-2 px-4 py-2 bg-light-primary dark:bg-dark-primary text-white rounded-lg hover:bg-light-primary/90 dark:hover:bg-dark-primary/90 transition-colors"
             >
-              <span>Read on Medium</span>
+              <span>{t.articles.readOnMedium}</span>
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>

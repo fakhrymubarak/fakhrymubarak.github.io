@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslations } from '@/presentation';
 
 interface CertificateFilterProps {
   skillFilters: string[];
@@ -24,6 +25,8 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
   onStatusFilterChange,
   onTypeFilterChange,
 }) => {
+  const t = useTranslations();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -33,7 +36,7 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
       {/* Status Filter */}
       <div className="text-center">
         <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-3">
-          Filter by Status
+          {t.certificates.filterByStatus}
         </h3>
         <div className="flex flex-wrap justify-center gap-3">
           <button
@@ -44,7 +47,7 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
                 : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral'
             }`}
           >
-            All Status
+            {t.certificates.allStatus}
           </button>
           {statusFilters.map(filter => (
             <button
@@ -65,7 +68,7 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
       {/* Type Filter */}
       <div className="text-center">
         <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-3">
-          Filter by Type
+          {t.certificates.filterByType}
         </h3>
         <div className="flex flex-wrap justify-center gap-3">
           <button
@@ -76,7 +79,7 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
                 : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral'
             }`}
           >
-            All Types
+            {t.certificates.allTypes}
           </button>
           {typeFilters.map(filter => (
             <button
@@ -97,7 +100,7 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
       {/* Skills Filter */}
       <div className="text-center">
         <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-3">
-          Filter by Skills
+          {t.certificates.filterBySkills}
         </h3>
         <div className="flex flex-wrap justify-center gap-3">
           <button
@@ -108,7 +111,7 @@ const CertificateFilter: React.FC<CertificateFilterProps> = ({
                 : 'bg-light-surface dark:bg-dark-surface text-light-muted dark:text-dark-muted hover:text-primary-coral'
             }`}
           >
-            All Skills
+            {t.certificates.allSkills}
           </button>
           {skillFilters.map(filter => (
             <button
