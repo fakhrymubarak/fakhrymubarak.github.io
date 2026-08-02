@@ -1,11 +1,10 @@
 import React from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useIntro, useTheme, useProjects } from '@/presentation';
+import { useIntro, useProjects } from '@/presentation';
 import { getYearsOfExperience } from '@/domain';
 
 const IntroSection: React.FC = () => {
   const { introduction } = useIntro();
-  const { theme } = useTheme();
   const { projects } = useProjects();
 
   const yearsOfExperience = getYearsOfExperience();
@@ -109,14 +108,11 @@ const IntroSection: React.FC = () => {
                       bg-black/[0.04] dark:bg-white/[0.06]
                       border border-black/[0.05] dark:border-white/[0.07]"
                   >
-                    <img
-                      src={tech.icon[theme]}
-                      alt={`${tech.name} icon`}
-                      className="w-4 h-4 object-contain"
-                      loading="lazy"
-                      decoding="async"
-                      width={16}
-                      height={16}
+                    <tech.icon
+                      color={tech.color}
+                      size={16}
+                      role="img"
+                      aria-label={`${tech.name} icon`}
                     />
                     <span className="font-medium text-xs">{tech.name}</span>
                   </div>
