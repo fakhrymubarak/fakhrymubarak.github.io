@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
-import { portfolioData } from '@domain/services/portfolio';
+import { getPortfolioData } from '@domain/services/portfolio';
 import { mapPortfolioData } from '@presentation/utils/dataMapper';
+import { useLanguage } from './useLanguage';
 import type { UICertificateState } from '@presentation/models';
 
 const MAX_CERTIFICATES = 6;
@@ -14,8 +15,12 @@ export const useCertificates = (): UICertificateState & {
   handleToggleCertificates: () => void;
   handleToggleFilters: () => void;
 } => {
+  const { language } = useLanguage();
   // Map domain data to UI data
-  const uiData = useMemo(() => mapPortfolioData(portfolioData), []);
+  const uiData = useMemo(
+    () => mapPortfolioData(getPortfolioData(language)),
+    [language]
+  );
   const { certificateCategories } = uiData;
 
   // State management
