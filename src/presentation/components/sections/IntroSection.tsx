@@ -1,12 +1,18 @@
 import React from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useIntro, useTheme, useProjects } from '@/presentation';
+import {
+  useIntro,
+  useTheme,
+  useProjects,
+  useTranslations,
+} from '@/presentation';
 import { getYearsOfExperience } from '@/domain';
 
 const IntroSection: React.FC = () => {
   const { introduction } = useIntro();
   const { theme } = useTheme();
   const { projects } = useProjects();
+  const t = useTranslations();
 
   const yearsOfExperience = getYearsOfExperience();
 
@@ -78,9 +84,9 @@ const IntroSection: React.FC = () => {
               variants={itemVariants}
               className="bento-tile bento-span-2 flex flex-col justify-between min-h-[9rem]"
             >
-              <p className="eyebrow">Experience</p>
+              <p className="eyebrow">{t.intro.experienceLabel}</p>
               <p className="display-lg text-primary-coral leading-none">
-                +{yearsOfExperience} yrs
+                +{yearsOfExperience} {t.intro.yearsUnit}
               </p>
             </m.div>
 
@@ -89,9 +95,9 @@ const IntroSection: React.FC = () => {
               variants={itemVariants}
               className="bento-tile bento-span-2 flex flex-col justify-between min-h-[9rem]"
             >
-              <p className="eyebrow">Shipped</p>
+              <p className="eyebrow">{t.intro.shippedLabel}</p>
               <p className="display-lg text-primary-lavender leading-none">
-                +{projects.length} projects
+                +{projects.length} {t.intro.projectsUnit}
               </p>
             </m.div>
 
@@ -100,7 +106,7 @@ const IntroSection: React.FC = () => {
               variants={itemVariants}
               className="bento-tile bento-span-2 sm:col-span-2 flex flex-col min-h-[9rem]"
             >
-              <h3 className="eyebrow mb-4">Tech Stack</h3>
+              <h3 className="eyebrow mb-4">{t.intro.techStack}</h3>
               <div className="flex flex-wrap gap-2">
                 {introduction.techStack.map(tech => (
                   <div

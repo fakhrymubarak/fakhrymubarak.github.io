@@ -60,7 +60,7 @@ jest.mock('@/infrastructure/adapters/firebase', () => ({
 
 // Mock the portfolio data service
 jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     introduction: {
       title: ['Hi, I am', 'Fakhry Mubarak'],
       subtitle: 'Software Engineer specializing in Android Development',
@@ -198,7 +198,7 @@ jest.mock('@domain/services/portfolio', () => ({
       contactImage: 'mocked-footer-avatar-image',
       signature: 'Test signature',
     },
-  },
+  }),
 }));
 
 // Mock all icon imports

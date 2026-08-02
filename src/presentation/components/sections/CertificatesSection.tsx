@@ -4,7 +4,7 @@ import CertificateCard from './certificate/CertificateCard';
 const CertificateModal = lazy(() => import('./certificate/CertificateModal'));
 const CertificateFilter = lazy(() => import('./certificate/CertificateFilter'));
 import { Filter } from 'lucide-react';
-import { useCertificates, useAnalytics } from '@/presentation';
+import { useCertificates, useAnalytics, useTranslations } from '@/presentation';
 
 const CertificatesSection: React.FC = () => {
   useEffect(() => {
@@ -34,6 +34,7 @@ const CertificatesSection: React.FC = () => {
   } = useCertificates();
 
   const { trackButtonClick } = useAnalytics();
+  const t = useTranslations();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -76,14 +77,11 @@ const CertificatesSection: React.FC = () => {
           >
             {/* Section Header */}
             <m.div variants={itemVariants} className="section-header">
-              <p className="eyebrow">Credentials</p>
+              <p className="eyebrow">{t.certificates.eyebrow}</p>
               <h2 className="display-md text-light-text dark:text-dark-text">
-                Certificates & Awards
+                {t.certificates.heading}
               </h2>
-              <p className="body-text">
-                Professional certifications and recognition for expertise and
-                contributions in mobile development and software engineering.
-              </p>
+              <p className="body-text">{t.certificates.body}</p>
 
               {/* Filter Toggle */}
               <div className="flex pt-2">
@@ -96,7 +94,7 @@ const CertificatesSection: React.FC = () => {
                   aria-expanded={showFilters}
                 >
                   <Filter className="w-4 h-4" />
-                  <span>Filter Certificates</span>
+                  <span>{t.certificates.filter}</span>
                 </button>
               </div>
             </m.div>
@@ -154,7 +152,9 @@ const CertificatesSection: React.FC = () => {
                   onClick={handleToggleCertificates}
                   className="btn-outline px-8 py-3 rounded-full"
                 >
-                  {showAllCertificates ? 'Show Less' : 'See More'}
+                  {showAllCertificates
+                    ? t.certificates.showLess
+                    : t.certificates.seeMore}
                 </button>
               </m.div>
             )}

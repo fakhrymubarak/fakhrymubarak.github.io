@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import IntroSection from '../IntroSection';
+import { AllTheProviders } from '@/shared/test-utils/test-providers';
 
 // Mock the portfolio data
 jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     introduction: {
       title: ['Hi, I am', 'Fakhry Mubarak'],
       subtitle: 'Software Engineer specializing in Android Development',
@@ -53,7 +54,7 @@ jest.mock('@domain/services/portfolio', () => ({
         },
       ],
     },
-  },
+  }),
 }));
 
 // Mock framer-motion
@@ -121,14 +122,22 @@ describe('IntroSection', () => {
   });
 
   it('renders the intro section', () => {
-    render(<IntroSection />);
+    render(
+      <AllTheProviders>
+        <IntroSection />
+      </AllTheProviders>
+    );
 
     expect(screen.getByText('Hi, I am')).toBeInTheDocument();
     expect(screen.getByText('Fakhry Mubarak')).toBeInTheDocument();
   });
 
   it('renders the description', () => {
-    render(<IntroSection />);
+    render(
+      <AllTheProviders>
+        <IntroSection />
+      </AllTheProviders>
+    );
 
     expect(
       screen.getByText(/Mobile Apps focused Software Engineer/)
@@ -136,21 +145,33 @@ describe('IntroSection', () => {
   });
 
   it('renders the profile image', () => {
-    render(<IntroSection />);
+    render(
+      <AllTheProviders>
+        <IntroSection />
+      </AllTheProviders>
+    );
 
     const profileImage = screen.getByAltText('Fakhry Mubarak');
     expect(profileImage).toBeInTheDocument();
   });
 
   it('renders tech stack', () => {
-    render(<IntroSection />);
+    render(
+      <AllTheProviders>
+        <IntroSection />
+      </AllTheProviders>
+    );
 
     expect(screen.getByText('Tech Stack')).toBeInTheDocument();
     expect(screen.getByText('Android')).toBeInTheDocument();
   });
 
   it('renders tech stack icons', () => {
-    render(<IntroSection />);
+    render(
+      <AllTheProviders>
+        <IntroSection />
+      </AllTheProviders>
+    );
 
     const androidIcon = screen.getByAltText('Android icon');
     const kotlinIcon = screen.getByAltText('Kotlin icon');
@@ -160,7 +181,11 @@ describe('IntroSection', () => {
 
   it('renders experience badges', () => {
     jest.useFakeTimers().setSystemTime(new Date('2025-07-01'));
-    render(<IntroSection />);
+    render(
+      <AllTheProviders>
+        <IntroSection />
+      </AllTheProviders>
+    );
 
     expect(screen.getByText('+3.5 yrs')).toBeInTheDocument();
     expect(screen.getByText('+8 projects')).toBeInTheDocument();

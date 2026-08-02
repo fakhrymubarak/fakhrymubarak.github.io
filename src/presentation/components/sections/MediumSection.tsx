@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import { ExternalLink, Filter } from 'lucide-react';
 import MediumCard from './medium/MediumCard';
-import { useAnalytics, useMedium } from '@/presentation';
+import { useAnalytics, useMedium, useTranslations } from '@/presentation';
 
 const MediumFilter = lazy(() => import('./medium/MediumFilter'));
 
@@ -22,6 +22,7 @@ const MediumSection: React.FC = () => {
   } = useMedium();
 
   const { trackButtonClick } = useAnalytics();
+  const t = useTranslations();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -55,7 +56,7 @@ const MediumSection: React.FC = () => {
         <div className="container min-h-screen flex items-center justify-center">
           <div className="text-center py-20">
             <p className="text-light-muted dark:text-dark-muted mb-4">
-              Unable to load articles at the moment.
+              {t.articles.unableToLoad}
             </p>
           </div>
         </div>
@@ -82,7 +83,7 @@ const MediumSection: React.FC = () => {
               data-testid="medium-loading-spinner"
               className="animate-spin rounded-full h-10 w-10 border-b-2 border-light-primary dark:border-dark-primary"
             ></div>
-            <span className="sr-only">Loading Medium articles</span>
+            <span className="sr-only">{t.articles.loading}</span>
           </div>
         </div>
       )}
@@ -97,14 +98,11 @@ const MediumSection: React.FC = () => {
           >
             {/* Section Header */}
             <m.div variants={itemVariants} className="section-header">
-              <p className="eyebrow">Writing</p>
+              <p className="eyebrow">{t.articles.eyebrow}</p>
               <h2 className="display-md text-light-text dark:text-dark-text">
-                Articles
+                {t.articles.heading}
               </h2>
-              <p className="body-text">
-                My latest thoughts and insights on software development, mobile
-                engineering, and technology trends.
-              </p>
+              <p className="body-text">{t.articles.body}</p>
 
               {/* Controls */}
               {!loading && (
@@ -118,7 +116,7 @@ const MediumSection: React.FC = () => {
                     aria-expanded={showFilters}
                   >
                     <Filter className="w-4 h-4" />
-                    <span>Filter Articles</span>
+                    <span>{t.articles.filter}</span>
                   </button>
 
                   <a
@@ -128,7 +126,7 @@ const MediumSection: React.FC = () => {
                     className="btn-outline gap-2 px-4 py-2 rounded-full"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    <span>View All on Medium</span>
+                    <span>{t.articles.viewAll}</span>
                   </a>
                 </div>
               )}
@@ -180,7 +178,7 @@ const MediumSection: React.FC = () => {
                   onClick={handleToggleArticles}
                   className="btn-outline px-8 py-3 rounded-full"
                 >
-                  {showAllArticles ? 'Show Less' : 'See More Articles'}
+                  {showAllArticles ? t.articles.showLess : t.articles.seeMore}
                 </button>
               </m.div>
             )}

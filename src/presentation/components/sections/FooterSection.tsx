@@ -9,11 +9,12 @@ import {
   MessageCircle,
   Youtube,
 } from 'lucide-react';
-import { useAnalytics, useFooter } from '@/presentation';
+import { useAnalytics, useFooter, useTranslations } from '@/presentation';
 
 const FooterSection: React.FC = () => {
   const { footer } = useFooter();
   const { trackContactClick, trackButtonClick } = useAnalytics();
+  const t = useTranslations();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,11 +82,10 @@ const FooterSection: React.FC = () => {
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center space-y-4">
             <h2 className="heading-2 text-3xl md:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
-              Get in Touch
+              {t.footer.getInTouch}
             </h2>
             <p className="body-text max-w-2xl mx-auto">
-              I'm always open to discussing new opportunities, interesting
-              projects, or just having a chat about technology.
+              {t.footer.getInTouchBody}
             </p>
           </motion.div>
 
@@ -94,12 +94,8 @@ const FooterSection: React.FC = () => {
             <motion.div variants={itemVariants} className="space-y-8">
               {/* Contact Links */}
               <div className="space-y-4">
-                <h3 className="heading-3">Let's Connect</h3>
-                <p className="body-text">
-                  Feel free to reach out if you'd like to discuss potential
-                  collaborations, have questions about my work, or just want to
-                  say hello!
-                </p>
+                <h3 className="heading-3">{t.footer.letsConnect}</h3>
+                <p className="body-text">{t.footer.letsConnectBody}</p>
 
                 <div className="space-y-3">
                   {footer.contacts.map(contact => (
@@ -126,7 +122,7 @@ const FooterSection: React.FC = () => {
 
               {/* Social Media */}
               <div className="space-y-4">
-                <h3 className="heading-3">Follow Me</h3>
+                <h3 className="heading-3">{t.footer.followMe}</h3>
                 <div className="flex space-x-4">
                   {footer.socialMedia.map(social => (
                     <a

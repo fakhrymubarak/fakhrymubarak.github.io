@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslations } from '@/presentation';
 
 interface MediumFilterProps {
   filters: string[];
@@ -12,6 +13,7 @@ const MediumFilter: React.FC<MediumFilterProps> = ({
   activeFilter,
   onFilterChange,
 }) => {
+  const t = useTranslations();
   const allFilters = ['all', ...filters];
 
   const baseClasses =
@@ -29,7 +31,7 @@ const MediumFilter: React.FC<MediumFilterProps> = ({
     >
       <div className="text-center">
         <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
-          Filter Articles
+          {t.articles.filterHeading}
         </h3>
       </div>
 
@@ -43,7 +45,7 @@ const MediumFilter: React.FC<MediumFilterProps> = ({
               onClick={() => onFilterChange(filter)}
               className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
             >
-              {filter === 'all' ? 'All Articles' : filter}
+              {filter === 'all' ? t.articles.all : filter}
             </button>
           );
         })}

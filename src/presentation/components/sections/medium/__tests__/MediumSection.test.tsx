@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import MediumSection from '../../MediumSection';
 import { useAnalytics, useMedium } from '@/presentation';
+import { AllTheProviders } from '@/shared/test-utils/test-providers';
 
 jest.mock('@/presentation', () => {
   const actual = jest.requireActual('@/presentation');
@@ -45,7 +46,11 @@ describe('MediumSection', () => {
   it('renders loading state', () => {
     mockedUseMedium.mockReturnValue(createMediumState({ loading: true }));
 
-    render(<MediumSection />);
+    render(
+      <AllTheProviders>
+        <MediumSection />
+      </AllTheProviders>
+    );
 
     expect(
       screen.getByRole('region', { name: /articles/i })
@@ -58,7 +63,11 @@ describe('MediumSection', () => {
       createMediumState({ loading: false, error: 'Failed to fetch' })
     );
 
-    render(<MediumSection />);
+    render(
+      <AllTheProviders>
+        <MediumSection />
+      </AllTheProviders>
+    );
 
     expect(
       screen.getByText(/unable to load articles at the moment/i)
@@ -109,7 +118,11 @@ describe('MediumSection', () => {
       })
     );
 
-    render(<MediumSection />);
+    render(
+      <AllTheProviders>
+        <MediumSection />
+      </AllTheProviders>
+    );
 
     expect(screen.getByText('First Medium Article')).toBeInTheDocument();
 

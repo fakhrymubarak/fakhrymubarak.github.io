@@ -10,7 +10,11 @@ import {
   Star,
   X,
 } from 'lucide-react';
-import { useAnalytics, useLockBodyScroll } from '@/presentation';
+import {
+  useAnalytics,
+  useLockBodyScroll,
+  useTranslations,
+} from '@/presentation';
 import type { UICertificate } from '@presentation/models';
 
 interface CertificateModalProps {
@@ -23,6 +27,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
   onClose,
 }) => {
   const { trackButtonClick } = useAnalytics();
+  const t = useTranslations();
   const isOpeningRef = useRef(true);
 
   useLockBodyScroll(!!certificate);
@@ -107,7 +112,9 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
           {/* Certificate Details */}
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-semibold mb-2">Description</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {t.certificates.description}
+              </h3>
               <p className="text-sm text-light-muted dark:text-dark-muted">
                 {certificate.description}
               </p>
@@ -119,7 +126,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
                 <Calendar className="w-4 h-4 text-light-muted dark:text-dark-muted" />
                 <div>
                   <p className="font-medium text-light-text dark:text-dark-text">
-                    Issue Date
+                    {t.certificates.issueDate}
                   </p>
                   <p className="text-sm text-light-muted dark:text-dark-muted">
                     {certificate.issueDate}
@@ -130,7 +137,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
                 <Hash className="w-4 h-4 text-light-muted dark:text-dark-muted" />
                 <div>
                   <p className="font-medium text-light-text dark:text-dark-text text">
-                    Credential ID
+                    {t.certificates.credentialId}
                   </p>
                   <p className="text-sm text-light-muted dark:text-dark-muted font-mono">
                     {certificate.credentialId}
@@ -142,7 +149,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
             {/* Status */}
             <div>
               <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-3">
-                Status
+                {t.certificates.status}
               </h3>
               <span
                 className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -151,14 +158,16 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
                     : 'bg-red-500/10 text-red-600 dark:text-red-400'
                 }`}
               >
-                {certificate.status === 'active' ? 'Active' : 'Expired'}
+                {certificate.status === 'active'
+                  ? t.certificates.active
+                  : t.certificates.expired}
               </span>
             </div>
 
             {/* Skills */}
             <div>
               <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-3">
-                Skills & Technologies
+                {t.certificates.skills}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {certificate.skills.map((skill: string) => (
@@ -181,7 +190,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({
                 className="btn-primary text-sm px-4 py-2"
                 onClick={handleViewCertificate}
               >
-                View Certificate
+                {t.certificates.viewCertificate}
                 <ExternalLink className="w-3 h-3 ml-1" />
               </a>
             </div>

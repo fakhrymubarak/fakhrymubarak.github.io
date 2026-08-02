@@ -11,7 +11,7 @@ jest.mock('../../../hooks/useAnalytics', () => ({
 
 // Mock the portfolio data
 jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     certificateCategories: [
       {
         type: 'course',
@@ -89,7 +89,7 @@ jest.mock('@domain/services/portfolio', () => ({
         ],
       },
     ],
-  },
+  }),
 }));
 
 describe('CertificatesSection', () => {

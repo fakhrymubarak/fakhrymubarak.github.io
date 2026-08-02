@@ -1,6 +1,6 @@
 // Mock the portfolio module to avoid webp import issues
 jest.mock('../portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     introduction: {
       title: ['Hi, I am', 'Fakhry Mubarak'],
       subtitle: 'Software Engineer specializing in Android Development',
@@ -68,10 +68,12 @@ jest.mock('../portfolio', () => ({
       ],
       signature: '© 2024 Test. All rights reserved.',
     },
-  },
+  }),
 }));
 
-import { portfolioData } from '@/domain';
+import { getPortfolioData } from '@/domain';
+
+const portfolioData = getPortfolioData('en');
 
 describe('Portfolio Data', () => {
   it('has introduction data', () => {
