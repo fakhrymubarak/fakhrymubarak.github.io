@@ -1,9 +1,6 @@
 import { PortfolioData } from '@/domain';
 import type { Locale } from '@domain/models/i18n.ts';
-import {
-  calculateDuration,
-  getYearsOfExperience,
-} from '../valueObjects/dateUtils';
+import { calculateDuration, getYearsOfExperience } from '@/domain';
 
 // Import assets from the src / assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp';
@@ -458,12 +455,7 @@ const enContent: PortfolioContent = {
   present: 'Present',
   introTitle: ['Hi, I am', 'Fakhry Mubarak'],
   introSubtitle: 'Software Engineer specializing in Android Development',
-  introDescription:
-    `Software Engineer with over ${getYearsOfExperience()} years of professional experience building scalable softwares. ` +
-    'Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. ' +
-    'Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. ' +
-    'Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. ' +
-    'Chasing impact, craftsmanship, and growth. Open for any challenges and opportunities.',
+  introDescription: `Senior Software Engineer at Transjakarta with ${getYearsOfExperience()} years of experience building large-scale systems for millions of users. Currently passionate about mobile apps. Proficient in developing cross-platform mobile applications using KMP, React Native, and Flutter.`,
   projectDescriptions: {
     'transjakarta-obu':
       'The On-Board Unit (OBU) is an Android application deployed on Transjakarta buses. I developed features including real-time GPS tracking via MQTT to display live bus locations on the Transjakarta App and Google Maps, automated voice announcements triggered by stopping proximity to inform passengers of current and upcoming stops, and integration with the LED units to display the route on the front, back and inside of the bus.',
@@ -550,12 +542,7 @@ const idContent: PortfolioContent = {
   present: 'Sekarang',
   introTitle: ['Hai, saya', 'Fakhry Mubarak'],
   introSubtitle: 'Software Engineer yang berfokus pada Pengembangan Android',
-  introDescription:
-    `Insinyur Perangkat Lunak dengan pengalaman profesional lebih dari ${getYearsOfExperience()} tahun membangun perangkat lunak yang skalabel. ` +
-    'Saat ini bekerja di Transjakarta sebagai Senior Software Engineer, membangun fitur berdampak bagi jutaan pengguna di Jakarta. ' +
-    'Berpengalaman dalam pengembangan Android native dan Multiplatform menggunakan Flutter atau KMM; pengembangan Web dengan ReactJS; serta pengembangan Backend dengan Go. ' +
-    'Antusias pada clean architecture, prinsip SOLID, dan pembelajaran berkelanjutan, dengan kemampuan mentoring dan kepemimpinan yang kuat. ' +
-    'Mengejar dampak, kualitas, dan pertumbuhan. Terbuka untuk setiap tantangan dan peluang.',
+  introDescription: `Senior Software Engineer di Transjakarta dengan ${getYearsOfExperience()} tahun pengalaman membangun sistem berskala besar untuk jutaan pengguna. Saat ini sedang passionate dengan mobile apps. Mampu mengembangkan aplikasi multiplatform mobile menggunakan KMP, React Native, Flutter.`,
   projectDescriptions: {
     'transjakarta-obu':
       'On-Board Unit (OBU) adalah aplikasi Android yang terpasang di bus Transjakarta. Saya mengembangkan berbagai fitur, termasuk pelacakan GPS real-time melalui MQTT untuk menampilkan lokasi bus secara langsung di Aplikasi Transjakarta dan Google Maps, pengumuman suara otomatis yang terpicu oleh kedekatan dengan halte untuk memberi tahu penumpang tentang halte saat ini dan berikutnya, serta integrasi dengan unit LED untuk menampilkan rute di bagian depan, belakang, dan dalam bus.',
