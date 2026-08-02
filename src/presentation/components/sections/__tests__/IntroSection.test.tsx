@@ -7,10 +7,8 @@ jest.mock('@domain/services/portfolio', () => {
     SiAndroid: mockSiAndroid,
     SiKotlin: mockSiKotlin,
     SiFlutter: mockSiFlutter,
-  } = (() => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    return require('react-icons/si');
-  })();
+  } = require('react-icons/si');
   const { DiJava: mockDiJava } = (() => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     return require('react-icons/di');
