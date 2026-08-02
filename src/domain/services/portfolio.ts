@@ -219,7 +219,7 @@ const companyMeta = [
         id: 'tj-engineer',
         title: 'Senior Software Engineer',
         period: 'Feb 2026 — Present',
-        type: 'full-time' as const,
+        type: 'contract' as const,
       },
     ],
   },

@@ -96,9 +96,14 @@ const ExperienceSection: React.FC = () => {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 space-y-6">
-                      {/* Company Header */}
-                      <div className="card">
+                    <div className="flex-1">
+                      <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                        className="card space-y-6"
+                      >
+                        {/* Company Header */}
                         <div className="flex items-center justify-between">
                           <h4 className="text-lg font-semibold text-primary-coral">
                             {company.name}
@@ -109,61 +114,56 @@ const ExperienceSection: React.FC = () => {
                             {t.experience.types[company.experiences[0].type]}
                           </span>
                         </div>
-                      </div>
 
-                      {/* Experiences for this company */}
-                      {company.experiences.map((exp, expIndex) => (
-                        <motion.div
-                          key={exp.id}
-                          initial={{ y: 20, opacity: 0 }}
-                          whileInView={{ y: 0, opacity: 1 }}
-                          transition={{ delay: expIndex * 0.1 }}
-                          className="card"
-                        >
-                          <div className="space-y-4">
-                            {/* Header */}
-                            <div className="space-y-2">
+                        {/* Experiences for this company */}
+                        {company.experiences.map(exp => (
+                          <React.Fragment key={exp.id}>
+                            <div className="border-t border-light-muted/20 dark:border-dark-muted/20" />
+                            <div className="space-y-4">
+                              {/* Header */}
                               <div className="space-y-2">
-                                <h3 className="heading-3">{exp.title}</h3>
+                                <div className="space-y-2">
+                                  <h3 className="heading-3">{exp.title}</h3>
+                                </div>
                               </div>
-                            </div>
 
-                            {/* Meta Info */}
-                            <div className="flex flex-wrap gap-4 text-sm text-light-muted dark:text-dark-muted">
-                              <div className="flex items-center space-x-1">
-                                <Calendar className="w-4 h-4" />
-                                <span>{exp.period}</span>
+                              {/* Meta Info */}
+                              <div className="flex flex-wrap gap-4 text-sm text-light-muted dark:text-dark-muted">
+                                <div className="flex items-center space-x-1">
+                                  <Calendar className="w-4 h-4" />
+                                  <span>{exp.period}</span>
+                                </div>
+                                <div className="flex items-center space-x-1">
+                                  <Clock className="w-4 h-4" />
+                                  <span>{exp.duration}</span>
+                                </div>
                               </div>
-                              <div className="flex items-center space-x-1">
-                                <Clock className="w-4 h-4" />
-                                <span>{exp.duration}</span>
-                              </div>
-                            </div>
 
-                            {/* Highlights */}
-                            <div className="space-y-2">
-                              <h5 className="font-medium text-light-text dark:text-dark-text">
-                                {t.experience.keyAchievements}
-                              </h5>
-                              <ul className="space-y-1">
-                                {exp.highlights.map(
-                                  (highlight, highlightIndex) => (
-                                    <li
-                                      key={highlightIndex}
-                                      className="flex items-start space-x-2 text-sm"
-                                    >
-                                      <span className="w-1.5 h-1.5 bg-primary-coral rounded-full mt-2 flex-shrink-0" />
-                                      <span className="text-light-muted dark:text-dark-muted">
-                                        {highlight}
-                                      </span>
-                                    </li>
-                                  )
-                                )}
-                              </ul>
+                              {/* Highlights */}
+                              <div className="space-y-2">
+                                <h5 className="font-medium text-light-text dark:text-dark-text">
+                                  {t.experience.keyAchievements}
+                                </h5>
+                                <ul className="space-y-1">
+                                  {exp.highlights.map(
+                                    (highlight, highlightIndex) => (
+                                      <li
+                                        key={highlightIndex}
+                                        className="flex items-start space-x-2 text-sm"
+                                      >
+                                        <span className="w-1.5 h-1.5 bg-primary-coral rounded-full mt-2 flex-shrink-0" />
+                                        <span className="text-light-muted dark:text-dark-muted">
+                                          {highlight}
+                                        </span>
+                                      </li>
+                                    )
+                                  )}
+                                </ul>
+                              </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </React.Fragment>
+                        ))}
+                      </motion.div>
                     </div>
                   </div>
                 </motion.div>
