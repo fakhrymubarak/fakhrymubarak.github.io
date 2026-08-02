@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useIntro } from '@/presentation';
-import { getYearsOfExperience } from '@/domain';
+import { useIntro, useLanguage, useTranslations } from '@/presentation';
 import { SITE_URL } from '@/shared/env';
 
 interface SEOProps {
@@ -13,20 +12,22 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = 'Fakhry Mubarak - Software Engineer',
-  description = `Software Engineer with over ${getYearsOfExperience()} years of professional experience building scalable softwares. Currently working on Transjakarta as Senior Software Engineer, building impactful features for millions of users of Jakarta. Experienced in native Android and Multiplatform Development using Flutter or KMM; Web development using ReactJS; as well as Backend development with Go. Passionate about clean architecture, SOLID principles, and continuous learning, with strong mentoring and leadership abilities. Chasing impact, craftsmanship, and growth. Open for any challenges and opportunities.`,
+  title,
+  description,
   image = `${SITE_URL}/avatar.webp`,
   url = `${SITE_URL}/`,
   type = 'website',
 }) => {
   const { introduction } = useIntro();
+  const { language } = useLanguage();
+  const t = useTranslations();
 
   const seoTitle =
     title || `${introduction.title.join(' ')} - ${introduction.subtitle}`;
   const seoDescription = description || introduction.description;
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang: language }}>
       {/* Preload hero (LCP) image at runtime to help LCP */}
       <link rel="preload" as="image" href={introduction.imagePath} />
       {/* Basic Meta Tags */}
@@ -57,7 +58,7 @@ const SEO: React.FC<SEOProps> = ({
         content="Software Engineer, Android Developer, Flutter Developer, Mobile Development, Kotlin, Java, React, TypeScript"
       />
       <meta name="robots" content="index, follow" />
-      <meta name="language" content="English" />
+      <meta name="language" content={t.seo.languageMeta} />
       <meta name="revisit-after" content="7 days" />
 
       {/* Favicon */}

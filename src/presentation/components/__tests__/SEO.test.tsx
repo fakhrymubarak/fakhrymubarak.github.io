@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
+import { AllTheProviders } from '@shared/test-utils/test-providers';
 import SEO from '../SEO';
 
 // Mock the portfolio data
 jest.mock('@domain/services/portfolio', () => ({
-  portfolioData: {
+  getPortfolioData: () => ({
     introduction: {
       description: 'Test description',
       techStack: [{ name: 'React' }, { name: 'TypeScript' }],
@@ -16,15 +17,17 @@ jest.mock('@domain/services/portfolio', () => ({
         link: 'https://example.com',
       },
     ],
-  },
+  }),
 }));
 
 describe('SEO', () => {
   const renderSEO = (props = {}) => {
     return render(
-      <HelmetProvider>
-        <SEO {...props} />
-      </HelmetProvider>
+      <AllTheProviders>
+        <HelmetProvider>
+          <SEO {...props} />
+        </HelmetProvider>
+      </AllTheProviders>
     );
   };
 
