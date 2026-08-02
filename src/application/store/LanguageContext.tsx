@@ -3,7 +3,7 @@ import type { Locale } from '@domain/models/i18n.ts';
 import { LanguageContext } from '@/application';
 
 interface LanguageProviderProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   initialLanguage?: Locale;
 }
 

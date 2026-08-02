@@ -11,6 +11,7 @@ export * from './components/ui/SkipLink';
 // Hooks
 export * from './hooks/useTheme';
 export * from './hooks/useLanguage';
+export * from './hooks/useTranslations';
 export * from './hooks/useAnalytics';
 export * from './hooks/useAccessibility';
 export * from './hooks/useProjects';
