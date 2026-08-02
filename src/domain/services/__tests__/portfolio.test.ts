@@ -1,3 +1,5 @@
+import { SiAndroid as mockSiAndroid } from 'react-icons/si';
+
 // Mock the portfolio module to avoid webp import issues
 jest.mock('../portfolio', () => ({
   getPortfolioData: () => ({
@@ -9,10 +11,7 @@ jest.mock('../portfolio', () => ({
       techStack: [
         {
           name: 'Android',
-          icon: {
-            light: 'test-light.svg',
-            dark: 'test-dark.svg',
-          },
+          icon: mockSiAndroid,
           color: '#3DDC84',
         },
       ],
@@ -140,8 +139,7 @@ describe('Portfolio Data', () => {
     const tech = portfolioData.introduction.techStack[0];
     expect(tech).toHaveProperty('name');
     expect(tech).toHaveProperty('icon');
-    expect(tech.icon).toHaveProperty('light');
-    expect(tech.icon).toHaveProperty('dark');
+    expect(typeof tech.icon).toBe('function');
   });
 
   it('has valid contact structure', () => {

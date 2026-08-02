@@ -1,11 +1,10 @@
 // UI Models for Presentation Layer
 
+import type { IconType } from 'react-icons';
+
 export interface UITechStack {
   name: string;
-  icon: {
-    light: string;
-    dark: string;
-  };
+  icon: IconType;
   color?: string;
 }
 

@@ -1,9 +1,8 @@
+import type { IconType } from 'react-icons';
+
 export interface TechStack {
   name: string;
-  icon: {
-    light: string;
-    dark: string;
-  };
+  icon: IconType;
   color?: string; // Made optional since we're using icons
 }
 
