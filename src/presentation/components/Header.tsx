@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTheme } from '@/presentation';
+import { useTheme, useLanguage, useTranslations } from '@/presentation';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../../assets/images/avatars/img_avatar.webp';
 import { useAnalytics } from '@/presentation';
@@ -7,6 +7,8 @@ import { accessibilityUtils } from '@/presentation';
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { toggleLanguage } = useLanguage();
+  const t = useTranslations();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isThemeToggling, setIsThemeToggling] = useState(false);
   const [animationPhase, setAnimationPhase] = useState<
@@ -42,20 +44,20 @@ const Header: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Articles', href: '#articles' },
-    { name: 'Contact', href: '#contact' },
+    { key: 'home', name: t.nav.home, href: '#home' },
+    { key: 'projects', name: t.nav.projects, href: '#projects' },
+    { key: 'experience', name: t.nav.experience, href: '#experience' },
+    { key: 'articles', name: t.nav.articles, href: '#articles' },
+    { key: 'contact', name: t.nav.contact, href: '#contact' },
   ];
 
-  const scrollToSection = (href: string, navName: string) => {
+  const scrollToSection = (href: string, navKey: string, navName: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       accessibilityUtils.announce(`Navigated to ${navName} section`);
     }
-    trackButtonClick(`nav_${navName.toLowerCase()}`, 'header');
+    trackButtonClick(`nav_${navKey}`, 'header');
     setIsMenuOpen(false);
   };
 
@@ -89,6 +91,12 @@ const Header: React.FC = () => {
         }, 250); // Entering animation duration (matches CSS)
       }, 150); // Brief transition phase
     }, 250); // Exiting animation duration (matches CSS)
+  };
+
+  const handleLanguageToggle = () => {
+    trackButtonClick('language_toggle', 'header');
+    toggleLanguage();
+    accessibilityUtils.announce(t.a11y.languageSwitchedTo);
   };
 
   const handleMenuToggle = () => {
@@ -163,8 +171,8 @@ const Header: React.FC = () => {
           >
             {navItems.map(item => (
               <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href, item.name)}
+                key={item.key}
+                onClick={() => scrollToSection(item.href, item.key, item.name)}
                 className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2 py-1"
                 aria-label={`Navigate to ${item.name} section`}
               >
@@ -175,6 +183,21 @@ const Header: React.FC = () => {
 
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
+            {/* Language Toggle */}
+            <button
+              data-testid="language-toggle"
+              onClick={handleLanguageToggle}
+              className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-2 rounded-lg bg-light-surface dark:bg-dark-surface hover:bg-light-surface/80 dark:hover:bg-dark-surface/80 transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 hover:scale-105"
+              aria-label={t.a11y.switchToLanguage}
+            >
+              <span aria-hidden="true" className="text-base leading-none">
+                {t.language.flag}
+              </span>
+              <span className="text-xs font-semibold text-light-muted dark:text-dark-muted">
+                {t.language.switchLabel}
+              </span>
+            </button>
+
             {/* Theme Toggle */}
             <button
               onClick={handleThemeToggle}
@@ -233,8 +256,10 @@ const Header: React.FC = () => {
             <nav className="flex flex-col space-y-4">
               {navItems.map(item => (
                 <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href, item.name)}
+                  key={item.key}
+                  onClick={() =>
+                    scrollToSection(item.href, item.key, item.name)
+                  }
                   className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus:outline-none focus:ring-2 focus:ring-primary-coral focus:ring-offset-2 rounded px-2"
                   aria-label={`Navigate to ${item.name} section`}
                 >
