@@ -5,7 +5,7 @@ describe('getPortfolioData', () => {
     const data = getPortfolioData('id');
     expect(data.introduction.title[0]).toBe('Hai, saya');
     expect(data.introduction.subtitle).toContain('Android');
-    expect(data.introduction.description).toContain('Insinyur');
+    expect(data.introduction.description).toContain('tahun pengalaman');
   });
 
   it('returns English intro copy for en', () => {

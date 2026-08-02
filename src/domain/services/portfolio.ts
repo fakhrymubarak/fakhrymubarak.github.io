@@ -1,6 +1,9 @@
 import { PortfolioData } from '@/domain';
 import type { Locale } from '@domain/models/i18n.ts';
-import { calculateDuration, getYearsOfExperience } from '@/domain';
+import {
+  calculateDuration,
+  getYearsOfExperience,
+} from '../valueObjects/dateUtils';
 
 // Import assets from the src / assets directory
 import avatarImage from '@/assets/images/avatars/img_avatar.webp';
