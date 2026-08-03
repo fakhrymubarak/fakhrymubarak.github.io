@@ -73,6 +73,7 @@ export const mapProject = (project: Project): UIProject => ({
   description: project.description,
   link: project.link,
   stacks: project.stacks,
+  category: project.category,
   featured: project.featured,
   hasGithub: project.hasGithub,
   githubUrl: project.githubUrl,

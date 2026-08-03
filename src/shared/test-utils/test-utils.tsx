@@ -84,6 +84,7 @@ jest.mock('@domain/services/portfolio', () => ({
         logo: 'mocked-logo',
         link: 'https://example.com',
         stacks: ['React', 'TypeScript', 'Tailwind CSS'],
+        category: 'Web',
         featured: true,
         hasGithub: true,
         githubUrl: 'https://github.com/example/react-project',
@@ -97,6 +98,7 @@ jest.mock('@domain/services/portfolio', () => ({
         logo: 'mocked-logo',
         link: 'https://example.com',
         stacks: ['Vue.js', 'JavaScript', 'Vite'],
+        category: 'Middleware',
         featured: false,
         hasGithub: true,
         githubUrl: 'https://github.com/example/vue-project',
@@ -110,6 +112,7 @@ jest.mock('@domain/services/portfolio', () => ({
         logo: 'mocked-logo',
         link: 'https://example.com',
         stacks: ['Angular', 'TypeScript', 'Jest'],
+        category: 'Web',
         featured: false,
         hasGithub: false,
         githubUrl: '',
@@ -511,6 +514,7 @@ export const mockProject = {
   hasGithub: true,
   period: '2023 - 2024',
   stacks: ['React', 'TypeScript', 'Tailwind CSS'],
+  category: 'Web' as const,
 };
 
 export const mockProjects = [

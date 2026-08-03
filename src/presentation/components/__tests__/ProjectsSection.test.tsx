@@ -45,7 +45,7 @@ describe('ProjectsSection', () => {
       expect(screen.getByText('Angular Project')).toBeInTheDocument();
     });
 
-    it('renders filter buttons for all unique stacks', async () => {
+    it('renders filter buttons for Web, Middleware, and Mobile categories', async () => {
       render(<ProjectsSection />);
 
       // First click the "Filter Projects" button to show filters
@@ -57,26 +57,15 @@ describe('ProjectsSection', () => {
       // Wait for lazy-loaded filters to render
       await waitFor(() => {
         expect(
-          screen.getByRole('button', { name: /react/i })
+          screen.getByRole('button', { name: /web/i })
         ).toBeInTheDocument();
       });
       expect(
-        screen.getByRole('button', { name: /typescript/i })
+        screen.getByRole('button', { name: /middleware/i })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('button', { name: /tailwind css/i })
+        screen.getByRole('button', { name: /mobile/i })
       ).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /vue\.js/i })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /javascript/i })
-      ).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /vite/i })).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /angular/i })
-      ).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /jest/i })).toBeInTheDocument();
     });
 
     it('highlights "All" button by default', () => {
@@ -89,14 +78,12 @@ describe('ProjectsSection', () => {
       fireEvent.click(filterButton);
 
       // Default selected may vary; ensure at least one filter button present
-      expect(
-        screen.getByRole('button', { name: /react/i })
-      ).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /web/i })).toBeInTheDocument();
     });
   });
 
   describe('Filtering Functionality', () => {
-    it('filters projects when React stack is selected', () => {
+    it('filters projects when Middleware category is selected', () => {
       render(<ProjectsSection />);
 
       // First click the "Filter Projects" button to show filters
@@ -105,15 +92,17 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      const reactButton = screen.getByRole('button', { name: /react/i });
-      fireEvent.click(reactButton);
+      const middlewareButton = screen.getByRole('button', {
+        name: /middleware/i,
+      });
+      fireEvent.click(middlewareButton);
 
-      expect(screen.getByText('React Project')).toBeInTheDocument();
-      expect(screen.queryByText('Vue Project')).not.toBeInTheDocument();
+      expect(screen.getByText('Vue Project')).toBeInTheDocument();
+      expect(screen.queryByText('React Project')).not.toBeInTheDocument();
       expect(screen.queryByText('Angular Project')).not.toBeInTheDocument();
     });
 
-    it('filters projects when TypeScript stack is selected', () => {
+    it('filters projects when Web category is selected', () => {
       render(<ProjectsSection />);
 
       // First click the "Filter Projects" button to show filters
@@ -122,10 +111,8 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      const typescriptButton = screen.getByRole('button', {
-        name: /typescript/i,
-      });
-      fireEvent.click(typescriptButton);
+      const webButton = screen.getByRole('button', { name: /web/i });
+      fireEvent.click(webButton);
 
       expect(screen.getByText('React Project')).toBeInTheDocument();
       expect(screen.getByText('Angular Project')).toBeInTheDocument();
@@ -141,9 +128,11 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      // First filter by React
-      const reactButton = screen.getByRole('button', { name: /react/i });
-      fireEvent.click(reactButton);
+      // First filter by Middleware
+      const middlewareButton = screen.getByRole('button', {
+        name: /middleware/i,
+      });
+      fireEvent.click(middlewareButton);
 
       // Then select "All"
       const allButton = screen.getByRole('button', { name: /all/i });
@@ -163,10 +152,10 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      const reactButton = screen.getByRole('button', { name: /react/i });
-      fireEvent.click(reactButton);
+      const webButton = screen.getByRole('button', { name: /web/i });
+      fireEvent.click(webButton);
 
-      expect(reactButton).toHaveClass('bg-primary-coral', 'text-white');
+      expect(webButton).toHaveClass('bg-primary-coral', 'text-white');
 
       const allButton = screen.getByRole('button', { name: /all/i });
       expect(allButton).toHaveClass('bg-light-surface', 'dark:bg-dark-surface');
@@ -342,24 +331,24 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      // Filter by React
-      const reactButton = screen.getByRole('button', { name: /react/i });
-      fireEvent.click(reactButton);
+      // Filter by Middleware
+      const middlewareButton = screen.getByRole('button', {
+        name: /middleware/i,
+      });
+      fireEvent.click(middlewareButton);
 
-      // Only React project should be visible
-      expect(screen.getByText('React Project')).toBeInTheDocument();
-      expect(screen.queryByText('Vue Project')).not.toBeInTheDocument();
+      // Only Vue project should be visible
+      expect(screen.getByText('Vue Project')).toBeInTheDocument();
+      expect(screen.queryByText('React Project')).not.toBeInTheDocument();
 
       // Open modal for the filtered project by clicking the card
-      const reactProjectCard = screen
-        .getByText('React Project')
-        .closest('.card');
-      fireEvent.click(reactProjectCard!);
+      const vueProjectCard = screen.getByText('Vue Project').closest('.card');
+      fireEvent.click(vueProjectCard!);
 
-      // Modal should show React project details
+      // Modal should show Vue project details
       expect(document.querySelector('.fixed.inset-0')).toBeInTheDocument();
       expect(
-        screen.getByText('React Project', { selector: 'h2' })
+        screen.getByText('Vue Project', { selector: 'h2' })
       ).toBeInTheDocument();
     });
 
@@ -373,11 +362,9 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      // Filter by TypeScript
-      const typescriptButton = screen.getByRole('button', {
-        name: /typescript/i,
-      });
-      fireEvent.click(typescriptButton);
+      // Filter by Web
+      const webButton = screen.getByRole('button', { name: /web/i });
+      fireEvent.click(webButton);
 
       // Open and close modal by clicking the first project card
       const firstProjectCard = screen
@@ -394,7 +381,7 @@ describe('ProjectsSection', () => {
       }
 
       // Filter should still be active
-      expect(typescriptButton).toHaveClass('bg-primary-coral', 'text-white');
+      expect(webButton).toHaveClass('bg-primary-coral', 'text-white');
       expect(screen.getByText('React Project')).toBeInTheDocument();
       expect(screen.getByText('Angular Project')).toBeInTheDocument();
       expect(screen.queryByText('Vue Project')).not.toBeInTheDocument();
@@ -410,15 +397,15 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      const reactButton = screen.getByRole('button', { name: /react/i });
-      const typescriptButton = screen.getByRole('button', {
-        name: /typescript/i,
+      const webButton = screen.getByRole('button', { name: /web/i });
+      const middlewareButton = screen.getByRole('button', {
+        name: /middleware/i,
       });
       const allButton = screen.getByRole('button', { name: /all/i });
 
       // Rapid filter changes
-      fireEvent.click(reactButton);
-      fireEvent.click(typescriptButton);
+      fireEvent.click(webButton);
+      fireEvent.click(middlewareButton);
       fireEvent.click(allButton);
 
       // Should show all projects
@@ -451,7 +438,7 @@ describe('ProjectsSection', () => {
       expect(githubLinks).toHaveLength(0);
     });
 
-    it('handles projects with different stack combinations', () => {
+    it('renders the fixed category filters regardless of project data', () => {
       render(<ProjectsSection />);
 
       // First click the "Filter Projects" button to show filters
@@ -460,21 +447,12 @@ describe('ProjectsSection', () => {
       });
       fireEvent.click(filterButton);
 
-      // All unique stacks should be available as filter options
-      const uniqueStacks = [
-        'React',
-        'TypeScript',
-        'Tailwind CSS',
-        'Vue.js',
-        'JavaScript',
-        'Vite',
-        'Angular',
-        'Jest',
-      ];
+      // Web, Middleware, and Mobile should always be available as filter options
+      const categories = ['Web', 'Middleware', 'Mobile'];
 
-      uniqueStacks.forEach(stack => {
+      categories.forEach(category => {
         expect(
-          screen.getByRole('button', { name: new RegExp(stack, 'i') })
+          screen.getByRole('button', { name: new RegExp(category, 'i') })
         ).toBeInTheDocument();
       });
     });

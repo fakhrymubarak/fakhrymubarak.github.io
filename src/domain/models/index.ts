@@ -6,6 +6,8 @@ export interface TechStack {
   color?: string; // Made optional since we're using icons
 }
 
+type ProjectCategory = 'Web' | 'Middleware' | 'Mobile';
+
 export interface Project {
   id: string;
   title: string;
@@ -15,6 +17,7 @@ export interface Project {
   description: string;
   link: string;
   stacks: string[];
+  category: ProjectCategory;
   featured?: boolean;
   hasGithub?: boolean;
   githubUrl?: string;

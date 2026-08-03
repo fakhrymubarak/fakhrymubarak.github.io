@@ -8,6 +8,8 @@ export interface UITechStack {
   color?: string;
 }
 
+export type UIProjectCategory = 'Web' | 'Middleware' | 'Mobile';
+
 export interface UIProject {
   id: string;
   title: string;
@@ -17,6 +19,7 @@ export interface UIProject {
   description: string;
   link: string;
   stacks: string[];
+  category: UIProjectCategory;
   featured?: boolean;
   hasGithub?: boolean;
   githubUrl?: string;

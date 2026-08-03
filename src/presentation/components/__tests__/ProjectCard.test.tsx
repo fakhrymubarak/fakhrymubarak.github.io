@@ -29,6 +29,7 @@ const mockProject: Project = {
   hasGithub: true,
   period: '2023 - 2024',
   stacks: ['React', 'TypeScript', 'Tailwind CSS'],
+  category: 'Web',
 };
 
 const defaultProps = {

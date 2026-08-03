@@ -5,6 +5,7 @@ import { useLanguage } from './useLanguage';
 import type { UIProjectState } from '@presentation/models';
 
 const MAX_PROJECTS = 5;
+const PROJECT_CATEGORIES = ['Web', 'Middleware', 'Mobile'];
 
 export const useProjects = (): UIProjectState & {
   handleProjectSelect: (projectId: string) => void;
@@ -28,16 +29,12 @@ export const useProjects = (): UIProjectState & {
   const [showFilters, setShowFilters] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
 
-  // Get unique tech stacks for filtering
-  const availableFilters = useMemo(() => {
-    const stacks = projects.flatMap(project => project.stacks);
-    return Array.from(new Set(stacks));
-  }, [projects]);
+  const availableFilters = PROJECT_CATEGORIES;
 
   // Filter projects based on active filter
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'all') return projects;
-    return projects.filter(project => project.stacks.includes(activeFilter));
+    return projects.filter(project => project.category === activeFilter);
   }, [projects, activeFilter]);
 
   // Limit projects to show based on showAllProjects state
