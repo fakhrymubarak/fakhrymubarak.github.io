@@ -126,4 +126,45 @@ describe('useActiveSection', () => {
     unmount();
     expect(mockDisconnect).toHaveBeenCalledTimes(1);
   });
+
+  it('falls back to earlier visible section when a later section exits', () => {
+    const { result } = renderHook(() => useActiveSection(sectionIds));
+
+    // Both home and projects are intersecting
+    act(() => {
+      observerCallback(
+        [
+          {
+            isIntersecting: true,
+            target: observedElements[0],
+          } as IntersectionObserverEntry,
+          {
+            isIntersecting: true,
+            target: observedElements[1],
+          } as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver
+      );
+    });
+
+    // Active section should be projects (furthest down)
+    expect(result.current).toBe('projects');
+
+    // Projects exits the viewport; only this change is reported
+    // (IntersectionObserver doesn't re-report home as still-intersecting)
+    act(() => {
+      observerCallback(
+        [
+          {
+            isIntersecting: false,
+            target: observedElements[1],
+          } as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver
+      );
+    });
+
+    // Active section should fall back to home (still visible)
+    expect(result.current).toBe('home');
+  });
 });
