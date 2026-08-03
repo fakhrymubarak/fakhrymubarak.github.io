@@ -30,6 +30,7 @@ export default [
         Image: 'readonly',
         HTMLImageElement: 'readonly',
         IntersectionObserver: 'readonly',
+        MutationObserver: 'readonly',
         PerformanceObserver: 'readonly',
         PerformanceNavigationTiming: 'readonly',
         ServiceWorkerRegistration: 'readonly',

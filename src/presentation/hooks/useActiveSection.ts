@@ -38,9 +38,43 @@ export const useActiveSection = (sectionIds: string[]): string => {
       { rootMargin: '-64px 0px -60% 0px', threshold: 0 }
     );
 
-    elements.forEach(element => observer.observe(element));
+    const foundIds = new Set<string>();
+    elements.forEach(element => {
+      observer.observe(element);
+      foundIds.add(element.id);
+    });
 
-    return () => observer.disconnect();
+    // Some sections (e.g. lazily-loaded ones) may not exist in the DOM yet.
+    // Watch for them mounting and observe them once they appear.
+    let mutationObserver: MutationObserver | undefined;
+
+    if (foundIds.size < sectionIds.length) {
+      mutationObserver = new MutationObserver(() => {
+        sectionIds
+          .filter(id => !foundIds.has(id))
+          .forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+              observer.observe(element);
+              foundIds.add(id);
+            }
+          });
+
+        if (foundIds.size === sectionIds.length) {
+          mutationObserver?.disconnect();
+        }
+      });
+
+      mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    return () => {
+      observer.disconnect();
+      mutationObserver?.disconnect();
+    };
   }, [sectionIds]);
 
   return activeSection;
