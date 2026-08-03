@@ -58,7 +58,7 @@ describe('useActiveSection', () => {
           {
             isIntersecting: true,
             target: observedElements[1],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
@@ -76,11 +76,11 @@ describe('useActiveSection', () => {
           {
             isIntersecting: true,
             target: observedElements[0],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
           {
             isIntersecting: true,
             target: observedElements[2],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
@@ -98,7 +98,7 @@ describe('useActiveSection', () => {
           {
             isIntersecting: true,
             target: observedElements[1],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
@@ -111,7 +111,7 @@ describe('useActiveSection', () => {
           {
             isIntersecting: false,
             target: observedElements[2],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
@@ -137,11 +137,11 @@ describe('useActiveSection', () => {
           {
             isIntersecting: true,
             target: observedElements[0],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
           {
             isIntersecting: true,
             target: observedElements[1],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
@@ -158,7 +158,7 @@ describe('useActiveSection', () => {
           {
             isIntersecting: false,
             target: observedElements[1],
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
@@ -200,7 +200,7 @@ describe('useActiveSection', () => {
           {
             isIntersecting: true,
             target: projectsEl,
-          } as IntersectionObserverEntry,
+          } as unknown as IntersectionObserverEntry,
         ],
         {} as IntersectionObserver
       );
