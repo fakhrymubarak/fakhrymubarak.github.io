@@ -21,6 +21,7 @@ export * from './hooks/useIntro';
 export * from './hooks/useFooter';
 export * from './hooks/useMedium';
 export * from './hooks/useLockBodyScroll';
+export * from './hooks/useActiveSection';
 
 // Models
 export * from './models';

@@ -1,8 +1,11 @@
+/* global IntersectionObserverCallback, IntersectionObserverEntry */
 import {
   render,
   screen,
   fireEvent,
   waitFor,
+  act,
+  within,
 } from '../../../shared/test-utils/test-utils';
 import Header from '../Header';
 
@@ -174,5 +177,96 @@ describe('Header Component', () => {
       // Buttons are naturally focusable, so they don't need explicit tabIndex
       expect(item).toBeInTheDocument();
     });
+  });
+});
+
+describe('Header active section highlighting', () => {
+  const SECTION_IDS = ['home', 'projects', 'experience', 'articles', 'contact'];
+  let observerCallback: IntersectionObserverCallback;
+  let observedElements: HTMLElement[];
+
+  beforeEach(() => {
+    Element.prototype.scrollIntoView = jest.fn();
+    observedElements = SECTION_IDS.map(id => {
+      const el = document.createElement('div');
+      el.id = id;
+      document.body.appendChild(el);
+      return el;
+    });
+
+    global.IntersectionObserver = jest
+      .fn()
+      .mockImplementation((callback: IntersectionObserverCallback) => {
+        observerCallback = callback;
+        return {
+          observe: jest.fn(),
+          disconnect: jest.fn(),
+          unobserve: jest.fn(),
+          takeRecords: () => [],
+          root: null,
+          rootMargin: '',
+          thresholds: [],
+        };
+      });
+  });
+
+  afterEach(() => {
+    observedElements.forEach(el => el.remove());
+  });
+
+  it('applies the active color and aria-current to the matching desktop nav button', async () => {
+    render(<Header />);
+
+    act(() => {
+      observerCallback(
+        [
+          {
+            isIntersecting: true,
+            target: observedElements[2], // 'experience'
+          } as unknown as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver
+      );
+    });
+
+    const desktopNav = screen.getByRole('navigation', {
+      name: /main navigation/i,
+    });
+    const experienceButton = within(desktopNav).getByText('Experience');
+    const projectsButton = within(desktopNav).getByText('Projects');
+
+    expect(experienceButton).toHaveClass('text-primary-coral');
+    expect(experienceButton).toHaveAttribute('aria-current', 'page');
+    expect(projectsButton).not.toHaveClass('text-primary-coral');
+    expect(projectsButton).not.toHaveAttribute('aria-current');
+  });
+
+  it('applies the active color to the matching mobile nav button', async () => {
+    render(<Header />);
+
+    act(() => {
+      observerCallback(
+        [
+          {
+            isIntersecting: true,
+            target: observedElements[1], // 'projects'
+          } as unknown as IntersectionObserverEntry,
+        ],
+        {} as IntersectionObserver
+      );
+    });
+
+    const menuButton = screen.getByRole('button', {
+      name: /toggle mobile menu/i,
+    });
+    fireEvent.click(menuButton);
+
+    const mobileNav = await screen.findByRole('navigation', {
+      name: /mobile navigation/i,
+    });
+    const projectsLink = within(mobileNav).getByText('Projects');
+
+    expect(projectsLink).toHaveClass('text-primary-coral');
+    expect(projectsLink).toHaveAttribute('aria-current', 'page');
   });
 });

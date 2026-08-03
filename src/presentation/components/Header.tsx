@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTheme, useLanguage, useTranslations } from '@/presentation';
+import {
+  useTheme,
+  useLanguage,
+  useTranslations,
+  useActiveSection,
+} from '@/presentation';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import avatarImage from '../../assets/images/avatars/img_avatar.webp';
 import { useAnalytics } from '@/presentation';
 import { accessibilityUtils } from '@/presentation';
+
+const SECTION_IDS = ['home', 'projects', 'experience', 'articles', 'contact'];
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -50,6 +57,8 @@ const Header: React.FC = () => {
     { key: 'articles', name: t.nav.articles, href: '#articles' },
     { key: 'contact', name: t.nav.contact, href: '#contact' },
   ];
+
+  const activeSection = useActiveSection(SECTION_IDS);
 
   const scrollToSection = (href: string, navKey: string, navName: string) => {
     const element = document.querySelector(href);
@@ -173,8 +182,13 @@ const Header: React.FC = () => {
               <button
                 key={item.key}
                 onClick={() => scrollToSection(item.href, item.key, item.name)}
-                className="text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded px-2 py-1"
+                className={`${
+                  activeSection === item.key
+                    ? 'text-primary-coral'
+                    : 'text-light-muted dark:text-dark-muted'
+                } hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded px-2 py-1`}
                 aria-label={t.a11y.navigateTo(item.name)}
+                aria-current={activeSection === item.key ? 'page' : undefined}
               >
                 {item.name}
               </button>
@@ -260,8 +274,13 @@ const Header: React.FC = () => {
                   onClick={() =>
                     scrollToSection(item.href, item.key, item.name)
                   }
-                  className="text-left text-light-muted dark:text-dark-muted hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded px-2"
+                  className={`text-left ${
+                    activeSection === item.key
+                      ? 'text-primary-coral'
+                      : 'text-light-muted dark:text-dark-muted'
+                  } hover:text-primary-coral dark:hover:text-primary-coral transition-colors font-medium py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-coral focus-visible:ring-offset-2 rounded px-2`}
                   aria-label={t.a11y.navigateTo(item.name)}
+                  aria-current={activeSection === item.key ? 'page' : undefined}
                 >
                   {item.name}
                 </button>
