@@ -223,4 +223,26 @@ describe('useActiveSection', () => {
 
     disconnectSpy.mockRestore();
   });
+
+  it('observes sections that all mount asynchronously when none exist at effect time (e.g. the whole route is lazy-loaded)', async () => {
+    // Nothing is in the DOM yet, simulating Header mounting while the entire
+    // page is still behind a lazy-loaded route's Suspense fallback.
+    document.body.innerHTML = '';
+
+    const { result } = renderHook(() => useActiveSection(sectionIds));
+
+    expect(mockObserve).not.toHaveBeenCalled();
+    expect(result.current).toBe('home');
+
+    // Simulate the lazy route resolving and mounting all sections at once.
+    sectionIds.forEach(id => {
+      const el = document.createElement('div');
+      el.id = id;
+      document.body.appendChild(el);
+    });
+
+    await waitFor(() => {
+      expect(mockObserve).toHaveBeenCalledTimes(3);
+    });
+  });
 });

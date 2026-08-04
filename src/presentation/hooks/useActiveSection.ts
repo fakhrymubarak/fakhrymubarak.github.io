@@ -9,8 +9,6 @@ export const useActiveSection = (sectionIds: string[]): string => {
       .map(id => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
 
-    if (elements.length === 0) return undefined;
-
     // Reset visible ids on mount
     visibleIdsRef.current.clear();
 
@@ -44,8 +42,9 @@ export const useActiveSection = (sectionIds: string[]): string => {
       foundIds.add(element.id);
     });
 
-    // Some sections (e.g. lazily-loaded ones) may not exist in the DOM yet.
-    // Watch for them mounting and observe them once they appear.
+    // Sections may not exist in the DOM yet (e.g. the whole page is behind a
+    // lazy-loaded route, or individual sections are lazily-loaded). Watch for
+    // them mounting and observe them once they appear.
     let mutationObserver: MutationObserver | undefined;
 
     if (foundIds.size < sectionIds.length) {
